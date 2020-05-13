@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Buy2FrmServlet
+ * Servlet implementation class Buy3FrmServlet
  */
-@WebServlet(name = "Buy2Frm", urlPatterns = { "/buy2Frm" })
-public class Buy2FrmServlet extends HttpServlet {
+@WebServlet(name = "Buy3Frm", urlPatterns = { "/buy3Frm" })
+public class Buy3FrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Buy2FrmServlet() {
+    public Buy3FrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class Buy2FrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/buy/buy2.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/buy/buy3.jsp").forward(request, response);;
 	}
 
 	/**

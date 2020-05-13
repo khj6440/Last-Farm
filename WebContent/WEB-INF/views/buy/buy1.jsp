@@ -133,7 +133,7 @@
 }
 
 .buy_btn {
-	width: 150px;
+	width: 120px;
 	height: 50px;
 }
 
@@ -161,7 +161,7 @@
 			<div class="buy_head2">
 				<div class="buy_head2_sub">
 					<img src="img/1g.png" class="buy_himg"> 약관동의 > <img
-						src="img/2.png" class="buy_himg"> 주문/결제 > <img
+						src="img/2.png" class="buy_himg"> 주문결제 > <img
 						src="img/3.png" class="buy_himg"> 주문완료
 				</div>
 			</div>
@@ -803,7 +803,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 				</div>
 				<div class="buy_btn_div">
 					<br>
-					<button class="buy_btn" type="submit" onclick="location.href='/buy2Frm'">다음으로(동의)</button>
+					<button class="buy_btn" type="submit">다음으로(동의)</button>
 					<button class="buy_btn" onclick="location.href='#'">취소</button>
 				</div>
 
@@ -812,6 +812,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 		</div>
 	</form>
 	</section>
+	<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
 	<script>
 		$(".allchk").click(function() {
 			
@@ -832,7 +833,10 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 					if(arr[i].checked==false){
 						alert("전체 약관에 동의해주세요");
 						return false;
+					}else{
+						location.href="'/buy2Frm'";
 					}	
+					
 				}
 				});
 				
