@@ -61,5 +61,8 @@
         </div>
         </div>
    
+
+	<button onclick="location.href='/buyFrm'">결제하기</button>
+
 </body>
 </html>
