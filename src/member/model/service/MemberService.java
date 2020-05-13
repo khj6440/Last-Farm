@@ -1,9 +1,9 @@
-package lastFarm.member.model.service;
+package member.model.service;
 
 import java.sql.Connection;
 
 import common.JDBCTemplate;
-import lastFarm.member.modelDao.MemberDao;
+import member.model.dao.MemberDao;
 import member.model.vo.Member;
 
 public class MemberService {

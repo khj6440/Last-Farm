@@ -1,4 +1,4 @@
-package lastFarm.member.model.controller;
+package member.model.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
