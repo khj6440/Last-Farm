@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-시험화면
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 </body>
 </html>

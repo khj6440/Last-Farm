@@ -803,7 +803,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 				</div>
 				<div class="buy_btn_div">
 					<br>
-					<button class="buy_btn" type="submit">다음으로(동의)</button>
+					<button class="buy_btn" type="submit" onclick="location.href='/buy2Frm'">다음으로(동의)</button>
 					<button class="buy_btn" onclick="location.href='#'">취소</button>
 				</div>
 
