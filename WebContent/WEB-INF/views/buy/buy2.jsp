@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -286,11 +287,13 @@
                             <table class="buy_inf">
                                 <tr>
                                     <th>주문자 이름</th>
-                                    <td><input type="text" name="name" class="name" readonly></td>
+                                    <td>${SessionScope.member.memberName }
+                                    <input type="text" name="name" class="name" value="${SessionScope.member.memberName }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th rowspan="3">주소</th>
-                                    <td><input type="text" name="addr" id="postCode" class="addr" placeholder="우편번호" readonly></td>
+                                    <td> 
+                                    <input type="text" name="addr" id="postCode" class="addr" value="${sessionScope.m.memberEmail}" placeholder="우편번호" readonly></td>
                                 </tr>
                                 <tr>
                                     <td><input type="text" name="addr" id="roadAddr" class="addr" placeholder="도로명주소" readonly></td>
