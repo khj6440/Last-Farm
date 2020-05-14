@@ -25,7 +25,7 @@ public class JDBCTemplate {
 		}
 		return conn;
 	}
-	
+
 	public static void close(Connection conn) {
 		try {
 			if(conn != null && !conn.isClosed()) {//conn이 null이 아니거나 conn가 닫혀있지 않을 때
@@ -76,4 +76,5 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
+
 }
