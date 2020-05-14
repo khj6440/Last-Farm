@@ -27,6 +27,7 @@
             margin-top: 45px;
             float: left;
             border: 1px solid gray;
+            font-family: 'Jua', sans-serif;
         }
         .category1{
             margin-left: 43px;
@@ -57,6 +58,7 @@
             border-style: none;
             border: 1px solid gray;
             outline: none;
+            font-family: 'Jua', sans-serif;
         }
         .searchInput-wrapper>button:hover{
             background-color: #ABD0CE;
@@ -70,6 +72,7 @@
             border:none;
             float: left;
             margin-top: 2px;
+            font-family: 'Jua', sans-serif;
         }
         .searchInput-wrapper img{
             height: 100%;
@@ -88,20 +91,32 @@
         }
         .shoppingList-wrapper{
             margin: 0 auto;
-            border: 1px solid red;
             height: 2000px;
             margin-top: 50px;
         }
-        
-/*상품 카테고리 부분의 CSS*/
-        .shoppingList-firstRow{
-            border: 1px solid blue;
+/* 마감시간, 구매, 등록순 조회 탭 CSS */
+        .ordertabCategory>ul {
+            list-style: none;
+            padding: 0;
+           margin: 0 auto;
         }
+
+        .ordertabCategory>ul>li {
+            display: block;
+            height: 60px;
+            width: 33.1%;
+            text-align: center;
+            font-size: 30px;
+            padding-top: 20px;
+            cursor: pointer;
+            float: left;
+        } 
+/*상품 카테고리 부분의 CSS*/
         .shoppingList-wrapper>table tr>th{
             height: 500px;
             width: 400px;
             padding: 0px;
-            padding-left: 10px;
+            padding-left: 17px;
         }
         .productImg>img{
             border:1px solid gray; 
@@ -116,7 +131,7 @@
             line-height: 40px;
             width:140px;
             border-radius: 8px;
-            font-size: 1.5em;
+            font-size: 1.2em;
             float: left;
             z-index: 2;
             position: absolute;
@@ -124,13 +139,12 @@
             margin-top: 350px;
             margin-left: 10px;
         }
-        
         .productBox>p{
             margin: 7px;
             font-size: 1.5em;
         }
-        .productBox span{
-            font-size: 1.2em;
+        .productBox{
+            font-size: 1.3em;
         }
         .detailInfoBox{
             text-align: left;
@@ -179,8 +193,71 @@
 </div>
     
     <style>
-        
+       .ordertabCategory>ul {
+            list-style: none;
+            padding: 0;
+           margin: 0 auto;
+        }
+
+        .ordertabCategory>ul>li {
+            display: block;
+            height: 60px;
+            width: 33.1%;
+            text-align: center;
+            font-size: 30px;
+            padding-top: 20px;
+            cursor: pointer;
+            float: left;
+        } 
+        .clicktab {
+            border-top: 1px solid gray;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+        }
+
+        .unclicktab {
+            border-bottom: 1px solid gray;
+        }
     </style>
+    <br><br>
+    
+    <script>
+    $(function() {
+        $(".ordertabCategory").children("ul").children("li").eq(0).click(function() {
+            $(".ordertabCategory").children("ul").children("li").eq(0).addClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(0).removeClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).removeClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).removeClass("clicktab");
+        });
+        $(".ordertabCategory").children("ul").children("li").eq(1).click(function() {
+            $(".ordertabCategory").children("ul").children("li").eq(0).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(0).removeClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).addClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).removeClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).removeClass("clicktab");
+        });
+        $(".ordertabCategory").children("ul").children("li").eq(2).click(function() {
+            $(".ordertabCategory").children("ul").children("li").eq(0).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(0).removeClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).addClass("clicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(2).removeClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).addClass("unclicktab");
+            $(".ordertabCategory").children("ul").children("li").eq(1).removeClass("clicktab");
+        });
+    });
+    </script>
+    
+    <div class="ordertabCategory">
+                        <ul>
+                            <li class="clicktab">마감시간 순</li>
+                            <li class="unclicktab">구매 인기순</li>
+                            <li class="unclicktab">최근 등록순</li>
+                        </ul>
+    </div>
+    <br><br><br>
     <div class="shoppingList-wrapper">
         <table class="shoppingList-firstRow">
             <tr>

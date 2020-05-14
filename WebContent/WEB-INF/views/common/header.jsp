@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    
      <div class="body">
    <div class="main_top">
             <div class="top_login">
@@ -21,7 +20,7 @@
             <div class="top_tap">
 
                 <ul class="top_ul1">
-                    <li class="top_li1"><a class="top_a1" href="#">전 지역 상품</a>
+                    <li class="top_li1"><a class="top_a1" href="/sellSearchNationalFrm">전 지역 상품</a>
                         <ul class="top_ul2">
                             <li class="top_li2 top_li4"><a href="#">농산물</a></li>
                             <li class="top_li2 "><a href="#">수산물</a></li>
@@ -60,6 +59,5 @@
         <div class="top_footer">
         </div>
         </div>
-   
 </body>
 </html>

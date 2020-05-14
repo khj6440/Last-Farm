@@ -1,4 +1,4 @@
-package common;
+package sell.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

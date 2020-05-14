@@ -5,39 +5,43 @@
 <head>
 <meta charset="UTF-8">
 <title>공동구매 리스트(전국)</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
 <style>
-body {
+/*상품 서치탭의 CSS*/
+.sell-list-body {
 	font-family: 'Jua', sans-serif;
 	width: 1280px;
-	border: 1px solid black;
 	height: 2000px;
+	margin: 0 auto;
 }
 
 .searchbox-wrapper {
 	background-color: #f4f4f4;
-	width: 1000px;
+	width: 100%;
 	height: 150px;
 	margin: 0 auto;
-	margin-top: 70px;
 }
 
 .category {
-	height: 54px;
-	width: 130px;
-	font-size: 120%;
+	height: 60px;
+	width: 15%;
+	font-size: 135%;
 	margin-right: 20px;
 	margin-top: 45px;
 	float: left;
+	border: 1px solid gray;
+	font-family: 'Jua', sans-serif;
 }
 
 .category1 {
-	margin-left: 40px;
+	margin-left: 43px;
 }
 
 .searchTypingBox {
-	height: 50px;
+	height: 60px;
 	width: 350px;
 	font-size: 120%;
 	margin: 0 auto;
@@ -45,88 +49,323 @@ body {
 }
 
 .searchInput-wrapper {
-	width: 630px;
+	width: 60%;
 	display: inline-block;
 	margin: 0 auto;
-	height: 50px;
+	height: 60px;
 	margin-top: 45px;
 	float: left;
 }
 
 .searchInput-wrapper>button {
-	height: 50px;
+	height: 60px;
 	width: 150px;
-	font-size: 1.2em;
-	float: left;
+	font-size: 1.5em;
+	float: right;
 	margin-left: 20px;
-	background-color: #ABD0CE;
+	background-color: #534847;
+	color: white;
 	border-style: none;
-	border-radius: 10px;
-	box-shadow: 1px 1px 1px gray;
+	border: 1px solid gray;
+	outline: none;
+	font-family: 'Jua', sans-serif;
 }
 
 .searchInput-wrapper>button:hover {
-	background-color: #534847;
-	box-shadow: 1px 1px 1px gray;
-	color: white;
+	background-color: #ABD0CE;
+	color: black;
 }
 
 .searchInput-wrapper input {
-	height: 50px;
-	width: 380px;
-	font-size: 1.2em;
+	height: 90%;
+	width: 400px;
+	font-size: 1.5em;
 	margin: 0 auto;
 	border: none;
 	float: left;
+	margin-top: 2px;
+	font-family: 'Jua', sans-serif;
 }
 
 .searchInput-wrapper img {
 	height: 100%;
-	width: 50px;
+	width: 60px;
 	margin: 0 auto;
 	display: inline-block;
 	float: left;
 }
 
 .searchInputBox {
-	border: 1px solid black;
-	height: 50px;
-	width: 450px;
+	border: 1px solid gray;
+	height: 60px;
+	width: 590px;
 	display: inline-block;
 	background-color: white;
 	float: left;
+}
+
+.shoppingList-wrapper {
+	margin: 0 auto;
+	height: 2000px;
+	margin-top: 50px;
+}
+/* 마감시간, 구매, 등록순 조회 탭 CSS */
+.ordertabCategory>ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.ordertabCategory>ul>li {
+	display: block;
+	height: 60px;
+	width: 33.1%;
+	text-align: center;
+	font-size: 30px;
+	padding-top: 20px;
+	cursor: pointer;
+	float: left;
+}
+
+.ordertabCategory>ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.ordertabCategory>ul>li {
+	display: block;
+	height: 60px;
+	width: 33.1%;
+	text-align: center;
+	font-size: 30px;
+	padding-top: 20px;
+	cursor: pointer;
+	float: left;
+}
+
+.clicktab {
+	border-top: 1px solid gray;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+}
+
+.unclicktab {
+	border-bottom: 1px solid gray;
+}
+/*상품 카테고리 부분의 CSS*/
+.shoppingList-wrapper>table tr>th {
+	height: 500px;
+	width: 400px;
+	padding: 0px;
+	padding-left: 17px;
+}
+
+.productImg>img {
+	border: 1px solid gray;
+	height: 400px;
+	width: 100%;
+	z-index: 1;
+	position: relative;
+}
+
+.timeBox {
+	color: white;
+	height: 40px;
+	line-height: 40px;
+	width: 140px;
+	border-radius: 8px;
+	font-size: 1.2em;
+	float: left;
+	z-index: 2;
+	position: absolute;
+	background-color: #534847;
+	margin-top: 350px;
+	margin-left: 10px;
+}
+
+.productBox>p {
+	margin: 7px;
+	font-size: 1.5em;
+}
+
+.productBox {
+	font-size: 1.3em;
+}
+
+.detailInfoBox {
+	text-align: left;
+	margin-left: 30px;
+	margin-bottom: 30px;
 }
 </style>
 </head>
 <body>
 	<script>
-		
+		//검색창에 검색어 입력 시, 아웃라인 제거
+		$(function() {
+			$(".searchTypingBox").focusin(function() {
+				$(".searchTypingBox").css("outline", "none");
+			});
+		});
+		//마감시간, 구매인기, 등록순 정렬 탭 활성화
+		$(function() {
+			$(".ordertabCategory").children("ul").children("li").eq(0).click(
+					function() {
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).addClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).removeClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).removeClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).removeClass("clicktab");
+					});
+			$(".ordertabCategory").children("ul").children("li").eq(1).click(
+					function() {
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).removeClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).addClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).removeClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).removeClass("clicktab");
+					});
+			$(".ordertabCategory").children("ul").children("li").eq(2).click(
+					function() {
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(0).removeClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).addClass("clicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(2).removeClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).addClass("unclicktab");
+						$(".ordertabCategory").children("ul").children("li")
+								.eq(1).removeClass("clicktab");
+					});
+		});
+		//DB에서 상품 데이터 불러오기
+		function sell_listAll(){
+			$.ajax({
+				url:"/sellSearchNational",
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					var html = "";
+					for(var i=0; i<data.length;i++){
+						
+						if(i%3==0){
+							html+="<tr>";
+						}
+						html += "<th><div class='productBox'><div class='productImg'>";
+						html += "<div class='timeBox'>"+data[i].sellEndDate+"</div>";
+						html += "<img src='/imgs/"+data[i].thumbnail+"'></div>";
+						html += "<p>"+data[i].sellTitle+"</p><div class='detailInfoBox'>"
+						html += "상품가격: "+data[i].sellPrice+"원<br> 현재 참여인원: "+data[i].sellCount+"명</div></div></th>"
+						if(i%3==2){
+							html+="</tr>"
+						}
+					}
+					$(".shoppingList-firstRow").append(html);
+				},
+				error: function(){
+					console.log("데이터 불러오기 실패.")
+				}
+			});
+		}
+		$(function(){
+			sell_listAll();
+		});
+		//카테고리 분류하여 검색
+		$(function(){
+			$("select[name=농산물]").hide();
+			$("select[name=수산물]").hide();
+			$("select[name=전체]").attr("disabled","true");
+			//카테고리1- 농산물 선택
+			$(".category1").change(function(){
+				if($(this).children("option:selected").val()=="농산물"){
+					$("select[name=전체]").hide();
+					$("select[name=농산물]").show();
+					$("select[name=수산물]").hide();
+				}else if($(this).children("option:selected").val()=="수산물"){
+					$("select[name=전체]").hide();
+					$("select[name=농산물]").hide();
+					$("select[name=수산물]").show();
+				}else{
+					sell_listAll();
+					$("select[name=전체]").show();
+					$("select[name=농산물]").hide();
+					$("select[name=수산물]").hide();
+				}
+				
+			});
+			
+	
+			
+		});
+		function categorySearch(){
+			
+		}
 	</script>
-	<div class="searchbox-wrapper">
-		<select class="category category1" name="sellCategory1">
-			<option value="농산물">농산물</option>
-			<option value="수산물">수산물</option>
-		</select> <select class="category category2" name="sellCategory2">
-			<option value="채소">채소</option>
-			<option value="과일">과일</option>
-			<option value="가공식품">가공식품</option>
-		</select>
-		<!--
-    <select class="category category2" name="sellCategory2">
+
+	<div class="sell-list-body">
+	<form action = "/searchSell" method="get" id="searchSell">
+		<div class="searchbox-wrapper">
+			<select class="category category1" name="sellCategory1">
+				<option value="전체" selected>농/수산물(전체)</option>
+				<option value="농산물">농산물</option>
+				<option value="수산물">수산물</option>
+			</select> <select class="category category2" name="전체">
+				<option value="전체" selected>상품타입(전체)</option>
+			</select> <select class="category category2" name="농산물">
+				<option value="전체" selected>상품타입(전체)</option>
+				<option value="채소">채소</option>
+				<option value="과일">과일</option>
+				<option value="가공식품">가공식품</option>
+			</select>
+    <select class="category category2" name="수산물">
+<option value="전체" selected>상품타입(전체)</option>
         <option value="생물">생물</option>
         <option value="냉동">냉동</option>
         <option value="가공식품">가공식품</option>
     </select>
-    -->
-		<div class="searchInput-wrapper">
-			<div class="searchInputBox">
-				<img src="imgs/search@3x.png" class="searchInput-factor"> <input
-					type="text" name="searchTypingBox"
-					class="searchTypingBox searchInput-factor"
-					placeholder="검색할 상품을 입력하세요.">
+			<div class="searchInput-wrapper">
+				<div class="searchInputBox">
+					<img src="../imgs/search@3x.png"> <input type="text"
+						name="searchTypingBox" class="searchTypingBox"
+						placeholder="검색할 상품을 입력하세요.">
+				</div>
+				<button type="button" onclick="categorySearch();">상품 검색</button>
 			</div>
-			<button onclick="categorySearch();" class="searchInput-factor">상품
-				검색</button>
+		</div>
+		</form>
+		<br>
+		<br>
+		<div class="ordertabCategory">
+			<ul>
+				<li class="clicktab">마감시간 순</li>
+				<li class="unclicktab">구매 인기순</li>
+				<li class="unclicktab">최근 등록순</li>
+			</ul>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div class="shoppingList-wrapper">
+			<table class="shoppingList-firstRow">
+			</table>
 		</div>
 	</div>
 </body>

@@ -9,14 +9,12 @@ public class Sell {
 	private String sellWriter;
 	private String sellContent;
 	private Date sellEndDate;
-	private int sellMaxStock;
-	private int sellMinStock;
+	private int sellMax;
+	private int sellMin;
+	private int sellCount;
 	private int sellPrice;
 	private Date sellDate;
-	private String sellFilename;
-	private String sellFilepath;
 	private int sellType;
-	private int sellCount;
 	private String sellCategory1;
 	private String sellCategory2;
 	private int sellWarning;
@@ -26,40 +24,8 @@ public class Sell {
 	private String sellItemQuantity;
 	private String sellItemMaterial;
 	private String sellItemRule;
-	public Sell() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Sell(int sellNo, String sellTitle, String sellName, String sellWriter, String sellContent, Date sellEndDate,
-			int sellMaxStock, int sellMinStock, int sellPrice, Date sellDate, String sellFilename, String sellFilepath,
-			int sellType, int sellCount, String sellCategory1, String sellCategory2, int sellWarning,
-			int sellDeliveryFee, String sellItemOrigin, String sellItemExpireDate, String sellItemQuantity,
-			String sellItemMaterial, String sellItemRule) {
-		super();
-		this.sellNo = sellNo;
-		this.sellTitle = sellTitle;
-		this.sellName = sellName;
-		this.sellWriter = sellWriter;
-		this.sellContent = sellContent;
-		this.sellEndDate = sellEndDate;
-		this.sellMaxStock = sellMaxStock;
-		this.sellMinStock = sellMinStock;
-		this.sellPrice = sellPrice;
-		this.sellDate = sellDate;
-		this.sellFilename = sellFilename;
-		this.sellFilepath = sellFilepath;
-		this.sellType = sellType;
-		this.sellCount = sellCount;
-		this.sellCategory1 = sellCategory1;
-		this.sellCategory2 = sellCategory2;
-		this.sellWarning = sellWarning;
-		this.sellDeliveryFee = sellDeliveryFee;
-		this.sellItemOrigin = sellItemOrigin;
-		this.sellItemExpireDate = sellItemExpireDate;
-		this.sellItemQuantity = sellItemQuantity;
-		this.sellItemMaterial = sellItemMaterial;
-		this.sellItemRule = sellItemRule;
-	}
+	private String thumbnail;
+	private int sellDeleteState;
 	public int getSellNo() {
 		return sellNo;
 	}
@@ -96,17 +62,23 @@ public class Sell {
 	public void setSellEndDate(Date sellEndDate) {
 		this.sellEndDate = sellEndDate;
 	}
-	public int getSellMaxStock() {
-		return sellMaxStock;
+	public int getSellMax() {
+		return sellMax;
 	}
-	public void setSellMaxStock(int sellMaxStock) {
-		this.sellMaxStock = sellMaxStock;
+	public void setSellMax(int sellMax) {
+		this.sellMax = sellMax;
 	}
-	public int getSellMinStock() {
-		return sellMinStock;
+	public int getSellMin() {
+		return sellMin;
 	}
-	public void setSellMinStock(int sellMinStock) {
-		this.sellMinStock = sellMinStock;
+	public void setSellMin(int sellMin) {
+		this.sellMin = sellMin;
+	}
+	public int getSellCount() {
+		return sellCount;
+	}
+	public void setSellCount(int sellCount) {
+		this.sellCount = sellCount;
 	}
 	public int getSellPrice() {
 		return sellPrice;
@@ -120,29 +92,11 @@ public class Sell {
 	public void setSellDate(Date sellDate) {
 		this.sellDate = sellDate;
 	}
-	public String getSellFilename() {
-		return sellFilename;
-	}
-	public void setSellFilename(String sellFilename) {
-		this.sellFilename = sellFilename;
-	}
-	public String getSellFilepath() {
-		return sellFilepath;
-	}
-	public void setSellFilepath(String sellFilepath) {
-		this.sellFilepath = sellFilepath;
-	}
 	public int getSellType() {
 		return sellType;
 	}
 	public void setSellType(int sellType) {
 		this.sellType = sellType;
-	}
-	public int getSellCount() {
-		return sellCount;
-	}
-	public void setSellCount(int sellCount) {
-		this.sellCount = sellCount;
 	}
 	public String getSellCategory1() {
 		return sellCategory1;
@@ -198,5 +152,50 @@ public class Sell {
 	public void setSellItemRule(String sellItemRule) {
 		this.sellItemRule = sellItemRule;
 	}
-	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public int getSellDeleteState() {
+		return sellDeleteState;
+	}
+	public void setSellDeleteState(int sellDeleteState) {
+		this.sellDeleteState = sellDeleteState;
+	}
+	public Sell(int sellNo, String sellTitle, String sellName, String sellWriter, String sellContent, Date sellEndDate,
+			int sellMax, int sellMin, int sellCount, int sellPrice, Date sellDate, int sellType, String sellCategory1,
+			String sellCategory2, int sellWarning, int sellDeliveryFee, String sellItemOrigin,
+			String sellItemExpireDate, String sellItemQuantity, String sellItemMaterial, String sellItemRule,
+			String thumbnail, int sellDeleteState) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellName = sellName;
+		this.sellWriter = sellWriter;
+		this.sellContent = sellContent;
+		this.sellEndDate = sellEndDate;
+		this.sellMax = sellMax;
+		this.sellMin = sellMin;
+		this.sellCount = sellCount;
+		this.sellPrice = sellPrice;
+		this.sellDate = sellDate;
+		this.sellType = sellType;
+		this.sellCategory1 = sellCategory1;
+		this.sellCategory2 = sellCategory2;
+		this.sellWarning = sellWarning;
+		this.sellDeliveryFee = sellDeliveryFee;
+		this.sellItemOrigin = sellItemOrigin;
+		this.sellItemExpireDate = sellItemExpireDate;
+		this.sellItemQuantity = sellItemQuantity;
+		this.sellItemMaterial = sellItemMaterial;
+		this.sellItemRule = sellItemRule;
+		this.thumbnail = thumbnail;
+		this.sellDeleteState = sellDeleteState;
+	}
+	public Sell() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
