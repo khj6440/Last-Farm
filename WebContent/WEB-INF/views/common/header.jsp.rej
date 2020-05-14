@@ -1,0 +1,9 @@
+diff a/WebContent/WEB-INF/views/common/header.jsp b/WebContent/WEB-INF/views/common/header.jsp	(rejected hunks)
+@@ -7,6 +7,7 @@
+ <title>Insert title here</title>
+ </head>
+ <body>
++    	
+      <div class="body">
+    <div class="main_top">
+             <div class="top_login">

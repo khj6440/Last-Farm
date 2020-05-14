@@ -9,6 +9,7 @@ public class Message {
 	private String msgContent;
 	private String msgReceiveId;
 	private Date msgDate;
+	
 	public Message(int msgNo, String msgTitle, String msgSendId, String msgContent, String msgReceiveId, Date msgDate) {
 		super();
 		this.msgNo = msgNo;

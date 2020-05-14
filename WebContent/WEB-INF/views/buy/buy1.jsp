@@ -150,7 +150,7 @@
 </style>
 </head>
 <body>
-	 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp"/> --%>
+	
 	<section class="buy_container">
 	<form action="/buy2Frm" method="post" class="buy">
 		<div class="buy_head">
