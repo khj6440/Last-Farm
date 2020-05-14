@@ -10,9 +10,9 @@
      <div class="body">
    <div class="main_top">
             <div class="top_login">
-                <a class="top_a1 top_a2" href="#">Login</a>
+                <a class="top_a1 top_a2" href="/loginFrm">Login</a>
                 <a class="top_a1 top_a2"> | </a>
-                <a class="top_a1 top_a2" href="#">Join</a>
+                <a class="top_a1 top_a2" href="/joinFrm">Join</a>
             </div>
             <div class="top_logo">
                 <a href="#"><img class="logo1" src="../imgs/Logo1.png"></a>

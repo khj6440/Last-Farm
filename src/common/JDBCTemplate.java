@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 public class JDBCTemplate {
 <<<<<<< HEAD
+<<<<<<< HEAD
    
    public static Connection getConnection() {
       
@@ -94,13 +95,17 @@ public class JDBCTemplate {
 =======
 	
 	public static Connection getConnection() {
+=======
+>>>>>>> c206ee5a196b89bdf42c692a558bc9d5a8c8dd7b
 
+	public static Connection getConnection() {
 		Connection conn = null;
-		
 		try {
+			// 1.드라이버 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","kh_server","1234");
-			//자동으로 커밋되는 것을 방지하는 설정
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "lastFarm", "1234");
+			// 자동 커밋 방지 설정
+
 			conn.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -110,6 +115,7 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 		return conn;
+
 		
 	}
 	
@@ -165,5 +171,6 @@ public class JDBCTemplate {
 	}
 	
 	
+
 }
 >>>>>>> 8fc76aa5483c8e188ec8b28549477f3eb7468d44
