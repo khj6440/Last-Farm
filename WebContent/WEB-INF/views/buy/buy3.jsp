@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>결제완료</title>
+<title>주문완료</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
-	        .buy {
+	  <style>
+        .buy {
             width: 1280px;
             height: 1800px;
             margin: 0 auto;
@@ -70,24 +71,23 @@
         .buy_content2{
             width: 90%;
             height: 1000px;
-            border: 1px solid black;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
             margin: 0 auto;
         }
         .buy_content2_sub{
             width: 100%;
             height: 200px;
-            border: 1px solid red;
             text-align: center;
-            line-height: 6;
+            line-height: 8;
             font-size: 20px;
         }
         .buy_content2_sub2{
             width: 100%;
             height: 500px;
-            border: 1px solid red;
         }
         .buy_content2_sub2_1{
-            border: 1px solid black;
+            background-color: lightgray;
             margin: 0 auto;
             width: 80%;
             height: 100%;
@@ -96,6 +96,54 @@
             border-bottom: 3px solid black;
             width: 100%;
             height: 20%;
+            text-align: center;
+            line-height: 5;
+        }
+        .buy_h3{
+            margin: 0;
+        }
+        .buy_content_table{
+            text-align: center;
+            width: 80%;
+            height: 50%;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .buy_content_table_tr{
+            border-bottom: 1px solid gray;
+        }
+        .buy_content_table td{
+            text-align: center;
+        }
+        .buy_content12{
+            margin-top: 50px;
+            width: 100%;
+            height: 80px;
+            text-align: center;
+            line-height: 5;
+            background-color: white;
+        }
+         .buy_table_btn,
+        .buy_table_btn2 {
+            width: 120px;
+            height: 50px;
+        }
+
+        .buy_table_btn {
+            margin-right: 50px;
+            
+        }
+
+        .buy_table_btn:hover {
+            background-color: darkgray;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .buy_table_btn2:hover {
+            background-color: darkgray;
+            font-weight: bold;
+            cursor: pointer;
         }
 </style>
 </head>
@@ -104,7 +152,7 @@
         <form action="/buy2Frm" method="post" class="buy">
             <div class="buy_head">
                 <div class="buy_head1">
-                    <p class="buy_p">주문결제</p>
+                    <p class="buy_p">주문완료</p>
                 </div>
 
                 <div class="buy_head2">
@@ -122,8 +170,28 @@
                         <div class="buy_content2_sub2">
                             <div class="buy_content2_sub2_1">
                                 <div class="buy_content11">
-                                    <h3>고객님이 주문하신 주문 번호는 123456789입니다.</h3>
+                                    <h3 class="buy_h3">
+                                        고객님이 주문하신 주문 번호는 123456789 입니다.
+                                    </h3>
                                 </div>
+                                <table class="buy_content_table">
+                                    <tr class="buy_content_table_tr">
+                                        <th>상품명</th>
+                                        <td>대홍단 왕감자</td>
+                                    </tr>
+                                    <tr class="buy_content_table_tr">
+                                        <th>총 결제 금액</th>
+                                        <td>10000 원</td>
+                                    </tr>
+                                    <tr class="buy_content_table_tr">
+                                        <th>거래 일시</th>
+                                        <td>2020-02-02</td>
+                                    </tr>
+                                </table>
+                                <div class="buy_content12">
+                                <button class="buy_table_btn">주문확인</button>
+                                <button class="buy_table_btn2" onclick="location.href='/index.jsp'">메인으로</button>
+                                    </div>
                             </div>
                         </div>
                         

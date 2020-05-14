@@ -287,28 +287,28 @@
                             <table class="buy_inf">
                                 <tr>
                                     <th>주문자 이름</th>
-                                    <td>${SessionScope.member.memberName }
-                                    <input type="text" name="name" class="name" value="${SessionScope.member.memberName }" readonly></td>
+                                    <td>
+                                    <input type="text" name="name" class="name" value="${sessionScope.member.memberName }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th rowspan="3">주소</th>
                                     <td> 
-                                    <input type="text" name="addr" id="postCode" class="addr" value="${sessionScope.m.memberEmail}" placeholder="우편번호" readonly></td>
+                                    <input type="text" name="addr" id="postCode" class="addr" value="${sessionScope.member.memberPostCode }" placeholder="우편번호" readonly></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="roadAddr" class="addr" placeholder="도로명주소" readonly></td>
+                                    <td><input type="text" name="addr" id="roadAddr" class="addr" value="${sessionScope.member.memberRoadAddr }" placeholder="도로명주소" readonly></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="detailAddr" class="addr" placeholder="상세주소" ></td>
+                                    <td><input type="text" name="addr" id="detailAddr" class="addr" value="${sessionScope.member.memberDetailAddr }"placeholder="상세주소" ></td>
                                 </tr>
                                 <tr>
                                     <th>휴대전화</th>
-                                    <td><input type="text" name="tel" class="tel" readonly>
+                                    <td><input type="text" name="tel" class="tel" value="${sessionScope.member.memberPhone }"readonly>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>이메일</th>
-                                    <td><input type="text" name="email" class="email"  readonly></td>
+                                    <td><input type="text" name="email" class="email" value="${sessionScope.member.memberEmail }" readonly></td>
                                 </tr>
                             </table>
                         </div>
@@ -320,34 +320,34 @@
                             <table class="buy_inf">
                                 <tr>
                                     <th class="buy_th">배송지 선택</th>
-                                    <td class="buy_td"><button type="button" id="sameBtn" onclick="addrSameBtn();">주문자 정보와 동일</button>
+                                    <td class="buy_td"><button type="button" id="sameBtn" onclick="SameBtn();">주문자 정보와 동일</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>주문자 이름</th>
-                                    <td><input type="text" name="name" class="name" ></td>
+                                    <td><input type="text" name="name" class="name2" value=""></td>
                                 </tr>
                                 <tr>
                                     <th rowspan="3">주소</th>
-                                    <td><input type="text" name="addr" id="postCode" class="addr" placeholder="우편번호" readonly>
+                                    <td><input type="text" name="addr" id="postCode" class="addr2" value="" placeholder="우편번호" readonly>
                                         <button type="button" id="addrSearchBtn" onclick="addrSearch();" class="addrBtn">주소검색</button>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="roadAddr" class="addr" placeholder="도로명주소" readonly></td>
+                                    <td><input type="text" name="addr" id="roadAddr" class="addr3" value="" placeholder="도로명주소" readonly></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="detailAddr" class="addr" placeholder="상세주소"></td>
+                                    <td><input type="text" name="addr" id="detailAddr" class="addr4" value="" placeholder="상세주소"></td>
                                 </tr>
                                 <tr>
                                     <th>휴대전화</th>
-                                    <td><input type="text" name="tel" class="tel" placeholder="ex) 010-0000-0000">
+                                    <td><input type="text" name="tel" class="tel2" value="" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>이메일</th>
-                                    <td><input type="text" name="email" class="email" placeholder="ex) test123@naver.com"></td>
+                                    <td><input type="text" name="email" class="email2" value="" placeholder="ex) test123@naver.com"></td>
                                 </tr>
                             </table>
                         </div>
@@ -362,5 +362,16 @@
         </form>
     </section>
     <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+    <script>
+    
+    	function SameBtn(){
+    		$('.name2').val('${sessionScope.member.memberName}');
+    		$('.tel2').val('${sessionScope.member.memberPhone}');
+    		$('.email2').val('${sessionScope.member.memberEmail}');
+    		$('.addr2').val('${sessionScope.member.memberPostCode }');
+    		$('.addr3').val('${sessionScope.member.memberRoadAddr }');
+    		$('.addr4').val('${sessionScope.member.memberDetailAddr }');
+    	};
+    </script>
 </body>
 </html>
