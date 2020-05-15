@@ -6,8 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
-	 <div class="body">
+    <div class="body">
         <div class="main_footer">
             <div class="footer_content">
                 <div class="footer_content1">
@@ -26,6 +27,5 @@
         </div>
 
     </div>
-  
 </body>
 </html>
