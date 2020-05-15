@@ -173,7 +173,9 @@
 			
 			
 			<form action="/searchKeyword" method="post">
+			<c:if test="${sessionScope.member.memberId=='admin' }">
 			<a class="question_add btn btn-dark" href="/questionWriteFrm">글쓰기</a>
+			</c:if>
 			<input type="text" class="question_search" name="keyword" value="${keyword }" placeholder="제목을 입력해주세요">
 			<button type="submit" class="btn btn-dark">검색</button>
 			<a href="/questionList?reqPage=1" class="btn btn-dark">전체 목록보기</a>
@@ -189,8 +191,10 @@
 							<div class="question_List">
 								<a style="font-weight: bold">Q${n.questionNo}. ${n.questionTitle }</a>
 								<div class="d1">
+									<c:if test="${sessionScope.member.memberId=='admin' }">
 									<a class="question_update btn btn-dark" href="javascript:void(0)" onclick="updateQuestion('${n.questionNo}')">수정</a>	
 									<a class="question_del btn btn-dark" href="javascript:void(0)" onclick="deleteQuestion('${n.questionNo}')">삭제</a>	
+									</c:if>
 								</div>
 							</div>
 							<ul class="question_sub2">
