@@ -6,13 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="/css/footer/footer.css">
 <body>
-	 <div class="body">
+    <div class="body">
         <div class="main_footer">
             <div class="footer_content">
                 <div class="footer_content1">
                     <a class="footer_a1">Last Farm</a><br><br>
-                    <a>35208 대전광역시 서구 청사로 189(둔산동 920) 정부대전청사 3동 대표전화 : 1588-0800<br>
+                    <a>서울 영등포구 선유동2로 57 이레빌딩 양평동 4가 2 (우) 07212 대표전화 : 1588-0000<br>
                         COPYRIGHT 2016 ALL RIGHTS RESERVED | 개인정보보호방침 |</a>
                 </div>
                 <div>
@@ -26,6 +27,5 @@
         </div>
 
     </div>
-  
 </body>
 </html>

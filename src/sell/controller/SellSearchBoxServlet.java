@@ -42,7 +42,7 @@ public class SellSearchBoxServlet extends HttpServlet {
 		ArrayList<Sell> sellList = new ArrayList<Sell>();
 		SellCategoryPage scp = new SellCategoryPage();
 		if(searchWord=="") {
-			sellList = new SellSearchService().selectSellNationalList();
+//			sellList = new SellSearchService().selectSellNationalList();
 		}else {
 			scp = new SellSearchService().searchBoxSorting(reqPage, sortingTab, searchWord);
 		}
