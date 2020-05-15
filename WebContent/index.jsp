@@ -38,8 +38,8 @@
     </script>
 <!--    jquery와popper.js 종료(부트4.3에 필요)-->
 <!-- header,footer 링크-->
-<link rel="stylesheet" href="/css/header/header.css">
-<link rel="stylesheet" href="/css/footer/footer.css">
+
+
 <!--  header,footer 종료  -->
 <style>
 .carousel-inner>.carousel-item>img {
@@ -199,14 +199,13 @@
 			class="fas fa-angle-left f-black" aria-hidden="true"></i> <span
 			class="f-black">Previous</span>
 		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-		<i
-			class="fas fa-angle-left f-black" aria-hidden="true"></i> <span
+			<i class="fas fa-angle-left f-black" aria-hidden="true"></i> <span
 			class="f-black">Next</span>
-		
+
 		</a>
-		</div>
-		
-			
-				<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-			</body>
+	</div>
+
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
 </html>
