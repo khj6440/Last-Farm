@@ -20,7 +20,11 @@
             <div class="top_tap">
 
                 <ul class="top_ul1">
+
+                    <li class="top_li1"><a class="top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전 지역 상품</a>
+
                     <li class="top_li1 jj"><a class="top_a1" href="#">전 지역 상품</a>
+
                         <ul class="top_ul2">
                             <li class="top_li2 top_li4"><a href="#">농산물</a></li>
                             <li class="top_li2 "><a href="#">수산물</a></li>
@@ -60,7 +64,6 @@
         </div>
         </div>
    
-
 
 
 </body>
