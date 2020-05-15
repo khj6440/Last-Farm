@@ -21,7 +21,7 @@
 
                 <ul class="top_ul1">
 
-                    <li class="top_li1"><a class="top_a1" href="/sellSearchNationalFrm">전 지역 상품</a>
+                    <li class="top_li1"><a class="top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전 지역 상품</a>
 
                     <li class="top_li1 jj"><a class="top_a1" href="#">전 지역 상품</a>
 

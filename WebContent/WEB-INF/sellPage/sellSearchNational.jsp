@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,11 @@
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
+	
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	 -->
 <style>
 /*상품 서치탭의 CSS*/
 .sell-list-body {
@@ -57,7 +63,7 @@
 	float: left;
 }
 
-.searchInput-wrapper>button {
+.searchBtn {
 	height: 60px;
 	width: 150px;
 	font-size: 1.5em;
@@ -71,12 +77,12 @@
 	font-family: 'Jua', sans-serif;
 }
 
-.searchInput-wrapper>button:hover {
+.searchBtn:hover {
 	background-color: #ABD0CE;
 	color: black;
 }
 
-.searchInput-wrapper input {
+.searchTypingBox {
 	height: 90%;
 	width: 400px;
 	font-size: 1.5em;
@@ -198,6 +204,13 @@
 	margin-left: 30px;
 	margin-bottom: 30px;
 }
+#pageNavi{
+   font-size:30px;
+   text-align: center;
+   width: 1000px;
+   margin: 0 auto;
+   margin-top: 80px;
+}
 </style>
 </head>
 <body>
@@ -210,6 +223,8 @@
 		});
 		//마감시간, 구매인기, 등록순 정렬 탭 활성화
 		$(function() {
+			var sortingTab;
+			console.log(sortingTab);
 			$(".ordertabCategory").children("ul").children("li").eq(0).click(
 					function() {
 						$(".ordertabCategory").children("ul").children("li")
@@ -224,6 +239,8 @@
 								.eq(2).addClass("unclicktab");
 						$(".ordertabCategory").children("ul").children("li")
 								.eq(2).removeClass("clicktab");
+						sortingTab = $(".clicktab").html();
+						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
 					});
 			$(".ordertabCategory").children("ul").children("li").eq(1).click(
 					function() {
@@ -239,6 +256,8 @@
 								.eq(2).addClass("unclicktab");
 						$(".ordertabCategory").children("ul").children("li")
 								.eq(2).removeClass("clicktab");
+						sortingTab = $(".clicktab").html();
+						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
 					});
 			$(".ordertabCategory").children("ul").children("li").eq(2).click(
 					function() {
@@ -254,15 +273,21 @@
 								.eq(1).addClass("unclicktab");
 						$(".ordertabCategory").children("ul").children("li")
 								.eq(1).removeClass("clicktab");
+						sortingTab = $(".clicktab").html();
+						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
 					});
 		});
 		//DB에서 상품 데이터 불러오기
 		function sell_listAll(){
+			var searchTypingBox = $("#searchTypingBox").val();
+			var param = {searchTypingBox:searchTypingBox, sortingTab:sortingTab};
 			$.ajax({
-				url:"/sellSearchNational",
+				url:"/sellSearchBox",
 				type: "post",
+				data: param,
 				dataType: "json",
 				success: function(data){
+					$(".shoppingList-firstRow").html("");
 					var html = "";
 					for(var i=0; i<data.length;i++){
 						
@@ -286,8 +311,12 @@
 			});
 		}
 		$(function(){
-			sell_listAll();
+			$("form").submit(function(){
+				sell_listAll();
+				return false;
+			});
 		});
+		
 		//카테고리 분류하여 검색
 		$(function(){
 			$("select[name=농산물]").hide();
@@ -309,19 +338,12 @@
 					$("select[name=농산물]").hide();
 					$("select[name=수산물]").hide();
 				}
-				
 			});
-			
-	
-			
 		});
-		function categorySearch(){
-			
-		}
+		//paging
 	</script>
-
 	<div class="sell-list-body">
-	<form action = "/searchSell" method="get" id="searchSell">
+	<form action = "/sellSearchNational" method="get" id="searchSell">
 		<div class="searchbox-wrapper">
 			<select class="category category1" name="sellCategory1">
 				<option value="전체" selected>농/수산물(전체)</option>
@@ -343,11 +365,12 @@
     </select>
 			<div class="searchInput-wrapper">
 				<div class="searchInputBox">
-					<img src="../imgs/search@3x.png"> <input type="text"
-						name="searchTypingBox" class="searchTypingBox"
+				
+					<img src="../imgs/search@3x.png"> 
+					<input type="text" name="searchTypingBox" id="searchTypingBox" class="searchTypingBox"
 						placeholder="검색할 상품을 입력하세요.">
 				</div>
-				<button type="button" onclick="categorySearch();">상품 검색</button>
+				<input type="submit" onclick="sell_listAll();" value="상품 검색" class="searchBtn">
 			</div>
 		</div>
 		</form>
@@ -365,8 +388,32 @@
 		<br>
 		<div class="shoppingList-wrapper">
 			<table class="shoppingList-firstRow">
+
+			<c:forEach items="${sellList }" var="n" varStatus="i">
+		<c:if test="${i.count%3 eq 1 }">
+			<tr>
+		</c:if>
+				<th>
+					<div class="productBox">
+						<div class='productImg'>
+							<div class='timeBox' id='timeBox'>${n.sellEndDate }</div>
+							<img src='/imgs/${n.thumbnail }'>
+						</div>
+						<p>${n.sellTitle }</p>
+						<div class='detailInfoBox'>
+							상품가격: ${n.sellPrice }원<br>
+							현재 참여인원: ${n.sellCount }명
+						</div>
+					</div>
+				</th>
+	<c:if test="${i.count%3 eq 0 }">
+			</tr>
+		</c:if>
+			</c:forEach>
 			</table>
+				<div id="pageNavi">${pageNavi }</div>
 		</div>
+	
 	</div>
 </body>
 </html>

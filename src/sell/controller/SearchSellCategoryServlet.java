@@ -15,16 +15,16 @@ import sell.model.service.SellSearchService;
 import sell.model.vo.Sell;
 
 /**
- * Servlet implementation class SellSearchNationalServlet
+ * Servlet implementation class SearchSellServlet
  */
-@WebServlet(name = "SellSearchNational", urlPatterns = { "/sellSearchNational" })
-public class SellSearchNationalServlet extends HttpServlet {
+@WebServlet(name = "SearchSellCategory", urlPatterns = { "/searchSellCategory" })
+public class SearchSellCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellSearchNationalServlet() {
+    public SearchSellCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +33,10 @@ public class SellSearchNationalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		sellList = new SellSearchService().selectSellNationalList();
-		if(sellList.isEmpty()) {
-			System.out.println("실패");
-		}
-		System.out.println(sellList.get(0).getSellTitle());
-		new Gson().toJson(sellList,response.getWriter());
+		request.setCharacterEncoding("utf-8");
+		String category1 = request.getParameter("searchTypingBox");
+		//ArrayList<Sell> sellList = new SellSearchService().searchBoxSorting(searchWord);
+		//new Gson().toJson(sellList,response.getWriter());
 	}
 
 	/**
