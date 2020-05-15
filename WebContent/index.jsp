@@ -112,7 +112,7 @@
                 <li data-target="#demo" data-slide-to="1"></li>
                 <li data-target="#demo" data-slide-to="2"></li>
             </ul> <!-- 인디케이터 끝 -->
-        </div>
+        </div> 
         <!-- 왼쪽 오른쪽 화살표 버튼 --> 
             <a class="carousel-control-prev" href="#demo" data-slide="prev"> 
 <!--                <span class="carousel-control-prev-icon b-black" aria-hidden="true"></span>-->
@@ -170,7 +170,7 @@
             <a class="carousel-control-prev" href="#demo" data-slide="prev"> 
 			
                 <i class="fas fa-angle-left f-black" aria-hidden="true"></i>
-                 <span class="f-black">Previous</span>  
+                 <span class="f-black">Previous</span>  .........
             </a> 
             <a class="carousel-control-next" href="#demo" data-slide="next"> 
 

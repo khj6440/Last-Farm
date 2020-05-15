@@ -40,7 +40,7 @@ public class NoticeListServlet extends HttpServlet {
 		//4.결과 값 처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
 		request.setAttribute("list", npd.getList());
-		request.setAttribute("Pagenavi", npd.getPageNavi());
+		request.setAttribute("pageNavi", npd.getPageNavi());
 		rd.forward(request, response);
 		
 	}
