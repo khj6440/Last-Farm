@@ -224,7 +224,6 @@
 		//마감시간, 구매인기, 등록순 정렬 탭 활성화
 		$(function() {
 			var sortingTab;
-			console.log(sortingTab);
 			$(".ordertabCategory").children("ul").children("li").eq(0).click(
 					function() {
 						$(".ordertabCategory").children("ul").children("li")
@@ -343,7 +342,7 @@
 		//paging
 	</script>
 	<div class="sell-list-body">
-	<form action = "/sellSearchNational" method="get" id="searchSell">
+	<form action = "/sellSearchBox" method="get" id="searchSell">
 		<div class="searchbox-wrapper">
 			<select class="category category1" name="sellCategory1">
 				<option value="전체" selected>농/수산물(전체)</option>

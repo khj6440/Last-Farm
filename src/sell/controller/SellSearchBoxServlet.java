@@ -48,6 +48,7 @@ public class SellSearchBoxServlet extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sellPage/sellSearchNational.jsp");
 		request.setAttribute("sellList", scp.getSellList());
+		request.setAttribute("sortingTab", sortingTab);
 		System.out.println(scp.getSellList().get(0).getSellNo());
 		request.setAttribute("pageNavi", scp.getPageNavi());
 		request.setAttribute("searchWord", searchWord);
