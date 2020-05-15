@@ -9,6 +9,8 @@ public class Notice {
 	private String noticeWriter;
 	private String noticeContent;
 	private Date noticeDate;
+	private String noticeFilename;
+	private String noticeFilepath;
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -51,7 +53,7 @@ public class Notice {
 	public void setNoticeFilepath(String noticeFilepath) {
 		this.noticeFilepath = noticeFilepath;
 	}
-	private String noticeFilename;
+	
 	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, Date noticeDate,
 			String noticeFilename, String noticeFilepath) {
 		super();
@@ -67,6 +69,6 @@ public class Notice {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	private String noticeFilepath;
+	
 
 }

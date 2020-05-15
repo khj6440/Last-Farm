@@ -1,4 +1,4 @@
-package sell.movel.vo;
+package sell.model.vo;
 
 import java.sql.Date;
 
