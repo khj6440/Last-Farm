@@ -15,7 +15,7 @@
                 <a class="top_a1 top_a2" href="/joinFrm">Join</a>
             </div>
             <div class="top_logo">
-                <a href="#"><img class="logo1" src="../imgs/Logo1.png"></a>
+	                <a href="#"><img class="logo1" src="../imgs/Logo1.png"></a>
             </div>	
             <div class="top_tap">
 
