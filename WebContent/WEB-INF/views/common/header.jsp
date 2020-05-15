@@ -25,7 +25,7 @@
                             <li class="top_li2 top_li4"><a href="#">농산물</a></li>
                             <li class="top_li2 "><a href="#">수산물</a></li>
                             <li class="top_li2"><a href="#">상품조회</a></li>
-                            <li class="top_li2"><a href="/buyFrm">상품판매</a></li>
+                            <li class="top_li2"><a href="/sellFrm">상품판매</a></li>
                         </ul>
                     </li>
                     <li class="top_li1  top_li3 jj"><a class="top_a1" href="#">지역 상품</a>
