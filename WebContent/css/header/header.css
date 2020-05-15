@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-  .body {
+    .main_body {
         margin: 0 auto;
         text-shadow: 0.5px 0.5px gray;
         width: 1280px;
-        
     }
+<<<<<<< HEAD
     .jj{
     	margin-top:17px;
     	
@@ -15,28 +15,59 @@
 		text-decoration:none;
 	}
     .main_top {
-        width: 100%;
-        height: 23%;
-        font-family: 'Nanum Gothic', sans-serif;
-        position: relative;
+=======
+	.jj{
+    	margin-top:17px;
 
     }
-    .top_logo {
+    a:hover{
+		color: black;
+		text-decoration:none;
+	}
+    .header_top {
+        border-bottom: 0.1px solid gray;
+>>>>>>> kang
+        width: 100%;
+        height: 235px;
+        font-family: 'Nanum Gothic', sans-serif;
+        position: relative;
+    }
+
+    .main_content {
+
+        width: 100%;
+        height: 62%;
+        border-left: 0.1px solid gray;
+        border-right: 0.1px solid gray;
+    }
+
+   
+
+
+    .main_footer {
+        position: relative;
+        background-color: #D9D4CF;
+        width: 100%;
+        height: 15%;
+    }
+
+    .header_top_logo {
         width: 16%;
+        height: 90%;
         float: left;
-        margin-top: -3%;
+        margin-top: -2.5%;
         position: absolute;
         margin-left: 42%;
 
     }
 
-    .logo1 {
+    .header_top_logo1 {
         width: 100%;
         height: 100%;
     }
 
 
-    .top_tap {
+    .header_top_tap {
         width: 100%;
         float: left;
         margin-top: 4.4%;
@@ -46,7 +77,7 @@
 
     }
 
-    .top_tap2 {
+    .header_top_tap2 {
 
         width: 42%;
         float: left;
@@ -56,15 +87,17 @@
 
     }
 
-    .top_ul1 {
+    .header_top_ul1 {
 
-        list-style: none;
+list-style: none;
 
+}
 
-    }
+    .header_top_li1 {
 
-    .top_li1 {
+display: block;
 
+<<<<<<< HEAD
         display: block;
         float: left;
         width: 170px;
@@ -74,11 +107,25 @@
         text-align: center;
         font-weight: bold;
         
+=======
+float: left;
+>>>>>>> kang
 
+width: 170px;
 
-    }
+height: 85px;
 
-    .top_a1 {
+margin-left: 40px;
+
+line-height: 85px;
+
+text-align: center;
+
+font-weight: bold;
+
+}
+
+    .header_top_a1 {
         display: inline-block;
         text-decoration: none;
         font-size: 22px;
@@ -86,7 +133,7 @@
         text-shadow: 10px 10px 10px 10px gray;
     }
 
-    .top_ul2 {
+    .header_top_ul2 {
 
         list-style: none;
         padding: 0;
@@ -100,7 +147,7 @@
 
 
 
-    .top_ul3 {
+    .header_top_ul3 {
         list-style: none;
         padding: 0;
         position: absolute;
@@ -111,19 +158,19 @@
         right: 5%;
     }
 
-    .top_li2 {
+    .header_top_li2 {
         width: 210px;
         float: left;
 
     }
 
-    .top_li4 {
+    .header_top_li4 {
         margin-left: 25px;
     }
 
 
 
-    .top_li2>a {
+    .header_top_li2>a {
         text-decoration: none;
         display: block;
         color: white;
@@ -131,20 +178,20 @@
 
     }
 
-    .top_li1:hover>.top_ul2>li {
+    .header_top_li1:hover>.header_top_ul2>li {
         visibility: visible;
 
 
     }
 
-    .top_li1:hover>.top_ul3>li {
+    .header_top_li1:hover>.header_top_ul3>li {
         visibility: visible;
 
 
     }
 
-    .top_footer {
-        margin-top: 12.5%;
+    .header_top_bottom {
+        margin-top: -50px;
         width: 100%;
         height: 50px;
         background-color: #D9D4CF;
@@ -152,31 +199,31 @@
 
     }
 
-    .top_a2 {
+    .header_top_a2 {
         font-size: 27px;
 
     }
 
-    .top_login {
+    .header_top_login {
 
         margin-left: 88%;
         width: 140px;
 
     }
 
-    .top_login>a {
+    .header_top_login>a {
         font-size: 20px;
         color: #7C7877;
         margin-right: 10px;
     }
-     .top_tap {
+ .header_top_tap {
         position: relative;
     }
 
-    .top_tap2 {
+    .header_top_tap2 {
         position: relative;
     }
 
-    .top_li3 {
+    .header_top_li3 {
         margin-right: 25%;
     }

@@ -17,21 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter("/ChartersetEncodingFilter")
 public class CharsetEncodingFilter implements Filter {
 
-	/**
-	 * Default constructor.
-	 */
-	public CharsetEncodingFilter() {
-		// TODO Auto-generated constructor stub
-	}
-
+    /**
+     * Default constructor. 
+     */
+    public CharsetEncodingFilter() {
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-
 		// TODO Auto-generated method stub
-
 		System.out.println("필터객체 소멸!");
 	}
 
@@ -50,14 +47,13 @@ public class CharsetEncodingFilter implements Filter {
 //		System.out.println("사후작업");
 		//서블릿에서 클라이언트로 응답 나가기 전 사후 작업
 
+
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-
-		// TODO Auto-generated method stub
 
 		System.out.println("필터객체 생성");
 	}
