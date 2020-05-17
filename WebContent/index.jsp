@@ -208,7 +208,7 @@
 	</div>
 
 
+	<a href="/manageMember?reqPage=1">관리자</a>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
 </body>
 </html>

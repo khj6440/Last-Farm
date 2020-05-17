@@ -1,8 +1,10 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import admin.model.vo.SellPageData;
 
 /**
- * Servlet implementation class ManageWarningServlet
+ * Servlet implementation class AdminDelMemberServlet
  */
-@WebServlet(name = "ManageWarning", urlPatterns = { "/manageWarning" })
-public class ManageWarningServlet extends HttpServlet {
+@WebServlet(name = "AdminDelMember", urlPatterns = { "/adminDelMember" })
+public class AdminDelMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageWarningServlet() {
+    public AdminDelMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,17 @@ public class ManageWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("서블릿 호출");
+		String memberNo = request.getParameter("memberNo");
+		System.out.println(memberNo);
+		StringTokenizer sT =  new StringTokenizer(memberNo, "/");
+		ArrayList<String> checkList = new ArrayList<String>();
+		while(sT.hasMoreTokens()) {
+			checkList.add(sT.nextToken());
+		}
+		int result = new AdminService().deleteMember(checkList);
 		
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageWarning.jsp");
-		rd.forward(request, response);
+		PrintWriter out  =response.getWriter();
+		out.print(result);
 	}
 
 	/**

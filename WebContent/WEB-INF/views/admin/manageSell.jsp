@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="utf-8">
 
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
 <!-- Required meta tags-->
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -15,6 +18,10 @@
 <meta name="author" content="Hau Nguyen">
 <meta name="keywords" content="au theme template">
 <style type="text/css">
+* {
+	font-family: 'Jua', sans-serif;
+}
+
 .page>a {
 	color: black;
 	font-weight: 500;
@@ -61,50 +68,99 @@
 .next_page:hover>a, .pre_page:hover>a {
 	color: #ffac05;
 }
+
+.noResult {
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 25px;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.list-unstyled>li {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
+		$("#sellDel").click(function(){
+			console.log("게시물삭제요청");
+			$.ajax({
+				url : "/reqDelSell",
+				type : "post",
+				success : function(data) {
+					console.log("서버 전송 성공");
+					console.log(data);
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			})
+		})
+		
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
 				item.checked = $("input[name=allCheck]").prop("checked");
 			})
 		});
 		$(".show-count").change(function() {
-			var value;
-			$(this).children().each(function(index, item) {
-				if (item.selected) {
-					value = Number(item.value);
-					location.href = "/manageSell?reqPage=1&reqCount=" + value;
-				}
-			});
-		});
+							var value;
+							$(this)
+									.children()
+									.each(
+											function(index, item) {
+												if (item.selected) {
+													var link = document.location.href;
+													value = Number(item.value);
+													var searched = $(
+															"input[name=search]")
+															.val();
+													if (!link.match("search")) {
+														location.href = "/manageSell?reqPage=1&reqCount="
+																+ value;
+													} else {
+														location.href = "/adminSearchSell?reqPage=1&reqCount="
+																+ value
+																+ "&search="
+																+ searched;
+													}
+													
+												}
+											});
+						});
 
 		$("#selectDel").click(function() {
 			var checkList = "";
-			var length = $("input[name=pick]:checked").length-1;
+			var length = $("input[name=pick]:checked").length - 1;
 			console.log(length);
 			$("input[name=pick]:checked").each(function(index, item) {
-				if(index ==length){
-					checkList= checkList.concat(item.value);
-								
-				}else{
-					checkList= checkList.concat(item.value+"/");
+				if (index == length) {
+					checkList = checkList.concat(item.value);
+
+				} else {
+					checkList = checkList.concat(item.value + "/");
 				}
 			});
-			
+
 			$.ajax({
-				url: "/adminDelSell",
-				data:{sellNo:checkList},
-				type :"post",
-				success:function(data){
+				url : "/adminDelSell",
+				data : {
+					sellNo : checkList
+				},
+				type : "post",
+				success : function(data) {
 					location.reload();
-					if(data>0){
-						alert("삭제 성공");
-					}else{
+					if (data > 0) {
+						alert(data + "개 삭제 성공");
+					} else {
 						alert("삭제 실패");
 					}
 				},
-				error : function(){
+				error : function() {
 					console.log("서버 전송 실패")
 				}
 			});
@@ -121,18 +177,20 @@
 	function deleteSell(param) {
 		$('#myModal').modal('hide');
 		$.ajax({
-			url: "/adminDelSell",
-			data:{sellNo:param},
-			type :"post",
-			success:function(data){
+			url : "/adminDelSell",
+			data : {
+				sellNo : param
+			},
+			type : "post",
+			success : function(data) {
 				location.reload();
-				if(data>0){
+				if (data > 0) {
 					alert("삭제 성공");
-				}else{
+				} else {
 					alert("삭제 실패");
 				}
 			},
-			error : function(){
+			error : function() {
 				console.log("서버 전송 실패")
 			}
 		});
@@ -200,15 +258,15 @@
 						class="fas fa-users"></i>회원 관리
 				</a></li>
 				<li class="active"><a href="/manageSell?reqPage=1"> <i
-						class="far fa-check-square"></i>거래글 관리
+						class="far fa-list-alt"></i>거래글 관리
 				</a></li>
 
 				<li><a href="/manageReview?reqPage=1"> <i
-						class="far fa-check-square"></i>리뷰 관리
+						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
 				<li><a href="/manageWarning?reqPage=1"> <i
-						class="far fa-check-square"></i>신고글 확인
+						class="far fa-check-square"></i>신고글 관리
 				</a></li>
 			</ul>
 			</nav>
@@ -228,8 +286,9 @@
 					<div class="header-wrap">
 						<form class="form-header" action="/adminSearchSell" method="get">
 							<input class="au-input au-input--xl" type="text" name="search"
-								placeholder="Search for datas &amp; reports..." />
-							<input type="hidden" name="reqPage" value="1">
+								placeholder="Search for title , user ID..." value="${search }" />
+							<input type="hidden" name="reqPage" value="1"> <input
+								type="hidden" name="reqCount" value="10">
 							<button class="au-btn--submit" type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
@@ -237,11 +296,12 @@
 						<div class="header-button">
 							<div class="noti-wrap">
 								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-comment-more"></i> <span class="quantity">1</span>
+									<i class="fas fa-exclamation"></i> <span class="quantity">1</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>You have 2 news message</p>
+											<p>신고요청 알림</p>
 										</div>
+
 										<div class="mess__item">
 											<div class="image img-cir img-40">
 												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
@@ -267,79 +327,27 @@
 										</div>
 									</div>
 								</div>
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-email"></i> <span class="quantity">1</span>
-									<div class="email-dropdown js-dropdown">
-										<div class="email__title">
-											<p>You have 3 New Emails</p>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, 3 min ago</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, Yesterday</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, April 12,,2018</span>
-											</div>
-										</div>
-										<div class="email__footer">
-											<a href="#">See all emails</a>
-										</div>
-									</div>
-								</div>
-								<div class="noti__item js-item-menu">
+								<div id="sellDel" class="noti__item js-item-menu">
 									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
 									<div class="notifi-dropdown js-dropdown">
 										<div class="notifi__title">
-											<p>You have 3 Notifications</p>
+											<p>게시물 삭제 요청</p>
 										</div>
-										<div class="notifi__item">
-											<div class="bg-c1 img-cir img-40">
-												<i class="zmdi zmdi-email-open"></i>
+										<div class="mess__item">
+											<div
+												style="border-radius: 0px; display: flex; align-items: center; justify-content: center;"
+												class="image img-cir img-40">
+												<i style="color: #f57542" class="fas fa-trash-alt"></i>
 											</div>
 											<div class="content">
-												<p>You got a email notification</p>
-												<span class="date">April 12, 2018 06:50</span>
+												<h6>${s.sellWriter }</h6>
+												<p>${s.sellTitle }</p>
+												<span class="time">${s.sellDate}</span>
 											</div>
 										</div>
-										<div class="notifi__item">
-											<div class="bg-c2 img-cir img-40">
-												<i class="zmdi zmdi-account-box"></i>
-											</div>
-											<div class="content">
-												<p>Your account has been blocked</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c3 img-cir img-40">
-												<i class="zmdi zmdi-file-text"></i>
-											</div>
-											<div class="content">
-												<p>You got a new file</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
+
 										<div class="notifi__footer">
-											<a href="#">All notifications</a>
+											<a href="#">요청 더 보기</a>
 										</div>
 									</div>
 								</div>
@@ -402,28 +410,22 @@
 							<div class="col-md-12">
 								<!-- DATA TABLE -->
 								<h3 class="title-5 m-b-35">
-									<span style="font-weight: bold">거래글 관리</span>
+									<i style="color: navy;" class="far fa-list-alt"></i> <span
+										style="font-weight: bold">거래글 관리</span>
 								</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
 										<div class="rs-select2--light rs-select2--md">
 											<select class="js-select2" name="property">
-												<option selected="selected">All Properties</option>
-												<option value="21">Option 1</option>
-												<option value="">Option 2</option>
+												<option value="0" selected>판매중 순</option>
+												<option value="1">삭제요청 순</option>
+												<option value="2">삭제진행중 순</option>
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
-										<div class="rs-select2--light rs-select2--sm">
-											<select class="js-select2" name="time">
-												<option selected="selected">Today</option>
-												<option value="">3 Days</option>
-												<option value="">1 Week</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
+
 										<button class="au-btn-filter">
-											<i class="zmdi zmdi-filter-list"></i>filters
+											<i class="zmdi zmdi-filter-list"></i>정렬
 										</button>
 									</div>
 									<div class="table-data__tool-right">
@@ -480,11 +482,12 @@
 											</tr>
 										</thead>
 										<tbody>
+
 											<c:forEach items="${list }" var="s">
 												<tr class="tr-shadow">
 													<td><label class="au-checkbox"> <input
-															type="checkbox" name="pick" value="${s.sellNo}"> <span
-															class="au-checkmark"></span>
+															type="checkbox" name="pick" value="${s.sellNo}">
+															<span class="au-checkmark"></span>
 													</label></td>
 
 													<td><span class="block-email">${s.sellWriter }</span>
@@ -500,7 +503,8 @@
 														</c:if> <c:if test="${s.sellDeleteState eq 2 }">
 															<span class="status--process" style="color: orange">삭제진행중</span>
 														</c:if></td>
-													<td>&#8361;${s.sellPrice }</td>
+													<td>&#8361;<fmt:formatNumber value="${s.sellPrice}"
+															pattern="###,###,###,###" /></td>
 													<td>
 														<div class="table-data-feature">
 
@@ -509,7 +513,6 @@
 																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?')">
 																<i class="zmdi zmdi-delete"></i>
 															</button>
-
 
 															<button class="item" data-toggle="tooltip"
 																data-placement="top" title="More">
@@ -521,13 +524,24 @@
 
 												<tr class="spacer"></tr>
 											</c:forEach>
+											${totalCount }
 										</tbody>
 									</table>
+									<c:if test="${empty list  && totalCount==0 }">
+										<div class="noResult">
+											<div style="padding-bottom: 30px;">[ ${search} ]에 대한
+												검색결과가 없습니다.</div>
+											<button class="btn btn-primary">돌아가기</button>
+										</div>
+									</c:if>
 								</div>
-								<div class="user-data__footer">
-									<div id="pageNavi">${pageNavi}</div>
-									<!-- <button class="au-btn au-btn-load">load more</button> -->
-								</div>
+
+								<c:if test="${totalCount!=0 }">
+									<div class="user-data__footer">
+										<div id="pageNavi">${pageNavi}</div>
+										<!-- <button class="au-btn au-btn-load">load more</button> -->
+									</div>
+								</c:if>
 								<!-- END DATA TABLE -->
 							</div>
 						</div>
@@ -535,9 +549,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="copyright">
-									<p>
-										Copyright Â© 2020 Colorlib. All rights reserved. Template by <a
-											href="https://colorlib.com">Colorlib</a>.
+										<p>
+										Copyright © 2020 Last Farm. All rights reserved. By <a
+											href="#">LAST FARM</a>.
 									</p>
 								</div>
 							</div>
