@@ -16,4 +16,22 @@ public class MemberService {
 	return m;
 	}
 
+	public Member selectOneMember(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member m = new MemberDao().selectOneMember(conn, memberId);
+		JDBCTemplate.close(conn);
+		return m;
+	}
+
+	public int insertMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().insertMember(conn, m);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

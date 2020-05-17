@@ -156,9 +156,9 @@
             <p class="forgot" align="center">
                 <br>
                 <br>
-                <a href="/join">회원가입</a> |
-                <a href="/searchId">아이디찾기</a> |
-                <a href="/searchPw">비밀번호 찾기</a>
+                <a href="/agree">회원가입</a> |
+                <a href="/searchFrm">아이디찾기/비번찾기</a> 
+                
             </p>
         </form>
 

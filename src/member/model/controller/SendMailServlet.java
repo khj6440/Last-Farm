@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SendMailServlet
  */
-@WebServlet(name = "/LoginFrm", urlPatterns = { "/loginFrm" })
-public class LoginFrmServlet extends HttpServlet {
+@WebServlet(name = "SendMail", urlPatterns = { "/sendMail" })
+public class SendMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginFrmServlet() {
+    public SendMailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +26,10 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//1.인코딩
-		//2.변수값 저장
-		//3.비지니스로직 저장
-		request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		String email = request.getParameter("email");
+		String mailCode = new MailSend().mailSend(email);
+		response.getWriter().print(mailCode);
 	}
 
 	/**

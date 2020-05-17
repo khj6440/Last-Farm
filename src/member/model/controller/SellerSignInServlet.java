@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+import member.model.vo.Member;
+
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SellerSignInServlet
  */
-@WebServlet(name = "/LoginFrm", urlPatterns = { "/loginFrm" })
-public class LoginFrmServlet extends HttpServlet {
+@WebServlet(name = "SellerSignIn", urlPatterns = { "/sellerSignIn" })
+public class SellerSignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginFrmServlet() {
+    public SellerSignInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +29,23 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//1.인코딩
-		//2.변수값 저장
-		//3.비지니스로직 저장
-		request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
+
+
+
+		Member m = new Member();
+		m.setMemberName(request.getParameter("name"));
+		m.setMemberId(request.getParameter("id"));
+		m.setMemberPhone(request.getParameter("phone"));
+		m.setMemberPw(request.getParameter("pw"));
+		m.setMemberEmail(request.getParameter("email"));
+		m.setMemberCode(request.getParameter("code"));
+		m.setMemberPostCode(request.getParameter("postAddr"));
+		m.setMemberRoadAddr(request.getParameter("roadAddr"));
+		m.setMemberDetailAddr(request.getParameter("detailAddr"));
+		
+		int result = new MemberService().insertMember(m);
+		
+		
 	}
 
 	/**

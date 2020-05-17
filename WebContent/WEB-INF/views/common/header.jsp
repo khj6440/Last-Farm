@@ -12,9 +12,9 @@
 	<div class="main_body">
 		<div class="header_top">
 			<div class="header_top_login">
-				<a class="header_top_a1 header_top_a2" href="#">Login</a> <a
+				<a class="header_top_a1 header_top_a2" href="/loginFrm">Login</a> <a
 					class="header_top_a1 header_top_a2"> | </a> <a
-					class="header_top_a1 header_top_a2" href="#">Join</a>
+					class="header_top_a1 header_top_a2" href="/agree">Join</a>
 			</div>
 			<div class="header_top_logo">
 				<a href="#"><img class="header_top_logo1"
