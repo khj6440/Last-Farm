@@ -36,9 +36,15 @@ public class SellSearchBoxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqPage = 1;
+		if(request.getParameter("reqPage") !=null) {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		}
 		String searchWord = request.getParameter("searchTypingBox");
 		String sortingTab = request.getParameter("sortingTab");
+		System.out.println(reqPage);
+		System.out.println(searchWord);
+		System.out.println(sortingTab);
 		ArrayList<Sell> sellList = new ArrayList<Sell>();
 		SellCategoryPage scp = new SellCategoryPage();
 		if(searchWord=="") {
@@ -46,7 +52,7 @@ public class SellSearchBoxServlet extends HttpServlet {
 		}else {
 			scp = new SellSearchService().searchBoxSorting(reqPage, sortingTab, searchWord);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sellPage/sellSearchNational.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
 		request.setAttribute("sellList", scp.getSellList());
 		request.setAttribute("sortingTab", sortingTab);
 		System.out.println(scp.getSellList().get(0).getSellNo());

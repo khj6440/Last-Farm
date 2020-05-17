@@ -23,7 +23,7 @@
 			<div class="header_top_tap">
 
 				<ul class="header_top_ul1 jj">
-					<li class="header_top_li1"><a class="header_top_a1" href="#">전
+					<li class="header_top_li1"><a class="header_top_a1" href="http://192.168.10.158/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전
 							지역 상품</a>
 						<ul class="header_top_ul2">
 							<li class="header_top_li2 header_top_li4"><a href="#">농산물</a></li>
