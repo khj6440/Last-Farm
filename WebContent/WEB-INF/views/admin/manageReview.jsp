@@ -247,8 +247,7 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning?reqPage=1"> <i
-						class="far fa-check-square"></i>신고글 관리
+				<li><a href="/manageWarning"> <i	class="fas fa-exclamation"></i>신고글 관리
 				</a></li>
 
 			</ul>
@@ -485,9 +484,7 @@
 															<span class="au-checkmark"></span>
 													</label></td>
 													<td><span class="block-email">
-													${rs.review.reviewWriter }
-													</span>
-													</td>
+															${rs.review.reviewWriter } </span></td>
 													<td class="desc">${rs.review.reviewTitle }</td>
 													<td>${rs.review.reviewDate }</td>
 													<td class="desc">${rs.sellEnd.sellEndTitle }</td>
@@ -505,9 +502,8 @@
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>
-													</td
+													</td>
 												</tr>
-
 												<tr class="spacer"></tr>
 											</c:forEach>
 											${totalCount }

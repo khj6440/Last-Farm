@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import admin.model.vo.WarningData;
 import common.JDBCTemplate;
 import member.model.vo.Member;
 import review.model.vo.Review;
@@ -459,7 +460,7 @@ public class AdminDao {
 	public int deleteMember(Connection conn, ArrayList<String> checkList, String param) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update member set member_status=2 where member_no in(" + param + ")";
+		String query = "update member set member_status=2,member_del_date=sysdate+14 where member_no in(" + param + ")";
 		try {
 			pstmt = conn.prepareStatement(query);
 			for (int i = 0; i < checkList.size(); i++) {
@@ -536,6 +537,115 @@ public class AdminDao {
 				m.setBankName(rset.getString("bank_name"));
 				m.setBankAccount(rset.getString("bank_account"));
 				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int deleteCancel(Connection conn, int memberNo) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_status=1,member_del_date=null where member_no=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int modifyMemberStatus(Connection conn, int memberNo, int memberStatus) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_status=? where member_no=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberStatus);
+			pstmt.setInt(2, memberNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int totalWarningCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select count(*) as cnt from (select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>0"
+				+ " union "
+				+ "select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>0"
+				+ " union "
+				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>0"
+				+ " union "
+				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>0)";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+
+		}
+		return result;
+	}
+
+	public ArrayList<WarningData> moreWarning(Connection conn, int start, int end) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ArrayList<WarningData> list = new ArrayList<WarningData>();
+		String query = "select * from(" + "select rownum as rnum, p.* from("
+				+ "select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>0 "
+				+ " union "
+				+ " select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>0 "
+				+ " union "
+				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>0 "
+				+ " union "
+				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>0 )p order by type_date desc) where rnum between ? and ?";
+
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				WarningData wd = new WarningData();
+				wd.setType(rset.getString("type"));
+				wd.setTypeDate(rset.getDate("type_date"));
+				wd.setTypeNo(rset.getInt("type_no"));
+				wd.setTypeTitle(rset.getString("type_title"));
+				wd.setTypeWarning(rset.getInt("type_warning"));
+				wd.setTypeWriter(rset.getString("type_writer"));
+
+				list.add(wd);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

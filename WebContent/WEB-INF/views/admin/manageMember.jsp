@@ -83,10 +83,21 @@
 												}
 											});
 						});
-		$(".memberStatus").change(function(){
-			console.log("z");
+		$(".memberStatus").change(function() {
+			var text = $(this).children("option:selected").html();
+			var value= $(this).children("option:selected").val();
+			var memberNo = $(this).children("option:selected").attr("memberNo");
+			$('.modal-title').html("회원 "+text);
+			$('.modal-body').html("해당회원을 ["+text+"] 하시겠습니까?");
+			$('#deleteContent').html("확인");
+			$('#cancelBtn').attr("onclick","location.reload()");
+			$('#deleteContent').attr("onclick", "modifyMemberStatus(" + value + ","+memberNo+")");
+			$('#myModal').modal('show');
 		});
-				
+		
+	
+		
+
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
 				item.checked = $("input[name=allCheck]").prop("checked");
@@ -112,7 +123,6 @@
 				},
 				type : "post",
 				success : function(data) {
-					location.reload();
 					if (data > 0) {
 						alert(data + "개 삭제 성공");
 					} else {
@@ -125,9 +135,36 @@
 			});
 		});
 	});
+	
+	
+	function modifyMemberStatus(value,memberNo) {
+		$('#myModal').modal('hide');
+		$.ajax({
+			url : "/adminMemberStatus",
+			data : {
+				memberStatus : value,
+				memberNo : memberNo
+			},
+			type : "post",
+			success : function(data) {
+				console.log("서버전송 성공");
+				console.log("결과:" +data);
+			},
+			error : function() {
+				console.log("서버 전송 실패");
+			},
+			complete:function(){
+				console.log("t");
+			}
+		});
+	}
+	
+	
+	
 	function showModal(memberNo, title, body) {
 		$('.modal-title').html(title);
 		$('.modal-body').html(body);
+		$('#deleteContent').html("삭제");
 		$('#myModal').modal('show');
 		$('#deleteContent').attr("onclick", "deleteMember(" + memberNo + ")");
 	}
@@ -153,6 +190,32 @@
 			}
 		});
 	}
+	
+	function deleteCancelModal(memberNo,title,body){
+		$('.modal-title').html(title);
+		$('.modal-body').html(body);
+		$('#deleteContent').html("확인");
+		$('#myModal').modal('show');
+		$('#deleteContent').attr("onclick", "deleteCancel(" + memberNo + ")");
+	}
+	
+	
+	function deleteCancel(memberNo) {
+		$.ajax({
+			url : "/adminDelCancel",
+			data : {
+				memberNo : memberNo
+			},
+			type : "post",
+			success : function(data) {
+				location.reload();
+				alert("취소 성공");
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});
+	}
 </script>
 </head>
 
@@ -166,10 +229,9 @@
 
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block" style="overflow:hidden">
-		<div class="logo"
-			style="background-color: white; padding: 100px 0px; display: flex; justify-content: center">
-			<a href="index.jsp"> <img width="200px;" src="/imgs/Logo1.png"
-				alt="Cool Admin" />
+		<div class="logo">
+			<a href="index.jsp"> <img src="/imgs/mole.jpg" style="width: 55px; margin-right: 10px;"
+				 /><span class="logoTitle">LAST FARM</span>
 			</a>
 		</div>
 		<div class="menu-sidebar__content js-scrollbar1">
@@ -186,8 +248,7 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning?reqPage=1"> <i
-						class="far fa-check-square"></i>신고글 관리
+				<li><a href="/manageWarning"><i class="fas fa-exclamation"></i>신고글 관리
 				</a></li>
 			</ul>
 			</nav>
@@ -245,44 +306,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-email"></i> <span class="quantity">1</span>
-									<div class="email-dropdown js-dropdown">
-										<div class="email__title">
-											<p>You have 3 New Emails</p>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, 3 min ago</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, Yesterday</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, April 12,,2018</span>
-											</div>
-										</div>
-										<div class="email__footer">
-											<a href="#">See all emails</a>
-										</div>
-									</div>
-								</div>
+								
 								<div class="noti__item js-item-menu">
 									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
 									<div class="notifi-dropdown js-dropdown">
@@ -377,17 +401,17 @@
 						<div class="row">
 							<div class="" style="max-width: none; width: 100%;">
 								<!-- USER DATA-->
-								<div class="user-data m-b-30">
+								<div class="user-data m-b-30" style="width: 100%">
 									<h3 class="title-3 m-b-30">
 										<i style="color: navy;" class="fas fa-users"></i><span
 											style="font-weight: bold">회원 관리 </span><span
-											style="color: gray; font-size: 15px"> (총 회원
+											style="color: gray; font-size: 15px"> (검색결과 회원
 											:${totalCount })</span>
 
 									</h3>
 
 									<div class="filters m-b-45"
-										style="display: flex; justify-content: space-between;">
+										style="display: flex;; justify-content: space-between;">
 										<div>
 											<div
 												class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
@@ -467,12 +491,18 @@
 											<tbody>
 												<c:forEach items="${list}" var="m">
 													<tr class="results">
-														
 														<td><label class="au-checkbox"> <input
 																type="checkbox" name="pick" value="${m.memberNo }">
 																<span class="au-checkmark"></span>
-														</label></td>
-
+														</label> <c:if test="${m.memberStatus eq 2 }">
+																<div class="setDelete">
+																	<span class="delTitle">삭제 예정일 : </span> <span
+																		class="delDate"> ${m.memberDelDate} 00시 </span>
+																	<button class="delCancel"
+																		onclick="deleteCancelModal('${m.memberNo }','회원삭제 취소','취소하시겠습니까?')">삭제
+																		취소</button>
+																</div>
+															</c:if></td>
 														<td>
 															<div class="table-data__info">
 																<h6>${m.memberName }</h6>
@@ -493,15 +523,15 @@
 
 																<c:if test="${m.memberStatus eq 1 }">
 																	<select class="js-select2 memberStatus" name="property">
-																		<option value="1" selected>활성화</option>
-																		<option value="3">비활성화</option>
+																		<option memberNo="${m.memberNo}" value="1" selected>활성화</option>
+																		<option memberNo="${m.memberNo}" value="3">비활성화</option>
 																		<option value="2" disabled>삭제중</option>
 																	</select>
 																</c:if>
 																<c:if test="${m.memberStatus eq 3 }">
 																	<select class="js-select2 memberStatus" name="property">
-																		<option value="1">활성화</option>
-																		<option value="3" seleted>비활성화</option>
+																		<option memberNo="${m.memberNo}" value="1">활성화</option>
+																		<option memberNo="${m.memberNo}" value="3" selected>비활성화</option>
 																		<option value="2" disabled>삭제중</option>
 																	</select>
 																</c:if>
@@ -515,16 +545,13 @@
 																<div class="dropDownSelect2"></div>
 															</div>
 														</td>
-														
+
 														<td><span class="more"> <i
 																class="zmdi zmdi-delete"
-																onclick="showModal('${m.memberNo}','회원 삭제','해당 회원을 삭제 하시겠습니까?')"></i>
+																onclick="showModal('${m.memberNo}','회원 삭제','해당 회원 [${m.memberId}]을 삭제 하시겠습니까?<div>회원 삭제시 14일뒤에 삭제 됩니다.</div')"></i>
 														</span> <span class="more"> <i class="zmdi zmdi-more"></i>
-
 														</span></td>
-														
 													</tr>
-
 												</c:forEach>
 											</tbody>
 										</table>
@@ -579,13 +606,33 @@
 				</div>
 				<div class="modal-body"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
+					<button id="cancelBtn" type="button" class="btn btn-secondary"
 						data-dismiss="modal">취소</button>
+					<button id="deleteContent" type="button" class="btn btn-danger"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
 					<button id="deleteContent" type="button" class="btn btn-danger">삭제</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Jquery JS-->
 	<script src="/admin_css/vendor/jquery-3.2.1.min.js"></script>
@@ -685,14 +732,49 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-.results{
+
+.results>td {
 	position: relative;
 }
-.setDelete{
-	width:100%;
+
+.setDelete {
+	width: 1450%;
+	height: 100%;
 	position: absolute;
+	top: 0;
+	left: 0;
 	background-color: black;
+	z-index: 2;
+	opacity: 0.8;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
+.setDelete>span {
+	color: white;
+}
+
+.setDelete>button {
+	background-color: #ffac05;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.table {
+	overflow: hidden;
+}
+
+.delTitle, .delDate {
+	margin-right: 30px;
+}
+.logoTitle{
+	
+	font-weight: bold;
+	font-size: 30px;
+	color: #ffac05 ;
+}
+
 </style>
 </html>
 <!-- end document-->

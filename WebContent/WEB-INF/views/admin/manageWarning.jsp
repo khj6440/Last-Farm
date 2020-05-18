@@ -64,7 +64,107 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.more-btn-box {
+	display: flex;
+	padding: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+#more-btn:hover {
+	background-color: #4a2100;
+	color: #ffac05;
+}
+
+#more-btn {
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	background-color: #ffac05;
+	color: #4a2100;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 </style>
+
+<script type="text/javascript">
+	function fn_more(start) {
+		var param = {
+			start : start
+		};
+		$
+				.ajax({
+					url : "/adminWarningMore",
+					data : param,
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						var area = $("tbody");
+						var html = "";
+						var value = "";
+						console.log(data);
+
+						for (var i = 0; i < data.length; i++) {
+							html += "<tr><td>";
+							html += "<label class='au-checkbox'>";
+							html += '<input type="checkbox" name="pick" value='+data[i].typeNo+'>';
+							html += '<span class="au-checkmark"></span>';
+							html += '</label></td>';
+							switch (data[i].type) {
+							case "review":
+								value = "리뷰";
+								break;
+							case "review_comment":
+								value = "리뷰 댓글";
+								break;
+							case "sell":
+								value = "판매글";
+								break;
+							case "sell_comment":
+								value = "판매글 댓글";
+								break;
+							}
+							html += '<td>' + value + '</td>';
+							html += '<td>' + data[i].typeTitle + '</td>';
+							html += '<td>' + data[i].typeWriter + '</td>';
+							html += '<td class="process">'
+									+ data[i].typeWarning + '</td>';
+							html += '<td>' + data[i].typeDate + '</td>';
+							html += '<td>btn</td></tr>';
+
+						}
+
+						$("tbody").append(html);
+						$("#more-btn").val(Number(start) + 5);
+						$("#more-btn").attr(
+								"currentCount",
+								Number($("#more-btn").attr("currentCount"))
+										+ data.length);
+						var totalCount = $("#more-btn").attr("totalCount");
+						var currentCount = $("#more-btn").attr("currentCount");
+						if (totalCount == currentCount) {
+							console.log("test");
+							$("#more-btn").attr("disabled", true);
+							$("#more-btn").css("cursor", "not-allowed");
+						}
+
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+	}
+	$(function() {
+		fn_more(1);
+		$("#more-btn").click(function() {
+			fn_more($(this).val());
+		})
+	})
+</script>
+
 </head>
 
 <body class="animsition">
@@ -85,15 +185,15 @@
 				<li><a href="/manageMember?reqPage=1"> <i
 						class="fas fa-users"></i>회원 관리
 				</a></li>
-				<li><a href="/manageSell?reqPage=1">
-				 <i	class="far fa-list-alt"></i>거래글 관리
+				<li><a href="/manageSell?reqPage=1"> <i
+						class="far fa-list-alt"></i>거래글 관리
 				</a></li>
-				<li><a href="/manageReview?reqPage=1" > 
-					<i class="far fa-star"></i>리뷰 관리
+				<li><a href="/manageReview?reqPage=1"> <i
+						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li class="active"><a href="/manageWarning?reqPage=1"> <i
-						class="far fa-check-square"></i>신고글 관리
+				<li class="active"><a href="/manageWarning?reqPage=1">
+				 <i	class="fas fa-exclamation"></i>신고글 관리
 				</a></li>
 
 			</ul>
@@ -277,42 +377,43 @@
 
 			<!-- MAIN CONTENT-->
 			<div class="main-content">
-		
+
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="row m-t-30">
 							<div class="col-md-12">
 								<!-- DATA TABLE-->
 								<div class="table-responsive m-b-40">
+									<h3 class="title-5 m-b-35" style="font-weight: bold;">
+										<i style="color: #DC3545" class="fas fa-exclamation"></i> 신고글
+										관리
+									</h3>
 									<table class="table table-borderless table-data3">
 										<thead>
 											<tr>
-												<th style="display: flex;"><label class="au-checkbox"> <input
-														type="checkbox" name="allCheck"> <span
+												<th style="display: flex;"><label class="au-checkbox">
+														<input type="checkbox" name="allCheck"> <span
 														class="au-checkmark"></span>
 												</label></th>
 												<th>type</th>
 												<th>description</th>
-												<th>status</th>
-												<th>date</th>
-												<th>more</th>
+												<th>writer</th>
+												<th>warning</th>
+												<th>reg date</th>
+												<th>Detail</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td><label class="au-checkbox"> <input
-															type="checkbox" name="pick" value="${s.sellNo}">
-															<span class="au-checkmark"></span>
-													</label></td>
-												<td>Mobile</td>
-												<td>iPhone X 64Gb Grey</td>
-												<td class="process">Processed</td>
-												<td>2018-09-29 05:57</td>
-												<td>bttn</td>
-											</tr>
-											
+
+
 										</tbody>
 									</table>
+									<div class="more-btn-box">
+										<button id="more-btn" totalCount="${totalCount}"
+											currentCount="0" value="">
+											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
+										</button>
+									</div>
 								</div>
 								<!-- END DATA TABLE-->
 							</div>
@@ -341,20 +442,24 @@
 	<script src="/admin_css/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 	<!-- Vendor JS       -->
 	<script src="/admin_css/vendor/slick/slick.min.js">
-    </script>
+		
+	</script>
 	<script src="/admin_css/vendor/wow/wow.min.js"></script>
 	<script src="/admin_css/vendor/animsition/animsition.min.js"></script>
 	<script
 		src="/admin_css/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+		
+	</script>
 	<script src="/admin_css/vendor/counter-up/jquery.waypoints.min.js"></script>
 	<script src="/admin_css/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+		
+	</script>
 	<script src="/admin_css/vendor/circle-progress/circle-progress.min.js"></script>
 	<script src="/admin_css/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
 	<script src="/admin_css/vendor/chartjs/Chart.bundle.min.js"></script>
 	<script src="/admin_css/vendor/select2/select2.min.js">
-    </script>
+		
+	</script>
 
 	<!-- Main JS-->
 	<script src="/admin_css/js/main.js"></script>

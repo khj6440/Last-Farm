@@ -87,7 +87,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#sellDel").click(function(){
+		$("#sellDel").click(function() {
 			console.log("게시물삭제요청");
 			$.ajax({
 				url : "/reqDelSell",
@@ -101,13 +101,15 @@
 				}
 			})
 		})
-		
+
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
 				item.checked = $("input[name=allCheck]").prop("checked");
 			})
 		});
-		$(".show-count").change(function() {
+		$(".show-count")
+				.change(
+						function() {
 							var value;
 							$(this)
 									.children()
@@ -128,7 +130,7 @@
 																+ "&search="
 																+ searched;
 													}
-													
+
 												}
 											});
 						});
@@ -265,9 +267,8 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning?reqPage=1"> <i
-						class="far fa-check-square"></i>신고글 관리
-				</a></li>
+				<li><a href="/manageWarning"><i class="fas fa-exclamation"></i>신고글
+						관리 </a></li>
 			</ul>
 			</nav>
 		</div>
@@ -549,7 +550,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="copyright">
-										<p>
+									<p>
 										Copyright © 2020 Last Farm. All rights reserved. By <a
 											href="#">LAST FARM</a>.
 									</p>

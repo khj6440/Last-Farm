@@ -1,23 +1,30 @@
-package member.model.controller;
+package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import admin.model.service.AdminService;
+import admin.model.vo.WarningData;
+
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class AdminWarningMoreServlet
  */
-@WebServlet(name = "/loginFrm", urlPatterns = { "/loginFrm" })
-public class LoginFrmServlet extends HttpServlet {
+@WebServlet(name = "AdminWarningMore", urlPatterns = { "/adminWarningMore" })
+public class AdminWarningMoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginFrmServlet() {
+    public AdminWarningMoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +33,14 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	//1.인코딩
-		//2.변수값 저장
-		//3.비지니스로직 저장
-		request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
+		int start = Integer.parseInt(request.getParameter("start"));
+		System.out.println("start:"+start);
+		ArrayList<WarningData> list = new AdminService().moreWarning(start);
+		
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
+		
+		
 	}
 
 	/**

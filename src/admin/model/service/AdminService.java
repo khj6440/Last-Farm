@@ -7,6 +7,7 @@ import admin.model.dao.AdminDao;
 import admin.model.vo.MemberPageData;
 import admin.model.vo.ReviewPageData;
 import admin.model.vo.SellPageData;
+import admin.model.vo.WarningData;
 import common.JDBCTemplate;
 import member.model.vo.Member;
 import review.model.vo.Review;
@@ -412,6 +413,55 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 
 		return pd;
+	}
+
+	public int deleteCancel(int memberNo) {
+		// TODO Auto-generated method stub
+		Connection conn =JDBCTemplate.getConnection();
+		int result = new AdminDao().deleteCancel(conn,memberNo);
+
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+		return result;
+		
+	}
+
+	public int modifyMemberStatus(int memberNo, int memberStatus) {
+		Connection conn =JDBCTemplate.getConnection();
+		int result = new AdminDao().modifyMemberStatus(conn,memberNo,memberStatus);
+
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+
+	public int totalWarningCount() {
+		Connection conn = JDBCTemplate.getConnection();
+		int warningCount = new AdminDao().totalWarningCount(conn);
+		
+		JDBCTemplate.close(conn);
+		return warningCount;
+	}
+
+	public ArrayList<WarningData> moreWarning(int start) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+		int length=5;
+		int end = start+length-1;
+		ArrayList<WarningData> list = new AdminDao().moreWarning(conn,start,end);
+		
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 }
