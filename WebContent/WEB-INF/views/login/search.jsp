@@ -1,300 +1,333 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
-	rel="stylesheet">
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+     <link href="http://font.woowahan.com/jua/" rel="stylesheet">
+</head>
 
-<link rel="stylesheet" href="/css/header/header.css">
-<link rel="stylesheet" href="/css/footer/footer.css">
-    <style>
-tr {
- border: 0px solid none;
-}
-
- 
-
-k:hover {
- text-decoration: none;
- color: #9354ED
-}
-</style>
-
-
-<script>
- function gohome() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./home.jsp"; //넘어간화면
-  frm.submit(); //등록이 될수 있는 조건이면, 정보를 보내겠다.
- }
-
- function gojoin() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./join.jsp"; //넘어간화면
-  frm.submit(); //등록이 될수 있는 조건이면, 정보를 보내겠다.
- }
-
- function gologin() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./login.jsp";
-  frm.submit();
- }
-
- function goidfind() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./id_find.jsp";
-  frm.submit();
- }
-
- function gopwfind() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./pw_find.jsp";
-  frm.submit();
- }
- function logout() {
-  var frm = document.idfindscreen;
-  frm.method = "post";
-  frm.action = "./logoutCtl.jsp";
-  frm.submit();
- }
- function id_search1() { //이름,핸드폰으로 '찾기' 버튼
-
-  var frm = document.idfindscreen;
-
-  if (frm.name.value.length < 1) {
-   alert("이름을 입력해주세요");
-   return;
-  }
-
-  if (frm.phone1.value.length<2 || frm.phone1.value.length>4) {
-   alert("핸드폰번호를 정확하게 입력해주세요");
-   return;
-  }
-  if (frm.phone2.value.length<2 || frm.phone2.value.length>4) {
-   alert("핸드폰번호를 정확하게 입력해주세요");
-   return;
-  }
-
-  frm.method = "post";
-  frm.action = "./id_searchCtl.jsp"; //넘어간화면
-  frm.submit();  }
-
-
-
- function id_search2() { //이름,이메일로 '찾기' 버튼
-
-  var frm = document.idfindscreen;
-
-  if (frm.name2.value.length < 1) {
-   alert("이름을 입력해주세요");
-   return;
-  }
-  if (frm.email.value.length < 1 || frm.e_domain.value.length < 1) {
-   alert("이메일을 입력해주세요");
-   return;
-  }
-
-  frm.method = "post";
-  frm.action = "./id_searchCtl2.jsp"; //넘어간화면
-  frm.submit();  }
-
-
-
- //이메일 부분
-
- function checkid() {
-
-  var frm = document.idfindscreen;
-
-  var regExp = '/^([/\w/g\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/';
-
-  if (!regExp.test(frm.email.value)) {
-
-   alert('올바른 email을 입력해주세요.');
-
-   frm.email.focus();
-
-  }
-
- }
-
- function domainCheck() {
-
-  var frm = document.idfindscreen;
-
-  if (frm.domain.value == 0) {
-   frm.e_domain.value = "";
-   frm.e_domain.disabled = false;
-
-  } else {
-   frm.e_domain.value = frm.domain.value;
-   frm.e_domain.disabled = true;
-
-  }
-
- }
-</script>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <style>
+        body {
+            font-family: 'Jua', sans-serif;
+        }
 
-<form name="idfindscreen">
-
-
-   <table width="1330px" height="430px" align="center">
-    <tr>
-     <td>
-      <table width="600px" align="center" border="0"
-       style="color: black; background-color: #F6F6F6; font-size: 20px;">
-       <tr>
-        <td>
-         <table width="750px" align="center" border=0;
-          style=" margin-top: 3%">
-          <tr>
-           <td align="center"></td>
-           <td>아이디/비밀번호 찾기</td>
-              
-           <td width="300px"></td>
-          </tr>
-         </table>
-        </td>
-       </tr>
-        
-       <tr>
-        <td>
-         <table width="800px" height="300px" align="center"
-          style="border: dotted 5px none; margin-top: 4%">
-
-          <tr>
-           <td>
-            <table width="300px" height="30px" border="0"
-             style="margin-top: 3%; color: black; font-size: 18px;">
-             <tr>
-              <td>&nbsp;&nbsp; 
-              </td>
-              <td>&nbsp;이름,핸드폰번호로 찾기</td>
-             </tr>
-            </table>
-           </td>
-          </tr>
-
-          <tr>
-           <td>
-            <table width="380px" height="70px" align="center" border="0"
-             style="font-size: 16px;">
-             <tr>
-              <td>이름</td>
-              <td><input type="text" name="name"></td>
-             </tr>
-             <tr>
-              <td>휴대폰</td>
-              <td><select name="phone">
-                <option value="010" selected="selected">010</option>
-                <option value="011">011</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-              </select> - <input type="text" name="phone1" style="width: 70px">
-               - <input type="text" name="phone2" style="width: 70px"></td>
-             </tr>
-            </table>
-           </td>
-          </tr>
-
- 
-
-          <tr>
-           <td>
-            <table width="140px" height="10px" border="0"
-             style="margin-top: 2%;" align="center">
-             <tr>
-              <td><input type="button" name="enter1" value="  찾기  "
-               align="center"
-               style="cursor: pointer; background: white; color: black; border-color: black;"
-               onClick="id_search1()"></td>
-              <td><input type="button" name="cancle1"
-               value="  취소  " align="center"
-               style="cursor: pointer; background: white; color: black; border-color: black;"
-               onClick="cancle()"></td>
-             </tr>
-            </table>
-           </td>
-          </tr>
-
-          <tr>
-           <td>
-            <table width="300px" height="20px" border="0"
-             style="margin-top: 3%; font-size: 18px;">
-             <br>
-             <br>
-             <tr>
-              <td>&nbsp;&nbsp;
-              </td>
-              <td>&nbsp;이름,이메일로 찾기</td>
-             </tr>
-            </table>
-           </td>
-          </tr>
-             <tr>
-          <td>
-           <table width="380px" height="70px" align="center" border="0"
-            style="font-size: 16px;">
-            <tr>
-             <td>이름</td>
-             <td><input type="text" name="name2"></td>
-            </tr>
-            <tr>
-             <td style="text-align: center;">e-mail&nbsp;</td>
-             <td><input type="text" name="email"
-              style="width: 160px" onblur="checkid()"> </td>
-            </tr>
-           </table>
-          </td>
-          </tr>
-            
-          <tr>
-           <td>
-            <table width="140px" height="10px" border="0"
-             style="margin-top: 2%" align="center">
-             <tr>
-              <td><input type="button" name="enter2" value="  찾기  "
-               align="center"
-               style="cursor: pointer; background: white; color: black; border-color: black;"
-               onClick="id_search2()"></td>
-              <td><input type="button" name="cancle2"
-               value="  취소  " align="center"
-               style="cursor: pointer; background: white; color: black; border-color: black"
-               onClick="cancle()"></td>
-             </tr>
-            </table>
-            <br>
-           </td>
-          </tr>
-         
-            </table>
-       </tr>
-      </table>
-     </td>
-    </tr>
-   </table>
+        tr {
+            border: 0px solid none;
+        }
 
 
- 
- </form>
+
+        k:hover {
+            text-decoration: none;
+            color: #9354ED
+        }
+
+        #result,
+        #pw_result {
+            color: red;
+            text-align: center;
+        }
+
+        #idButton,
+        #pwButton {
+             background-color: #ffac05;
+        color: #4a2100 ;
+       	border-radius: 3px 3px 3px 3px;
+        }
+
+        #idButton:hover,
+        #pwButton:hover {
+            background-color: #4a2100;
+            color: #ffac05;
+            border-radius: 3px 3px 3px 3px;
+        }
+
+
+        #code,
+        #id,
+        #pw,
+        #name,
+        #phone,
+        #email,
+        #mailCode {
+            display: inline-block;
+            width: 86%;
+            height: 40px;
+            color: rgb(38, 50, 56);
+            font-weight: 700px;
+            font-size: 14px;
+            letter-spacing: 1px;
+           
+            margin: 0 auto;
+            outline: none;
+            box-sizing: border-box;
+           
+            margin-left: 10px;
+            text-align: center;
+            font-family: 'Jua', sans-serif;
+        }
+
+  
+
+        #id,
+        #name,
+        #phone,
+        #email,
+        #mailCode {
+            display: inline-block;
+            width: 86%;
+            height: 40px;
+            color: rgb(38, 50, 56);
+            font-weight: 700px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(136, 126, 126, 0.04);
+            margin: 0 auto;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.02);
+            margin-left: 10px;
+            text-align: center;
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
+
+
+    <script>
+        $(function() {
+            var check = [false, false];
+            $("#name").focusout(function() {
+
+                var name = $("#name").val();
+                if (name == "") {
+                    $("#result").html("성함을 기입해주세요").css({
+                        "color": "red",
+                        " font-size": "5px",
+                        "font-family": "'Jua', sans-serif"
+                    });
+                }
+            })
+            $("#id").focusout(function() {
+                var name = $("#id").val();
+                if (name == "") {
+                    $("#pw_result").html("찾으시려는 아이디를 입력해주세요").css({
+                        "color": "red",
+                        " font-size": "5px",
+                        "font-family": "'Jua', sans-serif"
+                    });
+                }
+            })
+            $("#phone").focusout(function() {
+                var phone = $("#phone").val();
+                if (phone == "") {
+                    $("#result").html("휴대전화번호를 기입해주세요").css({
+                        "color": "red",
+                        " font-size": "5px",
+                        "font-family": "'Jua', sans-serif"
+
+                    });
+                }
+            })
+            $("#email").focusout(function() {
+                var email = $("#email").val();
+                var regExp = /^([/\w/g\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                if (!regExp.test(email)) {
+
+                    $("#pw_result").html('올바른 email을 입력해주세요.').css({
+                        "color": "red",
+                        " font-size": "5px",
+                        "font-family": "'Jua', sans-serif",
+                        " text-align": "center"
+                    });;
+                }
+            })
+
+            var mailCode = "";
+            $("#eBtn").click(function() {
+
+                var email = $("#email").val();
+                $.ajax({
+                    url: "/findPw",
+                    type: "post",
+                    data: {
+                        email: email
+                    },
+                    success: function(data) {
+                        mailCode = data;
+                        $("#mailCode").show();
+                        $("#mailResult").show();
+
+                    }
+                });
+            });
+
+            $("#mailResult").click(function() {
+                if ($("#mailCode").val() == mailCode) {
+                    $("#email_result").html('인증성공');
+                    $("#email_result").css({
+                        'color': 'green',
+                        'text-align': 'center'
+                    });
+                    check[0] = divue;
+                } else {
+                    $("#email_result").html('인증 실패');
+                    $("#email_result").css({
+                        'color': 'red',
+                        'text-align': 'center'
+                    });
+                    check[0] = false;
+                }
+            })
+            $('#searchPw').submit(function() {
+                var count = 0;
+                for (var i = 0; i < check.length; i++) {
+                    if (check[i] == divue) {
+                        count++;
+                    }
+                }
+                if (count < 2) {
+                    alert("빈틈없이 채워주세요");
+                    return false;
+
+                }
+            });
+        });
+    </script>
+
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
+    <table  align="center">
+        <tr>
+            <td>
+                <table width="600px" align="center" border="0" style="color: black; background-color: #F6F6F6; font-size: 20px;">
+                    <tr>
+                        <td>
+                            <table width="750px" align="center" border=0; style=" margin-top: 3%">
+                                <tr>
+                                    <td align="center"></td>
+                                    <td>아이디 /비밀번호 찾기</td>
+
+                                    <td width="300px"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table width="800px" height="300px" align="center" style="border: dotted 5px none; margin-top: 4%">
+
+                                <tr>
+                                    <td>
+                                        <table width="300px" height="30px" border="0" style="margin-top: 3%; color: black; font-size: 18px;">
+                                            <tr>
+                                                <td>&nbsp;&nbsp;
+                                                </td>
+                                                <td>&nbsp;아이디 찾기</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <form name="searchId" method="post" action="/serachId">
+                                    <tr>
+                                        <td>
+
+
+                                            <table width="380px" height="70px" align="center" border="0" style="font-size: 16px;">
+                                                <tr>
+
+                                                    <td>이름</td>
+                                                    <td><input type="text" name="name" id="name" style="width: 210px"> </td>
+                                                </tr>
+                                                <tr>
+                                                    <label for="phone">
+                                                        <td>휴대폰</td>
+                                                        <td>
+                                                            <input type="text" name="phone" id="phone" style="width: 210px"></td>
+                                                    </label>
+                                                </tr>
+                                            </table>
+
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table width="140px" height="10px" border="0" style="margin-top: 2%;" align="center">
+                                                <tr>
+                                                    <td><input type="submit" name="enter" value="  찾기  " id="idButton" align="center" ></td>
+                                                    <td><input type="reset" name="cancle" value="  취소  " id="idButton" ></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </form>
+                                <form name="searchPw" method="post" action="/sendPw">
+                                    <div id="result"></div>
+                                    <tr>
+                                        <td>
+                                            <table width="300px" height="20px" border="0" style="margin-top: 3%; font-size: 18px;">
+                                                <br>
+                                                <br>
+                                                <tr>
+                                                    <td>&nbsp;&nbsp;
+                                                    </td>
+                                                    <td>&nbsp;비밀번호 찾기</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table width="380px" height="70px" align="center" border="0" style="font-size: 16px;">
+                                                <tr>
+                                                    <td>아이디</td>
+                                                    <td><input type="text" name="id" id="id" style="width: 210px"></td>
+                                                </tr>
+                                                <tr>
+                                                    <label for="email">
+                                                        <td style="text-align: center;">e-mail&nbsp;</td>
+                                                        <td><input type="text" name="email" style="width: 210px" id="email"> </td>
+                                                    </label>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table width="140px" height="10px" border="0" style="margin-top: 2%" align="center">
+                                                <tr>
+                                                    <td><input type="submit" name="pwButton" value="  찾기  " align="center" id="pwButton" style="cursor: pointer;"></td>
+                                                    <td><input type="reset" name="pwButton" value="  취소  " align="center" id="pwButton" style="cursor: pointer;"></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr id="pw_result"></tr>
+                                </form>
+                            </table>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

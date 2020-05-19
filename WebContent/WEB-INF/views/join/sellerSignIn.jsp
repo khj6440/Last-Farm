@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script
@@ -193,7 +195,9 @@
 			}
 
 		});
-		$("#eBtn").click(function() {
+		$("#eBtn")
+				.click(
+						function() {
 							var email = $("#email").val()
 							var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -285,7 +289,7 @@
 
 	})
 
-	function addrSearch() {
+	function addrSearch1() {
 		new daum.Postcode({
 			oncomplete : function(data) {
 				$("#postCode").val(data.zonecode);
@@ -295,11 +299,11 @@
 		}).open();
 	}
 
-	function addrSearch() {
+	function addrSearch2() {
 		new daum.Postcode({
 			oncomplete : function(data) {
-				$("#bPostCode").val(data.zonecode);
-				$("#bRoadAddr").val(data.roadAddress);
+				$("#postCode2").val(data.zonecode);
+				$("#roadAddr2").val(data.roadAddress);
 				$("#bJibunAddr").val(data.jibunAddress);
 			}
 		}).open();
@@ -307,16 +311,9 @@
 </script>
 <style>
 body {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Jua', sans-serif;
 	background-repeat: no-repeat;
 	background-size: 140% 130%;
-	font-family: 'Ubuntu', sans-serif;
-}
-
-.container {
-	margin: 0px auto;
-	width: 120px;
-	text-align: left;
 }
 
 .container>.phone, .container>.bank {
@@ -355,7 +352,7 @@ body {
 .sign {
 	padding-top: 0px;
 	color: #8C55AA;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Jua', sans-serif;
 	font-weight: bold;
 	font-size: 23px;
 	margin: 0;
@@ -381,7 +378,7 @@ form.form1 {
 	border: 2px solid rgba(0, 0, 0, 0.02);
 	margin-left: 10px;
 	text-align: center;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Jua', sans-serif;
 }
 
 .form-control {
@@ -395,20 +392,15 @@ form.form1 {
 	background: rgba(136, 126, 126, 0.04);
 	padding: 10px 50px;
 	border: none;
-	border-radius: 20px;
+	border-radius: 3px 3px 3px 3px;
 	outline: none;
 	box-sizing: border-box;
 	border: 2px solid rgba(0, 0, 0, 0.02);
 	margin-bottom: 10px;
-	margin-left: 106px;
+	margin-left: 108px;
 	text-align: center;
 	margin-bottom: 27px;
-	font-family: 'Ubuntu', sans-serif;
-}
-
-.btn {
-	margin: 0px;
-	padding-right: 100px;
+	font-family: 'Jua', sans-serif;
 }
 
 #title:focus, #bank:focus, #id:focus, #pw:focus, #pw_re:focus, #email:focus,
@@ -419,33 +411,16 @@ form.form1 {
 	important;
 }
 
-.abtn, #eBtn {
-	background: #30A9DE;
+.abtn, .btn {
 	cursor: pointer;
-	border-radius: 5em;
-	color: #fff;
-	border: 0;
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	font-family: 'Ubuntu', sans-serif;
-	margin: 100px font-size: 13px;
-	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-}
-
-.btn {
-	cursor: pointer;
-	border-radius: 5em;
+	margin: 0 auto;
 	color: #fff;
 	background: #964b00;
-	border: 0;
-	padding-left: 50px;
-	padding-right: 50px;
+	border: 0.5px solid gray;
+	border-radius: 3px 3px 3px 3px;
 	padding-bottom: 10px;
 	padding-top: 10px;
-	font-family: 'Ubuntu', sans-serif;
-	margin: 100px font-size: 13px;
+	font-family: 'Jua', sans-serif;
 	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
@@ -459,7 +434,7 @@ form.form1 {
 	padding-right: 50px;
 	padding-bottom: 10px;
 	padding-top: 10px;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Jua', sans-serif;
 	margin-left: 35%;
 	font-size: 13px;
 	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -477,11 +452,6 @@ a {
 	text-decoration: none;
 }
 
-#eBtn {
-	background-color: antiquewhite;
-	border-radius: 10px 10px/10px 10px;
-}
-
 ul>li {
 	list-style: none;
 }
@@ -494,7 +464,7 @@ ul>li {
 	display: block;
 	padding-left: 100px;
 	text-align: left;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Jua', sans-serif;
 }
 
 .phone:before, .phone:after {
@@ -581,11 +551,6 @@ ul>li {
 	z-index: 3;
 }
 
-.ddd {
-	text-align: center;
-	margin: 0 auto;
-}
-
 @
 -moz-document url-prefix () { .phone-select {
 	padding-left: 6px;
@@ -600,89 +565,118 @@ ul>li {
 		margin: 0 auto;
 	}
 }
+
+::placeholder {
+	opacity: 0.4;
+}
+
+#submit {
+	background-color: #4a2100;
+	color: #ffac05;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#submit:hover {
+background-color: #ffac05;
+	color: #4a2100;
+}
+
+#reset {
+	background-color: #4a2100;
+	color: #ffac05;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#reset:hover {
+	background-color: #ffac05;
+	color: #4a2100;
+}
+
+#roadAddr, #detailAddr {
+	float: left;
+}
+
+#eBtn {
+color: #fff;
+font-family: 'Jua', sans-serif;
+	background: #964b00;
+	border: 0.5px solid gray;
+	border-radius: 3px 3px 3px 3px;
+}
+
 </style>
 
 <body>
 
 	<div class="main">
-		<h2 style="text-align: center;">판매자 회원가입</h2>
+		<div style="text-align: center; padding-top: 30px; font-size: 40px;">판매자
+			회원가입</div>
 		<form class="form1" method="post" action="/customerSignIn">
-			<div class="ddd">
-				<label for="id">
-					<div id="text" style="padding-bottom: 10px;">아이디</div>
-					<div style="padding-left: 100px; padding-right: 40px">
-						<input class="id " type="text" id="id" align="center"
-							placeholder="아이디 입력하세요" name="id" style="margin-right: 35px;">
-					</div>
-				</label>
-			</div>
-			<br>
+
+			<label for="id">
+				<div id="text">*아이디</div>
+				<div style="padding-left: 100px; padding-right: 40px">
+					<input class="id " type="text" id="id" align="center"
+						placeholder="아이디 입력하세요" name="id" style="margin-right: 35px;">
+				</div>
+			</label> <br>
 			<div id="id_result"></div>
-			<br> <br>
-			<div class="ddd" style="height: 130px;">
-				<label for="pw">
-					<div id="text" style="float: left;" style="padding-bottom:10px;">*비밀번호
+			<br> <br> <label for="pw">
+				<div id="text" style="float: left;" style="padding-bottom:10px;">*비밀번호
 
-					</div>
+				</div>
 
-					<div style="padding-left: 100px; padding-right: 40px">
+				<div style="padding-left: 100px; padding-right: 40px">
 
-						<input class="pw" type="password" id="pw" align="center"
-							placeholder="비밀번호 입력하세요" name="pw">
-					</div>
-				</label> <br> <label for="pw_re">
-					<div style="padding-left: 100px; padding-right: 40px">
-						<input type="password" id="pw_re" align="center"
-							placeholder="비밀번호 확인" name="pw_re">
-					</div>
-				</label>
+					<input class="pw" type="password" id="pw" align="center"
+						placeholder="비밀번호 입력하세요" name="pw">
+				</div>
+			</label> <br> <label for="pw_re">
+				<div style="padding-left: 100px; padding-right: 40px">
+					<input type="password" id="pw_re" align="center"
+						placeholder="비밀번호 확인" name="pw_re">
+				</div>
+			</label>
 
-				<div id="pw_result"></div>
-			</div>
-			<br> <br> <br>
-			<div class="ddd">
-				<label for="name">
-					<div id="text" style="padding-top: 20px; padding-bottom: 10px;">*이름</div>
-					<div style="padding-left: 100px; padding-right: 40px">
-						<input type="text" name="name" id="name" placeholder="성함을 입력해주세요">
-					</div>
-				</label>
-			</div>
+			<div id="pw_result"></div>
+
+			<br>  <label for="name">
+				<div id="text" style="padding-top: 20px;">*이름</div>
+				<div style="padding-left: 100px; padding-right: 40px">
+					<input type="text" name="name" id="name" placeholder="성함을 입력해주세요">
+				</div>
+			</label>
+
 
 			<div id="name_result"></div>
-			<br> <br>
-
-			<div class="ddd">
-				<label for="code">
-					<div id="text" style="padding-top: 20px; padding-bottom: 10px;">사업자
-						번호</div>
-					<div style="padding-left: 100px; padding-right: 40px">
-						<input type="text" name="code" id="code" placeholder="-제외하여 입력">
-					</div>
+			<br> <br> <label for="code">
+				<div id="text" style="padding-top: 20px;">*사업자 번호</div>
+				<div style="padding-left: 100px; padding-right: 40px">
+					<input type="text" name="code" id="code" placeholder="-제외하여 입력">
+				</div>
 
 
-				</label>
-			</div>
-			<br> <br> <br>
-			<div class="ddd">
-				<lable for="phone">
-				<div id="text">휴대전화</div>
-				</lable>
-				<div class="container" style="float: left; padding-left: 40px">
+			</label> <br> <br> 
+
+			<lable for="phone">
+			<div id="text">*휴대전화</div>
+
+			<div style="margin-left: 108px; display: inline-block;">
+				<div class="container" style="display: inline-block; float: left;">
 					<div class="dropdown" style="padding-top: 10px;">
-						<select class="phone" style="width: 150px; height: 40px">
+						<select class="phone" style="width: 50px; height: 40px;">
 
-							<option value="010">+82</option>
-							<option value="010">+84</option>
-							<option value="010">+1</option>
-							<option value="010">+10</option>
-							<option value="010">+11</option>
-							<option value="010">+12</option>
-							<option value="010">+13</option>
-							<option value="010">+14</option>
-							<option value="010">+15</option>
-							<option value="010">+16</option>
-							<option value="010">+17</option>
+							<option value="82">+82</option>
+							<option value="84">+84</option>
+							<option value="1">+1</option>
+							<option value="10">+10</option>
+							<option value="1">+11</option>
+							<option value="12">+12</option>
+							<option value="13">+13</option>
+							<option value="14">+14</option>
+							<option value="15">+15</option>
+							<option value="16">+16</option>
+							<option value="17">+17</option>
 
 						</select>
 
@@ -696,81 +690,90 @@ ul>li {
 					<input type="text" id="phone" name="phone" style="width: 250px;"
 						placeholder="-빼고 입력해주세요">
 				</div>
-				<br> <br>
-				<div id="tell_result" style="margin-top: 50px; margin-bottom: 10px;"></div>
 			</div>
+			</lable>
+			<br>
+			<div id="tell_result" style="margin-top: 50px; margin-bottom: 10px;"></div>
 
 
 
-			<br> <label for="email">
-				<div id="text">이메일 기입란</div>
-				<div style="padding-left: 90px; padding-right: 30px">
+			<br>
+			<label for="email">
+				<div id="text">*이메일 기입란</div>
+				<div style="padding-left: 98px; padding-right: 10px">
 					<input type="email" id="email" placeholder="이메일을 입력하세요@ 포함"
-						name="email" style="padding-float: left; width: 200px;">
-					<button type="button" id="eBtn"
-						style="height: 40px; margin-left: 10px; background: #30A9DE;">인증</button>
-				</div> <input type="text" id="mailCode"
-				style="display: none; margin-top: 10px; margin-left: 100px; width: 250px;">
-				<button type="button" id="mailResult" class="btn btn-primary"
-					style="display: none; margin-top: 1px; width: 130px; font-size: 10px; padding-top: 1px; background-color: balck;">확인</button>
-				<span id="mailMsg"></span> <br> <br>
+						name="email" style="float: left; width: 200px;"> <input
+						type="button" id="eBtn"
+						style="width: 115px; height: 40px; margin-left: 10px;"
+						value="인증하기">
+				</div>
+				<div style="padding-left: 98px;">
+					<input type="text" id="mailCode"
+						style="display: none; margin-top: 13px; width: 120px;">
+					<button type="button" id="mailResult" class="btn "
+						style="display: none; width: 100px; font-size: 10px; height: 40px; padding-bottom: 10px; background-color: balck;">확인</button>
+				</div> <span id="mailMsg"></span> <br> <br>
 
 				<div id="email_result" style="margin-top: 2px; margin-bottom: 10px;"></div>
 			</label>
 
-			<div id="text" style="text-align: left;">자택 주소</div>
+
+
+			<div id="text" style="text-align: left;">*자택 주소</div>
+
 			<div>
 				<div style="padding-right: 40px;">
 					<input type="text" id="postCode" name="postCode"
-						style="width: 200px; display: inline-block; margin-left: 100px;"
+						style="width: 200px; display: inline-block; margin-left: 108px;"
 						class="form-control" placeholder="우편번호" readonly> <input
-						type="button" id="addrSearchBtn" onclick="addrSearch();"
-						class="abtn" value="주소검색">
+						type="button" id="addrSearchBtn" onclick="addrSearch1();"
+						class="btn btn-primary" value="주소검색" style="width: 120px;">
 				</div>
 				<div>
-					<input id="roadAddr" style="width: 350px; display: inline-block;"
+					<input id="roadAddr" style="width: 325px; display: inline-block;"
 						name="roadAddr" type="text" class="form-control"
-						placeholder="도로명주소" readonly>
+						placeholder="도로명주소">
 					<div>
 						<input id="detailAddr" name="detailAddr"
-							style="width: 350px; display: inline-block;" type="text"
+							style="width: 325px; display: inline-block;" type="text"
 							class="form-control" placeholder="상세주소">
 					</div>
 				</div>
 
 			</div>
-			<br>
-			<div class="ddd">
-				<label for="title">
-					<div id="text" style="padding-top: 20px; padding-bottom: 10px;">상호명</div>
-					<div style="padding-left: 100px; padding-right: 40px">
-						<input type="text" name="title" id="title"
-							placeholder="성함을 입력해주세요">
-					</div>
-				</label>
-			</div>
+			<br> <br> <label for="title"> <br>
+
+				<div
+					style="padding-left: 100px; padding-right: 40px; text-align: left;">
+					<br> <br> <br>
+					<div style="text-align: left; padding-right: 108px;">*상호명</div>
+
+					<input type="text" name="title" id="title"
+						placeholder=" 상호명을 입력해주세요">
+				</div>
+			</label>
+
 
 			<div id="title_result"></div>
 
 			<br>
 
-			<div id="text" style="text-align: left;">사업자 등록 주소</div>
+			<div id="text" style="text-align: left;">*사업자 등록 주소</div>
 			<div>
-				<div style="padding-right: 40px;">
-					<input type="text" id="bPostCode" name="bPostCode"
-						style="width: 200px; display: inline-block; margin-left: 100px;"
-						class="form-control" placeholder="우편번호" readonly> <input
-						type="button" id="bAddrSearchBtn" accept=""
-						onclick="addrSearch();" style="width: 150px;" class="abtn "
-						value="주소검색">
+				<div style="padding-right: 50px;">
+					<input type="text" id="postCode2" name="postCode2"
+						style="width: 200px; display: inline-block;" class="form-control"
+						placeholder="우편번호" readonly> <input type="button"
+						id="bAddrSearchBtn" accept="" onclick="addrSearch2();"
+						style="width: 120px;" class="abtn " value="주소검색">
 				</div>
 				<div>
-					<input id="bRoadAddr" style="width: 350px; display: inline-block;"
-						name="bRoadAddr" type="text" class="form-control"
+					<input id="roadAddr2" style="width: 325px; display: inline-block;"
+						name="roadAddr2" type="text" class="form-control"
 						placeholder="도로명주소" readonly>
 					<div>
-						<input id="BdetailAddr" name="BdetailAddr"
-							style="width: 350px; display: inline-block;" type="text"
+						<input id="detailAddr2" name="detailAddr2"
+							style="width: 325px; display: inline-block;" type="text"
 							class="form-control" placeholder="상세주소">
 					</div>
 				</div>
@@ -778,44 +781,50 @@ ul>li {
 			</div>
 			<br>
 
-			<div class="ddd">
-				<lable for="bank">
-				<div id="text">주거래 은행</div>
-				</lable>
-				<div class="container" style="float: left; padding-left: 40px">
-					<div class="dropdown" style="padding-top: 10px;">
-						<select class="bank" style="width: 150px; height: 40px">
 
-							<option value="기업">기업은행</option>
-							<option value="신한">신한은행</option>
-							<option value="국민">국민은행</option>
-							<option value="리드코푸">리드코프</option>
-							<option value="러시앤캐쉬">러쉬앤캐쉬</option>
+			<lable for="bank">
+			<div id="text">주거래 은행</div>
+			</lable>
+			<div style="float: left; padding-left: 100px">
+				<div class="dropdown">
+					<select class="bank" style="width: 110px; height: 40px"
+						name="bankName">
+
+						<option value="기업">기업은행</option>
+						<option value="신한">신한은행</option>
+						<option value="국민">국민은행</option>
+						<option value="리드코푸">리드코프</option>
+						<option value="러시앤캐쉬">러쉬앤캐쉬</option>
 
 
-						</select>
-
-					</div>
-
+					</select>
 
 				</div>
 
-				<div id="bank_input"
-					style="padding-top: 10px; padding-right: 30px; float: right;">
-					<input type="text" id="bank" name="bank" style="width: 250px;"
-						placeholder="-빼고 입력해주세요">
-				</div>
-				<br> <br>
-				<div id="bank_result" style="margin-top: 50px; margin-bottom: 10px;"></div>
+
 			</div>
-			<br>
+
+			<div id="bank_input" style="padding-right: 30px;">
+				<input type="text" id="bank" name="bankAccount"
+					style="width: 213px;" placeholder="-빼고 입력해주세요">
+			</div>
+			<br> <br>
+			<div id="bank_result" style="margin-top: 50px; "></div>
+
+
+
+
+
+		
 			<div style="text-align: center;">
-				<input type="reset" class="submit" align="center" value="되돌아가기"
-					style="margin: 10px; float: left padding-left:10px;"
+				<input type="reset" id="reset" class="submit" align="center"
+					value="되돌아가기" style="margin: 10px; float: left padding-left:10px;"
 					onClick="location.href='/index.jsp';"> <input type="submit"
-					class="submit" align="center" value="회원 가입하기" style="margin: 10px">
+					id="submit" class="submit" align="center" value="회원 가입하기"
+					style="margin: 10px">
 
 				<p class="forgot" align="center"></p>
+
 			</div>
 
 		</form>
@@ -824,8 +833,6 @@ ul>li {
 
 
 
-
-
 </body>
 </html>
-F
+

@@ -3,12 +3,11 @@
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 <script>
     $(function() {
@@ -106,6 +105,7 @@
 
     body {
         background-color: #f7f7f7;
+        font-family: 'Jua', sans-serif;
     }
 
 
@@ -180,15 +180,27 @@
         text-align: center;
         line-height: 60px;
     }
-
-    .fpmgBt1 {
-        background-color: #fff;
-        color: #888
+ #fpmgBt2,
+    #fpmgBt1 { 
+        color: #ffac05;
+        background-color: #4a2100;
+	   font-family: 'Jua', sans-serif;
+        border: 0.5px solid gray;
+        border-radius: 3px 3px 3px 3px;
+        
     }
+    #fpmgBt2:hover,
+	#fpmgBt1:hover{
+      background-color: #ffac05;
+	color: #4a2100;
+	font-family: 'Jua', sans-serif;
+	border: 0.5px solid gray;
+	border-radius: 3px 3px 3px 3px;
+	
+		}
 
-    .fpmgBt2 {
-        background-color: #6A8518;
-        color: #fff
+
+    
     }
 
     img {
@@ -505,27 +517,25 @@
 
 
           	      회원 상태(필수) :
-                <label for="cus">소비자
-                </label>
+                <label for="user">소비자
+                
 
 
-                <input type="radio" name="status" id="user" value="customer">
+                <input type="radio" name="status" id="user" value="customer"></label>
 
-                <label for="sell">판매자</label>
-                <input type="radio" name="status" id="user" value="seller">
+                <label for="seller">판매자</label>
+                <input type="radio" name="status" id="seller" value="seller">
 
             </div>
 
         </div>
         <div class="footBtwrap clearfix">
-            <div><button type="reset" class="fpmgBt1" value="취소" onclick="location.href='/index.jsp';">취소</button></div>
-            <div><button type="submit" value="동의" class="fpmgBt2" onclick="return checkstatus(); ">동의</button></div>
+            <div><button type="reset" id="fpmgBt1" value="취소" onclick="location.href='/index.jsp';">취 소</button></div>
+            <div><button type="submit" value="동의" id="fpmgBt2" onclick="return checkstatus(); ">동 의</button></div>
         </div>
     </form>
 
 </div>
-
-
 
 
 </body></html>

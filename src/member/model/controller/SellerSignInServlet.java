@@ -42,8 +42,14 @@ public class SellerSignInServlet extends HttpServlet {
 		m.setMemberPostCode(request.getParameter("postAddr"));
 		m.setMemberRoadAddr(request.getParameter("roadAddr"));
 		m.setMemberDetailAddr(request.getParameter("detailAddr"));
+		m.setMemberPostCode2(request.getParameter("postAddr2"));
+		m.setMemberRoadAddr2(request.getParameter("roadAddr2"));
+		m.setMemberDetailAddr2(request.getParameter("detailAddr2"));
 		
-		int result = new MemberService().insertMember(m);
+		m.setBankName(request.getParameter("bankName"));
+		m.setBankAccount(request.getParameter("bankAccount"));
+		
+		int result = new MemberService().insertMemberSeller(m);
 		
 		
 	}
