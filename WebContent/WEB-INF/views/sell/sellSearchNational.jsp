@@ -69,17 +69,19 @@
 	font-size: 1.5em;
 	float: right;
 	margin-left: 20px;
-	background-color: #534847;
-	color: white;
+	background-color: #ffac05;
+	color: #4a2100;
 	border-style: none;
 	border: 1px solid gray;
 	outline: none;
 	font-family: 'Jua', sans-serif;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px darkgray;
 }
 
 .searchBtn:hover {
-	background-color: #ABD0CE;
-	color: black;
+	background-color: #4a2100;
+	color: #ffac05;
 }
 
 .searchTypingBox {
@@ -215,14 +217,23 @@
 </head>
 <body>
 	<script>
-		//검색창에 검색어 입력 시, 아웃라인 제거
+	window.onload(function(){
+		
+	});
+	//로그인한 아이디가 판매자이면 검색 대신 새글 쓰기 버튼
+	$(function(){
+		$("#newSellForm").click(function(){
+			location.href="/sellForm";
+		});
+	});
+	 	//검색창에 검색어 입력 시, 아웃라인 제거
 		$(function() {
 			$(".searchTypingBox").focusin(function() {
 				$(".searchTypingBox").css("outline", "none");
 			});
 		});
 		//마감시간, 구매인기, 등록순 정렬 탭 활성화
-		$(function() {
+	$(function() {
 			var sortingTab;
 			$(".ordertabCategory").children("ul").children("li").eq(0).click(
 					function() {
@@ -241,7 +252,8 @@
 						sortingTab = $(".clicktab").html();
 						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
 					});
-			$(".ordertabCategory").children("ul").children("li").eq(1).click(
+			
+			 $(".ordertabCategory").children("ul").children("li").eq(1).click(
 					function() {
 						$(".ordertabCategory").children("ul").children("li")
 								.eq(0).addClass("unclicktab");
@@ -277,7 +289,7 @@
 					});
 		});
 		//DB에서 상품 데이터 불러오기
-		function sell_listAll(){
+		/*function sell_listAll(){
 			var searchTypingBox = $("#searchTypingBox").val();
 			var sortingTab = $(".clicktab").html();
 			var param = {searchTypingBox:searchTypingBox, sortingTab:sortingTab};
@@ -309,8 +321,8 @@
 					console.log("데이터 불러오기 실패.")
 				}
 			});
-		}
-		$(function(){
+		}*/
+		/*$(function(){
 			$("form").submit(function(){
 				sell_listAll();
 				return false;
@@ -344,43 +356,47 @@
 				console.log("ㅇㅇ");
 			});
 		});
-		//paging
+		//paging */
 	</script>
 	<div class="sell-list-body">
-	<form action = "/sellSearchBox" method="get" id="searchSell">
+	<form action = "/sellSearchBox" method="post" id="searchSell">
 		<div class="searchbox-wrapper">
-			<select class="category category1" name="sellCategory1">
-				<option value="전체" selected>농/수산물(전체)</option>
+			<select class="category category1" name="type1">
+				<option value=null>농/수산물(전체)</option>
 				<option value="농산물">농산물</option>
 				<option value="수산물">수산물</option>
-			</select> <select class="category category2" name="전체">
-				<option value="전체" selected>상품타입(전체)</option>
-			</select> <select class="category category2" name="농산물">
-				<option value="전체" selected>상품타입(전체)</option>
+			</select> 
+			<select class="category category2" name="type2">
+				<option value=null>상품타입(전체)</option>
 				<option value="채소">채소</option>
 				<option value="과일">과일</option>
 				<option value="가공식품">가공식품</option>
 			</select>
-    <select class="category category2" name="수산물">
-<option value="전체" selected>상품타입(전체)</option>
+<!--     <select class="category category2" name="수산물">
+<option value=null>상품타입(전체)</option>
         <option value="생물">생물</option>
         <option value="냉동">냉동</option>
         <option value="가공식품">가공식품</option>
-    </select>
+    </select> -->
 			<div class="searchInput-wrapper">
 				<div class="searchInputBox">
 					<img src="../imgs/search@3x.png"> 
 					<input type="text" name="searchTypingBox" id="searchTypingBox" class="searchTypingBox"
-						placeholder="검색할 상품을 입력하세요.">
+						placeholder="검색할 상품을 입력하세요(Enter)">
 				</div>
+				<c:if test="${sessionScope.member.member_type != '2'}">
 				<input type="submit"  value="상품 검색" class="searchBtn">
+				</c:if>
+				<c:if test="${sessionScope.member.member_type == '2'}">
+				<input type="button" id="newSellForm" value="새 글쓰기" class="searchBtn">
+				</c:if>
 			</div>
 		</div>
-		
 		<br>
 		<br>
 		<div class="ordertabCategory">
 			<ul>
+			<input type="hidden" value="마감시간 순" name="sortingTab1">
 				<li class="clicktab" name="sortingTab" value="마감시간 순" >마감시간 순</li>
 				<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
 				<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
@@ -400,7 +416,14 @@
 				<th>
 					<div class="productBox">
 						<div class='productImg'>
-							<div class='timeBox' id='timeBox'>${n.sellEndDate }</div>
+							<div class='timeBox' id='timeBox'>
+							<c:if test="${n.timegap >0}">
+							${n.timegap } 일 남음
+							</c:if>
+							<c:if test="${n.timegap ==0 }">
+							
+							</c:if>
+							</div>
 							<img src='/imgs/${n.thumbnail }'>
 						</div>
 						<p>${n.sellTitle }</p>
@@ -417,7 +440,6 @@
 			</table>
 				<div id="pageNavi">${pageNavi }</div>
 		</div>
-	
 	</div>
 </body>
 </html>

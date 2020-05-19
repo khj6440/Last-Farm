@@ -20,6 +20,7 @@ public class SellEnd {
 	private String sellItemMaterial;
 	private String sellItemRule;
 	private String thumbnail;
+	private String sellRegionalAddr;
 	public SellEnd() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -27,7 +28,7 @@ public class SellEnd {
 	public SellEnd(int sellEndNo, String sellEndTitle, String sellEndName, String sellEndWriter, String sellEndContent,
 			Date sellDate, int sellType, String sellCategory1, String sellCategory2, int sellWarning, Date sellEndDate,
 			int sellEndType, String sellItemOrigin, String sellItemQuantity, String sellItemMaterial,
-			String sellItemRule, String thumbnail) {
+			String sellItemRule, String thumbnail, String sellRegionalAddr) {
 		super();
 		this.sellEndNo = sellEndNo;
 		this.sellEndTitle = sellEndTitle;
@@ -46,6 +47,7 @@ public class SellEnd {
 		this.sellItemMaterial = sellItemMaterial;
 		this.sellItemRule = sellItemRule;
 		this.thumbnail = thumbnail;
+		this.sellRegionalAddr = sellRegionalAddr;
 	}
 	public int getSellEndNo() {
 		return sellEndNo;
@@ -149,5 +151,10 @@ public class SellEnd {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	
+	public String getSellRegionalAddr() {
+		return sellRegionalAddr;
+	}
+	public void setSellRegionalAddr(String sellRegionalAddr) {
+		this.sellRegionalAddr = sellRegionalAddr;
+	}
 }
