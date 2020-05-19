@@ -1,8 +1,9 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import admin.model.vo.SellPageData;
+import sell.model.vo.Sell;
 
 /**
- * Servlet implementation class ManageWarningServlet
+ * Servlet implementation class ReqDelSellServlet
  */
-@WebServlet(name = "ManageWarning", urlPatterns = { "/manageWarning" })
-public class ManageWarningServlet extends HttpServlet {
+@WebServlet(name = "ReqDelSell", urlPatterns = { "/reqDelSell" })
+public class ReqDelSellServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageWarningServlet() {
+    public ReqDelSellServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,13 @@ public class ManageWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int totalCount = new AdminService().totalWarningCount();
-		System.out.println(totalCount);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageWarning.jsp");
-		request.setAttribute("totalCount", totalCount);
-		rd.forward(request, response);
+		
+//		ArrayList<Sell> list = new AdminService().reqDelSell();
+		
+		PrintWriter out = response.getWriter();
+		out.print("zzz");
+		
+	
 	}
 
 	/**

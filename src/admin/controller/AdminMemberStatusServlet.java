@@ -1,8 +1,8 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import admin.model.vo.SellPageData;
 
 /**
- * Servlet implementation class ManageWarningServlet
+ * Servlet implementation class AdminMemberStatusServlet
  */
-@WebServlet(name = "ManageWarning", urlPatterns = { "/manageWarning" })
-public class ManageWarningServlet extends HttpServlet {
+@WebServlet(name = "AdminMemberStatus", urlPatterns = { "/adminMemberStatus" })
+public class AdminMemberStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageWarningServlet() {
+    public AdminMemberStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,14 @@ public class ManageWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int totalCount = new AdminService().totalWarningCount();
-		System.out.println(totalCount);
+		int memberNo =  Integer.parseInt(request.getParameter("memberNo"));
+		int memberStatus =Integer.parseInt(request.getParameter("memberStatus"));
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageWarning.jsp");
-		request.setAttribute("totalCount", totalCount);
-		rd.forward(request, response);
+		int result = new AdminService().modifyMemberStatus(memberNo,memberStatus);
+		
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		
 	}
 
 	/**

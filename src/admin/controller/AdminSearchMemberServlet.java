@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
 import admin.model.vo.MemberPageData;
+import admin.model.vo.SellPageData;
 
 /**
- * Servlet implementation class ManageMemberServlet
+ * Servlet implementation class AdminSearchMemberServlet
  */
-@WebServlet(name = "ManageMember", urlPatterns = { "/manageMember" })
-public class ManageMemberServlet extends HttpServlet {
+@WebServlet(name = "AdminSearchMember", urlPatterns = { "/adminSearchMember" })
+public class AdminSearchMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageMemberServlet() {
+    public AdminSearchMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +32,7 @@ public class ManageMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String searched = request.getParameter("search");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		
 		int reqCount= 10;
@@ -40,12 +41,14 @@ public class ManageMemberServlet extends HttpServlet {
 		}
 		request.setAttribute("reqCount", reqCount);
 		
-		MemberPageData pd = new AdminService().selectMemberList(reqPage,reqCount);
-		RequestDispatcher rd = null;
 		
+		
+		MemberPageData pd = new AdminService().searchMember(reqPage,reqCount,searched);
+		
+		RequestDispatcher rd = null;
 		if(pd.getList().isEmpty() && pd.getTotalCount()!=0) {
 			System.out.println("전페이지 요청");
-			rd =request.getRequestDispatcher("/manageMember?reqCount="+reqCount+"&reqPage="+(reqPage-1));
+			rd =request.getRequestDispatcher("/adminSearchMember?reqCount="+reqCount+"&reqPage="+(reqPage-1)+"&search="+searched);
 		}else {
 			rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageMember.jsp");
 		}
@@ -54,8 +57,7 @@ public class ManageMemberServlet extends HttpServlet {
 		request.setAttribute("pageNavi", pd.getPageNavi());
 		request.setAttribute("totalPage", pd.getTotalPage());
 		request.setAttribute("totalCount", pd.getTotalCount());
-		
-		System.out.println(pd.getList().size());
+		request.setAttribute("search",searched);
 		rd.forward(request, response);
 	}
 

@@ -1,23 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="utf-8">
+<html lang="en">
 
 <head>
+<!-- Required meta tags-->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-<!-- Required meta tags-->
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="au theme template">
 <meta name="author" content="Hau Nguyen">
 <meta name="keywords" content="au theme template">
-<style type="text/css">
+
+<!-- Title Page-->
+<title>관리자 | 리뷰관리</title>
+
+<!-- Fontfaces CSS-->
+<link href="/admin_css/css/font-face.css" rel="stylesheet" media="all">
+<link href="/admin_css/vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="/admin_css/vendor/font-awesome-5/css/fontawesome-all.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="/admin_css/vendor/mdi-font/css/material-design-iconic-font.min.css"
+	rel="stylesheet" media="all">
+
+<!-- Bootstrap CSS-->
+<link href="/admin_css/vendor/bootstrap-4.1/bootstrap.min.css"
+	rel="stylesheet" media="all">
+
+<!-- Vendor CSS-->
+<link href="/admin_css/vendor/animsition/animsition.min.css"
+	rel="stylesheet" media="all">
+<link
+	href="/admin_css/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+	rel="stylesheet" media="all">
+<link href="/admin_css/vendor/wow/animate.css" rel="stylesheet"
+	media="all">
+<link href="/admin_css/vendor/css-hamburgers/hamburgers.min.css"
+	rel="stylesheet" media="all">
+<link href="/admin_css/vendor/slick/slick.css" rel="stylesheet"
+	media="all">
+<link href="/admin_css/vendor/select2/select2.min.css" rel="stylesheet"
+	media="all">
+<link href="/admin_css/vendor/perfect-scrollbar/perfect-scrollbar.css"
+	rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="/admin_css/css/theme.css" rel="stylesheet" media="all">
+<link href="/admin_css/css/adminTab.css" rel="stylesheet" media="all">
+<style>
 * {
 	font-family: 'Jua', sans-serif;
 }
@@ -87,21 +124,6 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#sellDel").click(function() {
-			console.log("게시물삭제요청");
-			$.ajax({
-				url : "/reqDelSell",
-				type : "post",
-				success : function(data) {
-					console.log("서버 전송 성공");
-					console.log(data);
-				},
-				error : function() {
-					console.log("서버 전송 실패")
-				}
-			})
-		})
-
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
 				item.checked = $("input[name=allCheck]").prop("checked");
@@ -122,10 +144,10 @@
 															"input[name=search]")
 															.val();
 													if (!link.match("search")) {
-														location.href = "/manageSell?reqPage=1&reqCount="
+														location.href = "/manageReview?reqPage=1&reqCount="
 																+ value;
 													} else {
-														location.href = "/adminSearchSell?reqPage=1&reqCount="
+														location.href = "/adminSearchReview?reqPage=1&reqCount="
 																+ value
 																+ "&search="
 																+ searched;
@@ -149,9 +171,9 @@
 			});
 
 			$.ajax({
-				url : "/adminDelSell",
+				url : "/adminDelReview",
 				data : {
-					sellNo : checkList
+					reviewNo : checkList
 				},
 				type : "post",
 				success : function(data) {
@@ -169,19 +191,19 @@
 		});
 	});
 
-	function showModal(sellNo, title, body) {
+	function showModal(reviewNo, title, body) {
 		$('.modal-title').html(title);
 		$('.modal-body').html(body);
 		$('#myModal').modal('show');
-		$('#deleteContent').attr("onclick", "deleteSell(" + sellNo + ")");
+		$('#deleteContent').attr("onclick", "deleteReview(" + reviewNo + ")");
 	}
 
-	function deleteSell(param) {
+	function deleteReview(param) {
 		$('#myModal').modal('hide');
 		$.ajax({
-			url : "/adminDelSell",
+			url : "/adminDelReview",
 			data : {
-				sellNo : param
+				reviewNo : param
 			},
 			type : "post",
 			success : function(data) {
@@ -198,49 +220,10 @@
 		});
 	}
 </script>
-<!-- Title Page-->
-<title>관리자 | 거래글관리</title>
-
-<!-- Fontfaces CSS-->
-<link href="/admin_css/css/font-face.css" rel="stylesheet" media="all">
-<link href="/admin_css/vendor/font-awesome-4.7/css/font-awesome.min.css"
-	rel="stylesheet" media="all">
-<link
-	href="/admin_css/vendor/font-awesome-5/css/fontawesome-all.min.css"
-	rel="stylesheet" media="all">
-<link
-	href="/admin_css/vendor/mdi-font/css/material-design-iconic-font.min.css"
-	rel="stylesheet" media="all">
-
-<!-- Bootstrap CSS-->
-<link href="/admin_css/vendor/bootstrap-4.1/bootstrap.min.css"
-	rel="stylesheet" media="all">
-
-<!-- Vendor CSS-->
-<link href="/admin_css/vendor/animsition/animsition.min.css"
-	rel="stylesheet" media="all">
-<link
-	href="/admin_css/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
-	rel="stylesheet" media="all">
-<link href="/admin_css/vendor/wow/animate.css" rel="stylesheet"
-	media="all">
-<link href="/admin_css/vendor/css-hamburgers/hamburgers.min.css"
-	rel="stylesheet" media="all">
-<link href="/admin_css/vendor/slick/slick.css" rel="stylesheet"
-	media="all">
-<link href="/admin_css/vendor/select2/select2.min.css" rel="stylesheet"
-	media="all">
-<link href="/admin_css/vendor/perfect-scrollbar/perfect-scrollbar.css"
-	rel="stylesheet" media="all">
-
-<!-- Main CSS-->
-<link href="/admin_css/css/theme.css" rel="stylesheet" media="all">
-<link href="/admin_css/css/adminTab.css" rel="stylesheet" media="all">
 </head>
 
 <body class="animsition">
 	<div class="page-wrapper">
-
 		<!-- HEADER MOBILE-->
 
 		<!-- END HEADER MOBILE-->
@@ -254,40 +237,35 @@
 		<div class="menu-sidebar__content js-scrollbar1">
 			<nav class="navbar-sidebar">
 			<ul class="list-unstyled navbar__list">
-
-
 				<li><a href="/manageMember?reqPage=1"> <i
 						class="fas fa-users"></i>회원 관리
 				</a></li>
-				<li class="active"><a href="/manageSell?reqPage=1"> <i
+				<li><a href="/manageSell?reqPage=1"> <i
 						class="far fa-list-alt"></i>거래글 관리
 				</a></li>
-
-				<li><a href="/manageReview?reqPage=1"> <i
+				<li class="active"><a href="/manageReview?reqPage=1"> <i
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning"><i class="fas fa-exclamation"></i>신고글
-						관리 </a></li>
+				<li><a href="/manageWarning"> <i	class="fas fa-exclamation"></i>신고글 관리
+				</a></li>
+
 			</ul>
 			</nav>
 		</div>
-
 		</aside>
-
 		<!-- END MENU SIDEBAR-->
 
 		<!-- PAGE CONTAINER-->
 		<div class="page-container">
-
 			<!-- HEADER DESKTOP-->
 			<header class="header-desktop">
 			<div class="section__content section__content--p30">
 				<div class="container-fluid">
 					<div class="header-wrap">
-						<form class="form-header" action="/adminSearchSell" method="get">
+						<form class="form-header" action="/adminSearchReview" method="get">
 							<input class="au-input au-input--xl" type="text" name="search"
-								placeholder="Search for title , user ID..." value="${search }" />
+								placeholder="Search for writer &amp; title..." value=${search }>
 							<input type="hidden" name="reqPage" value="1"> <input
 								type="hidden" name="reqCount" value="10">
 							<button class="au-btn--submit" type="submit">
@@ -297,12 +275,11 @@
 						<div class="header-button">
 							<div class="noti-wrap">
 								<div class="noti__item js-item-menu">
-									<i class="fas fa-exclamation"></i> <span class="quantity">1</span>
+									<i class="zmdi zmdi-comment-more"></i> <span class="quantity">1</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>신고요청 알림</p>
+											<p>You have 2 news message</p>
 										</div>
-
 										<div class="mess__item">
 											<div class="image img-cir img-40">
 												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
@@ -328,27 +305,42 @@
 										</div>
 									</div>
 								</div>
-								<div id="sellDel" class="noti__item js-item-menu">
+
+								<div class="noti__item js-item-menu">
 									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
 									<div class="notifi-dropdown js-dropdown">
 										<div class="notifi__title">
-											<p>게시물 삭제 요청</p>
+											<p>You have 3 Notifications</p>
 										</div>
-										<div class="mess__item">
-											<div
-												style="border-radius: 0px; display: flex; align-items: center; justify-content: center;"
-												class="image img-cir img-40">
-												<i style="color: #f57542" class="fas fa-trash-alt"></i>
+										<div class="notifi__item">
+											<div class="bg-c1 img-cir img-40">
+												<i class="zmdi zmdi-email-open"></i>
 											</div>
 											<div class="content">
-												<h6>${s.sellWriter }</h6>
-												<p>${s.sellTitle }</p>
-												<span class="time">${s.sellDate}</span>
+												<p>You got a email notification</p>
+												<span class="date">April 12, 2018 06:50</span>
 											</div>
 										</div>
-
+										<div class="notifi__item">
+											<div class="bg-c2 img-cir img-40">
+												<i class="zmdi zmdi-account-box"></i>
+											</div>
+											<div class="content">
+												<p>Your account has been blocked</p>
+												<span class="date">April 12, 2018 06:50</span>
+											</div>
+										</div>
+										<div class="notifi__item">
+											<div class="bg-c3 img-cir img-40">
+												<i class="zmdi zmdi-file-text"></i>
+											</div>
+											<div class="content">
+												<p>You got a new file</p>
+												<span class="date">April 12, 2018 06:50</span>
+											</div>
+										</div>
 										<div class="notifi__footer">
-											<a href="#">요청 더 보기</a>
+											<a href="#">All notifications</a>
 										</div>
 									</div>
 								</div>
@@ -400,7 +392,6 @@
 				</div>
 			</div>
 			</header>
-
 			<!-- END HEADER DESKTOP-->
 
 			<!-- MAIN CONTENT-->
@@ -410,28 +401,34 @@
 						<div class="row">
 							<div class="col-md-12">
 								<!-- DATA TABLE -->
-								<h3 class="title-5 m-b-35">
-									<i style="color: navy;" class="far fa-list-alt"></i> <span
-										style="font-weight: bold">거래글 관리</span>
+								<h3 class="title-5 m-b-35" style="font-weight: bold;">
+									<i style="color: #ffac05" class="fas fa-star"></i> 리뷰 관리
 								</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
 										<div class="rs-select2--light rs-select2--md">
 											<select class="js-select2" name="property">
-												<option value="0" selected>판매중 순</option>
-												<option value="1">삭제요청 순</option>
-												<option value="2">삭제진행중 순</option>
+												<option selected="selected">All Properties</option>
+												<option value="">Option 1</option>
+												<option value="">Option 2</option>
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
-
+										<div class="rs-select2--light rs-select2--sm">
+											<select class="js-select2" name="time">
+												<option selected="selected">Today</option>
+												<option value="">3 Days</option>
+												<option value="">1 Week</option>
+											</select>
+											<div class="dropDownSelect2"></div>
+										</div>
 										<button class="au-btn-filter">
-											<i class="zmdi zmdi-filter-list"></i>정렬
+											<i class="zmdi zmdi-filter-list"></i>filters
 										</button>
 									</div>
 									<div class="table-data__tool-right">
 										<button class="btn btn-danger" id="selectDel">
-											<i class="zmdi zmdi-minus"></i> 선택항목 삭제
+											<i class="zmdi zmdi-minus"></i>선택항목 삭제
 										</button>
 										<div
 											class="rs-select2--dark rs-select2--sm rs-select2--dark2 show-list"
@@ -462,7 +459,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="table-responsive table-responsive-data2">
 									<table class="table table-data2">
 										<thead>
@@ -471,50 +467,36 @@
 														type="checkbox" name="allCheck"> <span
 														class="au-checkmark"></span>
 												</label></th>
-
-												<th>user ID</th>
-												<th>title</th>
-												<th>reg date</th>
-												<th>end date</th>
-												<th>count</th>
-												<th>status</th>
-												<th>price</th>
+												<th>review writer</th>
+												<th>Review Title</th>
+												<th>REG DATE</th>
+												<th>sell title</th>
+												<th>sell writer</th>
+												<th>Warning</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-
-											<c:forEach items="${list }" var="s">
+											<c:forEach items="${list }" var="rs">
 												<tr class="tr-shadow">
 													<td><label class="au-checkbox"> <input
-															type="checkbox" name="pick" value="${s.sellNo}">
+															type="checkbox" name="pick" value="${rs.review.reviewNo}">
 															<span class="au-checkmark"></span>
 													</label></td>
-
-													<td><span class="block-email">${s.sellWriter }</span>
-													</td>
-													<td class="desc">${s.sellTitle }</td>
-													<td>${s.sellDate }</td>
-													<td>${s.sellEndDate }</td>
-													<td>${s.sellCount }/${s.sellMax }</td>
-													<td><c:if test="${s.sellDeleteState eq 0 }">
-															<span class="status--process"">판매중</span>
-														</c:if> <c:if test="${s.sellDeleteState eq 1 }">
-															<span class="status--process" style="color: red">삭제요청</span>
-														</c:if> <c:if test="${s.sellDeleteState eq 2 }">
-															<span class="status--process" style="color: orange">삭제진행중</span>
-														</c:if></td>
-													<td>&#8361;<fmt:formatNumber value="${s.sellPrice}"
-															pattern="###,###,###,###" /></td>
+													<td><span class="block-email">
+															${rs.review.reviewWriter } </span></td>
+													<td class="desc">${rs.review.reviewTitle }</td>
+													<td>${rs.review.reviewDate }</td>
+													<td class="desc">${rs.sellEnd.sellEndTitle }</td>
+													<td><span class="block-email">${rs.sellEnd.sellEndWriter }</span></td>
+													<td>${rs.review.reviewWarning }</td>
 													<td>
 														<div class="table-data-feature">
-
 															<button class="item" data-toggle="tooltip"
 																data-placement="top" title="Delete"
-																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?')">
+																onclick="showModal('${rs.review.reviewNo}','리뷰 삭제','해당 리뷰를 삭제 하시겠습니까?')">
 																<i class="zmdi zmdi-delete"></i>
 															</button>
-
 															<button class="item" data-toggle="tooltip"
 																data-placement="top" title="More">
 																<i class="zmdi zmdi-more"></i>
@@ -522,7 +504,6 @@
 														</div>
 													</td>
 												</tr>
-
 												<tr class="spacer"></tr>
 											</c:forEach>
 											${totalCount }
@@ -536,7 +517,6 @@
 										</div>
 									</c:if>
 								</div>
-
 								<c:if test="${totalCount!=0 }">
 									<div class="user-data__footer">
 										<div id="pageNavi">${pageNavi}</div>
@@ -563,7 +543,6 @@
 		</div>
 
 	</div>
-
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -584,9 +563,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
 
 	<!-- Jquery JS-->
 	<script src="/admin_css/vendor/jquery-3.2.1.min.js"></script>
@@ -618,5 +594,6 @@
 	<script src="/admin_css/js/main.js"></script>
 
 </body>
+
 </html>
 <!-- end document-->

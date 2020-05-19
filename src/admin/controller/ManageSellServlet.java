@@ -47,14 +47,19 @@ public class ManageSellServlet extends HttpServlet {
 		
 		
 		SellPageData pd = new AdminService().selectSellList(reqPage,reqCount);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageSell.jsp");
-
+		RequestDispatcher rd =null;
+		if(pd.getList().isEmpty() && pd.getTotalCount()!=0) {
+			System.out.println("전페이지 요청");
+			rd =request.getRequestDispatcher("/manageSell?reqCount="+reqCount+"&reqPage="+(reqPage-1));
+		}else {
+			rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageSell.jsp");
+		}
 		request.setAttribute("list", pd.getList());
 		request.setAttribute("pageNavi", pd.getPageNavi());
 		request.setAttribute("totalPage", pd.getTotalPage());
 		request.setAttribute("totalCount", pd.getTotalCount());
 
+		
 		
 		rd.forward(request, response);
 	}
