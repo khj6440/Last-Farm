@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import admin.model.vo.WarningData;
 import common.JDBCTemplate;
 import member.model.vo.Member;
+import message.model.vo.Message;
 import review.model.vo.Review;
 import review.model.vo.ReviewAndSell;
 import sell.model.vo.Sell;
@@ -85,12 +86,14 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Member> selectMemberList(Connection conn, int start, int end) {
+	public ArrayList<Member> selectMemberList(Connection conn, int start, int end ,String sort) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ArrayList<Member> list = new ArrayList<Member>();
 		ResultSet rset = null;
-		String query = "select * from" + "(select rownum AS rnum, n.* from " + "member n) where rnum BETWEEN ? and ?";
+		String query ="select * from (select rownum AS rnum, n.* from (select * from member order by "+sort +")n) where rnum BETWEEN ? and ?";
+		System.out.println(sort);
+		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -158,7 +161,7 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ArrayList<Sell> list = new ArrayList<Sell>();
 		ResultSet rset = null;
-		String query = "select * from" + "(select rownum AS rnum, n.* from " + "sell n) where rnum BETWEEN ? and ?";
+		String query = "select * from (select rownum AS rnum, n.* from (select * from sell order by sell_delete_state desc) n) where rnum BETWEEN ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -503,11 +506,11 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Member> searchMember(Connection conn, int start, int end, String searched) {
+	public ArrayList<Member> searchMember(Connection conn, int start, int end, String searched,String sort) {
 		PreparedStatement pstmt = null;
 		ArrayList<Member> list = new ArrayList<Member>();
 		ResultSet rset = null;
-		String query = "select * from (select rownum AS rnum, n.* from member n where member_id like ? or member_name like ?) where rnum BETWEEN ? and ?";
+		String query = "select * from (select rownum AS rnum, n.* from (select * from member order by "+sort+")n where member_id like ? or member_name like ?) where rnum BETWEEN ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + searched + "%");
@@ -591,13 +594,13 @@ public class AdminDao {
 	public int totalWarningCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select count(*) as cnt from (select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>0"
+		String query = "select count(*) as cnt from (select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>=5"
 				+ " union "
-				+ "select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>0"
+				+ "select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>=5"
 				+ " union "
-				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>0"
+				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>=5"
 				+ " union "
-				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>0)";
+				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>=5)";
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -622,13 +625,13 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ArrayList<WarningData> list = new ArrayList<WarningData>();
 		String query = "select * from(" + "select rownum as rnum, p.* from("
-				+ "select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>0 "
+				+ "select 'sell' as type,sell_no as type_no ,sell_title as type_title,sell_writer as type_writer,sell_date as type_date,sell_warning as type_warning from sell where sell_warning>=5 "
 				+ " union "
-				+ " select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>0 "
+				+ " select 'review' as type,review_no,review_title,review_writer,review_date,review_warning from review where review_warning>=5 "
 				+ " union "
-				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>0 "
+				+ "select 'review_comment' as type,review_comment_no,review_comment_content,review_comment_writer,review_comment_date,review_comment_warning from review_comment where review_comment_warning>=5 "
 				+ " union "
-				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>0 )p order by type_date desc) where rnum between ? and ?";
+				+ "select 'sell_comment' as type,sell_comment_no,sell_comment_content,sell_comment_writer,sell_comment_date,sell_comment_warning from sell_comment where sell_comment_warning>=5 )p order by type_date desc) where rnum between ? and ?";
 
 		ResultSet rset = null;
 		try {
@@ -646,6 +649,60 @@ public class AdminDao {
 				wd.setTypeWriter(rset.getString("type_writer"));
 
 				list.add(wd);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int getMessageCount(Connection conn) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) as cnt from message where msg_receive_id='admin' and msg_read=0";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Message> getMsgList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ArrayList<Message> list = new ArrayList<Message>();
+		String query = "select * from message where msg_receive_id='admin' or msg_send_id='admin'";
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Message m = new Message();
+				m.setMsgContent(rset.getString("msg_content"));
+				m.setMsgDate(rset.getDate("msg_date"));
+				m.setMsgNo(rset.getInt("msg_no"));
+				m.setMsgRead(rset.getInt("msg_read"));
+				m.setMsgReceiveId(rset.getString("msg_receive_id"));
+				m.setMsgSendId(rset.getString("msg_send_id"));
+				m.setMsgTitle(rset.getString("msg_title"));
+				list.add(m);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

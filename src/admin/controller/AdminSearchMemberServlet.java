@@ -39,11 +39,22 @@ public class AdminSearchMemberServlet extends HttpServlet {
 		if(request.getParameter("reqCount")!=null) {
 			reqCount=Integer.parseInt(request.getParameter("reqCount"));
 		}
+		String sort = "member_date desc";
+		if (request.getParameter("sort") != null) {
+			if (request.getParameter("sort").equals("ID순")) {
+				sort = "member_id";
+			} else if (request.getParameter("sort").equals("타입순")) {
+				sort = "member_type";
+			} else {
+				sort = "member_date desc";
+			}
+
+		}
+		
 		request.setAttribute("reqCount", reqCount);
+		request.setAttribute("sort", sort);
 		
-		
-		
-		MemberPageData pd = new AdminService().searchMember(reqPage,reqCount,searched);
+		MemberPageData pd = new AdminService().searchMember(reqPage,reqCount,searched,sort);
 		
 		RequestDispatcher rd = null;
 		if(pd.getList().isEmpty() && pd.getTotalCount()!=0) {

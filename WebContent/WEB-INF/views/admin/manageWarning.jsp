@@ -88,9 +88,76 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.search-btn {
+	color: #4a2100;
+	font-size: 25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+
+.search-btn:hover {
+	background-color: #ffac05;
+	color: white;
+}
+
+.logoTitle {
+	font-weight: bold;
+	font-size: 30px;
+	color: #ffac05;
+}
 </style>
 
 <script type="text/javascript">
+	$(function() {
+		$.ajax({
+			url : "/adminGetMsgCount",
+			type : "post",
+
+			success : function(data) {
+				console.log(data);
+				if (data <= 0) {
+					$("#nonReadMsg").remove();
+					return;
+				}
+
+				$(".mess__title").find("span").html(data);
+				$("#nonReadMsg").html(data);
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});
+
+		$("input[name=allCheck]").click(function() {
+			$("input[name=pick]").each(function(index, item) {
+				item.checked = $("input[name=allCheck]").prop("checked");
+			})
+		});
+		
+		$("#msg-btn").click(function() {
+			$.ajax({
+				url : "/adminGetMsgCount",
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data <= 0) {
+						$("#nonReadMsg").remove();
+						return;
+					}
+
+					$(".mess__title").find("span").html(data);
+					$("#nonReadMsg").html(data);
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			});
+		});
+	})
+
 	function fn_more(start) {
 		var param = {
 			start : start
@@ -130,10 +197,15 @@
 							html += '<td>' + value + '</td>';
 							html += '<td>' + data[i].typeTitle + '</td>';
 							html += '<td>' + data[i].typeWriter + '</td>';
-							html += '<td class="process">'
+							html += '<td style="color:red">'
 									+ data[i].typeWarning + '</td>';
 							html += '<td>' + data[i].typeDate + '</td>';
-							html += '<td>btn</td></tr>';
+							html += '<td>';
+
+							html += '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick=""><i class="zmdi zmdi-delete"></i></button>';
+							html += '<button class="item" data-toggle="tooltip" data-placement="top" title="More"><i class="zmdi zmdi-more"></i></button>';
+							html += '</div>';
+							html += '</td></tr>';
 
 						}
 
@@ -146,7 +218,7 @@
 						var totalCount = $("#more-btn").attr("totalCount");
 						var currentCount = $("#more-btn").attr("currentCount");
 						if (totalCount == currentCount) {
-							console.log("test");
+							$("#more-btn").unbind('mouseenter mouseleave')
 							$("#more-btn").attr("disabled", true);
 							$("#more-btn").css("cursor", "not-allowed");
 						}
@@ -176,7 +248,9 @@
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 		<div class="logo">
-			<a href="#"> <img src="images/icon/logo.png" alt="Cool Admin" />
+			<a href="index.jsp"> <img src="/imgs/mole.jpg"
+				style="width: 55px; margin-right: 10px;" /><span class="logoTitle">LAST
+					FARM</span>
 			</a>
 		</div>
 		<div class="menu-sidebar__content js-scrollbar1">
@@ -192,8 +266,12 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li class="active"><a href="/manageWarning?reqPage=1">
-				 <i	class="fas fa-exclamation"></i>신고글 관리
+				<li class="active"><a style="color: #4a2100"
+					href="/manageWarning?reqPage=1"> <i
+						class="fas fa-exclamation-circle"></i>신고글 관리
+				</a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
 				</a></li>
 
 			</ul>
@@ -209,122 +287,34 @@
 			<div class="section__content section__content--p30">
 				<div class="container-fluid">
 					<div class="header-wrap">
-						<form class="form-header" action="" method="POST">
-							<input class="au-input au-input--xl" type="text" name="search"
+						<form  class="form-header" action="" method="POST">
+							<input disabled class="au-input au-input--xl" type="text" name="search"
 								placeholder="Search for datas &amp; reports..." />
-							<button class="au-btn--submit" type="submit">
+							<button style="height: 43px; width: 43px;" class="search-btn"
+								type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
 						</form>
 						<div class="header-button">
 							<div class="noti-wrap">
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-comment-more"></i> <span class="quantity">1</span>
+								<div id="msg-btn" class="noti__item js-item-menu">
+									<i class="far fa-envelope-open"></i> <span id="nonReadMsg"
+										class="quantity">8</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>You have 2 news message</p>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-											</div>
-											<div class="content">
-												<h6>Michelle Moreno</h6>
-												<p>Have sent a photo</p>
-												<span class="time">3 min ago</span>
-											</div>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-											</div>
-											<div class="content">
-												<h6>Diane Myers</h6>
-												<p>You are now connected on message</p>
-												<span class="time">Yesterday</span>
-											</div>
+											<p style="font-size: 20px;">
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">8</span>개
+												있습니다.
+											</p>
 										</div>
 										<div class="mess__footer">
-											<a href="#">View all messages</a>
+											<a href="/adminGetMsgList">View all messages</a>
 										</div>
 									</div>
 								</div>
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-email"></i> <span class="quantity">1</span>
-									<div class="email-dropdown js-dropdown">
-										<div class="email__title">
-											<p>You have 3 New Emails</p>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, 3 min ago</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, Yesterday</span>
-											</div>
-										</div>
-										<div class="email__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
-											</div>
-											<div class="content">
-												<p>Meeting about new dashboard...</p>
-												<span>Cynthia Harvey, April 12,,2018</span>
-											</div>
-										</div>
-										<div class="email__footer">
-											<a href="#">See all emails</a>
-										</div>
-									</div>
-								</div>
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
-									<div class="notifi-dropdown js-dropdown">
-										<div class="notifi__title">
-											<p>You have 3 Notifications</p>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c1 img-cir img-40">
-												<i class="zmdi zmdi-email-open"></i>
-											</div>
-											<div class="content">
-												<p>You got a email notification</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c2 img-cir img-40">
-												<i class="zmdi zmdi-account-box"></i>
-											</div>
-											<div class="content">
-												<p>Your account has been blocked</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c3 img-cir img-40">
-												<i class="zmdi zmdi-file-text"></i>
-											</div>
-											<div class="content">
-												<p>You got a new file</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__footer">
-											<a href="#">All notifications</a>
-										</div>
-									</div>
-								</div>
+								<div class="noti__item js-item-menu"></div>
+
+								<div class="noti__item js-item-menu"></div>
 							</div>
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -337,30 +327,16 @@
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <!-- <img src="images/icon/avatar-01.jpg" alt="John Doe" /> -->
-												</a>
+												<i style="font-size: 50px;" class="fas fa-user"></i>
 											</div>
 											<div class="content">
 												<h5 class="name">
 													<a href="#">administrator</a>
 												</h5>
-												<span class="email">admin@example.com</span>
+												<span class="email">admin@gmail.com</span>
 											</div>
 										</div>
-										<div class="account-dropdown__body">
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-account"></i>Account
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-settings"></i>Setting
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-money-box"></i>Billing
-												</a>
-											</div>
-										</div>
+
 										<div class="account-dropdown__footer">
 											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
@@ -385,9 +361,15 @@
 								<!-- DATA TABLE-->
 								<div class="table-responsive m-b-40">
 									<h3 class="title-5 m-b-35" style="font-weight: bold;">
-										<i style="color: #DC3545" class="fas fa-exclamation"></i> 신고글
-										관리
+										<i style="color: #DC3545" class="fas fa-exclamation-circle"></i>
+										신고글 관리<span style="color: gray; font-size: 15px"> (검색결과
+											신고글 :${totalCount }개)</span>
 									</h3>
+									<button style="margin-bottom: 30px; float: right "
+												class="btn au-btn-icon btn-danger au-btn--small"
+												id=selectDel>
+												<i class="zmdi zmdi-minus"></i>선택항목 삭제
+											</button>
 									<table class="table table-borderless table-data3">
 										<thead>
 											<tr>
@@ -400,7 +382,7 @@
 												<th>writer</th>
 												<th>warning</th>
 												<th>reg date</th>
-												<th>Detail</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>

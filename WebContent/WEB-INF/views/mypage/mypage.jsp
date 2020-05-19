@@ -62,6 +62,7 @@
 
 .info {
 	width: 70%;
+	line-height:150px;
 	height: 150px;
 	padding-left: 30px;
 }
@@ -245,7 +246,7 @@ ul {
 }
 
 .p-image {
-	width: 35%;
+	width: 25%;
 	height: 100%;
 	background-color: burlywood;
 }
@@ -595,25 +596,13 @@ ul {
 		<div class="wrapper">
 			<div class="main">
 				<div class="mine">
-
 					<div class="info">
 						<div class="info-title">
-						<i class="fas fa-user" style="margin-right: 20px;"></i>
-							<span>홍길동 님 </span>
+							<i class="fas fa-user" style="margin-right: 20px;"></i> <span>회원명
+								님 </span>
 						</div>
 						<div class="info-contents">
-							<div class="info-content">
-								상점오픈일 <span>209일전</span>
-							</div>
-							<div class="info-content">
-								상점방문수 <span>120명</span>
-							</div>
-							<div class="info-content">
-								상품판매 <span>24회</span>
-							</div>
-							<div class="info-content">
-								택배발송 <span>17회</span>
-							</div>
+							<div class="info-content"></div>
 						</div>
 
 					</div>
@@ -629,9 +618,7 @@ ul {
 				<div class="contents">
 					<div class="content show-content">
 						<div class="content-title">내정보 수정</div>
-						<div class="request">
-							
-						</div>
+						<div class="request"></div>
 					</div>
 					<div class="content">
 						<div class="content-title">구매중 목록</div>
@@ -651,10 +638,9 @@ ul {
 								</div>
 								<div class="p-info">
 									<div class="p-title">
-										<span> 발렌시아가 스피드러너 </span> <input type="checkbox"
-											name="product">
+										<span> 제목 </span> <input type="checkbox" name="product">
 									</div>
-									<div class="p-price">550,000원</div>
+									<div class="p-price">55,000원</div>
 									<div class="p-day">4시간전</div>
 									<div class="p-location">
 										<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
@@ -668,10 +654,9 @@ ul {
 								</div>
 								<div class="p-info">
 									<div class="p-title">
-										<span> (250)나이키 테일윈드 </span> <input type="checkbox"
-											name="product">
+										<span> 제목</span> <input type="checkbox" name="product">
 									</div>
-									<div class="p-price">240,000원</div>
+									<div class="p-price">24,000원</div>
 									<div class="p-day">5시간전</div>
 									<div class="p-location">
 										<i class="fas fa-map-marker-alt"></i> 서울특별시 강북구 미아동
@@ -679,7 +664,7 @@ ul {
 								</div>
 							</div>
 						</div>
-					
+
 
 					</div>
 					<div class="content">
@@ -700,10 +685,9 @@ ul {
 								</div>
 								<div class="p-info">
 									<div class="p-title">
-										<span> 발렌시아가 스피드러너 </span> <input type="checkbox"
-											name="product">
+										<span> 제목 </span> <input type="checkbox" name="product">
 									</div>
-									<div class="p-price">550,000원</div>
+									<div class="p-price">55,000원</div>
 									<div class="p-day">4시간전</div>
 									<div class="p-location">
 										<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
@@ -717,10 +701,9 @@ ul {
 								</div>
 								<div class="p-info">
 									<div class="p-title">
-										<span> (250)나이키 테일윈드 </span> <input type="checkbox"
-											name="product">
+										<span> 제목 </span> <input type="checkbox" name="product">
 									</div>
-									<div class="p-price">240,000원</div>
+									<div class="p-price">24,000원</div>
 									<div class="p-day">5시간전</div>
 									<div class="p-location">
 										<i class="fas fa-map-marker-alt"></i> 서울특별시 강북구 미아동
