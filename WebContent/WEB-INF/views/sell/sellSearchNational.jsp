@@ -217,9 +217,6 @@
 </head>
 <body>
 	<script>
-	window.onload(function(){
-		
-	});
 	//로그인한 아이디가 판매자이면 검색 대신 새글 쓰기 버튼
 	$(function(){
 		$("#newSellForm").click(function(){
@@ -287,6 +284,11 @@
 						sortingTab = $(".clicktab").html();
 						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
 					});
+		});
+		$(function(){
+			if("${searchWord }" != null){
+				$("#searchTypingBox").val("${searchWord }");
+			}
 		});
 		//DB에서 상품 데이터 불러오기
 		/*function sell_listAll(){

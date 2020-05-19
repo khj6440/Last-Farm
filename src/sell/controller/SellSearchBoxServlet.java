@@ -40,7 +40,6 @@ public class SellSearchBoxServlet extends HttpServlet {
 		String type2 = request.getParameter("type2");
 		String searchWord = request.getParameter("searchTypingBox");
 		String sortingTab = request.getParameter("sortingTab1");
-		
 
 			SellCategoryPage scp = new SellSearchService().sellEnd(reqPage,type1,type2,searchWord, sortingTab);	
 		
