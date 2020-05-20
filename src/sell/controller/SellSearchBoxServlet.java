@@ -34,10 +34,12 @@ public class SellSearchBoxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
+
 		
 		int reqPage = 1;
 		if(request.getParameter("reqPage") !=null) {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+
 		}
 		String type1 = request.getParameter("type1");
 		String type2 = request.getParameter("type2");

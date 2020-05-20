@@ -11,7 +11,9 @@ public class Member {
 	private String memberRoadAddr;
 	private String memberDetailAddr;
 	private String memberPostCode;
-	private String memberDeliveryAddr;
+	private String memberRoadAddr2;
+	private String memberDetailAddr2;
+	private String memberPostCode2;
 	private String memberPhone;
 	private String memberEmail;
 	private Date memberDate;
@@ -26,8 +28,9 @@ public class Member {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberCode, String memberRoadAddr, String memberDetailAddr, String memberPostCode,
-			String memberAddr, String memberDeliveryAddr, String memberPhone, String memberEmail, Date memberDate,
+	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberCode,
+			String memberRoadAddr, String memberDetailAddr, String memberPostCode, String memberRoadAddr2,
+			String memberDetailAddr2, String memberPostCode2, String memberPhone, String memberEmail, Date memberDate,
 			int memberScore, int memberType, String companyName, int memberStatus, Date memberDelDate, String bankName,
 			String bankAccount) {
 		super();
@@ -39,7 +42,9 @@ public class Member {
 		this.memberRoadAddr = memberRoadAddr;
 		this.memberDetailAddr = memberDetailAddr;
 		this.memberPostCode = memberPostCode;
-		this.memberDeliveryAddr = memberDeliveryAddr;
+		this.memberRoadAddr2 = memberRoadAddr2;
+		this.memberDetailAddr2 = memberDetailAddr2;
+		this.memberPostCode2 = memberPostCode2;
 		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
 		this.memberDate = memberDate;
@@ -81,7 +86,6 @@ public class Member {
 	public void setMemberCode(String memberCode) {
 		this.memberCode = memberCode;
 	}
-
 	public String getMemberRoadAddr() {
 		return memberRoadAddr;
 	}
@@ -100,11 +104,23 @@ public class Member {
 	public void setMemberPostCode(String memberPostCode) {
 		this.memberPostCode = memberPostCode;
 	}
-	public String getMemberDeliveryAddr() {
-		return memberDeliveryAddr;
+	public String getMemberRoadAddr2() {
+		return memberRoadAddr2;
 	}
-	public void setMemberDeliveryAddr(String memberDeliveryAddr) {
-		this.memberDeliveryAddr = memberDeliveryAddr;
+	public void setMemberRoadAddr2(String memberRoadAddr2) {
+		this.memberRoadAddr2 = memberRoadAddr2;
+	}
+	public String getMemberDetailAddr2() {
+		return memberDetailAddr2;
+	}
+	public void setMemberDetailAddr2(String memberDetailAddr2) {
+		this.memberDetailAddr2 = memberDetailAddr2;
+	}
+	public String getMemberPostCode2() {
+		return memberPostCode2;
+	}
+	public void setMemberPostCode2(String memberPostCode2) {
+		this.memberPostCode2 = memberPostCode2;
 	}
 	public String getMemberPhone() {
 		return memberPhone;
@@ -166,5 +182,6 @@ public class Member {
 	public void setBankAccount(String bankAccount) {
 		this.bankAccount = bankAccount;
 	}
+	
 	
 }

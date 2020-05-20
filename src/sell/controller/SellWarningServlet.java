@@ -1,4 +1,4 @@
-package buy.controller;
+package sell.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.vo.Sell;
 import sellComment.model.service.SellCommentService;
+import sellComment.model.vo.SellViewData;
 
 /**
- * Servlet implementation class PaymentFrmServlet
+ * Servlet implementation class SellWarningServlet
  */
-@WebServlet(name = "BuyFrm", urlPatterns = { "/buyFrm" })
-public class BuyFrmServlet extends HttpServlet {
+@WebServlet(name = "SellWarning", urlPatterns = { "/sellWarning" })
+public class SellWarningServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyFrmServlet() {
+    public SellWarningServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +31,21 @@ public class BuyFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		int sellNo = Integer.parseInt(request.getParameter("sell_no"));
-		System.out.println(sellNo);
-		String sellName = request.getParameter("sell_name");
-		int type = Integer.parseInt(request.getParameter("type"));
-		int sellPrice = Integer.parseInt(request.getParameter("sell_price"));
-		int sellCount = Integer.parseInt(request.getParameter("sell_count"));
-		int sellMax = Integer.parseInt(request.getParameter("sell_max"));
-		int result = type*sellPrice;
+		int sellWarning = Integer.parseInt(request.getParameter("sell_warning"));
 		
-		int deliveryFee = Integer.parseInt(request.getParameter("sell_delivery_fee"));
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/buy/buy1.jsp");
-		request.setAttribute("sellNo", sellNo);
-		request.setAttribute("sellName", sellName);
-		request.setAttribute("type", type);
-		request.setAttribute("sellPrice", result);
-		request.setAttribute("deliveryFee", deliveryFee);
-		request.setAttribute("sellCount", sellCount);
-		request.setAttribute("sellMax", sellMax);
+		int result = new SellCommentService().sellWarning(sellNo, sellWarning);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "글 신고가 접수되었습니다 ");
+		} else {
+			request.setAttribute("msg", "신고 실패 !");
+		}
+		
+		request.setAttribute("loc", "/sellView?sell_no=4");
 		rd.forward(request, response);
-		
 	}
 
 	/**

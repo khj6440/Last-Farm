@@ -171,21 +171,21 @@
                             <div class="buy_content2_sub2_1">
                                 <div class="buy_content11">
                                     <h3 class="buy_h3">
-                                        고객님이 주문하신 주문 번호는 123456789 입니다.
+                                        고객님이 주문하신 주문 번호는 ${r1 } 입니다.
                                     </h3>
                                 </div>
                                 <table class="buy_content_table">
                                     <tr class="buy_content_table_tr">
                                         <th>상품명</th>
-                                        <td>대홍단 왕감자</td>
+                                        <td>${s.sellName }</td>
+                                    </tr>
+                                    <tr class="buy_content_table_tr">
+                                        <th>총 결제 수량</th>
+                                        <td>${type } 개</td>
                                     </tr>
                                     <tr class="buy_content_table_tr">
                                         <th>총 결제 금액</th>
-                                        <td>10000 원</td>
-                                    </tr>
-                                    <tr class="buy_content_table_tr">
-                                        <th>거래 일시</th>
-                                        <td>2020-02-02</td>
+                                        <td>${r2 } 원</td>
                                     </tr>
                                 </table>
                                 <div class="buy_content12">

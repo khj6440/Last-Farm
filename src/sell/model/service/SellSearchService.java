@@ -7,15 +7,18 @@ import common.JDBCTemplate;
 import sell.model.dao.SellSearchDao;
 import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
+import sellComment.model.dao.SellCommentDao;
+import sellComment.model.vo.SellComment;
+import sellComment.model.vo.SellViewData;
 
 public class SellSearchService {
 
-	public ArrayList<Sell> selectSellNationalList() {
+	public ArrayList<Sell> selectSellNationalList(String page) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		sellList = new SellSearchDao().selectSellNationalList(conn);
+		ArrayList<Sell> list = new ArrayList<Sell>();
+		list = new SellSearchDao().selectSellNationalList(conn,page);
 		JDBCTemplate.close(conn);
-		return sellList;
+		return list;
 	}
 
  //서치박스에서 카테고리화 + 페이징
@@ -184,5 +187,11 @@ public class SellSearchService {
 		JDBCTemplate.close(conn);
 		return scp;
 	}
+
+	
+
+	
+	
+	
 
 }

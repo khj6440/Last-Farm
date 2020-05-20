@@ -153,6 +153,13 @@
 	
 	<section class="buy_container">
 	<form action="/buy2Frm" method="post" class="buy">
+	<input type="hidden" name="sell_no" value="${sellNo }">
+	<input type="hidden" name="sell_name" value="${sellName }">
+	<input type="hidden" name="type" value="${type }">
+	<input type="hidden" name="sell_price" value="${sellPrice }">
+	<input type="hidden" name="sell_delivery_fee" value="${deliveryFee }">
+	<input type="hidden" name="sell_count" value="${sellCount }">
+	<input type="hidden" name="sell_max" value="${sellMax }">
 		<div class="buy_head">
 			<div class="buy_head1">
 				<p class="buy_p">약관동의</p>

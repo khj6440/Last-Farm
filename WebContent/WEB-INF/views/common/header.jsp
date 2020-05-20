@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="/css/header/header.css">
 </head>
 <body>
-
+ 
 	<div class="main_body">
 		<div class="header_top">
 			<div class="header_top_login">
-				<a class="header_top_a1 header_top_a2" href="#">Login</a> <a
+				<a class="header_top_a1 header_top_a2" href="/loginFrm">Login</a> <a
 					class="header_top_a1 header_top_a2"> | </a> <a
 					class="header_top_a1 header_top_a2" href="#">Join</a>
 			</div>
@@ -29,7 +29,7 @@
 							<li class="header_top_li2 header_top_li4"><a href="#">농산물</a></li>
 							<li class="header_top_li2 "><a href="#">수산물</a></li>
 							<li class="header_top_li2"><a href="#">상품조회</a></li>
-							<li class="header_top_li2"><a href="#">상품판매</a></li>
+							<li class="header_top_li2"><a href="/sellView?sell_no=21&sell_writer=id01">상품판매</a></li>
 						</ul></li>
 					<li class="header_top_li1  header_top_li3"><a
 						class="header_top_a1" href="#">지역 상품</a>

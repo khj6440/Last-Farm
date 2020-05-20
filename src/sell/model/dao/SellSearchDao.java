@@ -6,29 +6,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.jasper.tagplugins.jstl.core.Set;
+
 import common.JDBCTemplate;
 import sell.model.vo.Sell;
 
 public class SellSearchDao {
 	//전체 조회
-	public ArrayList<Sell> selectSellNationalList(Connection conn) {
+	public ArrayList<Sell> selectSellNationalList(Connection conn, String page) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		String query = "select*from sell";
+		ArrayList<Sell> list = new ArrayList<Sell>();
+		String query = "select*from sell where sell_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, page);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
 				sell.setSellTitle(rset.getString("sell_title"));
-				sell.setThumbnail(rset.getString("thumbnail"));
-				sell.setSellPrice(rset.getInt("sell_price"));
+				sell.setSellName(rset.getString("sell_name"));
+				sell.setSellWriter(rset.getString("sell_writer"));
+				sell.setSellContent(rset.getString("sell_content"));
+				sell.setSellEndDate(rset.getDate("sell_date"));
+				sell.setSellMax(rset.getInt("sell_max"));
+				sell.setSellMin(rset.getInt("sell_min"));
 				sell.setSellCount(rset.getInt("sell_count"));
+				sell.setSellPrice(rset.getInt("sell_price"));
 				sell.setSellDate(rset.getDate("sell_date"));
-				sell.setSellEndDate(rset.getDate("sell_end_date"));
-				sellList.add(sell);
+				sell.setSellType(rset.getInt("sell_type"));
+				sell.setSellCategory1(rset.getString("sell_category1"));
+				sell.setSellCategory2(rset.getString("sell_category2"));
+				sell.setSellWarning(rset.getInt("sell_warning"));
+				sell.setSellDeliveryFee(rset.getInt("sell_delivery_fee"));
+				sell.setSellItemOrigin(rset.getString("sell_item_origin"));
+				sell.setSellItemExpireDate(rset.getString("sell_item_expire_date"));
+				sell.setSellItemQuantity(rset.getString("sell_item_quantity"));
+				sell.setSellItemMaterial(rset.getString("sell_item_material"));
+				sell.setSellItemRule(rset.getString("sell_item_rule"));
+				sell.setThumbnail(rset.getString("thumbnail"));
+				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
+				list.add(sell);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -38,7 +57,7 @@ public class SellSearchDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return sellList;
+		return list;
 	}
 	
 		public ArrayList<Sell> selectSellFromSearchBox(Connection conn, String searchWord) {

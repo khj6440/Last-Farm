@@ -436,7 +436,7 @@
 			<div class="ordertabCategory">
 				<ul>
 					<input type="hidden" value="마감시간 순" name="sortingTab1">
-					<li class="clicktab" name="sortingTab" value="마감시간 순">마감시간 순</li>
+					<li class="clicktab" name="sortingTab" value="마감시간 순">마감시간 순 </li>
 					<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
 					<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
 				</ul>
