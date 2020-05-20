@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,10 +14,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-
-
-
 
 <style>
 * {
@@ -658,42 +655,29 @@ ul {
 							
 						</div>
 						<div class="list">
-							<c:forEach items="${list }" var="s">
+							<c:forEach items="${list }" var="l">
 								<div class="product">
 									<div class="p-image">
-										<img src="/imgs/Logo1.png" width="100%" height="100%" alt=""
+										<img src="/imgs/logo1.png" width="100%" height="100%" alt=""
 											srcset="">
 									</div>
 									<div class="p-info">
 										<div class="p-title">
-											<span> 제목 </span> <input type="checkbox" name="product">
+											<span>${l.sellTitle}</span> 
+											<button onclick="" type="button">상세보기</button>
 										</div>
-										<div class="p-price">55,000원</div>
-										<div class="p-day">4시간전</div>
+										<div class="p-price">
+										<fmt:formatNumber value="${l.sellPrice}"
+															pattern="###,###,###,###" />원
+										</div>
+										<div class="p-day">${l.sellWriter }</div>
 										<div class="p-location">
-											<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
+											구매중 수량 :  ${l.sellCount }/${l.sellMax }
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-							<div class="product">
-								<div class="p-image">
-									<img src="" width="100%" height="100%" alt="" srcset="">
-								</div>
-								<div class="p-info">
-									<div class="p-title">
-										<span> 제목</span> <input type="checkbox" name="product">
-									</div>
-									<div class="p-price">24,000원</div>
-									<div class="p-day">5시간전</div>
-									<div class="p-location">
-										<i class="fas fa-map-marker-alt"></i> 서울특별시 강북구 미아동
-									</div>
-								</div>
-							</div>
 						</div>
-
-
 					</div>
 					<div class="content">
 						<c:if test="${sessionScope.member.memberType eq 1 }">
@@ -718,8 +702,10 @@ ul {
 									<div class="p-info">
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
+											<c:if test="${sessionScope.member.memberType eq 1}">
 											<button onclick="reviewInsert('${e.sellEndNo}')"
 												type="button">리뷰작성</button>
+											</c:if>
 										</div>
 										<div class="p-price">55,000원</div>
 										<div class="p-day">4시간전</div>
@@ -734,60 +720,8 @@ ul {
 
 					<div class="content">
 						<div class="content-title">쪽지함</div>
-						<div class="followers">
-							<div class="follower-list">
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">kim123</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">ㅋㅋ루ㅋㅋ</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">park</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-							</div>
-							<div class="follower-list">
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">choi</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">qwer123</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-								<div class="follower">
-									<i class="fas fa-user-circle"></i>
-									<div class="nick">asdas</div>
-									<div class="">상품 276 | 팔로워 2621</div>
-									<div class="plus-btn">
-										<i class="fas fa-user-plus"></i>팔로우하기
-									</div>
-								</div>
-							</div>
-						</div>
+						
+						
 					</div>
 				</div>
 			</div>

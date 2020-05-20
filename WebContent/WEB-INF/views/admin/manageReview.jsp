@@ -487,7 +487,7 @@
 																<i class="zmdi zmdi-delete"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="More">
+																data-placement="top" title="More" onclick="location.href='/sellContentFrm?reviewBuyEndNo=${rs.review.reviewBuyEndNo}'">
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>
