@@ -163,15 +163,15 @@ public class SellSearchService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
 		if (pageNo != 1) {
-			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchNationalFrm?reqPage="
-					+ (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "'>Before</a>";
+			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchBox?reqPage="
+					+ (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "&type1=" + type1 + "&type2=" + type2+ "&searchWord=" + searchWord+"'>Before</a>";
 		}
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (reqPage == pageNo) {
 				pageNavi += "<span class='btn btn-outline-secondary'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a class='btn btn-outline-secondary' href='sellSearchNationalFrm?reqPage=" + pageNo
-						+ "&sortingTab=" + sortingTab + "'>" + pageNo + "</a>";
+				pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchBox?reqPage="
+						+ (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "&type1=" + type1 + "&type2=" + type2+ "&searchWord=" + searchWord+ "'>" + pageNo + "</a>";
 
 			}
 			pageNo++;
@@ -180,8 +180,8 @@ public class SellSearchService {
 			}
 		}
 		if (pageNo < totalPage) {
-			pageNavi += "<a class='btn btn-outline-secondary'" // 다음 버튼 만들기
-					+ "href='/sellSearchNationalFrm?reqPage=" + pageNo + "&sortingTab=" + sortingTab + "'>After</a>";
+			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchBox?reqPage="
+					+ (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "&type1=" + type1 + "&type2=" + type2+ "&searchWord=" + searchWord + "'>After</a>";
 		}
 		SellCategoryPage scp = new SellCategoryPage(sellList, pageNavi);
 		JDBCTemplate.close(conn);

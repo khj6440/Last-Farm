@@ -41,10 +41,26 @@ public class SellSearchBoxServlet extends HttpServlet {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));
 
 		}
-		String type1 = request.getParameter("type1");
-		String type2 = request.getParameter("type2");
-		String searchWord = request.getParameter("searchTypingBox");
-		String sortingTab = request.getParameter("sortingTab1");
+		String type1 = null;
+		if(request.getParameter("type1") !=null) {
+			type1 = request.getParameter("type1");
+
+		}
+		String type2 = null;
+		if(request.getParameter("type2") !=null) {
+			type2 = request.getParameter("type2");
+
+		}
+		String searchWord = null;
+		if(request.getParameter("searchTypingBox") !=null) {
+			searchWord = request.getParameter("searchTypingBox");
+
+		}
+		String sortingTab = null;
+		if(request.getParameter("sortingTab1") !=null) {
+			sortingTab = request.getParameter("sortingTab1");
+
+		}
 
 			SellCategoryPage scp = new SellSearchService().sellEnd(reqPage,type1,type2,searchWord, sortingTab);	
 			if(scp.getSellList().isEmpty()) {

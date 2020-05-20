@@ -1,7 +1,6 @@
 package sell.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-import sell.model.vo.SellCategoryPage;
-
 /**
- * Servlet implementation class SellSearchNationalFrmServlet
+ * Servlet implementation class SellSearchRegionalServlet
  */
-@WebServlet(name = "SellSearchNationalFrm", urlPatterns = { "/sellSearchNationalFrm" })
-public class SellSearchNationalFrmServlet extends HttpServlet {
+@WebServlet(name = "sellSearchRegionalFrm", urlPatterns = { "/sellSearchRegionalFrm" })
+public class SellSearchRegionalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellSearchNationalFrmServlet() {
+    public SellSearchRegionalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +28,18 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
-		
-		request.setCharacterEncoding("utf-8");		
-		int reqPage = 1;
-		if(request.getParameter("reqPage") !=null) {
-			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-
-		}
+		String addr = request.getParameter("sido")+request.getParameter("gugun");
+		String type1 = request.getParameter("type1");
+		String type2 = request.getParameter("type2");
+		String searchWord = request.getParameter("searchTypingBox");
 		String sortingTab = request.getParameter("sortingTab");
-		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
-		request.setAttribute("sellList", scp.getSellList());
-		request.setAttribute("pageNavi", scp.getPageNavi());
+		
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchRegional.jsp");
+		
 		rd.forward(request, response);
 	}
 

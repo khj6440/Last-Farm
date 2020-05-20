@@ -19,7 +19,7 @@
 <script src="/dist/js/i18n/datepicker.en.js"></script>
 <!-- 스마트 에디터 -->
 <script type="text/javascript" src="/SE2.3/js/HuskyEZCreator.js"
-   charset="utf-8"></script>
+	charset="utf-8"></script>
 <!-- 폰트 -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
@@ -27,16 +27,16 @@
 
 <title>새 판매글 작성</title>
 <style>
-body{
+body {
 	font-family: 'Jua', sans-serif;
 	width: 1280px;
 	margin: 0 auto;
 }
-th, td {
-    height: 45px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid lightgray;
 
+th, td {
+	height: 45px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid lightgray;
 }
 
 td {
@@ -44,189 +44,208 @@ td {
 }
 
 th {
-    border-right: 1px solid lightgray;
+	border-right: 1px solid lightgray;
 	width: 30%;
-    font-size: 120%;
+	font-size: 120%;
 }
-form{
+
+form {
 	margin: 25px;
-	}
-	
+}
+
 .comments {
 	color: red;
 }
-.chooseRtab{
-                    height: 100px;
-                    width: 650px;
-                    margin:0 auto;
-                    border-radius: 10px;
-                    background-color: #f4f4f4;
-                    margin-bottom: 10px;
-                }
-                .chooseRtab>select{
-                    height: 30px;
-                    border-radius: 3px;
-                    width: 140px;
-                    margin-right: 5px;
-                    margin-top: 10px;
-                    font-family: 'Jua', sans-serif;
-                    font-size: 105%;
-                }
-                #sido{
-                    margin-left:20px;
-                }
-                .chooseNation, .chooseRegion{
-                   margin: 16px;
-                    
-                }
-                
-                .sellFormBtn{
-                    background-color: white;
-                    border: 1px solid gray;
-                    height: 30px;
-                    width: 90px;
-                    border-radius: 3px;
-                    font-family: 'Jua', sans-serif;
-                    box-shadow: 1px 1px 1px darkgray;
-                    margin-right: 5px;
-                    font-size: 105%;
-                    line-height: 30px;
-                }
-               .sellFormBtn:hover{
-                    background-color: #ffac05;
-	               color: #4a2100;
-                   cursor: pointer;
-                }
-                #sellRegionalAddr{
-                    margin-left: 20px;
-                    height: 35px;
-                    width: 600px;
-                    border-radius: 3px;
-                    margin-top: 8px;
-                    border: 1px solid lightgray;
-                    overflow: scroll;
-                     font-family: 'Jua', sans-serif;
-                    box-shadow: 1px 1px 1px lightgray;
-                    font-size: 105%;
-                }
-                .sellerAddr>ul{
-                    padding-left: 20px;
-                }
-                .sellerAddr>ul>li{
-                    list-style: none;
-                }
-                .sellerAddr>ul>li>input{
-                    font-size: 100%;
-                    font-family: 'Jua', sans-serif;
-                    border-radius: 3px;
-                    height: 28px;
-                    margin-bottom: 3px;
-                    border: 1px solid lightgray;
-                    box-shadow: 1px 1px 1px lightgray;
-                    padding-left: 10px;
-                }
-                #addrSearchBtn{
-                    background-color: white;
-                    border: 1px solid gray;
-                    height: 30px;
-                    width: 100px;
-                    border-radius: 3px;
-                    font-family: 'Jua', sans-serif;
-                    box-shadow: 1px 1px 1px darkgray;
-                    font-size: 105%;
-                    line-height: 30px;
-                }
-                #addrSearchBtn:hover{
-                    background-color: #ffac05;
-	               color: #4a2100;
-                    cursor: pointer;
-                }
-                .sellInputBox{
-                    font-size: 100%;
-                    font-family: 'Jua', sans-serif;
-                    height: 25px;
-                    border-radius: 3px;
-                    margin-left: 20px;
-                    border: 1px solid lightgray;
-                    box-shadow: 1px 1px 1px lightgray;
-                    width: 700px;
-                    padding-left: 10px;
-                }
-                .sellInputNBox{
-                    font-size: 100%;
-                    font-family: 'Jua', sans-serif;
-                    height: 25px;
-                    border-radius: 3px;
-                    border: 1px solid lightgray;
-                    box-shadow: 1px 1px 1px lightgray;
-                    width: 200px;
-                    margin-right: 7px;
-                    padding-left: 10px;
-                }
-                .mg{
-                    margin-left: 20px;
-                }
-                .category{
-                    height: 30px;
-                    border-radius: 3px;
-                    width: 140px;
-                    margin-right: 5px;
-                    font-size: 105%;
-                    font-family: 'Jua', sans-serif;
-                }
-    .dfradio{
-                    margin: 15px;
-                    margin-left: 20px;
-                    
-                    
-                }
-                #delFeeBox{
-                    margin-left: 10px;
-                    margin-bottom: 6px;
-                }
-      .fileattach{
-                    margin-left: 20px;
-                    font-family: 'Jua', sans-serif;
-                    font-size: 110%;
-                    
-                }
-                #file-upload-button{
-                    background-color: white;
-                    border: 1px solid #4a2100;
-                    height: 40px;
-                    width: 150px;
-                    border-radius: 3px;
-                    font-family: 'Jua', sans-serif;
-                    box-shadow: 1px 1px 1px #4a2100;
-                    font-size: 105%;
-                    line-height: 40px;
-                    margin: 10px;
-                }
-                .finalBtn{
-                    background-color: white;
-                    border: 1px solid #4a2100;
-                    height: 50px;
-                    width: 180px;
-                    border-radius: 3px;
-                    font-family: 'Jua', sans-serif;
-                    box-shadow: 1px 1px 1px #4a2100;
-                    font-size: 110%;
-                    line-height: 50px;
-                    margin: 20px;
-                    background-color: #ffac05;
-	               color: #4a2100;
-                }
-                .finalBtn:hover{
-                    background-color: #4a2100;
-                    color: #ffac05;
-                    cursor: pointer;
-                }
-    .tableTitle{
-        height: 60px;
-        background-color:#fafafa; 
-        border-radius: 5px;
-        border-shadow: 0px 1px 1px gray;
-    }
+
+.chooseRtab {
+	height: 100px;
+	width: 650px;
+	margin: 0 auto;
+	border-radius: 10px;
+	background-color: #f4f4f4;
+	margin-bottom: 10px;
+}
+
+.chooseRtab>select {
+	height: 30px;
+	border-radius: 3px;
+	width: 140px;
+	margin-right: 5px;
+	margin-top: 10px;
+	font-family: 'Jua', sans-serif;
+	font-size: 105%;
+}
+
+#sido {
+	margin-left: 20px;
+}
+
+.chooseNation, .chooseRegion {
+	margin: 16px;
+}
+
+.sellFormBtn {
+	background-color: white;
+	border: 1px solid gray;
+	height: 30px;
+	width: 90px;
+	border-radius: 3px;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 1px 1px 1px darkgray;
+	margin-right: 5px;
+	font-size: 105%;
+	line-height: 30px;
+}
+
+.sellFormBtn:hover {
+	background-color: #ffac05;
+	color: #4a2100;
+	cursor: pointer;
+}
+
+#sellRegionalAddr {
+	margin-left: 20px;
+	height: 35px;
+	width: 600px;
+	border-radius: 3px;
+	margin-top: 8px;
+	border: 1px solid lightgray;
+	overflow: scroll;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 1px 1px 1px lightgray;
+	font-size: 105%;
+}
+
+.sellerAddr>ul {
+	padding-left: 20px;
+}
+
+.sellerAddr>ul>li {
+	list-style: none;
+}
+
+.sellerAddr>ul>li>input {
+	font-size: 100%;
+	font-family: 'Jua', sans-serif;
+	border-radius: 3px;
+	height: 28px;
+	margin-bottom: 3px;
+	border: 1px solid lightgray;
+	box-shadow: 1px 1px 1px lightgray;
+	padding-left: 10px;
+}
+
+#addrSearchBtn {
+	background-color: white;
+	border: 1px solid gray;
+	height: 30px;
+	width: 100px;
+	border-radius: 3px;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 1px 1px 1px darkgray;
+	font-size: 105%;
+	line-height: 30px;
+}
+
+#addrSearchBtn:hover {
+	background-color: #ffac05;
+	color: #4a2100;
+	cursor: pointer;
+}
+
+.sellInputBox {
+	font-size: 100%;
+	font-family: 'Jua', sans-serif;
+	height: 25px;
+	border-radius: 3px;
+	margin-left: 20px;
+	border: 1px solid lightgray;
+	box-shadow: 1px 1px 1px lightgray;
+	width: 700px;
+	padding-left: 10px;
+}
+
+.sellInputNBox {
+	font-size: 100%;
+	font-family: 'Jua', sans-serif;
+	height: 25px;
+	border-radius: 3px;
+	border: 1px solid lightgray;
+	box-shadow: 1px 1px 1px lightgray;
+	width: 200px;
+	margin-right: 7px;
+	padding-left: 10px;
+}
+
+.mg {
+	margin-left: 20px;
+}
+
+.category {
+	height: 30px;
+	border-radius: 3px;
+	width: 140px;
+	margin-right: 5px;
+	font-size: 105%;
+	font-family: 'Jua', sans-serif;
+}
+
+.dfradio {
+	margin: 15px;
+	margin-left: 20px;
+}
+
+#delFeeBox {
+	margin-left: 10px;
+	margin-bottom: 6px;
+}
+
+.fileattach {
+	margin-left: 20px;
+	font-family: 'Jua', sans-serif;
+	font-size: 110%;
+}
+
+#file-upload-button {
+	background-color: white;
+	border: 1px solid #4a2100;
+	height: 40px;
+	width: 150px;
+	border-radius: 3px;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 1px 1px 1px #4a2100;
+	font-size: 105%;
+	line-height: 40px;
+	margin: 10px;
+}
+
+.finalBtn {
+	background-color: white;
+	border: 1px solid #4a2100;
+	height: 50px;
+	width: 180px;
+	border-radius: 3px;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 1px 1px 1px #4a2100;
+	font-size: 110%;
+	line-height: 50px;
+	margin: 20px;
+	background-color: #ffac05;
+	color: #4a2100;
+}
+
+.finalBtn:hover {
+	background-color: #4a2100;
+	color: #ffac05;
+	cursor: pointer;
+}
+
+.tableTitle {
+	height: 60px;
+	background-color: #fafafa;
+	border-radius: 5px;
+	border-shadow: 0px 1px 1px gray;
+}
 </style>
 </head>
 <script>
@@ -234,10 +253,9 @@ form{
 	$('document')
 			.ready(
 					function() {
-						var area0 = [ "시/도 선택", "서울", "인천", "대전",
-								"광주", "대구", "울산", "부산", "경기",
-								"강원", "충북", "충남", "전북", "전남", "경북",
-								"경남", "제주특별자치도" ];
+						var area0 = [ "시/도 선택", "서울", "인천", "대전", "광주", "대구",
+								"울산", "부산", "경기", "강원", "충북", "충남", "전북", "전남",
+								"경북", "경남", "제주특별자치도" ];
 						var area1 = [ "강남구", "강동구", "강북구", "강서구", "관악구", "광진구",
 								"구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구",
 								"마포구", "서대문구", "서초구", "성동구", "성북구", "송파구",
@@ -313,7 +331,8 @@ form{
 											var $gugun = $(this).next(); // 선택영역 군구 객체
 											$("option", $gugun).remove(); // 구군 초기화
 											if (area == "area0")
-												$gugun.append("<option value=''>구/군 선택</option>");
+												$gugun
+														.append("<option value=''>구/군 선택</option>");
 											else {
 												$
 														.each(
@@ -328,34 +347,38 @@ form{
 										});
 					});
 	//지역 주소 추가&삭제 버튼
-	$(function(){
+	$(function() {
 		$(".chooseRtab").hide();
-		$(".chooseNation").click(function(){
-			$(".chooseRtab").slideToggle("fast",function(){
-			$(".chooseRtab").hide();
+		$(".chooseNation").click(function() {
+			$(".chooseRtab").slideToggle("fast", function() {
+				$(".chooseRtab").hide();
 			});
 		});
-		$(".chooseRegion").click(function(){
-			$(".chooseRtab").slideToggle("fast",function(){
+		$(".chooseRegion").click(function() {
+			$(".chooseRtab").slideToggle("fast", function() {
 				$(".chooseRtab").show();
 			});
 		});
 		//tockenizer 추가 필요
-		$("#addrAddBtn").click(function(){
-			var sido = $("#sido").children("option:selected").val();
-			var gugun = $("#gugun").children("option:selected").val();
-			var addr = sido+" "+gugun;
-			if($("#sellRegionalAddr").val()=="" & $("#sido").val()!="시/도 선택" ){
-				$("#sellRegionalAddr").val(sido+" "+gugun);
-			}else if($("#sido").val()!="시/도 선택"){
-				if($("#sellRegionalAddr").val()==addr){
-					alert("이미 추가한 주소입니다. \n다른 주소를 추가해주세요.")
-				}else{
-					$("#sellRegionalAddr").val($("#sellRegionalAddr").val()+","+sido+" "+gugun);
-				}
-			}
-		});
-		$("#addrDelBtn").click(function(){
+		$("#addrAddBtn").click(
+				function() {
+					var sido = $("#sido").children("option:selected").val();
+					var gugun = $("#gugun").children("option:selected").val();
+					var addr = sido + " " + gugun;
+					if ($("#sellRegionalAddr").val() == ""
+							& $("#sido").val() != "시/도 선택") {
+						$("#sellRegionalAddr").val(sido + " " + gugun);
+					} else if ($("#sido").val() != "시/도 선택") {
+						if ($("#sellRegionalAddr").val() == addr) {
+							alert("이미 추가한 주소입니다. \n다른 주소를 추가해주세요.")
+						} else {
+							$("#sellRegionalAddr").val(
+									$("#sellRegionalAddr").val() + "," + sido
+											+ " " + gugun);
+						}
+					}
+				});
+		$("#addrDelBtn").click(function() {
 			$("#sellRegionalAddr").val("");
 		});
 	});
@@ -413,58 +436,60 @@ form{
 	});
 	//스마트 에디터
 	$(function() {
-      //전역변수선언
-      var editor_object = [];
+		//전역변수선언
+		var editor_object = [];
 
-      nhn.husky.EZCreator.createInIFrame({
-         oAppRef : editor_object,
-         elPlaceHolder : "content", //불러올 id 
-         sSkinURI : "/SE2.3/SmartEditor2Skin.html",
-         htParams : {
-            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseToolbar : true,
-            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseVerticalResizer : true,
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseModeChanger : false,
-         }
-      });
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : editor_object,
+			elPlaceHolder : "content", //불러올 id 
+			sSkinURI : "/SE2.3/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : false,
+			}
+		});
 
-      //전송버튼 클릭이벤트
-      $("#formsubmit").click(
-            function() {
-               //id가 smarteditor인 textarea에 에디터에서 대입
-               editor_object.getById["content"].exec(
-                     "UPDATE_CONTENTS_FIELD", []);
+		//전송버튼 클릭이벤트
+		$("#formsubmit").click(function() {
+			//id가 smarteditor인 textarea에 에디터에서 대입
+			editor_object.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 
-               // 이부분에 에디터 validation 검증
+			// 이부분에 에디터 validation 검증
 
-               //폼 submit
-               $("form").submit();
-            });
-   });
-  
+			//폼 submit
+			$("form").submit();
+		});
+	});
 </script>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<form action="/sellFormInsert" method="post"
 		enctype="multipart/form-data"">
 		<input type="hidden" name="sellWriter"
 			value="${sessionScope.member.memberId }">
 		<table>
-            <tr>
-                <th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">판매 기본 정보 입력</th>
-            </tr>
+			<tr>
+				<th colspan="2" style="font-size: 140%; border-right: none;"
+					class="tableTitle">판매 기본 정보 입력</th>
+			</tr>
 			<tr>
 				<th>판매 가능 지역 선택</th>
-				<td><input type="radio" name="sellType" value="1" class="chooseNation">전국 판매
-					<input type="radio" name="sellType" value="2" class="chooseRegion">지역 선택하기
+				<td><input type="radio" name="sellType" value="1"
+					class="chooseNation">전국 판매 <input type="radio"
+					name="sellType" value="2" class="chooseRegion">지역 선택하기
 					<div class="chooseRtab">
 						<select name="sido" id="sido"></select> <select name="gugun"
 							id="gugun"></select>
-							<button type="button" id="addrAddBtn" class="sellFormBtn">추가</button>
-							<button type="button" id="addrDelBtn" class="sellFormBtn">전체 삭제</button><br>
-					 <input id="sellRegionalAddr" name="sellRegionalAddr" readonly/>
-					 </div>
+						<button type="button" id="addrAddBtn" class="sellFormBtn">추가</button>
+						<button type="button" id="addrDelBtn" class="sellFormBtn">전체
+							삭제</button>
+						<br> <input id="sellRegionalAddr" name="sellRegionalAddr"
+							readonly />
+					</div>
 			</tr>
 			<tr>
 				<th>판매자 지역(생산지) 입력</th>
@@ -512,7 +537,7 @@ form{
 						<option value="가공식품">가공식품</option>
 				</select> <select class="category category2 mg" disabled>
 						<option value="" selected>상품 소분류</option>
-				</select> </td>
+				</select></td>
 			</tr>
 			<tr>
 				<th>상품명</th>
@@ -521,58 +546,68 @@ form{
 
 			<tr>
 				<th>가격</th>
-				<td style="font-size:110%;"><input type="text" name="sellPrice" class="sellInputNBox mg">원</td>
+				<td style="font-size: 110%;"><input type="text"
+					name="sellPrice" class="sellInputNBox mg">원</td>
 			</tr>
 			<tr>
 				<th>배송비 선택</th>
-				<td><input type="radio" class="dfradio" name="sellDeliveryFee" value="0">무료배송
-					<input type="radio" class="dfradio" name="sellDeliveryFee" value="2500">2500원
-					<input type="radio" class="dfradio" name="sellDeliveryFee" value="3000">3000원
-					<input type="radio" class="dfradio" name="sellDeliveryFee" id="typeDF" value="">직접입력
-					<input type="text" id="delFeeBox" class="sellInputNBox" disabled></td>
+				<td><input type="radio" class="dfradio" name="sellDeliveryFee"
+					value="0">무료배송 <input type="radio" class="dfradio"
+					name="sellDeliveryFee" value="2500">2500원 <input
+					type="radio" class="dfradio" name="sellDeliveryFee" value="3000">3000원
+					<input type="radio" class="dfradio" name="sellDeliveryFee"
+					id="typeDF" value="">직접입력 <input type="text" id="delFeeBox"
+					class="sellInputNBox" disabled></td>
 			</tr>
 			<tr>
 				<th>판매 수량 설정</th>
-				<td style="font-size:110%; margin-left:10px;"><span class="mg"></span>최소: <input type="text" name="sellMin" class="sellInputNBox">개 ~ 최대: <input
-					type="text" name="sellMax" class="sellInputNBox">개(묶음/박스)
-				</td>
+				<td style="font-size: 110%; margin-left: 10px;"><span
+					class="mg"></span>최소: <input type="text" name="sellMin"
+					class="sellInputNBox">개 ~ 최대: <input type="text"
+					name="sellMax" class="sellInputNBox">개(묶음/박스)</td>
 			</tr>
 			<tr>
 				<th>판매 종료일 설정</th>
 				<td><input type="text" class="datepicker-here sellInputNBox mg"
 					data-language="en" name="sellEndDate" readonly></td>
 			</tr>
-            <tr>
-                <th colspan="2" style="border:none;"></th>
-            </tr>
 			<tr>
-				<th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">본문 내용 입력</th>
+				<th colspan="2" style="border: none;"></th>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea name="sellContent" id="content" rows="10" cols="100"
-						style="width: 1205px; height: 412px;"></textarea></td>
+				<th colspan="2" style="font-size: 140%; border-right: none;"
+					class="tableTitle">본문 내용 입력</th>
 			</tr>
-            <tr>
-                <th colspan="2" style="border:none;"></th>
-            </tr>
 			<tr>
-				<th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">등록 상품의 필수 정보 입력</th>
+				<td colspan="2"><textarea name="sellContent" id="content"
+						rows="10" cols="100" style="width: 1205px; height: 412px;"></textarea></td>
+			</tr>
+			<tr>
+				<th colspan="2" style="border: none;"></th>
+			</tr>
+			<tr>
+				<th colspan="2" style="font-size: 140%; border-right: none;"
+					class="tableTitle">등록 상품의 필수 정보 입력</th>
 			</tr>
 			<tr>
 				<th>제조원(원산지)</th>
-				<td><input type="text" name="sellItemOrigin" class="sellInputBox"></td>
+				<td><input type="text" name="sellItemOrigin"
+					class="sellInputBox"></td>
 			</tr>
 			<tr>
 				<th>유통기한</th>
-				<td><input type="text" name="sellItemExpireDate" class="sellInputBox"></td>
+				<td><input type="text" name="sellItemExpireDate"
+					class="sellInputBox"></td>
 			</tr>
 			<tr>
 				<th>상품 용량</th>
-				<td><input type="text" name="sellItemQuantity" class="sellInputBox"></td>
+				<td><input type="text" name="sellItemQuantity"
+					class="sellInputBox"></td>
 			</tr>
 			<tr>
 				<th>원재료명 및 함량</th>
-				<td><input type="text" name="sellItemMaterial" class="sellInputBox"></td>
+				<td><input type="text" name="sellItemMaterial"
+					class="sellInputBox"></td>
 			</tr>
 			<tr>
 				<th>보관상 주의사항</th>
@@ -580,22 +615,25 @@ form{
 			</tr>
 			<tr>
 				<th>대표 이미지 등록</th>
-				<td><input type="file" name="thumbnail" id="thumbnail" class="fileattach"></td>
+				<td><input type="file" name="thumbnail" id="thumbnail"
+					class="fileattach"></td>
 			</tr>
 			<tr>
 				<th>물품 사진 등록</th>
-				<td><input multiple="multiple" type="file" name="imgFilepath[]" class="fileattach">
-				</td>
+				<td><input multiple="multiple" type="file" name="imgFilepath[]"
+					class="fileattach"></td>
 			</tr>
-            <tr>
-                <th colspan="2" style="border:none;"></th>
-            </tr>
-			<tr style="height:100px;">
-				<th colspan="2" style="border:none;"><input type="submit" value="등록하기" id="formsubmit" class="finalBtn"> <input
+			<tr>
+				<th colspan="2" style="border: none;"></th>
+			</tr>
+			<tr style="height: 100px;">
+				<th colspan="2" style="border: none;"><input type="submit"
+					value="등록하기" id="formsubmit" class="finalBtn"> <input
 					type="reset" value="취소하기" class="finalBtn"></th>
 			</tr>
 		</table>
 	</form>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 
 </html>
