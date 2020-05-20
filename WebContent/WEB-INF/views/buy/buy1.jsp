@@ -8,7 +8,12 @@
 <title>약관동의</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
 <style>
+* {
+   font-family: 'Jua', sans-serif;
+}
 .buy {
 	width: 1280px;
 	height: 1800px;
@@ -29,6 +34,7 @@
 	font-size: 2.5em;
 	margin-left: 20px;
 	font-weight: bold;
+	color : #4a2100;
 }
 
 .buy_head1 {
@@ -135,12 +141,15 @@
 .buy_btn {
 	width: 120px;
 	height: 50px;
+	background-color : #ffac05;
+	color : #4a2100;
 }
 
 .buy_btn:hover {
 	font-weight: bold;
 	cursor: pointer;
-	background-color: darkgray;
+	background-color : #4a2100;
+	color : #ffac05;
 }
 
 .return {
@@ -150,7 +159,7 @@
 </style>
 </head>
 <body>
-	
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="buy_container">
 	<form action="/buy2Frm" method="post" class="buy">
 	<input type="hidden" name="sell_no" value="${sellNo }">
@@ -819,7 +828,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 		</div>
 	</form>
 	</section>
-	<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
 	<script>
 		$(".allchk").click(function() {
 			

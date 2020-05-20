@@ -10,7 +10,12 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src = "http://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-	<style>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
+<style>
+* {
+   font-family: 'Jua', sans-serif;
+}
 		.buy {
             width: 1280px;
             height: 1800px;
@@ -184,6 +189,8 @@
         .buy_btn2 {
             width: 120px;
             height: 50px;
+            background-color : #ffac05;
+			color : #4a2100;
         }
 
         .buy_btn {
@@ -195,11 +202,15 @@
             background-color: darkgray;
             font-weight: bold;
             cursor: pointer;
+            background-color : #4a2100;
+	color : #ffac05;
         }
         .buy_btn2:hover {
             background-color: darkgray;
             font-weight: bold;
             cursor: pointer;
+            background-color : #4a2100;
+	color : #ffac05;
         }
         input{
             height: 30px;
@@ -230,9 +241,8 @@
 	</style>
 </head>
 <body>
-	<%-- <jsp:include page="/WEB-INF/views/common/header.jsp"/> --%>
+	 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<section class="buy_container">
-	
         <form action="/buy3Frm" method="post" class="buy">
         	<input type="hidden" name="sellNo" value="${sellNo }">
 			<input type="hidden" name="type" value="${type }">
@@ -369,7 +379,7 @@
             </div>
         </form>
     </section>
-    <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
     	
     	function addrSearch(){
@@ -428,6 +438,26 @@
     		}
     	});
     	});
+    	
+    	  var now = new Date();
+    	  var standD = now.getDate()+1;
+    	  var endTime = new Date('2020-05-22');
+    	          console.log(now.getDate());
+    	  var gapTime = endTime-now-32400000;
+    	  var SetTime =gapTime/1000;
+    	  var SetMin = SetTime/60;
+    	  var SetHour = SetMin/60;
+    	  function msg_time() {   // 1초씩 카운트
+    	     m = Math.floor(SetHour% 60) + ":"+Math.floor(SetMin % 60) + ":" + Math.floor(SetTime % 60);   // 남은 시간 계산
+    	     var msg = m;
+    	     document.all.ViewTimer.innerHTML = msg;
+    	     SetTime--;      
+    	     if (SetTime < 0) {   
+    	        clearInterval(tid);
+    	     }
+    	  }
+    	  window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+
     </script>
 </body>
 </html>

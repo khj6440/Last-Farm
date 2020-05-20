@@ -7,8 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문완료</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
 <style>
-	  <style>
+* {
+   font-family: 'Jua', sans-serif;
+}
+
         .buy {
             width: 1280px;
             height: 1800px;
@@ -148,6 +153,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="buy_container">
         <form action="/buy2Frm" method="post" class="buy">
             <div class="buy_head">
@@ -176,8 +182,8 @@
                                 </div>
                                 <table class="buy_content_table">
                                     <tr class="buy_content_table_tr">
-                                        <th>상품명</th>
-                                        <td>${s.sellName }</td>
+                                        <th>구매자명</th>
+                                        <td>${sessionScope.member.memberName }</td>
                                     </tr>
                                     <tr class="buy_content_table_tr">
                                         <th>총 결제 수량</th>
@@ -200,5 +206,6 @@
             </div>
         </form>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

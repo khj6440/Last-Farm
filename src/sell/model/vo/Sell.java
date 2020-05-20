@@ -28,10 +28,12 @@ public class Sell {
 	private int sellDeleteState;
 	private String sellRegionalAddr;
 	private int timegap;
+
 	public Sell() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Sell(int sellNo, String sellTitle, String sellName, String sellWriter, String sellContent, Date sellEndDate,
 			int sellMax, int sellMin, int sellCount, int sellPrice, Date sellDate, int sellType, String sellCategory1,
 			String sellCategory2, int sellWarning, int sellDeliveryFee, String sellItemOrigin,
@@ -64,156 +66,209 @@ public class Sell {
 		this.sellRegionalAddr = sellRegionalAddr;
 		this.timegap = timegap;
 	}
+	public String getContentBr() {
+		return sellContent.replaceAll("\r\n", "<br>");
+	}
 	public int getSellNo() {
 		return sellNo;
 	}
+
 	public int getTimegap() {
 		return timegap;
 	}
+
 	public void setTimegap(int timegap) {
 		this.timegap = timegap;
 	}
+
 	public void setSellNo(int sellNo) {
 		this.sellNo = sellNo;
 	}
+
 	public String getSellTitle() {
 		return sellTitle;
 	}
+
 	public void setSellTitle(String sellTitle) {
 		this.sellTitle = sellTitle;
 	}
+
 	public String getSellName() {
 		return sellName;
 	}
+
 	public void setSellName(String sellName) {
 		this.sellName = sellName;
 	}
+
 	public String getSellWriter() {
 		return sellWriter;
 	}
+
 	public void setSellWriter(String sellWriter) {
 		this.sellWriter = sellWriter;
 	}
+
 	public String getSellContent() {
 		return sellContent;
 	}
+
 	public void setSellContent(String sellContent) {
 		this.sellContent = sellContent;
 	}
+
+	
+
 	public Date getSellEndDate() {
 		return sellEndDate;
 	}
+
 	public void setSellEndDate(Date sellEndDate) {
 		this.sellEndDate = sellEndDate;
 	}
+
 	public int getSellMax() {
 		return sellMax;
 	}
+
 	public void setSellMax(int sellMax) {
 		this.sellMax = sellMax;
 	}
+
 	public int getSellMin() {
 		return sellMin;
 	}
+
 	public void setSellMin(int sellMin) {
 		this.sellMin = sellMin;
 	}
+
 	public int getSellCount() {
 		return sellCount;
 	}
+
 	public void setSellCount(int sellCount) {
 		this.sellCount = sellCount;
 	}
+
 	public int getSellPrice() {
 		return sellPrice;
 	}
+
 	public void setSellPrice(int sellPrice) {
 		this.sellPrice = sellPrice;
 	}
+
 	public Date getSellDate() {
 		return sellDate;
 	}
+
 	public void setSellDate(Date sellDate) {
 		this.sellDate = sellDate;
 	}
+
 	public int getSellType() {
 		return sellType;
 	}
+
 	public void setSellType(int sellType) {
 		this.sellType = sellType;
 	}
+
 	public String getSellCategory1() {
 		return sellCategory1;
 	}
+
 	public void setSellCategory1(String sellCategory1) {
 		this.sellCategory1 = sellCategory1;
 	}
+
 	public String getSellCategory2() {
 		return sellCategory2;
 	}
+
 	public void setSellCategory2(String sellCategory2) {
 		this.sellCategory2 = sellCategory2;
 	}
+
 	public int getSellWarning() {
 		return sellWarning;
 	}
+
 	public void setSellWarning(int sellWarning) {
 		this.sellWarning = sellWarning;
 	}
+
 	public int getSellDeliveryFee() {
 		return sellDeliveryFee;
 	}
+
 	public void setSellDeliveryFee(int sellDeliveryFee) {
 		this.sellDeliveryFee = sellDeliveryFee;
 	}
+
 	public String getSellItemOrigin() {
 		return sellItemOrigin;
 	}
+
 	public void setSellItemOrigin(String sellItemOrigin) {
 		this.sellItemOrigin = sellItemOrigin;
 	}
+
 	public String getSellItemExpireDate() {
 		return sellItemExpireDate;
 	}
+
 	public void setSellItemExpireDate(String sellItemExpireDate) {
 		this.sellItemExpireDate = sellItemExpireDate;
 	}
+
 	public String getSellItemQuantity() {
 		return sellItemQuantity;
 	}
+
 	public void setSellItemQuantity(String sellItemQuantity) {
 		this.sellItemQuantity = sellItemQuantity;
 	}
+
 	public String getSellItemMaterial() {
 		return sellItemMaterial;
 	}
+
 	public void setSellItemMaterial(String sellItemMaterial) {
 		this.sellItemMaterial = sellItemMaterial;
 	}
+
 	public String getSellItemRule() {
 		return sellItemRule;
 	}
+
 	public void setSellItemRule(String sellItemRule) {
 		this.sellItemRule = sellItemRule;
 	}
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
+
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+
 	public int getSellDeleteState() {
 		return sellDeleteState;
 	}
+
 	public void setSellDeleteState(int sellDeleteState) {
 		this.sellDeleteState = sellDeleteState;
 	}
+
 	public String getSellRegionalAddr() {
 		return sellRegionalAddr;
 	}
+
 	public void setSellRegionalAddr(String sellRegionalAddr) {
 		this.sellRegionalAddr = sellRegionalAddr;
 	}
-	
 
 }

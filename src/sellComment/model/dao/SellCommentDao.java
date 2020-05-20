@@ -72,7 +72,7 @@ public class SellCommentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Sell sell = null;
-		String query = "select * from sell where sell_no = ?";
+		String query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select * from sell where sell_no = ?)s";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -104,6 +104,7 @@ public class SellCommentDao {
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
 				sell.setSellRegionalAddr(rset.getString("sell_regional_addr"));
+				sell.setTimegap(rset.getInt("timegap"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

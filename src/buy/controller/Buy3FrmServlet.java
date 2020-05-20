@@ -47,12 +47,10 @@ public class Buy3FrmServlet extends HttpServlet {
 		int sellMax = Integer.parseInt(request.getParameter("sell_max"));
 		
 		int result = new BuyService().updateSell(sellNo,type,sellCount,type,memberId,sellCount,sellMax,r1,r2);
-		SellViewData svd = new SellCommentService().selectOneSell(sellNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/buy/buy3.jsp");
 		request.setAttribute("r1", r1);
 		request.setAttribute("r2", r2);
 		request.setAttribute("type", type);
-		request.setAttribute("s", svd.getS());
 							
 		rd.forward(request, response);
 						

@@ -8,6 +8,7 @@
 <!-- 다음주소api -->
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 <!-- 제이쿼리 -->
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
@@ -27,6 +28,9 @@
 
 <title>새 판매글 작성</title>
 <style>
+* {
+   font-family: 'Jua', sans-serif;
+}
 body{
 	font-family: 'Jua', sans-serif;
 	width: 1280px;
@@ -446,6 +450,7 @@ form{
   
 </script>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<form action="/sellFormInsert" method="post"
 		enctype="multipart/form-data"">
 		<input type="hidden" name="sellWriter"
@@ -596,6 +601,7 @@ form{
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 
 </html>
