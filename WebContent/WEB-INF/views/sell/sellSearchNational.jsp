@@ -423,10 +423,10 @@
 							name="searchTypingBox" id="searchTypingBox"
 							class="searchTypingBox" placeholder="검색할 상품을 입력하세요(Enter)">
 					</div>
-					<c:if test="${sessionScope.member.member_type != '2'}">
+					<c:if test="${sessionScope.member.memberType != '2'}">
 						<input type="submit" value="상품 검색" class="searchBtn">
 					</c:if>
-					<c:if test="${sessionScope.member.member_type == '2'}">
+					<c:if test="${sessionScope.member.memberType == '2'}">
 						<input type="button" id="newSellForm" value="새 글쓰기"
 							class="searchBtn">
 					</c:if>
