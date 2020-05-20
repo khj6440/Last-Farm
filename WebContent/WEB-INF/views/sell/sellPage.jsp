@@ -79,7 +79,7 @@
 
 .sell_img11 {
 	margin-left: 50px;
-	width: 370px;
+	width: 500px;
 	height: 300px;
 }
 
@@ -98,10 +98,9 @@
 	box-sizing: border-box;
 	position: absolute;
 	margin-left: 340px;
-	margin-top: -70px;
 	border: 2px solid black;
 	width: 300px;
-	height: 70px;
+	height: 80px;
 	text-align: center;
 	color: red;
 	line-height: 1.7;
@@ -112,6 +111,7 @@
 .sell_table_th {
 	width: 500px;
 	height: 50px;
+	padding-left : 50px;
 }
 
 .sell_table_th2 {
@@ -205,13 +205,18 @@
 	border-bottom: 2px solid gray;
 }
 
-.sell_content2_sub21 {
+.sell_content2_sub31 {
+	margin : 0 auto;
 	box-sizing: border-box;
-	margin-top: 80px;
-	margin-left: 60px;
 	width: 200px;
 	height: 50%;
 	background-color: lightgray;
+}
+.sell_content2_sub32{
+	box-sizing: border-box;
+	width: 100%;
+	height: 50%;
+	border : 1px solid red;
 }
 
 .sell_content2_sub22 {
@@ -227,8 +232,8 @@
 }
 
 .sell_grade {
-	width : 20px;
-	height : 20px;
+	width : 30px;
+	height : 30px;
 }
 
 .sell_content3 {
@@ -270,7 +275,7 @@
 }
 .sellList{
 	margin-left : 15px;
-	width: 90%;
+	width: 100%;
 	clear: both;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -316,6 +321,10 @@
 	width: 250px;
 	height: 20px;
 }
+.sell_commentBtn{
+	text-decoration : none;
+	font-size : 15px; 
+}
 </style>
 </head>
 
@@ -330,7 +339,7 @@
 	<input type="hidden" name="sell_max" value="${s.sellMax }">
 			<div class="sell_head">
 				<div class="sell_head_sub">
-					<img src="img/1.png" class="sell_home"> > 
+					<a href="index.jsp" ><img src="imgs/두더지.jpg" class="sell_home"></a> > 
 					<c:if test="${s.sellType eq 1}">
 					<a href="#"
 						class="sell_a">전 지역 판매</a>
@@ -356,7 +365,7 @@
 						<td rowspan="5" class="sell_table_td"><img src="/imgs/${s.thumbnail }"
 							class="sell_img11">
 							<div class="sell_timer">00:00:00</div></td>
-						<th class="sell_table_th">${s.sellTitle }</th>
+						<th class="sell_table_th">${s.sellName }</th>
 						<th class="sell_table_th2">
 						<a href="/sellWarning?sell_no=${s.sellNo }&sell_warning=${s.sellWarning }"><img src="/img/신고버튼.png"
 							class="sell_warning"></a><br> 
@@ -416,7 +425,7 @@
 						</c:if>
 						<c:if test="${s.sellDeleteState eq 0 && not empty sessionScope.member || s.sellCount ne s.sellMax}">
 							<button type="submit" onclick="location.href='/buyFrm'" class="sell_btn">딜
-								참여하기(결제하기)</button> 총 <span class="sell_allprice">${s.sellPrice }</span>원
+								참여하기</button> 총 <span class="sell_allprice">${s.sellPrice }</span>원
 								</c:if>
 						</th>
 					</tr>
@@ -435,12 +444,15 @@
 					</div>
 					<div class="sell_content2_sub2">
 						<div class="sell_content2_sub2_div">
-							<div class="sell_content2_sub21">
-								판매자 스토어 정보<br> <br> <span>${s.sellWriter }</span> 
-								<span>${m.memberScore}</span>
+							<div class="sell_content2_sub31">
+								판매자 스토어 정보<br> <span>판매자 이름 : ${s.sellWriter }</span> 
 								 <c:if test="${m. memberScore eq 4}"> 
-								<span><img src="/img/판매자스티커.png" class="sell_grade"></span>
+								<span><img src="/img/판매자스티커.png" onclick="alert('후기 평점이 4점을 넘은 우수 판매자에게 부여되는 스티커입니다.');" class="sell_grade"></span>
 								 </c:if> 
+							</div>
+							<div class="sell_content2_sub32">
+								당일 배송 가능한 지역 : <br>
+								${s.sellRegionalAddr }
 							</div>
 						</div>
 						<div class="sell_content2_sub22">
@@ -477,7 +489,8 @@
 			<div class="sell_content3">
 				<div class="sell_menu">상품문의</div>
 				<div class="sell_menu_sub">
-					<h4 class="sell_comment_h4">상품에 대한 궁금한 점은 댓글로 남겨주세요 ↓</h4>
+				<fieldset>
+					<legend><h4 class="sell_comment_h4">상품에 대한 궁금한 점은 댓글로 남겨주세요 ↓</h4></legend>
 					<div class="sell_content_wrapper">
 						<form action="/sellCommentInsert" method="post">
 							<input type="hidden" name="sellCommentWriter"
@@ -490,9 +503,9 @@
 							
 								<tr>
 									<td width="90%"><input type="text"
-										class="sellCommentInput" name="sellCommentContent"></td>
+										class="sellCommentInput" name="sellCommentContent" placeholder="이곳에 문의 댓글을 남겨주세요."></td>
 									<td width="20%">
-										<button type="submit" class="sellCommentBtn">등록</button>
+										<button type="submit" class="form-control">등록</button>
 								</tr>
 							</table>
 							</c:if>
@@ -509,16 +522,16 @@
 										name="sellCommentContent" value="${sc.sellCommentContent }"
 										style="display: none;"></li>
 									<li style="width: 20%; text-align: center"><span>${sc.sellCommentDate }</span></li>
-									<li style="width: 25%; text-align: center"><c:if
+									<li style="width: 30%; text-align: right"><c:if
 											test="${sessionScope.member.memberId eq s.sellWriter }">
-											<a href="javascript:void(0)"
+											<a href="javascript:void(0)" class="sell_commentBtn"
 												onclick="insertComment(this, '${sc.sellCommentNo }','${s.sellNo }','${sessionScope.member.memberId }')">댓글달기</a>
-												<a href="javascript:void(0)" onclick="warningComment('${sc.sellCommentNo}','${sc.sellCommentWarning }')">신고</a>
+												<a href="javascript:void(0)" class="sell_commentBtn" onclick="warningComment('${sc.sellCommentNo}','${sc.sellCommentWarning }')">신고</a>
 											<c:if
 												test="${sessionScope.member.memberId == sc.sellCommentWriter }">
-												<a href="javascript:void(0)"
+												<a href="javascript:void(0)" class="sell_commentBtn" 
 													onclick="modifyComment(this, '${sc.sellCommentNo}','${sc.sellRef }')">수정</a>
-												<a href="javascript:void(0)"
+												<a href="javascript:void(0)" class="sell_commentBtn" 
 													onclick="deleteComment('${sc.sellCommentNo}','${sc.sellRef }')">삭제</a>
 											</c:if>
 										</c:if></li>
@@ -535,17 +548,18 @@
 										<li style="width: 20%; text-align: center"><span>${scc.sellCommentDate }</span>
 										</li>
 										<li style="width: 25%; text-align: center">
-										<a href="javascript:void(0)" onclick="warningComment('${sc.sellCommentNo}','${sc.sellCommentWarning }')">신고</a>
+										<a href="javascript:void(0)" class="sell_commentBtn" onclick="warningComment('${sc.sellCommentNo}','${sc.sellCommentWarning }')">신고</a>
 										<c:if
 											test="${not empty sessionScope.member && sessionScope.member.memberId eq scc.sellCommentWriter }">
-										<a href="javascript:void(0)" onclick="modifyComment(this, '${scc.sellCommentNo}','${scc.sellRef }')">수정</a>
-										<a href="javascript:void(0)" onclick="deleteComment('${scc.sellCommentNo}','${scc.sellRef }')">삭제</a>
+										<a href="javascript:void(0)" class="sell_commentBtn" onclick="modifyComment(this, '${scc.sellCommentNo}','${scc.sellRef }')">수정</a>
+										<a href="javascript:void(0)" class="sell_commentBtn" onclick="deleteComment('${scc.sellCommentNo}','${scc.sellRef }')">삭제</a>
 										</c:if></li>
 									</ul>
 									</c:if>
 						</c:forEach>
 					</c:forEach>
 					</div>
+					</fieldset>
 				</div>
 			</div>
 		

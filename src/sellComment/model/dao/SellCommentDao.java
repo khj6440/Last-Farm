@@ -103,6 +103,7 @@ public class SellCommentDao {
 				sell.setSellItemRule(rset.getString("sell_item_rule"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
+				sell.setSellRegionalAddr(rset.getString("sell_regional_addr"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
