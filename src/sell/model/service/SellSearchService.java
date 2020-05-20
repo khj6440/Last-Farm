@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import sell.model.dao.SellSearchDao;
 import sell.model.vo.Sell;
+import sell.model.vo.SellCategoryPage;
 
 
 public class SellSearchService {
@@ -13,6 +14,7 @@ public class SellSearchService {
 	
 	public ArrayList<Sell> selectList(int test) {
 	      Connection conn = JDBCTemplate.getConnection();
+	      System.out.println(test);
 	      ArrayList<Sell> list = new ArrayList<Sell>();
 	      list = new SellSearchDao().selectList(conn,test);
 	      JDBCTemplate.close(conn);

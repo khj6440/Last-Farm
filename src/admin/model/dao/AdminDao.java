@@ -33,7 +33,9 @@ public class AdminDao {
 				m.setMemberRoadAddr(rset.getString("member_road_addr"));
 				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberPostCode(rset.getString("member_post_code"));
-				m.setMemberDeliveryAddr(rset.getString("member_delivery_addr"));
+				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));
+				m.setMemberDetailAddr2(rset.getString("member_detail_addr2"));
+				m.setMemberPostCode2(rset.getString("member_post_code2"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberDate(rset.getDate("member_date"));
@@ -99,9 +101,12 @@ public class AdminDao {
 				m.setMemberPw(rset.getString("member_pw"));
 				m.setMemberName(rset.getString("member_name"));
 				m.setMemberCode(rset.getString("member_code"));
+				m.setMemberRoadAddr(rset.getString("member_road_addr"));
 				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberPostCode(rset.getString("member_post_code"));
-				m.setMemberDeliveryAddr(rset.getString("member_delivery_addr"));
+				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));
+				m.setMemberDetailAddr2(rset.getString("member_detail_addr2"));
+				m.setMemberPostCode2(rset.getString("member_post_code2"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberDate(rset.getDate("member_date"));

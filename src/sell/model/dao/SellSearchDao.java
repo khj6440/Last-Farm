@@ -14,13 +14,18 @@ public class SellSearchDao {
 	public ArrayList<Sell> selectList(Connection conn,int test) {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
-	      ArrayList<Sell> list = new ArrayList<Sell>();
+	      ArrayList<Sell> list = null;
 	      String query = "select * from (select rownum as rnum, n.* from ( select * from sell where sell_type=? order by sell_no desc)n) where rnum between 1 and 9";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setInt(1, test);
 	         rset = pstmt.executeQuery();
+	         if(rset != null) {
+	        	 list = new ArrayList<Sell>();
+	        	 System.out.println("list 생성"+test);
+	         }
 	         while(rset.next()) {
+	        	
 	            Sell sell = new Sell();
 	            sell.setSellNo(rset.getInt("sell_no"));
 	            sell.setSellTitle(rset.getString("sell_title"));

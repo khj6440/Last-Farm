@@ -86,25 +86,11 @@ public class Member {
 	public void setMemberCode(String memberCode) {
 		this.memberCode = memberCode;
 	}
-
 	public String getMemberRoadAddr() {
 		return memberRoadAddr;
 	}
 	public void setMemberRoadAddr(String memberRoadAddr) {
 		this.memberRoadAddr = memberRoadAddr;
-	}
-	public String getMemberDetailAddr() {
-		return memberDetailAddr;
-	}
-	public void setMemberDetailAddr(String memberDetailAddr) {
-		this.memberDetailAddr = memberDetailAddr;
-	}
-	public String getMemberPostCode() {
-		return memberPostCode;
-	}
-	public void setMemberPostCode(String memberPostCode) {
-		this.memberPostCode = memberPostCode;
-
 	}
 	public String getMemberDetailAddr() {
 		return memberDetailAddr;
@@ -197,4 +183,5 @@ public class Member {
 		this.bankAccount = bankAccount;
 	}
 	
+		
 }
