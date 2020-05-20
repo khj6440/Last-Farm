@@ -163,7 +163,7 @@
 				<div class="carousel-caption d-none d-md-block">
 					
 					<p></p>
-				</div>
+				</div> 
 			</div>
 			<div class="carousel-item">
 				<img class="d-inline-block"
@@ -205,8 +205,6 @@
 
 		</a>
 	</div>
-
-
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

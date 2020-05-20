@@ -16,14 +16,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="/css/header/header.css">
-<link rel="stylesheet" href="/css/footer/footer.css">
+
 
 <style>
 .community_body {
 	margin: 0 auto;
 	width: 1280px;
 	magin-right: -100px;
+	font-family: 'Jua', sans-serif;
 }
 
 .community_sideTap {
@@ -73,10 +73,12 @@
 	border-radius: 10px;
 	width: 102.2%;
 	margin-left: -2%;
+	background-color: #dee2e6;
 }
 
+
 .question_search {
-	margin-left: 40%;
+	margin-left: 513px;
 	
 }
 
@@ -112,6 +114,7 @@
 }
 
 .question_add {
+	position:absolute;
 	text-decoration: none;
 	color: white;
 	border:0.1px  solid black;
@@ -129,6 +132,16 @@
 	margin-top:-7%;
 	
 }
+.dd1{
+	margin:20px;
+}
+.question_tap{
+background-color: #ffac05 ;
+border-radius: 5px;
+}
+.question_tap1:hover{
+	color:#4a2100;
+}
 </style>
 <script>
 	
@@ -143,9 +156,7 @@
 	
 	$(function() {
 		$(".question_li1").click(function() {
-
-			$(".question_sub2").hide();
-			$(this).find(".question_sub2").show();
+			$(this).find(".question_sub2").toggle();
 			$("#pageNavi").css("margin-top","0px");
 			$(".community_content").css("height","1000px");
 		});
@@ -158,13 +169,13 @@
 	<div class="community_body">
 		<div class="community_sideTap">
 			<div class="sideTap_a1">
-				<a href="#">공지사항</a>
+				<a href="/noticeList?reqPage=1" class="question_tap1">공지사항</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="/questionList?reqPage=1">자주 묻는 질문</a>
+				<a href="/questionList?reqPage=1" class="question_tap question_tap1">자주 묻는 질문</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="#" >리뷰게시판</a>
+				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
 			</div>
 		</div>
 		<div class="community_content">
@@ -173,12 +184,13 @@
 			
 			
 			<form action="/searchKeyword" method="post">
+			<input type="hidden" name="reqPage" value="1">
 			<c:if test="${sessionScope.member.memberId=='admin' }">
-			<a class="question_add btn btn-dark" href="/questionWriteFrm">글쓰기</a>
+			<a class="question_add btn btn-outline-primary" href="/questionWriteFrm">글쓰기</a>
 			</c:if>
 			<input type="text" class="question_search" name="keyword" value="${keyword }" placeholder="제목을 입력해주세요">
-			<button type="submit" class="btn btn-dark">검색</button>
-			<a href="/questionList?reqPage=1" class="btn btn-dark">전체 목록보기</a>
+			<button type="submit" class="btn btn-outline-primary">검색</button>
+			<a href="/questionList?reqPage=1" class="btn btn-outline-primary">전체 목록보기</a>
 			</form>
 			<!--<c:if test="${sessionScope.member.memberId=='admin' }">
 				<a class="question_add" href="insertQuestion">글쓰기</a>
@@ -192,13 +204,13 @@
 								<a style="font-weight: bold">Q${n.questionNo}. ${n.questionTitle }</a>
 								<div class="d1">
 									<c:if test="${sessionScope.member.memberId=='admin' }">
-									<a class="question_update btn btn-dark" href="javascript:void(0)" onclick="updateQuestion('${n.questionNo}')">수정</a>	
-									<a class="question_del btn btn-dark" href="javascript:void(0)" onclick="deleteQuestion('${n.questionNo}')">삭제</a>	
+									<a class="question_update btn btn-outline-dark" href="javascript:void(0)" onclick="updateQuestion('${n.questionNo}')">수정</a>	
+									<a class="question_del btn btn-outline-dark" href="javascript:void(0)" onclick="deleteQuestion('${n.questionNo}')">삭제</a>	
 									</c:if>
 								</div>
 							</div>
 							<ul class="question_sub2">
-								<li class="question_li3"><a><br>${n.contentBr }</a></li>
+								<li class="question_li3"><div class="dd1"><a>${n.contentBr }</a></div></li>
 							</ul>
 						</li>
 					</c:forEach>

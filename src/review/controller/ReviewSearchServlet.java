@@ -1,4 +1,4 @@
-package sell.controller;
+package review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-import sell.model.vo.SellCategoryPage;
+import review.model.service.ReviewService;
+import review.model.vo.Review;
+import review.model.vo.ReviewPageData;
 
 /**
- * Servlet implementation class SellSearchNationalFrmServlet
+ * Servlet implementation class ReviewSearchServlet
  */
-@WebServlet(name = "SellSearchNationalFrm", urlPatterns = { "/sellSearchNationalFrm" })
-public class SellSearchNationalFrmServlet extends HttpServlet {
+@WebServlet(name = "ReviewSearch", urlPatterns = { "/reviewSearch" })
+public class ReviewSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellSearchNationalFrmServlet() {
+    public ReviewSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +33,26 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");		
+		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String sortingTab = request.getParameter("sortingTab");
-		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
-		request.setAttribute("sellList", scp.getSellList());
-		System.out.println(scp.getSellList().get(0).getSellNo());
-		request.setAttribute("pageNavi", scp.getPageNavi());
+		String keyword = request.getParameter("keyword");
+		String type = request.getParameter("type");
+		
+		ArrayList<Review> list =null;
+		
+		
+		if(type.equals("id")) {
+			ReviewPageData pd = new ReviewService().serchIdMember(reqPage,keyword, type);
+			request.setAttribute("list", pd.getList());
+			request.setAttribute("pageNavi", pd.getPageNavi());
+		}else {
+			ReviewPageData pd = new ReviewService().serchContentMember(reqPage, keyword, type);		
+			request.setAttribute("list", pd.getList());
+			request.setAttribute("pageNavi", pd.getPageNavi());
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/reviewList.jsp");
+		
 		rd.forward(request, response);
 	}
 

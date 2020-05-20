@@ -11,12 +11,13 @@ public class Review {
 	private int reviewScore;
 	private Date reviewDate;
 	private int reviewWarning;
+	private String reviewFilepath;
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Review(int reviewNo, int reviewBuyEndNo, String reviewTitle, String reviewWriter, String reviewContent,
-			int reviewScore, Date reviewDate, int reviewWarning) {
+			int reviewScore, Date reviewDate, int reviewWarning, String reviewFilepath) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewBuyEndNo = reviewBuyEndNo;
@@ -26,6 +27,7 @@ public class Review {
 		this.reviewScore = reviewScore;
 		this.reviewDate = reviewDate;
 		this.reviewWarning = reviewWarning;
+		this.reviewFilepath = reviewFilepath;
 	}
 	public int getReviewNo() {
 		return reviewNo;
@@ -75,6 +77,11 @@ public class Review {
 	public void setReviewWarning(int reviewWarning) {
 		this.reviewWarning = reviewWarning;
 	}
-	
+	public String getReviewFilepath() {
+		return reviewFilepath;
+	}
+	public void setReviewFilepath(String reviewFilepath) {
+		this.reviewFilepath = reviewFilepath;
+	}
 	
 }

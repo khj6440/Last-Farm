@@ -1,30 +1,24 @@
-package sell.controller;
+package member.model.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SearchSellServlet
+ * Servlet implementation class LogoutFrmServlet
  */
-@WebServlet(name = "SearchSellCategory", urlPatterns = { "/searchSellCategory" })
-public class SearchSellCategoryServlet extends HttpServlet {
+@WebServlet(name = "LogoutFrm", urlPatterns = { "/logoutFrm" })
+public class LogoutFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchSellCategoryServlet() {
+    public LogoutFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,11 +27,12 @@ public class SearchSellCategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String category1 = request.getParameter("searchTypingBox");
-		
-		//ArrayList<Sell> sellList = new SellSearchService().searchBoxSorting(searchWord);
-		//new Gson().toJson(sellList,response.getWriter());
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			//세션 파기
+			session.invalidate();
+			response.sendRedirect("/");
+		}
 	}
 
 	/**
