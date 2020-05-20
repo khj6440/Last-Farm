@@ -15,9 +15,9 @@
                     <a class="footer_a1">Last Farm</a><br><br>
                     <a>35208 대전광역시 서구 청사로 189(둔산동 920) 정부대전청사 3동 대표전화 : 1588-0800<br>
                         COPYRIGHT 2016 ALL RIGHTS RESERVED | 개인정보보호방침 |</a>
-                </div> 
+                </div>
                 <div>
-                    <select class="select_f">
+                    <select>
                         <option>관련사이트</option>
                         <option>main 페이지</option>
                         <option>회사 소개</option>

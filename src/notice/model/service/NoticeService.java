@@ -1,6 +1,7 @@
 package notice.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
@@ -153,7 +154,7 @@ public class NoticeService {
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
 
 		if (pageNo != 1) {
-			pageNavi += "<a class='btn btn-outline-secondary fnt1' href='/noticeList?reqPage=" + (pageNo - pageNaviSize)
+			pageNavi += "<a class='btn btn-outline-secondary fnt1' href='/searchNotice?"+ "type=noticeTitle&keyword=" + noticeTitle + "&reqPage=" + (pageNo - pageNaviSize)
 					+ "'>이전</a>";
 		}
 
@@ -174,7 +175,7 @@ public class NoticeService {
 		}
 
 		if (pageNo <= totalPage) {
-			pageNavi += "<a class='btn btn-outline-secondary fnt1' href='/noticeList?reqPage=" + pageNo + "'>다음</a>";
+			pageNavi += "<a class='btn btn-outline-secondary fnt1' href='/searchNotice?"+ "type=noticeTitle&keyword=" + noticeTitle + "&reqPage=" + pageNo + "'>다음</a>";
 		}
 
 		NoticePageData npd = new NoticePageData(list, pageNavi);
@@ -182,6 +183,58 @@ public class NoticeService {
 
 		return npd;
 
+	}
+
+	public int insertNotice(Notice n) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().insertNotice(conn,n);
+		System.out.println(result);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+		
+	}
+
+	public Notice noticeView(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Notice n = new NoticeDao().noticeView(conn,noticeNo);
+		JDBCTemplate.close(conn);
+		
+		
+		return n;
+	}
+
+	public int noticeUpdate(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().noticeUpdate(conn,n);
+		if(result != 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().deleteNotice(conn,noticeNo);
+		if(result != 0 ) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result;
 	}
 
 }

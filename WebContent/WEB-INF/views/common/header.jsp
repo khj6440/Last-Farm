@@ -5,12 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/header/header.css">
 </head>
 <body>
+
 	<div class="main_body">
 		<div class="header_top">
 			<div class="header_top_login">
-				<a class="header_top_a1 header_top_a2" href="#">Login</a> <a
+				<a class="header_top_a1 header_top_a2" href="/loginFrm">Login</a> <a
 					class="header_top_a1 header_top_a2"> | </a> <a
 					class="header_top_a1 header_top_a2" href="#">Join</a>
 			</div>
@@ -41,7 +43,7 @@
 				<ul class="header_top_ul1">
 					<li class="header_top_li1"><a class="header_top_a1" href="#">커뮤니티</a>
 						<ul class="header_top_ul3">
-							<li class="header_top_li2 header_top_li4"><a href="#">공지사항</a></li>
+							<li class="header_top_li2 header_top_li4"><a href="/noticeList?reqPage=1">공지사항</a></li>
 							<li class="header_top_li2"><a href="/questionList?reqPage=1">자주묻는질문</a></li>
 							<li class="header_top_li2"><a href="#">리뷰 게시판</a></li>
 						</ul></li>
