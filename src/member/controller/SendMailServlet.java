@@ -1,4 +1,4 @@
-package member.model.controller;
+package member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class JoinClassifyServlet
+ * Servlet implementation class SendMailServlet
  */
-@WebServlet(name = "JoinClassify", urlPatterns = { "/joinClassify" })
-public class JoinClassifyServlet extends HttpServlet {
+@WebServlet(name = "SendMail", urlPatterns = { "/sendMail" })
+public class SendMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinClassifyServlet() {
+    public SendMailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,12 +26,10 @@ public class JoinClassifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type=request.getParameter("radio");
-		if(type.equals("customerSignIn")) {
-			request.getRequestDispatcher("/WEB-INF/views/join/customerSignIn.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("/WEB-INF/views/join/sellerSignIn.jsp").forward(request, response);
-		}
+		request.setCharacterEncoding("utf-8");
+		String email = request.getParameter("email");
+		String mailCode = new MailSend().mailSend(email);
+		response.getWriter().print(mailCode);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package member.controller;
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -41,18 +42,21 @@ public class LoginServlet extends HttpServlet {
 		//3.비지니스 로직 처리
 		Member m = new MemberService().selectOneMember(memberId,memberPw);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
-		if(m.getMemberStatus()==1) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", m);
-			request.setAttribute("msg", "로그인 성공");
-			request.setAttribute("loc", "/");
-		}else if(m.getMemberStatus()==2) {
-			request.setAttribute("msg", "관리자 문의(탈퇴중 회원)");
-			request.setAttribute("loc", "/");
-		}else if(m.getMemberStatus()==3){
-			request.setAttribute("msg", "관리자 문의(비활성화 회원)");
-			request.setAttribute("loc", "/");
+		HttpSession session = request.getSession();
+		session.setAttribute("m", m);
+		if(m!=null) {
+			if(m.getMemberStatus()==1) {
+				
+				
+				request.setAttribute("msg", "로그인 성공");
+				request.setAttribute("loc", "/");
+			}else if(m.getMemberStatus()==2) {
+				request.setAttribute("msg", "관리자 문의(탈퇴 회원)");
+				request.setAttribute("loc", "/");
+			}else{
+				request.setAttribute("msg", "관리자 문의(비활성화 회원)");
+				request.setAttribute("loc", "/");
+			}
 		}
 		else {
 			request.setAttribute("msg", "ID,PW를 확인하세요.");

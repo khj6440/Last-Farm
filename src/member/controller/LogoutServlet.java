@@ -1,4 +1,4 @@
-package member.model.controller;
+package member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SigninFrmServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet(name = "Agree", urlPatterns = { "/agree" })
-public class AgreeServlet extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = { "/logout" })
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AgreeServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +27,12 @@ public class AgreeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		request.getRequestDispatcher("/WEB-INF/views/join/agree.jsp").forward(request, response);
-	
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			// 세션 파기
+			session.invalidate();
+		}
+		response.sendRedirect("/");
 	}
 
 	/**

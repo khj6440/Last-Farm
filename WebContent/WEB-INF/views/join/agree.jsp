@@ -214,6 +214,11 @@
         padding: 10%;
     }
 
+
+	
+
+
+
     #result {
         text-align: center;
     }

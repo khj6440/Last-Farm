@@ -1,4 +1,4 @@
-package member.model.controller;
+package member.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

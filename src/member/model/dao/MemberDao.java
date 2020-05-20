@@ -14,14 +14,14 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Member m = null;
-		String query="select * from member where member_id=? and member_pw=?";
+		String query = "select * from member where member_id=? and member_pw=?";
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, memberPw);
-			rset=pstmt.executeQuery();
-			if(rset.next()) {
-				m=new Member();
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				m = new Member();
 				m.setMemberNo(rset.getInt("member_no"));
 				m.setMemberId(rset.getString("member_id"));
 				m.setMemberPw(rset.getString("member_pw"));
@@ -43,16 +43,16 @@ public class MemberDao {
 				m.setMemberDelDate(rset.getDate("member_del_date"));
 				m.setBankName(rset.getString("bank_name"));
 				m.setBankAccount(rset.getString("bank_account"));
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return m;
 	}
 
@@ -62,11 +62,11 @@ public class MemberDao {
 		Member m = null;
 		String query = "select*from member where member_id=?";
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				m=new Member();
+			if (rset.next()) {
+				m = new Member();
 				m.setMemberNo(rset.getInt("member_no"));
 				m.setMemberId(rset.getString("member_id"));
 				m.setMemberPw(rset.getString("member_pw"));
@@ -92,55 +92,55 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-			
+
 		}
 		return m;
 	}
 
-	public int insertMember(Connection conn, Member m) {
+	public int insertMemberCus(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query 
-		="insert into member values(seq_member.nextval,?,?,?,?,?,?,?,null,null,null,?,?,sysdate,0,1,null,1,sysdate,null,null)";
-		
+		String query = "insert into member values(seq_member.nextval,?,?,?,?,?,?,?,null,null,null,?,?,sysdate,0,1,null,1,sysdate,null,null)";
+
 		try {
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,m.getMemberId());
-			pstmt.setString(2, m.getMemberPw());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getMemberCode());
-			pstmt.setString(5, m.getMemberPostCode());
-			pstmt.setString(6, m.getMemberRoadAddr());
-			pstmt.setString(7,m.getMemberDetailAddr());
-			pstmt.setString(8, m.getMemberPhone());
-			pstmt.setString(9,m.getMemberEmail());
-			result=pstmt.executeUpdate();
+			int index=1;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(index++, m.getMemberId());
+			pstmt.setString(index++, m.getMemberPw());
+			pstmt.setString(index++, m.getMemberName());
+			pstmt.setString(index++, m.getMemberCode());
+			pstmt.setString(index++, m.getMemberRoadAddr());
+			pstmt.setString(index++, m.getMemberDetailAddr());
+			pstmt.setString(index++, m.getMemberPostCode());
+			pstmt.setString(index++, m.getMemberPhone());
+			pstmt.setString(index++, m.getMemberEmail());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return result;
 	}
 
-	public Member searchId(Connection conn, String memberName,String memberPh) {
+	public Member searchId(Connection conn, String memberName, String memberPh) {
 		String query = "select*from member where member_name=? and member_phone=?";
-		PreparedStatement pstmt=null;
-		ResultSet rset=null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		Member mId = null;
-		
+
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberName);
 			pstmt.setString(2, memberPh);
-			rset=pstmt.executeQuery();
-			if(rset.next()) {
-				mId=new Member();
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				mId = new Member();
 				mId.setMemberNo(rset.getInt("member_no"));
 				mId.setMemberId(rset.getString("member_id"));
 				mId.setMemberPw(rset.getString("member_pw"));
@@ -162,13 +162,13 @@ public class MemberDao {
 				mId.setMemberDelDate(rset.getDate("member_del_date"));
 				mId.setBankName(rset.getString("bank_name"));
 				mId.setBankAccount(rset.getString("bank_account"));
-				
+
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
@@ -178,48 +178,50 @@ public class MemberDao {
 	public int insertMemberSeller(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query 
-		="insert into member values(seq_member.nextval,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,0,2,null,1,sysdate,?,?)";
-		
+		String query = "insert into member values(seq_member.nextval,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,0,2,?,1,sysdate,?,?)";
+
 		try {
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,m.getMemberId());
-			pstmt.setString(2, m.getMemberPw());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getMemberCode());
-			pstmt.setString(5, m.getMemberPostCode());
-			pstmt.setString(6, m.getMemberRoadAddr());
-			pstmt.setString(7,m.getMemberDetailAddr());
-			pstmt.setString(8, m.getMemberPostCode2());
-			pstmt.setString(9, m.getMemberRoadAddr2());
-			pstmt.setString(10,m.getMemberDetailAddr2());
-			pstmt.setString(11, m.getMemberPhone());
-			pstmt.setString(12,m.getMemberEmail());
-			pstmt.setString(13,m.getBankName());
-			pstmt.setString(14,m.getBankAccount());
-			result=pstmt.executeUpdate();
+			
+			int index=1;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(index++, m.getMemberId());
+			pstmt.setString(index++, m.getMemberPw());
+			pstmt.setString(index++, m.getMemberName());
+			pstmt.setString(index++, m.getMemberCode());
+			pstmt.setString(index++, m.getMemberPostCode());
+			pstmt.setString(index++, m.getMemberRoadAddr());
+			pstmt.setString(index++, m.getMemberDetailAddr());
+			pstmt.setString(index++, m.getMemberPostCode2());
+			pstmt.setString(index++, m.getMemberRoadAddr2());
+			pstmt.setString(index++, m.getMemberDetailAddr2());
+			pstmt.setString(index++, m.getMemberPhone());
+			pstmt.setString(index++, m.getMemberEmail());
+			pstmt.setString(index++, m.getCompanyName());
+			pstmt.setString(index++, m.getBankName());
+			pstmt.setString(index++, m.getBankAccount());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public Member searchPw(Connection conn, String memberId, String email) {
-		PreparedStatement pstmt=null;
-		ResultSet rset=null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		Member mPw = null;
 		String query = "select*from member where member_id=? and member_email=?";
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, email);
-			rset=pstmt.executeQuery();
-			if(rset.next()) {
-				mPw=new Member();
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				mPw = new Member();
 				mPw.setMemberNo(rset.getInt("member_no"));
 				mPw.setMemberId(rset.getString("member_id"));
 				mPw.setMemberPw(rset.getString("member_pw"));
@@ -241,38 +243,39 @@ public class MemberDao {
 				mPw.setMemberDelDate(rset.getDate("member_del_date"));
 				mPw.setBankName(rset.getString("bank_name"));
 				mPw.setBankAccount(rset.getString("bank_account"));
-				
+
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		return mPw;
 	}
 
-	public int sendPw(Connection conn,Member m) {
-		PreparedStatement pstmt=null;
+	public int sendPw(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
 		int result = 0;
-		String query
-		="update member set member_pw=? where member_email=?";
+		String query = "update member set member_pw=? where member_email=?";
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMemberPw());
 			pstmt.setString(2, m.getMemberEmail());
-			result= pstmt.executeUpdate();
-			
-			
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
 
 		return result;
 	}
+
+
+	
 }

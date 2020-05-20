@@ -1,4 +1,4 @@
-package member.model.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -13,16 +13,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class CustomerSignInServlet
+ * Servlet implementation class SellerSignInServlet
  */
-@WebServlet(name = "CustomerSignIn", urlPatterns = { "/customerSignIn" })
-public class CustomerSignInServlet extends HttpServlet {
+@WebServlet(name = "SellerSignIn", urlPatterns = { "/sellerSignIn" })
+public class SellerSignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CustomerSignInServlet() {
+    public SellerSignInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +31,9 @@ public class CustomerSignInServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//1.인코딩-필터
-		
-	
+
+
+
 		Member m = new Member();
 		m.setMemberName(request.getParameter("name"));
 		m.setMemberId(request.getParameter("id"));
@@ -42,11 +41,17 @@ public class CustomerSignInServlet extends HttpServlet {
 		m.setMemberPw(request.getParameter("pw"));
 		m.setMemberEmail(request.getParameter("email"));
 		m.setMemberCode(request.getParameter("code"));
-		m.setMemberPostCode(request.getParameter("postAddr"));
-		m.setMemberRoadAddr(request.getParameter("roadAddr"));
-		m.setMemberDetailAddr(request.getParameter("detailAddr"));
-		int result = new MemberService().insertMember(m);
+		m.setCompanyName(request.getParameter("company"));
+		m.setMemberPostCode(request.getParameter("postCode1"));
+		m.setMemberRoadAddr(request.getParameter("roadAddr1"));
+		m.setMemberDetailAddr(request.getParameter("detailAddr1"));
+		m.setMemberPostCode2(request.getParameter("postCode2"));
+		m.setMemberRoadAddr2(request.getParameter("roadAddr2"));
+		m.setMemberDetailAddr2(request.getParameter("detailAddr2"));
+		m.setBankName(request.getParameter("bankName"));
+		m.setBankAccount(request.getParameter("bankAccount"));
 		
+		int result = new MemberService().insertMemberSeller(m);
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
 		if (result > 0) {
 			request.setAttribute("msg", "회원가입 성공");
@@ -57,7 +62,7 @@ public class CustomerSignInServlet extends HttpServlet {
 
 		}
 		rd.forward(request, response);
-
+		
 	}
 
 	/**

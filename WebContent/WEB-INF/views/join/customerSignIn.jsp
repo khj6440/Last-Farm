@@ -636,7 +636,11 @@ font-family: 'Jua', sans-serif;
 
 
 			<div id="name_result"></div>
-		
+			 <br> <label for="code">
+				<div id="text" style="padding-top: 20px;">*주민 번호</div>
+				<div style="padding-left: 100px; padding-right: 40px">
+					<input type="text" name="code" id="code" placeholder="-제외하여 입력">
+				</div>
 
 
 			</label> <br> <br> 
@@ -709,7 +713,7 @@ font-family: 'Jua', sans-serif;
 					<input type="text" id="postCode" name="postCode"
 						style="width: 200px; display: inline-block; margin-left: 108px;"
 						class="form-control" placeholder="우편번호" readonly> <input
-						type="button" id="addrSearchBtn" onclick="addrSearch1();"
+						type="button" id="addrSearchBtn" onclick="addrSearch();"
 						class="btn btn-primary" value="주소검색" style="width: 120px;">
 				</div>
 				<div>

@@ -23,9 +23,9 @@ public class MemberService {
 		return m;
 	}
 
-	public int insertMember(Member m) {
+	public int insertMemberCus(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new MemberDao().insertMember(conn, m);
+		int result = new MemberDao().insertMemberCus(conn, m);
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -62,7 +62,7 @@ public class MemberService {
 		return mPw;
 	}
 
-	public Member sendPw(Member m) {
+	public int sendPw(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MemberDao().sendPw(conn,m);
 		if (result > 0) {
@@ -71,8 +71,12 @@ public class MemberService {
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
-		return m;
+		return result;
 	}
+
+	
+
+
 
 	
 }

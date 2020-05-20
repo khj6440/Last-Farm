@@ -20,8 +20,7 @@
 <script>
 	$(function() {
 
-		var check = [ false, false, false, false, false, false, false, false,
-				false, false, false, false ]
+		var check = [ false, false, false, false, false, false, false]
 		$("#id").focusout(function() {
 			RegExp = /^[a-z][a-z0-9]{4,12}$/;
 			var id = $("#id").val();
@@ -115,6 +114,22 @@
 				check[1] = false;
 			}
 		});
+		 $("#pw_re").focusout(function() {
+	            var pw = $("#pw").val();
+	            var pwr = $("#pw_re").val();
+	            if (pw != pwr) {
+	                $("#pw_result").html("비밀번호와 비밀번호 확인이 맞지 않습니다.").css({
+	                    'color': 'red',
+	                    "font-size": "15px",
+	                    "text-align": "center",
+	                    "margin-top": "20px"
+	                })
+	                check[1] = false;
+	            } else {
+	                $("#pw_result").html(" ");
+	                check[1] = true
+	            }
+	        })
 
 		$("#name").focusout(function() {
 			regExp = /^[가-힣]{2,4}$/;
@@ -280,8 +295,8 @@
 					count++;
 				}
 			}
-			if (count < 6) {
-				alert("필수 기입란을 확인해주세요");
+			if (count < 5) {
+				alert("필수 항목을 확인해주세요");
 				return false;
 
 			}
@@ -432,8 +447,8 @@ form.form1 {
 	border: 0;
 	padding-left: 50px;
 	padding-right: 50px;
-	padding-bottom: 10px;
-	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 	font-family: 'Jua', sans-serif;
 	margin-left: 35%;
 	font-size: 13px;
@@ -446,15 +461,6 @@ form.form1 {
 	padding-top: 15px;
 }
 
-a {
-	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-	color: #E1BEE7;
-	text-decoration: none;
-}
-
-ul>li {
-	list-style: none;
-}
 
 .dropdown {
 	float: left;
@@ -611,7 +617,7 @@ font-family: 'Jua', sans-serif;
 	<div class="main">
 		<div style="text-align: center; padding-top: 30px; font-size: 40px;">판매자
 			회원가입</div>
-		<form class="form1" method="post" action="/customerSignIn">
+		<form class="form1" method="post" action="/sellerSignIn">
 
 			<label for="id">
 				<div id="text">*아이디</div>
@@ -723,7 +729,7 @@ font-family: 'Jua', sans-serif;
 
 			<div>
 				<div style="padding-right: 40px;">
-					<input type="text" id="postCode" name="postCode"
+					<input type="text" id="postCode" name="postCode1"
 						style="width: 200px; display: inline-block; margin-left: 108px;"
 						class="form-control" placeholder="우편번호" readonly> <input
 						type="button" id="addrSearchBtn" onclick="addrSearch1();"
@@ -731,10 +737,10 @@ font-family: 'Jua', sans-serif;
 				</div>
 				<div>
 					<input id="roadAddr" style="width: 325px; display: inline-block;"
-						name="roadAddr" type="text" class="form-control"
+						name="roadAddr1" type="text" class="form-control"
 						placeholder="도로명주소">
 					<div>
-						<input id="detailAddr" name="detailAddr"
+						<input id="detailAddr" name="detailAddr1"
 							style="width: 325px; display: inline-block;" type="text"
 							class="form-control" placeholder="상세주소">
 					</div>
@@ -748,8 +754,8 @@ font-family: 'Jua', sans-serif;
 					<br> <br> <br>
 					<div style="text-align: left; padding-right: 108px;">*상호명</div>
 
-					<input type="text" name="title" id="title"
-						placeholder=" 상호명을 입력해주세요">
+					<input type="text"  id="title"
+						placeholder=" 상호명을 입력해주세요" name="company">
 				</div>
 			</label>
 
@@ -818,12 +824,13 @@ font-family: 'Jua', sans-serif;
 		
 			<div style="text-align: center;">
 				<input type="reset" id="reset" class="submit" align="center"
-					value="되돌아가기" style="margin: 10px; float: left padding-left:10px;"
-					onClick="location.href='/index.jsp';"> <input type="submit"
-					id="submit" class="submit" align="center" value="회원 가입하기"
-					style="margin: 10px">
+					value="되돌아가기" style="margin: 10px;margin-bottom:12px; width:150px"
+					onClick="location.href='/index.jsp';">
+					 <input type="submit"
+					id="submit" class="submit" align="center" value="가입하기"
+					style="margin: 10px;width:150px">
 
-				<p class="forgot" align="center"></p>
+				
 
 			</div>
 

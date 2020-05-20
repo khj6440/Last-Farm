@@ -59,7 +59,7 @@ body {
 .sign {
     padding-top: 40px;
     color: #4a2100 ;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Jua", sans-serif;
     font-weight: bold;
     font-size: 23px;
 }
@@ -81,7 +81,7 @@ body {
     margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Jua", sans-serif;
 }
 
 form.form1 {
@@ -105,7 +105,7 @@ form.form1 {
     margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+   font-family: "Jua", sans-serif;
 }
 
 
