@@ -543,64 +543,354 @@ ul {
 .grey3 {
 	background-color: #d2d5db;
 }
+
+.pcontainer>.phone, .bcontainer>.bank {
+	float: left;
+	margin: 0 20px;
+	vertical-align: top;
+}
+
+.phone, .bank {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	height: 28px;
+	width: 150px;
+	background: #f2f2f2;
+	border: 1px solid;
+	border-color: white #f7f7f7 whitesmoke;
+	border-radius: 3px;
+	background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+	background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+	background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+	background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.sign {
+	padding-top: 0px;
+	color: #8C55AA;
+	font-family: 'Jua', sans-serif;
+	font-weight: bold;
+	font-size: 23px;
+	margin: 0;
+}
+
+form.form1 {
+	padding-top: 20px;
+}
+
+#company, #bank, .id, #pw, #pw_re, #name, #phone, #email, #mailCode,
+	#code {
+	display: inline-block;
+	width: 86%;
+	height: 40px;
+	color: rgb(38, 50, 56);
+	font-weight: 700px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	background: rgba(136, 126, 126, 0.04);
+	margin: 0 auto;
+	outline: none;
+	box-sizing: border-box;
+	border: 2px solid rgba(0, 0, 0, 0.02);
+	margin-left: 10px;
+	text-align: center;
+	font-family: 'Jua', sans-serif;
+}
+
+.form-control {
+	width: 36%;
+	height: 40px;
+	color: rgb(38, 50, 56);
+	font-weight: 70;
+	font-size: 14px;
+	letter-spacing: 1px;
+	background: rgba(136, 126, 126, 0.04);
+	border: none;
+	border-radius: 3px 3px 3px 3px;
+	outline: none;
+	box-sizing: border-box;
+	border: 2px solid rgba(0, 0, 0, 0.02);
+	margin-bottom: 10px;
+	margin-left: 108px;
+	text-align: center;
+	margin-bottom: 27px;
+	font-family: 'Jua', sans-serif;
+}
+
+#company:focus, #bank:focus, #id:focus, #pw:focus, #pw_re:focus, #email:focus,
+	#name:focus, #phone:focus, #bankNum:focus, #code:focus {
+	border: 2px solid rgba(0, 0, 0, 0.18);
+	background-color: beige;
+	!
+	important;
+}
+
+.abtn, .btn {
+	cursor: pointer;
+	margin: 0 auto;
+	color: #fff;
+	background: #964b00;
+	border: 0.5px solid gray;
+	border-radius: 3px 3px 3px 3px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Jua', sans-serif;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.submit {
+	cursor: pointer;
+	border-radius: 5em;
+	color: #fff;
+	background: #964b00;
+	border: 0;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Jua', sans-serif;
+	margin-left: 35%;
+	font-size: 13px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.forgot {
+	padding-top: 15px;
+}
+
+.dropdown {
+	float: left;
+}
+
+#text {
+	display: block;
+	padding-left: 100px;
+	text-align: left;
+	font-family: 'Jua', sans-serif;
+}
+
+.phone:before, .phone:after {
+	content: '';
+	position: absolute;
+	z-index: 2;
+	top: 9px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 4px dashed;
+	border-color: #888888 transparent;
+	pointer-events: none;
+}
+
+.bank:before, .bank:after {
+	content: '';
+	position: absolute;
+	z-index: 2;
+	top: 9px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 4px dashed;
+	border-color: #888888 transparent;
+	pointer-events: none;
+}
+
+.phone:before {
+	border-bottom-style: solid;
+	border-top: none;
+}
+
+.phone:after, .bank:after {
+	margin-top: 7px;
+	border-top-style: solid;
+	border-bottom: none;
+}
+
+.phone-select, .bank-select {
+	position: relative;
+	width: 130%;
+	margin: 0;
+	height: 28px;
+	line-height: 14px;
+	font-size: 12px;
+	color: #62717a;
+	text-shadow: 0 1px white;
+	background: #f2f2f2;
+	background: rgba(0, 0, 0, 0) !important;
+	border: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+
+.bank-select:focus, .phone-select:focus {
+	z-index: 3;
+	width: 100%;
+	color: #394349;
+	outline: 2px solid #49aff2;
+	outline: 2px solid -webkit-focus-ring-color;
+	outline-offset: -2px;
+}
+
+.bank-select>option, .phone-select>option {
+	margin: 3px;
+	padding: 6px 8px;
+	text-shadow: none;
+	background: #f2f2f2;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.lt-ie9 .phone, .lt-ie9 .bank {
+	z-index: 1;
+}
+
+.lt-ie9 .phone-select, .lt-ie9 .bank-select {
+	z-index: -1;
+}
+
+.lt-ie9 .phone-select:focus, .lt-ie9 .bank-select:focus {
+	z-index: 3;
+}
+
+@
+-moz-document url-prefix () { .phone-select {
+	padding-left: 6px;
+}
+
+}
+@media ( max-width : 600px) {
+	.main {
+		border-radius: 0px;
+	}
+	p {
+		margin: 0 auto;
+	}
+}
+
+::placeholder {
+	opacity: 0.4;
+}
+
+#submit {
+	background-color: #4a2100;
+	color: #ffac05;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#submit:hover {
+	background-color: #ffac05;
+	color: #4a2100;
+}
+
+#reset {
+	background-color: #4a2100;
+	color: #ffac05;
+	border-radius: 3px 3px 3px 3px;
+}
+
+#reset:hover {
+	background-color: #ffac05;
+	color: #4a2100;
+}
+
+#roadAddr, #detailAddr {
+	float: left;
+}
+
+#eBtn {
+	color: #fff;
+	font-family: 'Jua', sans-serif;
+	background: #964b00;
+	border: 0.5px solid gray;
+	border-radius: 3px 3px 3px 3px;
+}
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		$(".tab>ul>li").click(function() {
-			$(".tab>ul>li").removeClass("tab-selected")
-			$(this).addClass("tab-selected");
-			var index = $(".tab>ul>li").index($(this));
-			$(".content").removeClass("show-content");
-			$(".content").eq(index).addClass("show-content")
-		});
 
-		$(".order>div").click(function() {
-			$(".order>div").css("color", "");
-			$(this).css("color", "#F6b70d");
+function deleteMember(memberId) {
+	if (confirm("탈퇴하시겠습니까?"))
 
-		})
-		$("#inputArea").keyup(function() {
-			var inputLength = $(this).val().length;
-			if (inputLength > 2000) {
-				alert("입력가능 글자를 초과했습니다")
-				return;
-			}
-			$(".textNum>span").html(inputLength + " / 2000");
+		location.href = "/deleteMember?memberId=" + memberId;
+}
 
-		})
+function addrSearch1() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			$("#postCode").val(data.zonecode);
+			$("#roadAddr").val(data.roadAddress);
+		
+		}
+	}).open();
+}
 
-		$(".p-title>input").click(function(event) {
-			event.stopPropagation();
-		})
+function addrSearch2() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			$("#postCode2").val(data.zonecode);
+			$("#roadAddr2").val(data.roadAddress);
+			
+		}
+	}).open();
+}
 
-		$(".product").children().not(".p-info>.p-title>input").click(
-				function() {
-					console.log("test");
-				})
 
-		$("#imgInp").on('change', function() {
-			changeImg(this);
-		});
+   $(function() {
+      $(".tab>ul>li").click(function() {
+         $(".tab>ul>li").removeClass("tab-selected")
+         $(this).addClass("tab-selected");
+         var index = $(".tab>ul>li").index($(this));
+         $(".content").removeClass("show-content");
+         $(".content").eq(index).addClass("show-content")
+      });
 
-	})
+      $(".order>div").click(function() {
+         $(".order>div").css("color", "");
+         $(this).css("color", "#F6b70d");
 
-	function reviewInsert(sellEndNo) {
-		console.log("시작");
-		var memberId = "${sessionScope.member.memberId}";
-		var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}";
-		var url = "/reviewInsertFrm";
-		var title = "reviewInsertFrm";
-		var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
-		var popup = window.open("", title, status);
-		$("input[name=sellEndNo]").val(sellEndNo);
-		$("input[name=memberId]").val(memberId);
-		$("input[name=sellEndWriter]").val(sellEndWriter);
-		$(".reviewInsertFrm").attr("action", url);
-		$(".reviewInsertFrm").attr("method", "post");
-		$(".reviewInsertFrm").attr("target", title);//새로 열린 popup창과 form태그를 연결
-		$(".reviewInsertFrm").submit();
-	}
+      })
+      $("#inputArea").keyup(function() {
+         var inputLength = $(this).val().length;
+         if (inputLength > 2000) {
+            alert("입력가능 글자를 초과했습니다")
+            return;
+         }
+         $(".textNum>span").html(inputLength + " / 2000");
+
+      })
+
+      $(".p-title>input").click(function(event) {
+         event.stopPropagation();
+      })
+
+      $(".product").children().not(".p-info>.p-title>input").click(
+            function() {
+               console.log("test");
+            })
+
+      $("#imgInp").on('change', function() {
+         changeImg(this);
+      });
+
+   })
+
+   function reviewInsert(sellEndNo) {
+      console.log("시작");
+      var memberId = "${sessionScope.member.memberId}";
+      var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}";
+      var url = "/reviewInsertFrm";
+      var title = "reviewInsertFrm";
+      var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
+      var popup = window.open("", title, status);
+      $("input[name=sellEndNo]").val(sellEndNo);
+      $("input[name=memberId]").val(memberId);
+      $("input[name=sellEndWriter]").val(sellEndWriter);
+      $(".reviewInsertFrm").attr("action", url);
+      $(".reviewInsertFrm").attr("method", "post");
+      $(".reviewInsertFrm").attr("target", title);//새로 열린 popup창과 form태그를 연결
+      $(".reviewInsertFrm").submit();
+   }
 </script>
 </head>
 <body>
@@ -641,7 +931,243 @@ ul {
 				<div class="contents">
 					<div class="content show-content">
 						<div class="content-title">내정보 수정</div>
-						<div class="request"></div>
+						<div class="request">
+							<form class="form1" method="post" action="/updateMember">
+
+								<label for="id">
+									<div id="text">아이디</div>
+									<div style="padding-left: 100px; padding-right: 40px">
+										<input class="id " type="text" id="id" align="center"
+											value="${m.memberId}" name="id"
+											style="margin-right: 35px; width: 150px" readonly>
+									</div>
+								</label> <br> <label for="pw">
+									<div id="text" style="float: left;"
+										style="padding-bottom:10px;">비밀번호</div> <br>
+									<div style="padding-left: 100px; padding-right: 40px">
+
+										<input class="pw" type="password" id="pw" align="center"
+											style="width: 150px" "
+										value="${m.memberPw }"
+											name="pw">
+									</div> <br>
+								</label>
+								<div id="text" style="padding-bottom: 10px;">비밀번호 확인</div>
+								<div style="padding-left: 100px; padding-right: 40px">
+
+									<input class="pw" type="password" id="pw" align="center"
+										style="width: 150px" "
+										value="${m.memberPw }"
+										style="display:none" name="pw">
+								</div>
+								<br> </label>
+
+								<div id="pw_result" style="display: none"></div>
+
+								<br> <label for="name">
+									<div id="text" style="padding-top: 20px;">이름</div>
+									<div style="padding-left: 100px; padding-right: 40px">
+										<input type="text" name="name" id="name"
+											value="${m.memberName }" style="width: 150px">
+									</div>
+								</label>
+
+
+								<div id="name_result"></div>
+								<br>
+
+								<lable for="phone">
+								<div id="text">휴대전화</div>
+
+								<div style="margin-left: 108px; display: inline-block;">
+									<div class="Pcontainer"
+										style="display: inline-block; float: left;">
+										<div class="dropdown" style="padding-top: 10px;">
+											<select class="phone" style="width: 50px; height: 40px;">
+
+												<option value="82">+82</option>
+												<option value="84">+84</option>
+												<option value="1">+1</option>
+												<option value="10">+10</option>
+												<option value="1">+11</option>
+												<option value="12">+12</option>
+												<option value="13">+13</option>
+												<option value="14">+14</option>
+												<option value="15">+15</option>
+												<option value="16">+16</option>
+												<option value="17">+17</option>
+
+											</select>
+
+										</div>
+
+
+									</div>
+
+									<div id="tell_input"
+										style="padding-top: 10px; padding-right: 30px; float: right;">
+										<input type="text" id="phone" name="phone"
+											style="width: 150px;" value="${m.memberPhone }">
+									</div>
+								</div>
+								</lable>
+								<br>
+								<div id="tell_result"
+									style="margin-top: 50px; margin-bottom: 10px;"></div>
+
+
+
+								<br> <label for="email">
+									<div id="text">이메일</div>
+									<div style="padding-left: 98px; padding-right: 10px">
+										<input type="email" id="email" value="${m.memberEmail }"
+											name="email" style="float: left; width: 200px;"> <input
+											type="button" id="eBtn"
+											style="width: 115px; height: 40px; margin-left: 10px;"
+											value="인증하기">
+									</div>
+									<div style="padding-left: 98px;">
+										<input type="text" id="mailCode"
+											style="display: none; margin-top: 13px; width: 120px;">
+										<button type="button" id="mailResult" class="btn "
+											style="display: none; width: 100px; font-size: 10px; height: 40px; padding-bottom: 10px; background-color: balck;">확인</button>
+									</div> <span id="mailMsg"></span> <br> <br>
+
+									<div id="email_result"
+										style="margin-top: 2px; margin-bottom: 10px;"></div>
+								</label>
+
+
+
+								<div id="text" style="text-align: left;">자택 주소</div>
+
+								<div>
+									<div style="padding-right: 40px;">
+										<input type="text" id="postCode" name="postCode1"
+											style="width: 200px; display: inline-block; width: 150px"
+											class="form-control" value="${m.memberPostCode }" readonly>
+										<input type="button" id="addrSearchBtn"
+											onclick="addrSearch1();" class="btn btn-primary" value="변경하기"
+											style="width: 120px;">
+									</div>
+									<div>
+										<input id="roadAddr"
+											style="width: 190px; display: inline-block;" name="roadAddr1"
+											type="text" class="form-control" value="${m.memberRoadAddr }">
+
+
+										<input id="detailAddr" name="detailAddr1"
+											style="width: 125px; float: left; margin-left: 15px;"
+											type="text" ;
+							class="form-control"
+											value="${m.memberDetailAddr }">
+
+									</div>
+
+								</div>
+								<c:if test="${m.memberType eq 2 }">
+									<br>
+									<label for="title"> <br>
+
+										<div
+											style="padding-left: 100px; padding-right: 40px; text-align: left;">
+											<br> <br> <br>
+											<div style="text-align: left; padding-right: 108px;">상호명</div>
+
+											<input type="text" name="company" id="company"
+												style="width: 150px; height: 40px;"
+												placeholder=" 상호명을 입력해주세요" value="${m.companyName }">
+										</div>
+									</label>
+
+
+									<div id="title_result"></div>
+
+									<br>
+
+									<div id="text" style="text-align: left;">사업자 등록 주소</div>
+									<div>
+										<div style="padding-right: 40px;">
+											<input type="text" id="postCode2" name="postCode2"
+												style="width: 200px; display: inline-block; width: 150px"
+												class="form-control" value="${m.memberPostCode2 }" readonly>
+											<input type="button" id="addrSearchBtn2"
+												onclick="addrSearch2();" class="btn btn-primary"
+												value="변경하기" style="width: 120px;">
+										</div>
+										<div>
+											<input id="roadAddr2"
+												style="width: 190px; display: inline-block;"
+												name="roadAddr2" type="text" class="form-control"
+												value="${m.memberRoadAddr2 }"> <input
+												id="detailAddr2" name="detailAddr2"
+												style="width: 125px; margin-left: 15px;" type="text"
+												;
+														class="form-control"
+												value="${m.memberDetailAddr2 }">
+
+										</div>
+
+									</div>
+									<br>
+									<br>
+									<br>
+									<br>
+
+									<lable for="bank">
+									<div id="text" style="text-align: left;">주거래 은행</div>
+									</lable>
+									<div style="float: left; padding-left: 100px">
+										<div class="dropdown">
+											<select class="bank" style="width: 110px; height: 40px"
+												name="bankName">
+
+												<option value="기업">기업은행</option>
+												<option value="신한">신한은행</option>
+												<option value="국민">국민은행</option>
+												<option value="리드코푸">리드코프</option>
+												<option value="러시앤캐쉬">러쉬앤캐쉬</option>
+
+
+											</select>
+
+										</div>
+
+
+									</div>
+
+									<div id="bank_input" style="padding-right: 30px;">
+										<input type="text" id="bank" name="bankAccount"
+											style="width: 213px;" placeholder="-빼고 입력해주세요"
+											value="${m.bankAccount }">
+									</div>
+									<br>
+									<br>
+									<div id="bank_result" style="margin-top: 50px;"></div>
+								</c:if>
+
+
+								<br> <br> <br> <br>
+
+								<div style="text-align: center">
+									<input type="reset" id="reset" class="submit" align="center"
+										value="되돌아가기"
+										style="margin: 10px; margin-bottom: 12px; width: 150px"
+										onClick="location.href='/index.jsp';"> <input
+										type="submit" id="submit" class="submit" align="center"
+										value="수정하기" style="margin: 10px; width: 150px"> <input
+										type="button" align="center" id="submit"
+										style="margin: 10px; width: 150px; margin: 10 px; width: 150px; outline: 0; border: 0; color: red; padding-top: 10px; padding-bottom: 10px;"
+										onclick="deleteMember('${m.memberId}')" value="탈퇴하기">
+
+									<p class="forgot" align="center"></p>
+
+								</div>
+
+							</form>
+
+
+						</div>
 					</div>
 					<div class="content">
 						<c:if test="${sessionScope.member.memberType eq 1 }">
@@ -651,9 +1177,7 @@ ul {
 						<c:if test="${sessionScope.member.memberType eq 2 }">
 							<div class="content-title">판매중 목록</div>
 						</c:if>
-						<div class="content-menu">
-							
-						</div>
+						<div class="content-menu"></div>
 						<div class="list">
 							<c:forEach items="${list }" var="l">
 								<div class="product">
@@ -663,16 +1187,16 @@ ul {
 									</div>
 									<div class="p-info">
 										<div class="p-title">
-											<span>${l.sellTitle}</span> 
+											<span>${l.sellTitle}</span>
 											<button onclick="" type="button">상세보기</button>
 										</div>
 										<div class="p-price">
-										<fmt:formatNumber value="${l.sellPrice}"
-															pattern="###,###,###,###" />원
+											<fmt:formatNumber value="${l.sellPrice}"
+												pattern="###,###,###,###" />
+											원
 										</div>
 										<div class="p-day">${l.sellWriter }</div>
-										<div class="p-location">
-											구매중 수량 :  ${l.sellCount }/${l.sellMax }
+										<div class="p-location">구매중 수량 : ${l.sellCount }/${l.sellMax }
 										</div>
 									</div>
 								</div>
@@ -703,8 +1227,8 @@ ul {
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
 											<c:if test="${sessionScope.member.memberType eq 1}">
-											<button onclick="reviewInsert('${e.sellEndNo}')"
-												type="button">리뷰작성</button>
+												<button onclick="reviewInsert('${e.sellEndNo}')"
+													type="button">리뷰작성</button>
 											</c:if>
 										</div>
 										<div class="p-price">55,000원</div>
@@ -720,8 +1244,8 @@ ul {
 
 					<div class="content">
 						<div class="content-title">쪽지함</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
