@@ -121,9 +121,69 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.search-btn {
+	color: #4a2100;
+	font-size: 25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+
+.search-btn:hover {
+	background-color: #ffac05;
+	color: white;
+}
+
+.logoTitle {
+	font-weight: bold;
+	font-size: 30px;
+	color: #ffac05;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
+
+		$.ajax({
+			url : "/adminGetMsgCount",
+			type : "post",
+
+			success : function(data) {
+				console.log(data);
+				if (data <= 0) {
+					$("#nonReadMsg").remove();
+					return;
+				}
+
+				$(".mess__title").find("span").html(data);
+				$("#nonReadMsg").html(data);
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});
+
+		$("#msg-btn").click(function() {
+			$.ajax({
+				url : "/adminGetMsgCount",
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if (data <= 0) {
+						$("#nonReadMsg").remove();
+						return;
+					}
+
+					$(".mess__title").find("span").html(data);
+					$("#nonReadMsg").html(data);
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			});
+		});
+
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
 				item.checked = $("input[name=allCheck]").prop("checked");
@@ -231,7 +291,9 @@
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 		<div class="logo">
-			<a href="#"> <img src="images/icon/logo.png" alt="Cool Admin" />
+			<a href="index.jsp"> <img src="/imgs/mole.jpg"
+				style="width: 55px; margin-right: 10px;" /><span class="logoTitle">LAST
+					FARM</span>
 			</a>
 		</div>
 		<div class="menu-sidebar__content js-scrollbar1">
@@ -243,11 +305,15 @@
 				<li><a href="/manageSell?reqPage=1"> <i
 						class="far fa-list-alt"></i>거래글 관리
 				</a></li>
-				<li class="active"><a href="/manageReview?reqPage=1"> <i
+				<li class="active"><a style="color: #4a2100" href="/manageReview?reqPage=1"> <i
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning"> <i	class="fas fa-exclamation"></i>신고글 관리
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
+						
+						<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
 				</a></li>
 
 			</ul>
@@ -268,82 +334,29 @@
 								placeholder="Search for writer &amp; title..." value=${search }>
 							<input type="hidden" name="reqPage" value="1"> <input
 								type="hidden" name="reqCount" value="10">
-							<button class="au-btn--submit" type="submit">
+							<button style="height: 43px; width: 43px;" class="search-btn" type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
 						</form>
 						<div class="header-button">
 							<div class="noti-wrap">
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-comment-more"></i> <span class="quantity">1</span>
+								<div id="msg-btn" class="noti__item js-item-menu">
+									<i class="far fa-envelope-open"></i> <span id="nonReadMsg" class="quantity">8</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>You have 2 news message</p>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-											</div>
-											<div class="content">
-												<h6>Michelle Moreno</h6>
-												<p>Have sent a photo</p>
-												<span class="time">3 min ago</span>
-											</div>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-											</div>
-											<div class="content">
-												<h6>Diane Myers</h6>
-												<p>You are now connected on message</p>
-												<span class="time">Yesterday</span>
-											</div>
+											<p style="font-size: 20px;">
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
+												있습니다.
+											</p>
 										</div>
 										<div class="mess__footer">
-											<a href="#">View all messages</a>
+											<a href="/adminGetMsgList">View all messages</a>
 										</div>
 									</div>
 								</div>
+								<div class="noti__item js-item-menu"></div>
 
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
-									<div class="notifi-dropdown js-dropdown">
-										<div class="notifi__title">
-											<p>You have 3 Notifications</p>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c1 img-cir img-40">
-												<i class="zmdi zmdi-email-open"></i>
-											</div>
-											<div class="content">
-												<p>You got a email notification</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c2 img-cir img-40">
-												<i class="zmdi zmdi-account-box"></i>
-											</div>
-											<div class="content">
-												<p>Your account has been blocked</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c3 img-cir img-40">
-												<i class="zmdi zmdi-file-text"></i>
-											</div>
-											<div class="content">
-												<p>You got a new file</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__footer">
-											<a href="#">All notifications</a>
-										</div>
-									</div>
-								</div>
+								<div class="noti__item js-item-menu"></div>
 							</div>
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -356,28 +369,13 @@
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <!-- <img src="images/icon/avatar-01.jpg" alt="John Doe" /> -->
-												</a>
+												<i style="font-size: 50px;" class="fas fa-user"></i>
 											</div>
 											<div class="content">
 												<h5 class="name">
 													<a href="#">administrator</a>
 												</h5>
-												<span class="email">admin@example.com</span>
-											</div>
-										</div>
-										<div class="account-dropdown__body">
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-account"></i>Account
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-settings"></i>Setting
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-money-box"></i>Billing
-												</a>
+												<span class="email">admin@gmail.com</span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
@@ -403,28 +401,19 @@
 								<!-- DATA TABLE -->
 								<h3 class="title-5 m-b-35" style="font-weight: bold;">
 									<i style="color: #ffac05" class="fas fa-star"></i> 리뷰 관리
+									<span
+											style="color: gray; font-size: 15px"> (검색결과 리뷰
+											:${totalCount }개)</span>
 								</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
 										<div class="rs-select2--light rs-select2--md">
-											<select class="js-select2" name="property">
-												<option selected="selected">All Properties</option>
-												<option value="">Option 1</option>
-												<option value="">Option 2</option>
-											</select>
-											<div class="dropDownSelect2"></div>
+											
 										</div>
 										<div class="rs-select2--light rs-select2--sm">
-											<select class="js-select2" name="time">
-												<option selected="selected">Today</option>
-												<option value="">3 Days</option>
-												<option value="">1 Week</option>
-											</select>
-											<div class="dropDownSelect2"></div>
+											
 										</div>
-										<button class="au-btn-filter">
-											<i class="zmdi zmdi-filter-list"></i>filters
-										</button>
+									
 									</div>
 									<div class="table-data__tool-right">
 										<button class="btn btn-danger" id="selectDel">
@@ -498,7 +487,7 @@
 																<i class="zmdi zmdi-delete"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="More">
+																data-placement="top" title="More" onclick="location.href='/sellContentFrm?reviewBuyEndNo=${rs.review.reviewBuyEndNo}'">
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>
@@ -506,7 +495,7 @@
 												</tr>
 												<tr class="spacer"></tr>
 											</c:forEach>
-											${totalCount }
+										
 										</tbody>
 									</table>
 									<c:if test="${empty list  && totalCount==0 }">

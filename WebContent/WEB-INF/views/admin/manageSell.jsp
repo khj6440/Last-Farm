@@ -68,7 +68,11 @@
 .next_page:hover>a, .pre_page:hover>a {
 	color: #ffac05;
 }
-
+.logoTitle {
+	font-weight: bold;
+	font-size: 30px;
+	color: #ffac05;
+}
 .noResult {
 	height: 500px;
 	display: flex;
@@ -84,9 +88,68 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.search-btn {
+	color: #4a2100;
+	font-size: 25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+
+.search-btn:hover {
+	background-color: #ffac05;
+	color: white;
+}
+
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+
+		$.ajax({
+			url : "/adminGetMsgCount",
+			type : "post",
+			
+			success : function(data) {
+				console.log(data);
+				if(data<=0){
+					$("#nonReadMsg").remove();
+					return;
+				}
+				
+				$(".mess__title").find("span").html(data);
+				$("#nonReadMsg").html(data);
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});		
+		
+		
+		$("#msg-btn").click(function(){
+			$.ajax({
+				url : "/adminGetMsgCount",
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if(data<=0){
+						$("#nonReadMsg").remove();
+						return;
+					}
+					
+					$(".mess__title").find("span").html(data);
+					$("#nonReadMsg").html(data);
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			});			
+		});
+		
+		
+		
 		$("#sellDel").click(function() {
 			console.log("게시물삭제요청");
 			$.ajax({
@@ -248,7 +311,9 @@
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block">
 		<div class="logo">
-			<a href="#"> <img src="images/icon/logo.png" alt="Cool Admin" />
+			<a href="index.jsp"> <img src="/imgs/mole.jpg"
+				style="width: 55px; margin-right: 10px;" /><span class="logoTitle">LAST
+					FARM</span>
 			</a>
 		</div>
 		<div class="menu-sidebar__content js-scrollbar1">
@@ -259,7 +324,7 @@
 				<li><a href="/manageMember?reqPage=1"> <i
 						class="fas fa-users"></i>회원 관리
 				</a></li>
-				<li class="active"><a href="/manageSell?reqPage=1"> <i
+				<li class="active"><a style="color: #4a2100" href="/manageSell?reqPage=1"> <i
 						class="far fa-list-alt"></i>거래글 관리
 				</a></li>
 
@@ -267,8 +332,11 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning"><i class="fas fa-exclamation"></i>신고글
+				<li><a href="/manageWarning"><i class="fas fa-exclamation-circle"></i>신고글
 						관리 </a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
+				</a></li>
 			</ul>
 			</nav>
 		</div>
@@ -290,68 +358,29 @@
 								placeholder="Search for title , user ID..." value="${search }" />
 							<input type="hidden" name="reqPage" value="1"> <input
 								type="hidden" name="reqCount" value="10">
-							<button class="au-btn--submit" type="submit">
+							<button style="height: 43px; width: 43px;" class="search-btn" type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
 						</form>
 						<div class="header-button">
-							<div class="noti-wrap">
-								<div class="noti__item js-item-menu">
-									<i class="fas fa-exclamation"></i> <span class="quantity">1</span>
+						<div class="noti-wrap">
+								<div id="msg-btn" class="noti__item js-item-menu">
+									<i class="far fa-envelope-open"></i> <span id="nonReadMsg" class="quantity">8</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>신고요청 알림</p>
-										</div>
-
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-											</div>
-											<div class="content">
-												<h6>Michelle Moreno</h6>
-												<p>Have sent a photo</p>
-												<span class="time">3 min ago</span>
-											</div>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-											</div>
-											<div class="content">
-												<h6>Diane Myers</h6>
-												<p>You are now connected on message</p>
-												<span class="time">Yesterday</span>
-											</div>
+											<p style="font-size: 20px;">
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
+												있습니다.
+											</p>
 										</div>
 										<div class="mess__footer">
-											<a href="#">View all messages</a>
+											<a href="/adminGetMsgList">View all messages</a>
 										</div>
 									</div>
 								</div>
-								<div id="sellDel" class="noti__item js-item-menu">
-									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
-									<div class="notifi-dropdown js-dropdown">
-										<div class="notifi__title">
-											<p>게시물 삭제 요청</p>
-										</div>
-										<div class="mess__item">
-											<div
-												style="border-radius: 0px; display: flex; align-items: center; justify-content: center;"
-												class="image img-cir img-40">
-												<i style="color: #f57542" class="fas fa-trash-alt"></i>
-											</div>
-											<div class="content">
-												<h6>${s.sellWriter }</h6>
-												<p>${s.sellTitle }</p>
-												<span class="time">${s.sellDate}</span>
-											</div>
-										</div>
+								<div class="noti__item js-item-menu"></div>
 
-										<div class="notifi__footer">
-											<a href="#">요청 더 보기</a>
-										</div>
-									</div>
-								</div>
+								<div class="noti__item js-item-menu"></div>
 							</div>
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -364,34 +393,20 @@
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <!-- <img src="images/icon/avatar-01.jpg" alt="John Doe" /> -->
-												</a>
+												<i style="font-size: 50px;" class="fas fa-user"></i>
 											</div>
 											<div class="content">
 												<h5 class="name">
 													<a href="#">administrator</a>
 												</h5>
-												<span class="email">admin@example.com</span>
-											</div>
-										</div>
-										<div class="account-dropdown__body">
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-account"></i>Account
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-settings"></i>Setting
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-money-box"></i>Billing
-												</a>
+												<span class="email">admin@gmail.com</span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
 											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -412,23 +427,16 @@
 								<!-- DATA TABLE -->
 								<h3 class="title-5 m-b-35">
 									<i style="color: navy;" class="far fa-list-alt"></i> <span
-										style="font-weight: bold">거래글 관리</span>
+										style="font-weight: bold">거래글 관리</span><span
+											style="color: gray; font-size: 15px"> (검색결과 거래글
+											:${totalCount }개)</span>
 								</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
 										<div class="rs-select2--light rs-select2--md">
-											<select class="js-select2" name="property">
-												<option value="0" selected>판매중 순</option>
-												<option value="1">삭제요청 순</option>
-												<option value="2">삭제진행중 순</option>
-											</select>
-											<div class="dropDownSelect2"></div>
+											
 										</div>
-
-										<button class="au-btn-filter">
-											<i class="zmdi zmdi-filter-list"></i>정렬
-										</button>
-									</div>
+								</div>
 									<div class="table-data__tool-right">
 										<button class="btn btn-danger" id="selectDel">
 											<i class="zmdi zmdi-minus"></i> 선택항목 삭제
@@ -511,7 +519,7 @@
 
 															<button class="item" data-toggle="tooltip"
 																data-placement="top" title="Delete"
-																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?')">
+																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?<div>현재 거래중인 수량 [${s.sellCount}]개는 환불이 진행됩니다. </div>')">
 																<i class="zmdi zmdi-delete"></i>
 															</button>
 
@@ -525,7 +533,7 @@
 
 												<tr class="spacer"></tr>
 											</c:forEach>
-											${totalCount }
+											
 										</tbody>
 									</table>
 									<c:if test="${empty list  && totalCount==0 }">

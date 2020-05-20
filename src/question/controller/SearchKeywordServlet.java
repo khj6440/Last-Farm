@@ -34,7 +34,7 @@ public class SearchKeywordServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = 1;
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		String keyword = request.getParameter("keyword");
 		ArrayList<Question> list =null;
 		QuestionPageData pd = new QuestionService().selectSearch(reqPage, keyword);

@@ -10,11 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-$(function() {
-    var regId = /^[A-Za-z0-9]{5,12}/;
-    var regPw = /^[a-z0-9_-]{3,16}$/;
-
-
+    $(function() {
 
     $("#id").focusout(function() {
         if ($("#id").val() == "") {

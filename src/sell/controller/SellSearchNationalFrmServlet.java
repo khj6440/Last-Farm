@@ -37,7 +37,7 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		String sortingTab = request.getParameter("sortingTab");
 		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sellPage/sellSearchNational.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
 		request.setAttribute("sellList", scp.getSellList());
 		System.out.println(scp.getSellList().get(0).getSellNo());
 		request.setAttribute("pageNavi", scp.getPageNavi());

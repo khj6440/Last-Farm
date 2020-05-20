@@ -33,9 +33,7 @@ public class AdminDelSellServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("서블릿 호출");
 		String sellNo = request.getParameter("sellNo");
-		System.out.println(sellNo);
 		StringTokenizer sT =  new StringTokenizer(sellNo, "/");
 		ArrayList<String> checkList = new ArrayList<String>();
 		while(sT.hasMoreTokens()) {

@@ -56,6 +56,59 @@
 <link href="/admin_css/css/adminTab.css" rel="stylesheet" media="all">
 <script type="text/javascript">
 	$(function() {
+		
+		$.ajax({
+			url : "/adminGetMsgCount",
+			type : "post",
+			
+			success : function(data) {
+				console.log(data);
+				if(data<=0){
+					$("#nonReadMsg").remove();
+					return;
+				}
+				
+				$(".mess__title").find("span").html(data);
+				$("#nonReadMsg").html(data);
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});		
+		
+		
+		$("#msg-btn").click(function(){
+			$.ajax({
+				url : "/adminGetMsgCount",
+				type : "post",
+				success : function(data) {
+					console.log(data);
+					if(data<=0){
+						$("#nonReadMsg").remove();
+						return;
+					}
+					
+					$(".mess__title").find("span").html(data);
+					$("#nonReadMsg").html(data);
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			});			
+		});
+		
+		
+		$("#sort-btn").click(function(){
+			var value =$("#sort-select").children("option:selected").val();
+			var link = document.location.href;
+			var searched = $("input[name=search]").val();
+			if (!link.match("search")) {
+				location.href = "/manageMember?reqPage=1&reqCount="+$(".show-count").children("option:selected").val()+"&sort="+ value;
+			} else {
+				location.href = "/adminSearchMember?reqPage=1&reqCount="+$(".show-count").children("option:selected").val()+"&search="+ searched+"&sort="+value;
+			}
+		});
+		
 		$(".show-count")
 				.change(
 						function() {
@@ -123,6 +176,7 @@
 				},
 				type : "post",
 				success : function(data) {
+					location.reload();
 					if (data > 0) {
 						alert(data + "개 삭제 성공");
 					} else {
@@ -230,15 +284,17 @@
 		<!-- MENU SIDEBAR-->
 		<aside class="menu-sidebar d-none d-lg-block" style="overflow:hidden">
 		<div class="logo">
-			<a href="index.jsp"> <img src="/imgs/mole.jpg" style="width: 55px; margin-right: 10px;"
-				 /><span class="logoTitle">LAST FARM</span>
+			<a href="index.jsp"> <img src="/imgs/mole.jpg"
+				style="width: 55px; margin-right: 10px;" /><span class="logoTitle">LAST
+					FARM</span>
 			</a>
 		</div>
 		<div class="menu-sidebar__content js-scrollbar1">
 			<nav class="navbar-sidebar">
 			<ul class="list-unstyled navbar__list">
-				<li class="active"><a href="/manageMember?reqPage=1"> <i
-						class="fas fa-users"></i>회원 관리
+				<li class="active"><a style="color: #4a2100"
+					href="/manageMember?reqPage=1"> <i class="fas fa-users"></i>회원
+						관리
 				</a></li>
 				<li><a href="/manageSell?reqPage=1"> <i
 						class="far fa-list-alt"></i>거래글 관리
@@ -248,8 +304,12 @@
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning"><i class="fas fa-exclamation"></i>신고글 관리
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
 				</a></li>
+
 			</ul>
 			</nav>
 		</div>
@@ -264,87 +324,37 @@
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<form class="form-header" action="/adminSearchMember" method="get">
-							<input class="au-input au-input--xl" type="text" name="search"
+							<input style="margin-right: 10px;" class="au-input au-input--xl"
+								type="text" name="search"
 								placeholder="Search for user ID &amp; name..."
 								value="${search }"> <input type="hidden" name="reqPage"
 								value="1"> <input type="hidden" name="reqCount"
 								value="10">
-							<button class="au-btn--submit" type="submit">
+							<button style="height: 43px; width: 43px;" class="search-btn"
+								type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
 						</form>
 						<div class="header-button">
 							<div class="noti-wrap">
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-comment-more"></i> <span class="quantity">1</span>
+								<div id="msg-btn" class="noti__item js-item-menu">
+									<i class="far fa-envelope-open"></i> <span id="nonReadMsg"
+										class="quantity">0</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
-											<p>You have 2 news message</p>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-											</div>
-											<div class="content">
-												<h6>Michelle Moreno</h6>
-												<p>Have sent a photo</p>
-												<span class="time">3 min ago</span>
-											</div>
-										</div>
-										<div class="mess__item">
-											<div class="image img-cir img-40">
-												<img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-											</div>
-											<div class="content">
-												<h6>Diane Myers</h6>
-												<p>You are now connected on message</p>
-												<span class="time">Yesterday</span>
-											</div>
+											<p style="font-size: 20px;">
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
+												있습니다.
+											</p>
 										</div>
 										<div class="mess__footer">
-											<a href="#">View all messages</a>
+											<a href="/adminGetMsgList">View all messages</a>
 										</div>
 									</div>
 								</div>
-								
-								<div class="noti__item js-item-menu">
-									<i class="zmdi zmdi-notifications"></i> <span class="quantity">3</span>
-									<div class="notifi-dropdown js-dropdown">
-										<div class="notifi__title">
-											<p>You have 3 Notifications</p>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c1 img-cir img-40">
-												<i class="zmdi zmdi-email-open"></i>
-											</div>
-											<div class="content">
-												<p>You got a email notification</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c2 img-cir img-40">
-												<i class="zmdi zmdi-account-box"></i>
-											</div>
-											<div class="content">
-												<p>Your account has been blocked</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__item">
-											<div class="bg-c3 img-cir img-40">
-												<i class="zmdi zmdi-file-text"></i>
-											</div>
-											<div class="content">
-												<p>You got a new file</p>
-												<span class="date">April 12, 2018 06:50</span>
-											</div>
-										</div>
-										<div class="notifi__footer">
-											<a href="#">All notifications</a>
-										</div>
-									</div>
-								</div>
+								<div class="noti__item js-item-menu"></div>
+
+								<div class="noti__item js-item-menu"></div>
 							</div>
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -357,30 +367,16 @@
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <!-- <img src="images/icon/avatar-01.jpg" alt="John Doe" /> -->
-												</a>
+												<i style="font-size: 50px;" class="fas fa-user"></i>
 											</div>
 											<div class="content">
 												<h5 class="name">
 													<a href="#">administrator</a>
 												</h5>
-												<span class="email">admin@example.com</span>
+												<span class="email">admin@gmail.com</span>
 											</div>
 										</div>
-										<div class="account-dropdown__body">
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-account"></i>Account
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-settings"></i>Setting
-												</a>
-											</div>
-											<div class="account-dropdown__item">
-												<a href="#"> <i class="zmdi zmdi-money-box"></i>Billing
-												</a>
-											</div>
-										</div>
+
 										<div class="account-dropdown__footer">
 											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
@@ -407,39 +403,42 @@
 											style="font-weight: bold">회원 관리 </span><span
 											style="color: gray; font-size: 15px"> (검색결과 회원
 											:${totalCount })</span>
-
 									</h3>
-
 									<div class="filters m-b-45"
 										style="display: flex;; justify-content: space-between;">
-										<div>
+										<div style="display: flex;">
 											<div
 												class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
-												<select class="js-select2" name="property">
-													<option selected="selected">전체 사용자</option>
-													<option value="seller">판매자</option>
-													<option value="buyer">구매자</option>
-												</select>
+												<c:if test="${sort eq 'member_date desc' }">
+													<select id="sort-select" class="js-select2" name="property">
+														<option value="가입일순" selected>가입일순</option>
+														<option value="타입순">타입순</option>
+														<option value="ID순">ID순</option>
+													</select>
+												</c:if>
+												<c:if test="${sort eq 'member_type' }">
+													<select id="sort-select" class="js-select2" name="property">
+														<option value="가입일순">가입일순</option>
+														<option value="타입순" selected>타입순</option>
+														<option value="ID순">ID순</option>
+													</select>
+												</c:if>
+												<c:if test="${sort eq 'member_id' }">
+													<select id="sort-select" class="js-select2" name="property">
+														<option value="가입일순">가입일순</option>
+														<option value="타입순">타입순</option>
+														<option value="ID순" selected>ID순</option>
+													</select>
+												</c:if>
 												<div class="dropDownSelect2"></div>
 											</div>
-
-
-											<div
-												class="rs-select2--dark rs-select2--sm rs-select2--border">
-												<select class="js-select2 au-select-dark" name="time">
-													<option selected="selected">All Time</option>
-													<option value="">By Month</option>
-													<option value="">By Day</option>
-												</select>
-												<div class="dropDownSelect2"></div>
-											</div>
-											<button class="btn btn-primary"
-												style="height: 100%; width: 50px" type="button">
-												<i class="zmdi zmdi-search"></i>
+											<button id="sort-btn" class="search-btn" type="button">
+												<i class="fas fa-sort"></i>
 											</button>
 										</div>
 										<div>
-											<button class="btn au-btn-icon btn-danger au-btn--small"
+											<button style=""
+												class="btn au-btn-icon btn-danger au-btn--small"
 												id=selectDel>
 												<i class="zmdi zmdi-minus"></i>선택항목 삭제
 											</button>
@@ -485,11 +484,13 @@
 													<td>user ID</td>
 													<td>type</td>
 													<td>status</td>
+													<td>reg Date</td>
 													<td></td>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach items="${list}" var="m">
+													<c:if test="${m.memberId ne 'admin'}">
 													<tr class="results">
 														<td><label class="au-checkbox"> <input
 																type="checkbox" name="pick" value="${m.memberNo }">
@@ -513,10 +514,12 @@
 														<td><span>${m.memberId }</span></td>
 
 														<c:if test="${m.memberType eq 1}">
-															<td><span class="role member">구매자</span></td>
+															<td><span class="role member"
+																style="background-color: #d9be8d;">구매자</span></td>
 														</c:if>
 														<c:if test="${m.memberType eq 2}">
-															<td><span class="role user">판매자</span></td>
+															<td><span class="role user"
+																style="background-color: #8f7951;">판매자</span></td>
 														</c:if>
 														<td>
 															<div class="rs-select2--trans rs-select2--sm">
@@ -545,13 +548,14 @@
 																<div class="dropDownSelect2"></div>
 															</div>
 														</td>
-
+														<td>${m.memberDate }</td>
 														<td><span class="more"> <i
 																class="zmdi zmdi-delete"
 																onclick="showModal('${m.memberNo}','회원 삭제','해당 회원 [${m.memberId}]을 삭제 하시겠습니까?<div>회원 삭제시 14일뒤에 삭제 됩니다.</div')"></i>
 														</span> <span class="more"> <i class="zmdi zmdi-more"></i>
 														</span></td>
 													</tr>
+													</c:if>
 												</c:forEach>
 											</tbody>
 										</table>
@@ -738,7 +742,7 @@
 }
 
 .setDelete {
-	width: 1450%;
+	width: 1750%;
 	height: 100%;
 	position: absolute;
 	top: 0;
@@ -768,13 +772,25 @@
 .delTitle, .delDate {
 	margin-right: 30px;
 }
-.logoTitle{
-	
+
+.logoTitle {
 	font-weight: bold;
 	font-size: 30px;
-	color: #ffac05 ;
+	color: #ffac05;
 }
 
+.search-btn {
+	color: #4a2100;
+	font-size: 25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+}
+
+.search-btn:hover {
+	background-color: #ffac05;
+	color: white;
+}
 </style>
 </html>
 <!-- end document-->
