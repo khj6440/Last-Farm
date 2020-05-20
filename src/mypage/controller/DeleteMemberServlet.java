@@ -40,7 +40,7 @@ public class DeleteMemberServlet extends HttpServlet {
 		 if(result>0) {
 				//탈퇴성공->get/set 과 같다고 보면 됨
 					request.setAttribute("msg", "감사합니다.");
-					request.setAttribute("loc","/logout"); 
+					request.setAttribute("loc","/logoutFrm"); 
 			 }else {
 				 request.setAttribute("msg", "관리자에게 문의주세요");
 					request.setAttribute("loc","/"); 

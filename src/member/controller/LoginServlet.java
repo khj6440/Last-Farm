@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		Member m = new MemberService().selectOneMember(memberId,memberPw);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		HttpSession session = request.getSession();
-		session.setAttribute("m", m);
+		session.setAttribute("member", m);
 		if(m!=null) {
 			if(m.getMemberStatus()==1) {
 				
