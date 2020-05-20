@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +10,8 @@
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-	
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	 -->
@@ -175,6 +175,7 @@
 	width: 100%;
 	z-index: 1;
 	position: relative;
+	overflow: hidden;
 }
 
 .timeBox {
@@ -194,7 +195,7 @@
 
 .productBox>p {
 	margin: 7px;
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .productBox {
@@ -206,90 +207,127 @@
 	margin-left: 30px;
 	margin-bottom: 30px;
 }
-#pageNavi{
-   font-size:30px;
-   text-align: center;
-   width: 1000px;
-   margin: 0 auto;
-   margin-top: 80px;
+
+#pageNavi {
+	font-size: 30px;
+	text-align: center;
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 80px;
 }
 </style>
 </head>
 <body>
 	<script>
-	//로그인한 아이디가 판매자이면 검색 대신 새글 쓰기 버튼
-	$(function(){
-		$("#newSellForm").click(function(){
-			location.href="/sellForm";
+		//로그인한 아이디가 판매자이면 검색 대신 새글 쓰기 버튼
+		$(function() {
+			$("#newSellForm").click(function() {
+				location.href = "/sellForm";
+			});
 		});
-	});
-	 	//검색창에 검색어 입력 시, 아웃라인 제거
+		//검색창에 검색어 입력 시, 아웃라인 제거
 		$(function() {
 			$(".searchTypingBox").focusin(function() {
 				$(".searchTypingBox").css("outline", "none");
 			});
 		});
 		//마감시간, 구매인기, 등록순 정렬 탭 활성화
-	$(function() {
+		$(function() {
 			var sortingTab;
-			$(".ordertabCategory").children("ul").children("li").eq(0).click(
-					function() {
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).addClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).removeClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).removeClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).removeClass("clicktab");
-						sortingTab = $(".clicktab").html();
-						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
-					});
-			
-			 $(".ordertabCategory").children("ul").children("li").eq(1).click(
-					function() {
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).removeClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).addClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).removeClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).removeClass("clicktab");
-						sortingTab = $(".clicktab").html();
-						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
-					});
-			$(".ordertabCategory").children("ul").children("li").eq(2).click(
-					function() {
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(0).removeClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).addClass("clicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(2).removeClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).addClass("unclicktab");
-						$(".ordertabCategory").children("ul").children("li")
-								.eq(1).removeClass("clicktab");
-						sortingTab = $(".clicktab").html();
-						location.href="/sellSearchNationalFrm?reqPage=1&sortingTab="+sortingTab;
-					});
+			$(".ordertabCategory")
+					.children("ul")
+					.children("li")
+					.eq(0)
+					.click(
+							function() {
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).addClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).removeClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).removeClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).removeClass("clicktab");
+								sortingTab = $(".clicktab").html();
+								location.href = "/sellSearchNationalFrm?reqPage=1&sortingTab="
+										+ sortingTab;
+							});
+
+			$(".ordertabCategory")
+					.children("ul")
+					.children("li")
+					.eq(1)
+					.click(
+							function() {
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).removeClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).addClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).removeClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).removeClass("clicktab");
+								sortingTab = $(".clicktab").html();
+								location.href = "/sellSearchNationalFrm?reqPage=1&sortingTab="
+										+ sortingTab;
+							});
+			$(".ordertabCategory")
+					.children("ul")
+					.children("li")
+					.eq(2)
+					.click(
+							function() {
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(0).removeClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).addClass("clicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(2).removeClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).addClass("unclicktab");
+								$(".ordertabCategory").children("ul").children(
+										"li").eq(1).removeClass("clicktab");
+								sortingTab = $(".clicktab").html();
+								location.href = "/sellSearchNationalFrm?reqPage=1&sortingTab="
+										+ sortingTab;
+							});
 		});
-		$(function(){
-			if("${searchWord }" != null){
+		$(function() {
+			if ("${searchWord }" != null) {
 				$("#searchTypingBox").val("${searchWord }");
 			}
 		});
+		//countdown
+		var now = new Date();
+		var endTime = new Date('2020-05-22');
+		var gapTime = endTime - now - 32400000;
+		var SetTime = gapTime / 1000;
+		var SetMin = SetTime / 60;
+		var SetHour = SetMin / 60;
+		function msg_time() { // 1초씩 카운트
+			m = Math.floor(SetHour % 60) + ":" + Math.floor(SetMin % 60) + ":"
+					+ Math.floor(SetTime % 60); // 남은 시간 계산
+			var msg = m;
+			document.all.ViewTimer.innerHTML = msg;
+			SetTime--;
+			if (SetTime < 0) {
+				clearInterval(tid);
+			}
+		}
+		window.onload = function TimerStart() {
+			tid = setInterval('msg_time()', 1000)
+		};
+
 		//DB에서 상품 데이터 불러오기
 		/*function sell_listAll(){
 			var searchTypingBox = $("#searchTypingBox").val();
@@ -361,86 +399,81 @@
 		//paging */
 	</script>
 	<div class="sell-list-body">
-	<form action = "/sellSearchBox" method="post" id="searchSell">
-		<div class="searchbox-wrapper">
-			<select class="category category1" name="type1">
-				<option value=null>농/수산물(전체)</option>
-				<option value="농산물">농산물</option>
-				<option value="수산물">수산물</option>
-			</select> 
-			<select class="category category2" name="type2">
-				<option value=null>상품타입(전체)</option>
-				<option value="채소">채소</option>
-				<option value="과일">과일</option>
-				<option value="가공식품">가공식품</option>
-			</select>
-<!--     <select class="category category2" name="수산물">
+		<form action="/sellSearchBox" method="post" id="searchSell">
+			<div class="searchbox-wrapper">
+				<select class="category category1" name="type1">
+					<option value=null>농/수산물(전체)</option>
+					<option value="농산물">농산물</option>
+					<option value="수산물">수산물</option>
+				</select> <select class="category category2" name="type2">
+					<option value=null>상품타입(전체)</option>
+					<option value="채소">채소</option>
+					<option value="과일">과일</option>
+					<option value="가공식품">가공식품</option>
+				</select>
+				<!--     <select class="category category2" name="수산물">
 <option value=null>상품타입(전체)</option>
         <option value="생물">생물</option>
         <option value="냉동">냉동</option>
         <option value="가공식품">가공식품</option>
     </select> -->
-			<div class="searchInput-wrapper">
-				<div class="searchInputBox">
-					<img src="../imgs/search@3x.png"> 
-					<input type="text" name="searchTypingBox" id="searchTypingBox" class="searchTypingBox"
-						placeholder="검색할 상품을 입력하세요(Enter)">
+				<div class="searchInput-wrapper">
+					<div class="searchInputBox">
+						<img src="../imgs/search@3x.png"> <input type="text"
+							name="searchTypingBox" id="searchTypingBox"
+							class="searchTypingBox" placeholder="검색할 상품을 입력하세요(Enter)">
+					</div>
+					<c:if test="${sessionScope.member.member_type == '2'}">
+						<input type="submit" value="상품 검색" class="searchBtn">
+					</c:if>
+					<c:if test="${sessionScope.member.member_type != '2'}">
+						<input type="button" id="newSellForm" value="새 글쓰기"
+							class="searchBtn">
+					</c:if>
 				</div>
-				<c:if test="${sessionScope.member.member_type != '2'}">
-				<input type="submit"  value="상품 검색" class="searchBtn">
-				</c:if>
-				<c:if test="${sessionScope.member.member_type == '2'}">
-				<input type="button" id="newSellForm" value="새 글쓰기" class="searchBtn">
-				</c:if>
 			</div>
-		</div>
-		<br>
-		<br>
-		<div class="ordertabCategory">
-			<ul>
-			<input type="hidden" value="마감시간 순" name="sortingTab1">
-				<li class="clicktab" name="sortingTab" value="마감시간 순" >마감시간 순</li>
-				<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
-				<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
-			</ul>
-		</div>
+			<br> <br>
+			<div class="ordertabCategory">
+				<ul>
+					<input type="hidden" value="마감시간 순" name="sortingTab1">
+					<li class="clicktab" name="sortingTab" value="마감시간 순">마감시간 순</li>
+					<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
+					<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
+				</ul>
+			</div>
 		</form>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="shoppingList-wrapper">
 			<table class="shoppingList-firstRow">
-
-			<c:forEach items="${sellList }" var="n" varStatus="i">
-		<c:if test="${i.count%3 eq 1 }">
-			<tr>
-		</c:if>
-				<th>
-					<div class="productBox">
-						<div class='productImg'>
-							<div class='timeBox' id='timeBox'>
-							<c:if test="${n.timegap >0}">
+				<c:forEach items="${sellList }" var="n" varStatus="i">
+					<c:if test="${i.count%3 eq 1 }">
+						<tr>
+					</c:if>
+					<th>
+						<div class="productBox">
+							<div class='productImg'>
+								<div class='timeBox' id='timeBox'>
+									<c:if test="${n.timegap >0}">
 							${n.timegap } 일 남음
 							</c:if>
-							<c:if test="${n.timegap ==0 }">
-							
-							</c:if>
+									<c:if test="${n.timegap ==0 }">
+										<div id="ViewTimer"></div>
+									</c:if>
+								</div>
+								<img src='/imgs/${n.thumbnail }'>
 							</div>
-							<img src='/imgs/${n.thumbnail }'>
+							<p>${n.sellTitle }</p>
+							<div class='detailInfoBox'>
+								상품가격: ${n.sellPrice }원<br> 현재 참여인원: ${n.sellCount }명
+							</div>
 						</div>
-						<p>${n.sellTitle }</p>
-						<div class='detailInfoBox'>
-							상품가격: ${n.sellPrice }원<br>
-							현재 참여인원: ${n.sellCount }명
-						</div>
-					</div>
-				</th>
-	<c:if test="${i.count%3 eq 0 }">
-			</tr>
-		</c:if>
-			</c:forEach>
+					</th>
+					<c:if test="${i.count%3 eq 0 }">
+						</tr>
+					</c:if>
+				</c:forEach>
 			</table>
-				<div id="pageNavi">${pageNavi }</div>
+			<div id="pageNavi">${pageNavi }</div>
 		</div>
 	</div>
 </body>

@@ -119,40 +119,40 @@ public class SellSearchDao {
 		
 				//셋다 null일때
 		if (type1.equals("null") && type2.equals("null") && searchWord.equals("")) {
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_end_date)n)s where rnum between ? and ?";	
 					System.out.println("2");
 				}
 				// type1만 값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
 					System.out.println("3");
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// type2만 값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
 					System.out.println("4");
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// searchWord만 값이 있을때
 		else if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
 					System.out.println("5");
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// type1, type2 값이 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// type2, search값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// type1,search값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";	
 				}
 				// 셋다 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
 					
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_end_date)n)s where rnum between ? and ?";
 				}
 		
 	
@@ -242,35 +242,35 @@ public class SellSearchDao {
 		
 		//셋다 null일때
 		if (type1.equals("null") && type2.equals("null") && searchWord.equals("")) {
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// type1만 값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// type2만 값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// searchWord만 값이 있을때
 		else if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// type1, type2 값이 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// type2, search값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// type1,search값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";	
 		}
 		// 셋다 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
-			query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";
+			query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_count desc)n)s where rnum between ? and ?";
 		}
 
 		try {
@@ -360,35 +360,35 @@ public class SellSearchDao {
 		//셋다 null일때
 		if (type1.equals("null") && type2.equals("null") && searchWord.equals("")) {			
 
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// type1만 값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// type2만 값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// searchWord만 값이 있을때
 		else if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// type1, type2 값이 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// type2, search값이 있을때
 		else if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category2 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// type1,search값이 있을때
 		else if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";	
 				}
 				// 셋다 있을때
 		else if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
-					query = "select s.*, floor(sell_end_date-sysdate)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";
+					query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ? order by sell_date desc)n)s where rnum between ? and ?";
 				}
 		
 		

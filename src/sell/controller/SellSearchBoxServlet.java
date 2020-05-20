@@ -1,6 +1,9 @@
 package sell.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +45,6 @@ public class SellSearchBoxServlet extends HttpServlet {
 		String sortingTab = request.getParameter("sortingTab1");
 
 			SellCategoryPage scp = new SellSearchService().sellEnd(reqPage,type1,type2,searchWord, sortingTab);	
-		
 			if(scp.getSellList().isEmpty()) {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 				request.setAttribute("msg", "검색어와 일치하는 글이 없습니다.");
@@ -53,6 +55,8 @@ public class SellSearchBoxServlet extends HttpServlet {
 				request.setAttribute("sellList", scp.getSellList());
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("pageNavi", scp.getPageNavi());
+
+		        
 				rd.forward(request, response);
 			}
 			
