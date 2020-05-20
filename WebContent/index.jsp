@@ -41,7 +41,6 @@
 
 
 <!--  header,footer 종료  -->
-
 <style>
 .carousel-inner>.carousel-item>img {
 	width: 290px;
@@ -75,10 +74,10 @@
 }
 </style>
 
-
 <body>
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 	<div class="container">
 		<div class="d1">
 			<h2 class="font">전체 판매</h2>
@@ -97,7 +96,7 @@
 					src="imgs/%EA%B5%B0%EA%B3%A0%EA%B5%AC%EB%A7%88.jpg"
 					alt="First slide">
 				<div class="carousel-caption d-none d-md-block">
-					<h5>테스트</h5>
+					
 					<p></p>
 				</div>
 			</div>
@@ -162,9 +161,9 @@
 					src="imgs/%EA%B5%B0%EA%B3%A0%EA%B5%AC%EB%A7%88.jpg"
 					alt="First slide">
 				<div class="carousel-caption d-none d-md-block">
-					<h5>테스트</h5>
+					
 					<p></p>
-				</div>
+				</div> 
 			</div>
 			<div class="carousel-item">
 				<img class="d-inline-block"
@@ -206,9 +205,6 @@
 
 		</a>
 	</div>
-
-
-	<a href="/manageMember?reqPage=1">관리자</a>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

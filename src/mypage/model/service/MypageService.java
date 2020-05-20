@@ -56,7 +56,7 @@ public class MypageService {
 	public ArrayList<SellEnd> getSellEndList(String memberId) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<SellEnd> list = new MypageDao().getSellEndList(conn, memberId);
-		
+		System.out.println("list size:"+list.size());
 		JDBCTemplate.close(conn);
 		return list;
 	}

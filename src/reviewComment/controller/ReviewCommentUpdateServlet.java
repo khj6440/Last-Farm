@@ -1,30 +1,27 @@
-package sell.controller;
+package reviewComment.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
+import reviewComment.model.service.reviewCommentService;
 
 /**
- * Servlet implementation class SearchSellServlet
+ * Servlet implementation class ReviewCommentUpdateServlet
  */
-@WebServlet(name = "SearchSellCategory", urlPatterns = { "/searchSellCategory" })
-public class SearchSellCategoryServlet extends HttpServlet {
+@WebServlet(name = "ReviewCommentUpdate", urlPatterns = { "/reviewCommentUpdate" })
+public class ReviewCommentUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchSellCategoryServlet() {
+    public ReviewCommentUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +31,20 @@ public class SearchSellCategoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String category1 = request.getParameter("searchTypingBox");
+		int reviewCommentNo = Integer.parseInt(request.getParameter("reviewCommentNo"));
+		String reviewCommentContent = request.getParameter("reviewCommentContent");
 		
-		//ArrayList<Sell> sellList = new SellSearchService().searchBoxSorting(searchWord);
-		//new Gson().toJson(sellList,response.getWriter());
+		
+		int result = new reviewCommentService().commentUpdate(reviewCommentNo, reviewCommentContent);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "수정 성공");
+		}else {
+			request.setAttribute("msg", "수정 실패");
+		}
+		request.setAttribute("loc", "/reviewList?reqPage=1");
+		rd.forward(request, response);
+		 
 	}
 
 	/**

@@ -1,7 +1,6 @@
-package sell.controller;
+package reviewComment.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-import sell.model.vo.SellCategoryPage;
+import reviewComment.model.service.reviewCommentService;
 
 /**
- * Servlet implementation class SellSearchNationalFrmServlet
+ * Servlet implementation class ReviewCommentWarningServlet
  */
-@WebServlet(name = "SellSearchNationalFrm", urlPatterns = { "/sellSearchNationalFrm" })
-public class SellSearchNationalFrmServlet extends HttpServlet {
+@WebServlet(name = "ReviewCommentWarning", urlPatterns = { "/reviewCommentWarning" })
+public class ReviewCommentWarningServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellSearchNationalFrmServlet() {
+    public ReviewCommentWarningServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +30,16 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");		
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String sortingTab = request.getParameter("sortingTab");
-		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
-		request.setAttribute("sellList", scp.getSellList());
-		System.out.println(scp.getSellList().get(0).getSellNo());
-		request.setAttribute("pageNavi", scp.getPageNavi());
+		int reviewCommentNo = Integer.parseInt(request.getParameter("reviewCommentNo"));
+		int reviewCommentWarning = Integer.parseInt(request.getParameter("reviewCommentWarning"));
+		int result = new reviewCommentService().commentWarning(reviewCommentNo, reviewCommentWarning);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "신고 성공");
+		}else {
+			request.setAttribute("msg", "신고 실패");
+		}
+		request.setAttribute("loc", "/reviewList?reqPage=1");
 		rd.forward(request, response);
 	}
 

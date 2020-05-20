@@ -8,13 +8,15 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="../css/myPage.css">
-<link rel="stylesheet" href="../css/color.css">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="../js/myPage.js"></script>
+
+
+
+
 
 <style>
 * {
@@ -62,7 +64,7 @@
 
 .info {
 	width: 70%;
-	line-height:150px;
+	line-height: 150px;
 	height: 150px;
 	padding-left: 30px;
 }
@@ -547,58 +549,73 @@ ul {
 </style>
 
 <script type="text/javascript">
-	$(
-			function() {
-				$(".tab>ul>li").click(function() {
-					$(".tab>ul>li").removeClass("tab-selected")
-					$(this).addClass("tab-selected");
-					var index = $(".tab>ul>li").index($(this));
-					$(".content").removeClass("show-content");
-					$(".content").eq(index).addClass("show-content")
-				});
+	$(function() {
+		$(".tab>ul>li").click(function() {
+			$(".tab>ul>li").removeClass("tab-selected")
+			$(this).addClass("tab-selected");
+			var index = $(".tab>ul>li").index($(this));
+			$(".content").removeClass("show-content");
+			$(".content").eq(index).addClass("show-content")
+		});
 
-				
+		$(".order>div").click(function() {
+			$(".order>div").css("color", "");
+			$(this).css("color", "#F6b70d");
 
-				$(".order>div").click(function() {
-					$(".order>div").css("color", "");
-					$(this).css("color", "#F6b70d");
+		})
+		$("#inputArea").keyup(function() {
+			var inputLength = $(this).val().length;
+			if (inputLength > 2000) {
+				alert("입력가능 글자를 초과했습니다")
+				return;
+			}
+			$(".textNum>span").html(inputLength + " / 2000");
 
+		})
+
+		$(".p-title>input").click(function(event) {
+			event.stopPropagation();
+		})
+
+		$(".product").children().not(".p-info>.p-title>input").click(
+				function() {
+					console.log("test");
 				})
-				$("#inputArea").keyup(function() {
-					var inputLength = $(this).val().length;
-					if (inputLength > 2000) {
-						alert("입력가능 글자를 초과했습니다")
-						return;
-					}
-					$(".textNum>span").html(inputLength + " / 2000");
 
-				})
+		$("#imgInp").on('change', function() {
+			changeImg(this);
+		});
 
-				$(".p-title>input").click(function(event) {
-					event.stopPropagation();
-				})
+	})
 
-				$(".product").children().not(".p-info>.p-title>input").click(
-						function() {
-							console.log("test");
-						})
-
-				$("#imgInp").on('change', function() {
-					changeImg(this);
-				});
-
-			})
+	function reviewInsert(sellEndNo) {
+		console.log("시작");
+		var memberId = "${sessionScope.member.memberId}";
+		var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}";
+		var url = "/reviewInsertFrm";
+		var title = "reviewInsertFrm";
+		var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
+		var popup = window.open("", title, status);
+		$("input[name=sellEndNo]").val(sellEndNo);
+		$("input[name=memberId]").val(memberId);
+		$("input[name=sellEndWriter]").val(sellEndWriter);
+		$(".reviewInsertFrm").attr("action", url);
+		$(".reviewInsertFrm").attr("method", "post");
+		$(".reviewInsertFrm").attr("target", title);//새로 열린 popup창과 form태그를 연결
+		$(".reviewInsertFrm").submit();
+	}
 </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 	<div class="container">
 		<div class="wrapper">
 			<div class="main">
 				<div class="mine">
 					<div class="info">
 						<div class="info-title">
-							<i class="fas fa-user" style="margin-right: 20px;"></i> <span>회원명
+							<i class="fas fa-user" style="margin-right: 20px;"></i> <span>${sessionScope.member.memberName }
 								님 </span>
 						</div>
 						<div class="info-contents">
@@ -610,8 +627,17 @@ ul {
 				<div class="tab">
 					<ul class="tab-ul">
 						<li class="tab-li tab-selected">내 정보 수정</li>
-						<li class="tab-li">구매중 목록</li>
-						<li class="tab-li">구매 내역</li>
+
+
+						<c:if test="${sessionScope.member.memberType eq 1 }">
+							<li class="tab-li">구매중 목록</li>
+							<li class="tab-li">구매 내역</li>
+						</c:if>
+						<c:if test="${sessionScope.member.memberType eq 2 }">
+							<li class="tab-li">판매중 목록</li>
+							<li class="tab-li">판매 내역</li>
+						</c:if>
+
 						<li class="tab-li">쪽지함</li>
 					</ul>
 				</div>
@@ -621,38 +647,38 @@ ul {
 						<div class="request"></div>
 					</div>
 					<div class="content">
-						<div class="content-title">구매중 목록</div>
+						<c:if test="${sessionScope.member.memberType eq 1 }">
+							<div class="content-title">구매중 목록</div>
+						</c:if>
+
+						<c:if test="${sessionScope.member.memberType eq 2 }">
+							<div class="content-title">판매중 목록</div>
+						</c:if>
 						<div class="content-menu">
-							<div class="allCheck"></div>
-							<div class="order">
-								<div style="color: #F6b70d;">높은가격순</div>
-								<div>낮은가격순</div>
-								<div>최신순</div>
-							</div>
+							
 						</div>
 						<div class="list">
 							<c:forEach items="${list }" var="s">
-							<div class="product">
-								<div class="p-image">
-									<img src="/imgs/Logo1.png" width="100%" height="100%" alt=""
-										srcset="">
-								</div>
-								<div class="p-info">
-									<div class="p-title">
-										<span> 제목 </span> <input type="checkbox" name="product">
+								<div class="product">
+									<div class="p-image">
+										<img src="/imgs/Logo1.png" width="100%" height="100%" alt=""
+											srcset="">
 									</div>
-									<div class="p-price">55,000원</div>
-									<div class="p-day">4시간전</div>
-									<div class="p-location">
-										<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
+									<div class="p-info">
+										<div class="p-title">
+											<span> 제목 </span> <input type="checkbox" name="product">
+										</div>
+										<div class="p-price">55,000원</div>
+										<div class="p-day">4시간전</div>
+										<div class="p-location">
+											<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
+										</div>
 									</div>
 								</div>
-							</div>
 							</c:forEach>
 							<div class="product">
 								<div class="p-image">
-									<img src="../imgs/product2.jpg" width="100%" height="100%"
-										alt="" srcset="">
+									<img src="" width="100%" height="100%" alt="" srcset="">
 								</div>
 								<div class="p-info">
 									<div class="p-title">
@@ -670,48 +696,39 @@ ul {
 
 					</div>
 					<div class="content">
-						<div class="content-title">구매 내역</div>
-						<div class="content-menu">
-							<div class="allCheck"></div>
-							<div class="order">
-								<div style="color: #F6b70d;">높은가격순</div>
-								<div>낮은가격순</div>
-								<div>최신순</div>
-							</div>
-						</div>
+						<c:if test="${sessionScope.member.memberType eq 1 }">
+							<div class="content-title">구매 내역</div>
+						</c:if>
+
+						<c:if test="${sessionScope.member.memberType eq 2 }">
+							<div class="content-title">판매 내역</div>
+						</c:if>
+						<div class="content-menu"></div>
 						<div class="list">
-							<div class="product">
-								<div class="p-image">
-									<img src="/imgs/Logo1.png" width="100%" height="100%" alt=""
-										srcset="">
-								</div>
-								<div class="p-info">
-									<div class="p-title">
-										<span> 제목 </span> <input type="checkbox" name="product">
+							<c:forEach items="${endList }" var="e">
+								<form class="reviewInsertFrm">
+									<input name="sellEndNo" type="hidden"> <input
+										name="memberId" type="hidden"> <input
+										name="sellEndWriter" type="hidden" value="${e.sellEndWriter}">
+								</form>
+								<div class="product">
+									<div class="p-image">
+										<img src="" width="100%" height="100%" alt="" srcset="">
 									</div>
-									<div class="p-price">55,000원</div>
-									<div class="p-day">4시간전</div>
-									<div class="p-location">
-										<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
-									</div>
-								</div>
-							</div>
-							<div class="product">
-								<div class="p-image">
-									<img src="../imgs/product2.jpg" width="100%" height="100%"
-										alt="" srcset="">
-								</div>
-								<div class="p-info">
-									<div class="p-title">
-										<span> 제목 </span> <input type="checkbox" name="product">
-									</div>
-									<div class="p-price">24,000원</div>
-									<div class="p-day">5시간전</div>
-									<div class="p-location">
-										<i class="fas fa-map-marker-alt"></i> 서울특별시 강북구 미아동
+									<div class="p-info">
+										<div class="p-title">
+											<span>${e.sellEndTitle } </span>
+											<button onclick="reviewInsert('${e.sellEndNo}')"
+												type="button">리뷰작성</button>
+										</div>
+										<div class="p-price">55,000원</div>
+										<div class="p-day">4시간전</div>
+										<div class="p-location">
+											<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 
@@ -777,6 +794,7 @@ ul {
 		</div>
 
 	</div>
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

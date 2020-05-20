@@ -1,4 +1,4 @@
-package question.controller;
+package reviewComment.controller;
 
 import java.io.IOException;
 
@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import question.model.service.QuestionService;
-import question.model.vo.Question;
+import question.model.vo.QuestionPageData;
+import review.model.service.ReviewService;
+import review.model.vo.ReviewPageData;
+import reviewComment.model.service.reviewCommentService;
 
 /**
- * Servlet implementation class InsertQuestionServlet
+ * Servlet implementation class ReviewCommentServlet
  */
-@WebServlet(name = "InsertQuestion", urlPatterns = { "/insertQuestion" })
-public class InsertQuestionServlet extends HttpServlet {
+@WebServlet(name = "ReviewComment", urlPatterns = { "/reviewComment" })
+public class ReviewCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertQuestionServlet() {
+    public ReviewCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +35,20 @@ public class InsertQuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
-		Question q = new Question();
-		q.setQuestionTitle(request.getParameter("questionTitle"));
-		q.setQuestionContent(request.getParameter("questionContent"));
 		
-		
-		int result = new QuestionService().insertQuestion(q);
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		String commentWriter = request.getParameter("commentWriter");
+		String commentContent = request.getParameter("reviewCommentContent");
+		int result = new reviewCommentService().insertComment(reviewNo, commentContent ,commentWriter);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
-			request.setAttribute("msg", "등록 성공");
+			request.setAttribute("msg", "댓글 등록 성공");
 		}else {
-			request.setAttribute("msg", "등록 실패");
+			//삭제 실패
+			request.setAttribute("msg", "댓글 등록 실패");
 		}
-		request.setAttribute("loc", "/questionList?reqPage=1");
+		
+		request.setAttribute("loc", "/reviewList?reqPage=1");
 		rd.forward(request, response);
 	}
 
