@@ -56,58 +56,62 @@
 <link href="/admin_css/css/adminTab.css" rel="stylesheet" media="all">
 <script type="text/javascript">
 	$(function() {
-		
+
 		$.ajax({
 			url : "/adminGetMsgCount",
 			type : "post",
-			
+
 			success : function(data) {
 				console.log(data);
-				if(data<=0){
+				if (data <= 0) {
 					$("#nonReadMsg").remove();
 					return;
 				}
-				
+
 				$(".mess__title").find("span").html(data);
 				$("#nonReadMsg").html(data);
 			},
 			error : function() {
 				console.log("서버 전송 실패")
 			}
-		});		
-		
-		
-		$("#msg-btn").click(function(){
+		});
+
+		$("#msg-btn").click(function() {
 			$.ajax({
 				url : "/adminGetMsgCount",
 				type : "post",
 				success : function(data) {
 					console.log(data);
-					if(data<=0){
+					if (data <= 0) {
 						$("#nonReadMsg").remove();
 						return;
 					}
-					
+
 					$(".mess__title").find("span").html(data);
 					$("#nonReadMsg").html(data);
 				},
 				error : function() {
 					console.log("서버 전송 실패")
 				}
-			});			
+			});
 		});
-		
-		$("#sort-btn").click(function(){
-			var value =$("#sort-select").children("option:selected").val();
-			var link = document.location.href;
-			var searched = $("input[name=search]").val();
-			if (!link.match("search")) {
-				location.href = "/manageMember?reqPage=1&reqCount=10&sort="+ value;
-			} else {
-				location.href = "/adminSearchMember?reqPage=1&reqCount=10&search="+ searched+"&sort="+value;
-			}
-		});
-		
+
+		$("#sort-btn")
+				.click(
+						function() {
+							var value = $("#sort-select").children(
+									"option:selected").val();
+							var link = document.location.href;
+							var searched = $("input[name=search]").val();
+							if (!link.match("search")) {
+								location.href = "/manageMember?reqPage=1&reqCount=10&sort="
+										+ value;
+							} else {
+								location.href = "/adminSearchMember?reqPage=1&reqCount=10&search="
+										+ searched + "&sort=" + value;
+							}
+						});
+
 		$(".show-count")
 				.change(
 						function() {
@@ -135,20 +139,22 @@
 												}
 											});
 						});
-		$(".memberStatus").change(function() {
-			var text = $(this).children("option:selected").html();
-			var value= $(this).children("option:selected").val();
-			var memberNo = $(this).children("option:selected").attr("memberNo");
-			$('.modal-title').html("회원 "+text);
-			$('.modal-body').html("해당회원을 ["+text+"] 하시겠습니까?");
-			$('#deleteContent').html("확인");
-			$('#cancelBtn').attr("onclick","location.reload()");
-			$('#deleteContent').attr("onclick", "modifyMemberStatus(" + value + ","+memberNo+")");
-			$('#myModal').modal('show');
-		});
-		
-	
-		
+		$(".memberStatus").change(
+				function() {
+					var text = $(this).children("option:selected").html();
+					var value = $(this).children("option:selected").val();
+					var memberNo = $(this).children("option:selected").attr(
+							"memberNo");
+					$('.modal-title').html("회원 " + text);
+					$('.modal-body').html("해당회원을 [" + text + "] 하시겠습니까?");
+					$('#deleteContent').html("확인");
+					$('#cancelBtn').attr("onclick", "location.reload()");
+					$('#deleteContent').attr(
+							"onclick",
+							"modifyMemberStatus(" + value + "," + memberNo
+									+ ")");
+					$('#myModal').modal('show');
+				});
 
 		$("input[name=allCheck]").click(function() {
 			$("input[name=pick]").each(function(index, item) {
@@ -188,9 +194,8 @@
 			});
 		});
 	});
-	
-	
-	function modifyMemberStatus(value,memberNo) {
+
+	function modifyMemberStatus(value, memberNo) {
 		$('#myModal').modal('hide');
 		$.ajax({
 			url : "/adminMemberStatus",
@@ -201,19 +206,17 @@
 			type : "post",
 			success : function(data) {
 				console.log("서버전송 성공");
-				console.log("결과:" +data);
+				console.log("결과:" + data);
 			},
 			error : function() {
 				console.log("서버 전송 실패");
 			},
-			complete:function(){
+			complete : function() {
 				console.log("t");
 			}
 		});
 	}
-	
-	
-	
+
 	function showModal(memberNo, title, body) {
 		$('.modal-title').html(title);
 		$('.modal-body').html(body);
@@ -243,16 +246,15 @@
 			}
 		});
 	}
-	
-	function deleteCancelModal(memberNo,title,body){
+
+	function deleteCancelModal(memberNo, title, body) {
 		$('.modal-title').html(title);
 		$('.modal-body').html(body);
 		$('#deleteContent').html("확인");
 		$('#myModal').modal('show');
 		$('#deleteContent').attr("onclick", "deleteCancel(" + memberNo + ")");
 	}
-	
-	
+
 	function deleteCancel(memberNo) {
 		$.ajax({
 			url : "/adminDelCancel",
@@ -291,9 +293,8 @@
 		<div class="menu-sidebar__content js-scrollbar1">
 			<nav class="navbar-sidebar">
 			<ul class="list-unstyled navbar__list">
-				<li ><a 
-					href="/manageMember?reqPage=1"> <i class="fas fa-users"></i>회원
-						관리
+				<li><a href="/manageMember?reqPage=1"> <i
+						class="fas fa-users"></i>회원 관리
 				</a></li>
 				<li><a href="/manageSell?reqPage=1"> <i
 						class="far fa-list-alt"></i>거래글 관리
@@ -305,8 +306,9 @@
 
 				<li><a href="/manageWarning"><i
 						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
-				<li class="active"><a  style="color: #4a2100" href="/adminGetMsgList">
-					<i class="far fa-envelope-open"></i>쪽지함 </a></li>		
+				<li class="active"><a style="color: #4a2100"
+					href="/adminGetMsgList"> <i class="far fa-envelope-open"></i>쪽지함
+				</a></li>
 			</ul>
 			</nav>
 		</div>
@@ -321,7 +323,7 @@
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<form class="form-header" action="/adminSearchMember" method="get">
-							<input style="margin-right: 10px;" class="au-input au-input--xl"
+							<input disabled style="margin-right: 10px;" class="au-input au-input--xl"
 								type="text" name="search"
 								placeholder="Search for user ID &amp; name..."
 								value="${search }"> <input type="hidden" name="reqPage"
@@ -389,13 +391,103 @@
 			<!-- END HEADER DESKTOP-->
 			<!-- MAIN CONTENT-->
 			<div class="main-content">
-				<c:forEach items="${list }" var='m' >
-					${m.msgNo }
-					${m.msgSendId }
-					${m.msgReceiveId }
-				</c:forEach>
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="row m-t-30">
+							<div class="col-md-12">
+								<!-- DATA TABLE-->
+								<div class="table-responsive m-b-40">
+									<h3 class="title-5 m-b-35"
+										style="font-size: 30px; font-weight: bold;">
+										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함<span
+											style="color: gray; font-size: 15px"> ( 받은,보낸쪽지
+											:${totalCount }개)</span>
+									</h3>
+								</div>
+
+								<div class="msg-main">
+									<div class="msg-receive">
+										<div class="msg-box-title">받은쪽지함</div>
+										<div class="msg-box-tab">
+											<div>보낸사람</div>
+											<div>제목</div>
+											<div>읽음여부</div>
+
+										</div>
+
+										<div class="msg-box-content">
+											<div class="msgs">
+												<c:forEach items="${list }" var='m'>
+													<c:if test="${m.msgReceiveId eq 'admin' }">
+														${m.msgNo }
+														${m.msgSendId }
+														${m.msgReceiveId }
+													</c:if>
+												</c:forEach>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="msg-send">
+										<div class="msg-box-title">보낸쪽지함</div>
+										<div class="msg-box-tab">
+											<div>받은사람</div>
+											<div>제목</div>
+											<div></div>
+										</div>
+										<div class="msg-box-content">
+											<div class="msgs">
+												<c:forEach items="${list }" var='m'>
+													<c:if test="${m.msgSendId eq 'admin' }">
+														${m.msgNo }
+														${m.msgSendId }
+														${m.msgReceiveId }
+													</c:if>
+												</c:forEach>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="msg-main">
+									<div class="more-btn-box">
+										<button id="more-btn" totalCount="${totalCount}"
+											currentCount="0" value="">
+											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
+										</button>
+									</div>
+									<div class="more-btn-box">
+										<button id="more-btn" totalCount="${totalCount}"
+											currentCount="0" value="">
+											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
+										</button>
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+						<!-- END DATA TABLE-->
+					</div>
+				</div>
+				<div style="margin-top: 100px;" class="row">
+					<div class="col-md-12">
+						<div class="copyright">
+							<p>
+								Copyright © 2020 Last Farm. All rights reserved. By <a href="#">LAST
+									FARM</a>.
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+
+
+	</div>
+	</div>
 
 	</div>
 
@@ -592,6 +684,80 @@
 .search-btn:hover {
 	background-color: #ffac05;
 	color: white;
+}
+
+.more-btn-box {
+	display: flex;
+	padding: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+#more-btn:hover {
+	background-color: #4a2100;
+	color: #ffac05;
+}
+
+#more-btn {
+	width: 60px;
+	height: 60px;
+	border-radius: 50px;
+	background-color: #ffac05;
+	color: #4a2100;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.msg-main {
+	display: flex;
+}
+
+.msg-main>div {
+	width: 50%;
+}
+
+.msg-box-title {
+	width: 50%;
+	height: 60px;
+	line-height: 60px;
+	padding-left: 10px;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 30px;
+	color: #4a2100;
+	background-color: #ffac05;
+}
+
+.msg-box-content {
+	width: 98%;
+	padding: 20px 0px;
+	border: 1px solid grey;
+	border-radius: 3px;
+	background-color: #f5f5f5;
+}
+
+.msgs, .msg-box-tab {
+	padding: 20px 10px;
+	width: 98%;
+	display: flex;
+}
+
+.msg-box-tab>div:first-child, .msg-box-tab>div:last-child {
+	width: 25%;
+}
+
+.msg-box-tab>div:nth-child(2) {
+	width: 50%;
+}
+
+.msgs>div:nth-child(2) {
+	width: 50%;
+}
+
+.msgs>div:first-child, .msgs>div:last-child {
+	width: 25%;
 }
 </style>
 </html>

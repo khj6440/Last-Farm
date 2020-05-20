@@ -345,7 +345,7 @@
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
 											<p style="font-size: 20px;">
-												읽지 않은 메세지가 <span style="font-weight: bold; color: black">8</span>개
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
 												있습니다.
 											</p>
 										</div>

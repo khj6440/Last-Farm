@@ -136,7 +136,40 @@
 				item.checked = $("input[name=allCheck]").prop("checked");
 			})
 		});
-		
+
+		$("#selectDel").click(function() {
+			var checkList = "";
+			var length = $("input[name=pick]:checked").length - 1;
+			console.log(length);
+			$("input[name=pick]:checked").each(function(index, item) {
+				if (index == length) {
+					checkList = checkList.concat(item.value);
+
+				} else {
+					checkList = checkList.concat(item.value + "/");
+				}
+			});
+
+			$.ajax({
+				url : "/adminDelMember",
+				data : {
+					memberNo : checkList
+				},
+				type : "post",
+				success : function(data) {
+					location.reload();
+					if (data > 0) {
+						alert(data + "개 삭제 성공");
+					} else {
+						alert("삭제 실패");
+					}
+				},
+				error : function() {
+					console.log("서버 전송 실패")
+				}
+			});
+		});
+
 		$("#msg-btn").click(function() {
 			$.ajax({
 				url : "/adminGetMsgCount",
@@ -157,6 +190,47 @@
 			});
 		});
 	})
+
+	function showModal(typeNo, title, body,type) {
+		$('.modal-title').html(title);
+		$('.modal-body').html(body);
+		$('#deleteContent').html("삭제");
+		$('#myModal').modal('show');
+		$('#deleteContent').attr("onclick", "deleteWarning(" + typeNo + ",'"+type+"')");
+	}
+
+	function deleteWarning(typeNo,type) {
+		$('#myModal').modal('hide');
+		var url="";
+		var param=null;
+		if(type=="sell"){
+			url ="/adminDelSell";
+			param= {sellNo:typeNo};
+		}else if(type=="review"){
+			url ="/adminDelReview";
+			param= {reviewNo:typeNo};
+		}else{
+			url = "/adminDelComment";
+			param={commentNo:typeNo,type:type};
+		}
+		
+		$.ajax({
+			url : url,
+			data : param,
+			type : "post",
+			success : function(data) {
+				location.reload();
+				if (data > 0) {
+					alert("삭제 성공");
+				} else {
+					alert("삭제 실패");
+				}
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});
+	}
 
 	function fn_more(start) {
 		var param = {
@@ -202,7 +276,22 @@
 							html += '<td>' + data[i].typeDate + '</td>';
 							html += '<td>';
 
-							html += '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick=""><i class="zmdi zmdi-delete"></i></button>';
+							html += '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="showModal('
+									+ data[i].typeNo
+									+ ","
+									+ "'"
+									+ value
+									+ "삭제'"
+									+ ","
+									+ "'"
+									+ "해당글을 삭제하시겠습니까?"
+									+ "'"
+									+ ","
+									+ "'"
+									+ data[i].type
+									+ "'"
+									+ ')">';
+							html += '<i class="zmdi zmdi-delete"></i></button>';
 							html += '<button class="item" data-toggle="tooltip" data-placement="top" title="More"><i class="zmdi zmdi-more"></i></button>';
 							html += '</div>';
 							html += '</td></tr>';
@@ -287,9 +376,9 @@
 			<div class="section__content section__content--p30">
 				<div class="container-fluid">
 					<div class="header-wrap">
-						<form  class="form-header" action="" method="POST">
-							<input disabled class="au-input au-input--xl" type="text" name="search"
-								placeholder="Search for datas &amp; reports..." />
+						<form class="form-header" action="" method="POST">
+							<input disabled class="au-input au-input--xl" type="text"
+								name="search" placeholder="Search for datas &amp; reports..." />
 							<button style="height: 43px; width: 43px;" class="search-btn"
 								type="submit">
 								<i class="zmdi zmdi-search"></i>
@@ -303,7 +392,7 @@
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
 											<p style="font-size: 20px;">
-												읽지 않은 메세지가 <span style="font-weight: bold; color: black">8</span>개
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
 												있습니다.
 											</p>
 										</div>
@@ -365,11 +454,13 @@
 										신고글 관리<span style="color: gray; font-size: 15px"> (검색결과
 											신고글 :${totalCount }개)</span>
 									</h3>
-									<button style="margin-bottom: 30px; float: right "
-												class="btn au-btn-icon btn-danger au-btn--small"
-												id=selectDel>
-												<i class="zmdi zmdi-minus"></i>선택항목 삭제
-											</button>
+									<div>
+										(신고누적 <span style="color: #dc3545">5</span>개 이상)
+									</div>
+									<button style="margin-bottom: 30px; float: right"
+										class="btn au-btn-icon btn-danger au-btn--small" id=selectDel>
+										<i class="zmdi zmdi-minus"></i>선택항목 삭제
+									</button>
 									<table class="table table-borderless table-data3">
 										<thead>
 											<tr>
@@ -416,6 +507,28 @@
 		</div>
 
 	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button id="cancelBtn" type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button id="deleteContent" type="button" class="btn btn-danger"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 	<!-- Jquery JS-->
 	<script src="/admin_css/vendor/jquery-3.2.1.min.js"></script>

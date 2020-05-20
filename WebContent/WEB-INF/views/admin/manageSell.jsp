@@ -369,7 +369,7 @@
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
 											<p style="font-size: 20px;">
-												읽지 않은 메세지가 <span style="font-weight: bold; color: black">8</span>개
+												읽지 않은 메세지가 <span style="font-weight: bold; color: black">0</span>개
 												있습니다.
 											</p>
 										</div>
@@ -519,7 +519,7 @@
 
 															<button class="item" data-toggle="tooltip"
 																data-placement="top" title="Delete"
-																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?')">
+																onclick="showModal('${s.sellNo}','거래글 삭제','해당 게시물을 삭제 하시겠습니까?<div>현재 거래중인 수량 [${s.sellCount}]개는 환불이 진행됩니다. </div>')">
 																<i class="zmdi zmdi-delete"></i>
 															</button>
 

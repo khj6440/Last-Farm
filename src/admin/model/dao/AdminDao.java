@@ -86,12 +86,13 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Member> selectMemberList(Connection conn, int start, int end ,String sort) {
+	public ArrayList<Member> selectMemberList(Connection conn, int start, int end, String sort) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ArrayList<Member> list = new ArrayList<Member>();
 		ResultSet rset = null;
-		String query ="select * from (select rownum AS rnum, n.* from (select * from member order by "+sort +")n) where rnum BETWEEN ? and ?";
+		String query = "select * from (select rownum AS rnum, n.* from (select * from member order by " + sort
+				+ ")n) where rnum BETWEEN ? and ?";
 		System.out.println(sort);
 		System.out.println(query);
 		try {
@@ -506,11 +507,12 @@ public class AdminDao {
 		return result;
 	}
 
-	public ArrayList<Member> searchMember(Connection conn, int start, int end, String searched,String sort) {
+	public ArrayList<Member> searchMember(Connection conn, int start, int end, String searched, String sort) {
 		PreparedStatement pstmt = null;
 		ArrayList<Member> list = new ArrayList<Member>();
 		ResultSet rset = null;
-		String query = "select * from (select rownum AS rnum, n.* from (select * from member order by "+sort+")n where member_id like ? or member_name like ?) where rnum BETWEEN ? and ?";
+		String query = "select * from (select rownum AS rnum, n.* from (select * from member order by " + sort
+				+ ")n where member_id like ? or member_name like ?) where rnum BETWEEN ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + searched + "%");
@@ -689,7 +691,7 @@ public class AdminDao {
 		ArrayList<Message> list = new ArrayList<Message>();
 		String query = "select * from message where msg_receive_id='admin' or msg_send_id='admin'";
 		ResultSet rset = null;
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -712,6 +714,140 @@ public class AdminDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+
+	public int deleteBuy(Connection conn, ArrayList<String> checkList, String param) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from buy where buy_sell_no in(" + param + ")";
+		System.out.println(query);
+		try {
+
+			pstmt = conn.prepareStatement(query);
+			for (int i = 0; i < checkList.size(); i++) {
+				pstmt.setInt(i + 1, Integer.parseInt(checkList.get(i)));
+			}
+			System.out.println(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public ArrayList<Sell> getDelSellList(Connection conn, ArrayList<String> checkList, String param) {
+		PreparedStatement pstmt = null;
+		ArrayList<Sell> list = new ArrayList<Sell>();
+		String query = "select * from sell where sell_no in(" + param + ")";
+		ResultSet rset = null;
+		System.out.println(query);
+		try {
+			pstmt = conn.prepareStatement(query);
+			for (int i = 0; i < checkList.size(); i++) {
+				pstmt.setInt(i + 1, Integer.parseInt(checkList.get(i)));
+			}
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Sell s = new Sell();
+
+				s.setSellNo(rset.getInt("sell_no"));
+				s.setSellTitle(rset.getString("sell_title"));
+				s.setSellName(rset.getString("sell_name"));
+				s.setSellWriter(rset.getString("sell_writer"));
+				s.setSellContent(rset.getString("sell_content"));
+				s.setSellEndDate(rset.getDate("sell_end_date"));
+				s.setSellMax(rset.getInt("sell_max"));
+				s.setSellMin(rset.getInt("sell_min"));
+				s.setSellCount(rset.getInt("sell_count"));
+				s.setSellPrice(rset.getInt("sell_price"));
+				s.setSellDate(rset.getDate("sell_date"));
+				s.setSellType(rset.getInt("sell_type"));
+				s.setSellCategory1(rset.getString("sell_category1"));
+				s.setSellCategory2(rset.getString("sell_category2"));
+				s.setSellWarning(rset.getInt("sell_warning"));
+				s.setSellDeliveryFee(rset.getInt("sell_delivery_fee"));
+				s.setSellItemOrigin(rset.getString("sell_item_origin"));
+				s.setSellItemExpireDate(rset.getString("sell_item_expire_date"));
+				s.setSellItemQuantity(rset.getString("sell_item_quantity"));
+				s.setSellItemMaterial(rset.getString("sell_item_material"));
+				s.setSellItemRule(rset.getString("sell_item_rule"));
+				s.setThumbnail(rset.getString("thumbnail"));
+				s.setSellDeleteState(rset.getInt("sell_delete_state"));
+
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return list;
+	}
+
+	public int insertSellEnd(Connection conn, ArrayList<Sell> list) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into sell_end values(?,?,?,?,?,?,?,?,?,?,sysdate,2,?,?,?,?,?)";
+
+		try {
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(query);
+				pstmt = conn.prepareStatement(query);
+				int index=1;
+				pstmt.setInt(index++, list.get(i).getSellNo());
+				pstmt.setString(index++, list.get(i).getSellTitle());
+				pstmt.setString(index++, list.get(i).getSellName());
+				pstmt.setString(index++, list.get(i).getSellWriter());
+				pstmt.setString(index++, list.get(i).getSellContent());
+				pstmt.setDate(index++, list.get(i).getSellDate());
+				pstmt.setInt(index++, list.get(i).getSellType());
+				pstmt.setString(index++, list.get(i).getSellCategory1());
+				pstmt.setString(index++, list.get(i).getSellCategory2());
+				pstmt.setInt(index++, list.get(i).getSellWarning());
+				pstmt.setString(index++, list.get(i).getSellItemOrigin());
+				pstmt.setString(index++, list.get(i).getSellItemQuantity());
+				pstmt.setString(index++, list.get(i).getSellItemMaterial());
+				pstmt.setString(index++, list.get(i).getSellItemRule());
+				pstmt.setString(index++, list.get(i).getThumbnail());
+				
+				result +=pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int deleteComment(Connection conn, ArrayList<String> checkList, String param, String type) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from "+type+" where "+type+"_no in(" + param + ")";
+		try {
+			pstmt = conn.prepareStatement(query);
+			for (int i = 0; i < checkList.size(); i++) {
+				pstmt.setInt(i + 1, Integer.parseInt(checkList.get(i)));
+			}
+			System.out.println(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
 	}
 
 }

@@ -97,14 +97,15 @@
 			});			
 		});
 		
+		
 		$("#sort-btn").click(function(){
 			var value =$("#sort-select").children("option:selected").val();
 			var link = document.location.href;
 			var searched = $("input[name=search]").val();
 			if (!link.match("search")) {
-				location.href = "/manageMember?reqPage=1&reqCount=10&sort="+ value;
+				location.href = "/manageMember?reqPage=1&reqCount="+$(".show-count").children("option:selected").val()+"&sort="+ value;
 			} else {
-				location.href = "/adminSearchMember?reqPage=1&reqCount=10&search="+ searched+"&sort="+value;
+				location.href = "/adminSearchMember?reqPage=1&reqCount="+$(".show-count").children("option:selected").val()+"&search="+ searched+"&sort="+value;
 			}
 		});
 		

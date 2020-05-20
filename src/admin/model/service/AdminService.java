@@ -152,19 +152,19 @@ public class AdminService {
 				param += "?,";
 			}
 		}
-		System.out.println(param);
-//		int result1 = new AdminDao().deleteBuy(conn,checkList,param)
-		int result = new AdminDao().deleteSell(conn, checkList, param);
-//		int result3 = 3;
+		int result1 = new AdminDao().deleteBuy(conn,checkList,param);
+		ArrayList<Sell> list = new AdminDao().getDelSellList(conn,checkList,param);
+		int result2 = new AdminDao().deleteSell(conn, checkList, param);
+		int result3 = new AdminDao().insertSellEnd(conn,list);
 
-		if (result > 0) {
+		if (result3>0 ) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
 
-		return result;
+		return result2;
 	}
 
 	public SellPageData searchSell(int reqPage, int reqCount, String searched) {
@@ -498,6 +498,30 @@ public class AdminService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int deleteComment(ArrayList<String> checkList, String type) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+
+		String param = "";
+		for (int i = 0; i < checkList.size(); i++) {
+			if (i == checkList.size() - 1) {
+				param += "?";
+			} else {
+				param += "?,";
+			}
+		}
+		int result = new AdminDao().deleteComment(conn, checkList, param, type);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+		return result;
 	}
 
 }

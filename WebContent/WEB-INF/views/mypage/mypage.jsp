@@ -631,6 +631,7 @@ ul {
 							</div>
 						</div>
 						<div class="list">
+							<c:forEach items="${list }" var="s">
 							<div class="product">
 								<div class="p-image">
 									<img src="/imgs/Logo1.png" width="100%" height="100%" alt=""
@@ -647,6 +648,7 @@ ul {
 									</div>
 								</div>
 							</div>
+							</c:forEach>
 							<div class="product">
 								<div class="p-image">
 									<img src="../imgs/product2.jpg" width="100%" height="100%"
