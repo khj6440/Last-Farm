@@ -30,7 +30,9 @@ public class MemberDao {
 				m.setMemberRoadAddr(rset.getString("member_road_addr"));
 				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberPostCode(rset.getString("member_post_code"));
-				m.setMemberDeliveryAddr(rset.getString("member_delivery_addr"));
+				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));
+				m.setMemberDetailAddr2(rset.getString("member_detail_addr2"));
+				m.setMemberPostCode2(rset.getString("member_post_code2"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberDate(rset.getDate("member_date"));
@@ -54,4 +56,30 @@ public class MemberDao {
 		return m;
 	}
 
+	public Member selectOneWriter(Connection conn, String sellWriter) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query="select * from member where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sellWriter);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("member_id"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setMemberScore(rset.getInt("member_score"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return m;
+	}
 }

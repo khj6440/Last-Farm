@@ -7,6 +7,9 @@ import common.JDBCTemplate;
 import sell.model.dao.SellSearchDao;
 import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
+import sellComment.model.dao.SellCommentDao;
+import sellComment.model.vo.SellComment;
+import sellComment.model.vo.SellViewData;
 
 public class SellSearchService {
 
@@ -123,6 +126,10 @@ public class SellSearchService {
 		JDBCTemplate.close(conn);
 		return scp;
 	}
+
+	
+
+	
 	
 	
 

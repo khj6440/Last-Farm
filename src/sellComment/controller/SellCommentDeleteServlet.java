@@ -1,7 +1,6 @@
-package sell.controller;
+package sellComment.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-import sell.model.vo.SellCategoryPage;
 import sellComment.model.service.SellCommentService;
 import sellComment.model.vo.SellComment;
 
 /**
- * Servlet implementation class SellSearchNationalFrmServlet
+ * Servlet implementation class SellCommentDeleteServlet
  */
-@WebServlet(name = "SellFrm", urlPatterns = { "/sellFrm" })
-public class SellFrmServlet extends HttpServlet {
+@WebServlet(name = "SellCommentDelete", urlPatterns = { "/sellCommentDelete" })
+public class SellCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellFrmServlet() {
+    public SellCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,11 +31,24 @@ public class SellFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");	
-		String page = request.getParameter("sell_no");
-		ArrayList<Sell> list = new SellSearchService().selectSellNationalList(page);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellPage.jsp");
-		request.setAttribute("list",list);
+request.setCharacterEncoding("utf-8");
+	
+		int sc = Integer.parseInt(request.getParameter("sellCommentNo"));
+		int sc1 = Integer.parseInt(request.getParameter("sellRef"));
+//		SellComment sc = new SellComment();
+//		sc.setSellCommentNo(Integer.parseInt(request.getParameter("sellCommentNo")));
+//		sc.setSellCommentRef(Integer.parseInt(request.getParameter("sellRef")));
+		
+		
+		int result = new SellCommentService().sellCommentDelete(sc);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "삭제되었습니다.");
+		}else {
+			request.setAttribute("msg", "삭제 실패");
+		}
+		request.setAttribute("loc", "/sellView?sell_no="+sc1);
+		
 		rd.forward(request, response);
 	}
 

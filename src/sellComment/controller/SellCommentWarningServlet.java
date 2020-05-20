@@ -1,7 +1,6 @@
-package sell.controller;
+package sellComment.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-import sell.model.vo.SellCategoryPage;
 import sellComment.model.service.SellCommentService;
-import sellComment.model.vo.SellComment;
 
 /**
- * Servlet implementation class SellSearchNationalFrmServlet
+ * Servlet implementation class SellCommentWarningServlet
  */
-@WebServlet(name = "SellFrm", urlPatterns = { "/sellFrm" })
-public class SellFrmServlet extends HttpServlet {
+@WebServlet(name = "SellCommentWarning", urlPatterns = { "/sellCommentWarning" })
+public class SellCommentWarningServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellFrmServlet() {
+    public SellCommentWarningServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +30,19 @@ public class SellFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");	
-		String page = request.getParameter("sell_no");
-		ArrayList<Sell> list = new SellSearchService().selectSellNationalList(page);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellPage.jsp");
-		request.setAttribute("list",list);
-		rd.forward(request, response);
-	}
+		int sellCommentNo = Integer.parseInt(request.getParameter("sellCommentNo"));
+	      int sellCommentWarning = Integer.parseInt(request.getParameter("sellCommentWarning"));
+	      int result = new SellCommentService().commentWarning(sellCommentNo, sellCommentWarning);
+	      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+	      if(result>0) {
+	         request.setAttribute("msg", "신고 성공");
+	      }else {
+	         request.setAttribute("msg", "신고 실패");
+	      }
+	      request.setAttribute("loc", "/sellView?sell_no=4");
+	      rd.forward(request, response);
+	   }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

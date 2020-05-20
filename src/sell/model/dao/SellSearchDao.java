@@ -46,7 +46,7 @@ public class SellSearchDao {
 				sell.setSellItemMaterial(rset.getString("sell_item_material"));
 				sell.setSellItemRule(rset.getString("sell_item_rule"));
 				sell.setThumbnail(rset.getString("thumbnail"));
-				sell.setSellDeleteState(rset.getInt("sell_detail_state"));
+				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
 				list.add(sell);
 			}
 		} catch (SQLException e) {
