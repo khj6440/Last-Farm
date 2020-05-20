@@ -35,6 +35,8 @@ body{
 th, td {
     height: 45px;
     margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+
 }
 
 td {
@@ -42,12 +44,14 @@ td {
 }
 
 th {
-
+    border-right: 1px solid lightgray;
 	width: 30%;
     font-size: 120%;
 }
 form{
-	margin: 25px;}
+	margin: 25px;
+	}
+	
 .comments {
 	color: red;
 }
@@ -219,6 +223,9 @@ form{
                 }
     .tableTitle{
         height: 60px;
+        background-color:#fafafa; 
+        border-radius: 5px;
+        border-shadow: 0px 1px 1px gray;
     }
 </style>
 </head>
@@ -445,7 +452,7 @@ form{
 			value="${sessionScope.member.memberId }">
 		<table>
             <tr>
-                <th colspan="2" style="font-size:140%;" class="tableTitle">판매 기본 정보 입력</th>
+                <th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">판매 기본 정보 입력</th>
             </tr>
 			<tr>
 				<th>판매 가능 지역 선택</th>
@@ -539,17 +546,17 @@ form{
                 <th colspan="2" style="border:none;"></th>
             </tr>
 			<tr>
-				<th colspan="2" style="font-size:140%" class="tableTitle">본문 내용 입력</th>
+				<th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">본문 내용 입력</th>
 			</tr>
 			<tr>
 				<td colspan="2"><textarea name="sellContent" id="content" rows="10" cols="100"
-						style="width: 1200px; height: 412px;"></textarea></td>
+						style="width: 1205px; height: 412px;"></textarea></td>
 			</tr>
             <tr>
                 <th colspan="2" style="border:none;"></th>
             </tr>
 			<tr>
-				<th colspan="2" style="font-size:140%" class="tableTitle">등록 상품의 필수 정보 입력</th>
+				<th colspan="2" style="font-size:140%; border-right:none;" class="tableTitle">등록 상품의 필수 정보 입력</th>
 			</tr>
 			<tr>
 				<th>제조원(원산지)</th>
@@ -584,7 +591,7 @@ form{
                 <th colspan="2" style="border:none;"></th>
             </tr>
 			<tr style="height:100px;">
-				<th colspan="2"><input type="submit" value="등록하기" id="formsubmit" class="finalBtn"> <input
+				<th colspan="2" style="border:none;"><input type="submit" value="등록하기" id="formsubmit" class="finalBtn"> <input
 					type="reset" value="취소하기" class="finalBtn"></th>
 			</tr>
 		</table>

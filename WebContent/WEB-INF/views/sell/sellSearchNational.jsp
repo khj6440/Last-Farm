@@ -169,7 +169,7 @@
 	padding-left: 17px;
 }
 
-.productImg>img {
+.productImg img {
 	border: 1px solid gray;
 	height: 400px;
 	width: 100%;
@@ -327,7 +327,14 @@
 		window.onload = function TimerStart() {
 			tid = setInterval('msg_time()', 1000)
 		};
-
+		
+	$(function(){
+		$(".imgToSellPage").click(function(){
+			console.log('${n.sellNo }');
+			console.log('${n.sellWriter }');
+			//location.href="/sellView?sell_no="+"${n.sellNo }"+"&sell_writer="+"${n.sellWriter }";
+		})
+	});
 		//DB에서 상품 데이터 불러오기
 		/*function sell_listAll(){
 			var searchTypingBox = $("#searchTypingBox").val();
@@ -460,7 +467,7 @@
 										<div id="ViewTimer"></div>
 									</c:if>
 								</div>
-								<img src='/imgs/${n.thumbnail }'>
+								<a href='/sellView?sellNo=${n.sellNo }&sellWriter=${n.sellWriter }'><img src='/imgs/${n.thumbnail }'></a>
 							</div>
 							<p>${n.sellTitle }</p>
 							<div class='detailInfoBox'>

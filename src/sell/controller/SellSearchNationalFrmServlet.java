@@ -41,7 +41,6 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
 		request.setAttribute("sellList", scp.getSellList());
-		System.out.println(scp.getSellList().get(0).getSellNo());
 		request.setAttribute("pageNavi", scp.getPageNavi());
 		rd.forward(request, response);
 	}

@@ -57,8 +57,6 @@ public class SellSearchBoxServlet extends HttpServlet {
 				request.setAttribute("sellList", scp.getSellList());
 				request.setAttribute("searchWord", searchWord);
 				request.setAttribute("pageNavi", scp.getPageNavi());
-
-		        
 				rd.forward(request, response);
 			}
 			
