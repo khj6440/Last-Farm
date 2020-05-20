@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5dae4ac37c5f2bb1fda554c2fee44bc411debb71
  @charset "UTF-8";
 
 
@@ -7,12 +10,16 @@
 	text-shadow: 0.5px 0.5px gray;
 	width: 1280px;
 }
+.body{
+	font-family: 'Jua', sans-serif;
+}
 
 .main_footer {
 	position: relative;
-	background-color: #D9D4CF;
+	background-color: #A2A367;
 	width: 100%;
 	height: 180px;
+	font-family: 'Jua', sans-serif;
 }
 
 
@@ -24,6 +31,7 @@
 	margin-left: 25%;
 	float: left;
 	text-align: center;
+
 }
 
 select {
@@ -36,5 +44,5 @@ select {
 .footer_a1 {
 	text-shadow: 2px 2px gray;
 	font-size: 30px;
-	
+
 }

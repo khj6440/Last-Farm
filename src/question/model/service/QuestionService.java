@@ -83,13 +83,13 @@ public class QuestionService {
 		
 		if(pageNo != 1) {
 			pageNavi += "<a class='"
-					+ " ' href='/questionList?reqPage="+(pageNo-pageNaviSize)+"'>이전</a>";
+					+ " ' href='/searchKeyword?reqPage="+(pageNo-pageNaviSize)+"&keyword="+keyword+"'>이전</a>";
 		}
 		for(int i=0; i<pageNaviSize; i++) {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='btn btn-secondary'>"+pageNo+"</span>";
 			}else {
-				pageNavi +=  "<a class='btn btn-outline-secondary' href='/questionList?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				pageNavi +=  "<a class='btn btn-outline-secondary' href='/searchKeyword?reqPage="+pageNo+"&keyword="+keyword+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo>totalPage) {
@@ -97,7 +97,7 @@ public class QuestionService {
 			}
 		}
 		if(pageNo <= totalPage) {
-			pageNavi += "<a class ='btn btn-outline-secondary' href='/questionList?reqPage="+pageNo+"'>다음</a>"; 
+			pageNavi += "<a class ='btn btn-outline-secondary' href='/searchKeyword?reqPage="+pageNo+"&keyword="+keyword+"'>다음</a>"; 
 		}
 		QuestionPageData pd = new QuestionPageData(list, pageNavi);
 		JDBCTemplate.close(conn);
@@ -154,5 +154,7 @@ public class QuestionService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+
 
 }

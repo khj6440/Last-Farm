@@ -1,17 +1,22 @@
+
 package notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class NoticeWriteServlet
  */
+
 @WebServlet(name = "NoticeWrite", urlPatterns = { "/noticeWrite" })
 public class NoticeWriteServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -38,5 +43,4 @@ public class NoticeWriteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

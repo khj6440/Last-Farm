@@ -35,6 +35,7 @@ public class SearchSellCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String category1 = request.getParameter("searchTypingBox");
+		
 		//ArrayList<Sell> sellList = new SellSearchService().searchBoxSorting(searchWord);
 		//new Gson().toJson(sellList,response.getWriter());
 	}

@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminService;
+import admin.model.vo.ReviewPageData;
+import admin.model.vo.SellPageData;
+
 /**
  * Servlet implementation class ManageReviewServlet
  */
@@ -28,7 +32,31 @@ public class ManageReviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageReview.html");
+	
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqCount= 10;
+		if(request.getParameter("reqCount")!=null) {
+			reqCount=Integer.parseInt(request.getParameter("reqCount"));
+		}
+		request.setAttribute("reqCount", reqCount);
+		
+		
+		ReviewPageData pd = new AdminService().selectReviewList(reqPage,reqCount);
+		
+		RequestDispatcher rd =null;
+		if(pd.getList().isEmpty() && pd.getTotalCount()!=0) {
+			System.out.println("전페이지 요청");
+			rd =request.getRequestDispatcher("/manageReview?reqCount="+reqCount+"&reqPage="+(reqPage-1));
+		}else {
+			rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageReview.jsp");
+		}
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
+		request.setAttribute("totalPage", pd.getTotalPage());
+		request.setAttribute("totalCount", pd.getTotalCount());
+
+		
+		
 		rd.forward(request, response);
 	}
 

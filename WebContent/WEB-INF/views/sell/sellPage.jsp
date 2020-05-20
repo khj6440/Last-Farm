@@ -16,7 +16,7 @@
 	margin: 0 auto;
 	overflow: hidden;
 }
-
+ 
 .sell_head {
 	box-sizing: content-box;
 	margin: 0 auto;
