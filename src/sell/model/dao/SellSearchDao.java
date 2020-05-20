@@ -73,6 +73,7 @@ public class SellSearchDao {
 					while(rset.next()) {
 						Sell sell = new Sell();
 						sell.setSellNo(rset.getInt("sell_no"));
+						sell.setSellWriter(rset.getString("sell_writer"));
 						sell.setSellTitle(rset.getString("sell_title"));
 						sell.setThumbnail(rset.getString("thumbnail"));
 						sell.setSellPrice(rset.getInt("sell_price"));
@@ -108,6 +109,7 @@ public class SellSearchDao {
 				while(rset.next()) {
 					Sell sell = new Sell();
 					sell.setSellNo(rset.getInt("sell_no"));
+					sell.setSellWriter(rset.getString("sell_writer"));
 					sell.setSellTitle(rset.getString("sell_title"));
 					sell.setThumbnail(rset.getString("thumbnail"));
 					sell.setSellPrice(rset.getInt("sell_price"));
@@ -234,6 +236,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -351,6 +354,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -468,6 +472,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -504,6 +509,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -541,6 +547,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -595,6 +602,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -628,6 +636,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
@@ -661,6 +670,7 @@ public class SellSearchDao {
 			while(rset.next()) {
 				Sell sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
+				sell.setSellWriter(rset.getString("sell_writer"));
 				sell.setSellTitle(rset.getString("sell_title"));
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellPrice(rset.getInt("sell_price"));
