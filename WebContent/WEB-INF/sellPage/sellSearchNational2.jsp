@@ -338,6 +338,11 @@
 					$("select[name=수산물]").hide();
 				}
 			});
+			
+			$(".ordertabCategory").children().children().click(function(){
+				var tabWord = $(this).val();
+				console.log("ㅇㅇ");
+			});
 		});
 		//paging
 	</script>
@@ -364,24 +369,24 @@
     </select>
 			<div class="searchInput-wrapper">
 				<div class="searchInputBox">
-				
 					<img src="../imgs/search@3x.png"> 
 					<input type="text" name="searchTypingBox" id="searchTypingBox" class="searchTypingBox"
 						placeholder="검색할 상품을 입력하세요.">
 				</div>
-				<input type="submit" onclick="sell_listAll();" value="상품 검색" class="searchBtn">
+				<input type="submit"  value="상품 검색" class="searchBtn">
 			</div>
 		</div>
-		</form>
+		
 		<br>
 		<br>
 		<div class="ordertabCategory">
 			<ul>
-				<li class="clicktab">마감시간 순</li>
-				<li class="unclicktab">구매 인기순</li>
-				<li class="unclicktab">최근 등록순</li>
+				<li class="clicktab" name="sortingTab" value="마감시간 순" >마감시간 순</li>
+				<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
+				<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
 			</ul>
 		</div>
+		</form>
 		<br>
 		<br>
 		<br>

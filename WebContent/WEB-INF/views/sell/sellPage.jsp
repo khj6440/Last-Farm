@@ -79,8 +79,8 @@
 
 .sell_img11 {
 	margin-left: 50px;
-	width: 80%;
-	height: 100%;
+	width: 370px;
+	height: 300px;
 }
 
 .sell_content_table tr {
@@ -343,7 +343,7 @@
 				<div class="sell_head_sub2">
 					작성일 : ${s.sellDate }
 					<c:if
-						test="${sessionScope.member.memberId eq s.sellWriter && s.sellDeleteState eq 0}">
+						test="${sessionScope.member.memberId eq s.sellWriter && s.sellDeleteState eq 0 && sessionScope.member.memberType eq 2}">
 						
 						<button type="button" class="sell_delete_btn" onclick="location.href='/sellPageDelRequest?sell_no=${s.sellNo}&sell_delete_state=${s.sellDeleteState }'" >글 삭제 요청</button>
 						
@@ -353,7 +353,7 @@
 			<div class="sell_content">
 				<table class="sell_content_table">
 					<tr>
-						<td rowspan="5" class="sell_table_td"><img src="${s.thumbnail }"
+						<td rowspan="5" class="sell_table_td"><img src="/imgs/${s.thumbnail }"
 							class="sell_img11">
 							<div class="sell_timer">00:00:00</div></td>
 						<th class="sell_table_th">${s.sellTitle }</th>
@@ -634,7 +634,7 @@
 			$(".sell_count_select").change(function(){
 				$(".sell_allprice").html($(this).val() * ${s.sellPrice});
 			});
-		 });
+		  });
 		
 	
 		

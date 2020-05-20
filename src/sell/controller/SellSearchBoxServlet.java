@@ -1,7 +1,8 @@
 package sell.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
 
 /**
@@ -36,23 +34,34 @@ public class SellSearchBoxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String searchWord = request.getParameter("searchTypingBox");
-		String sortingTab = request.getParameter("sortingTab");
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		SellCategoryPage scp = new SellCategoryPage();
-		if(searchWord=="") {
-//			sellList = new SellSearchService().selectSellNationalList();
-		}else {
-			scp = new SellSearchService().searchBoxSorting(reqPage, sortingTab, searchWord);
+
+		
+		int reqPage = 1;
+		if(request.getParameter("reqPage") !=null) {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sellPage/sellSearchNational.jsp");
-		request.setAttribute("sellList", scp.getSellList());
-		request.setAttribute("sortingTab", sortingTab);
-		System.out.println(scp.getSellList().get(0).getSellNo());
-		request.setAttribute("pageNavi", scp.getPageNavi());
-		request.setAttribute("searchWord", searchWord);
-		rd.forward(request, response);
+		String type1 = request.getParameter("type1");
+		String type2 = request.getParameter("type2");
+		String searchWord = request.getParameter("searchTypingBox");
+		String sortingTab = request.getParameter("sortingTab1");
+
+			SellCategoryPage scp = new SellSearchService().sellEnd(reqPage,type1,type2,searchWord, sortingTab);	
+			if(scp.getSellList().isEmpty()) {
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+				request.setAttribute("msg", "검색어와 일치하는 글이 없습니다.");
+				request.setAttribute("loc", "/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순");
+				rd.forward(request, response);
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
+				request.setAttribute("sellList", scp.getSellList());
+				request.setAttribute("searchWord", searchWord);
+				request.setAttribute("pageNavi", scp.getPageNavi());
+
+		        
+				rd.forward(request, response);
+			}
+			
 	}
 
 	/**
