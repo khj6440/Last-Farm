@@ -53,7 +53,6 @@
 						</li>
 					</c:if>
 				</ul>
-
 			</div>
 			<div class="header_top_logo">
 				<a class="header_top_logo_a1" href="index.jsp"><img

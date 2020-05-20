@@ -323,8 +323,8 @@
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<form class="form-header" action="/adminSearchMember" method="get">
-							<input disabled style="margin-right: 10px;" class="au-input au-input--xl"
-								type="text" name="search"
+							<input disabled style="margin-right: 10px;"
+								class="au-input au-input--xl" type="text" name="search"
 								placeholder="Search for user ID &amp; name..."
 								value="${search }"> <input type="hidden" name="reqPage"
 								value="1"> <input type="hidden" name="reqCount"
@@ -377,7 +377,7 @@
 										</div>
 
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
 									</div>
@@ -400,72 +400,190 @@
 									<h3 class="title-5 m-b-35"
 										style="font-size: 30px; font-weight: bold;">
 										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함<span
-											style="color: gray; font-size: 15px"> ( 받은,보낸쪽지
-											:${totalCount }개)</span>
+											style="color: gray; font-size: 15px"></span>
 									</h3>
 								</div>
+								<div style="display: flex">
+									<div class="col-lg-6">
+										<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+											<div class="au-card-title"
+												style="background-image: url('images/bg-title-02.jpg');">
+												<div style="background-color: #ffac05;" class="bg-overlay bg-overlay--blue"></div>
+												<h3 style="color:#4a2100;">
+													<i style="color:#4a2100;" class="zmdi zmdi-comment-text"></i>받은 쪽지함
+												</h3>
+											</div>
+											<div class="au-inbox-wrap js-inbox-wrap">
+												<div class="au-message js-list-load">
+													<div class="au-message__noti"></div>
+													<div class="au-message-list">
 
-								<div class="msg-main">
-									<div class="msg-receive">
-										<div class="msg-box-title">받은쪽지함</div>
-										<div class="msg-box-tab">
-											<div>보낸사람</div>
-											<div>제목</div>
-											<div>읽음여부</div>
-
-										</div>
-
-										<div class="msg-box-content">
-											<div class="msgs">
-												<c:forEach items="${list }" var='m'>
-													<c:if test="${m.msgReceiveId eq 'admin' }">
-														${m.msgNo }
-														${m.msgSendId }
-														${m.msgReceiveId }
-													</c:if>
-												</c:forEach>
-
+														<c:forEach items="${list }" var="m">
+															<c:if test="${m.msgReceiveId eq 'admin' }">
+																<div class="au-message__item">
+																	<div class="au-message__item-inner">
+																		<div class="au-message__item-text">
+																			<div class="avatar-wrap">
+																				<div class="avatar">
+																					<img src="images/icon/avatar-05.jpg"
+																						alt="Michelle Sims">
+																				</div>
+																			</div>
+																			<div class="text">
+																				<h5 class="name">${m.msgSendId }</h5>
+																				<p>Purus feugiat finibus</p>
+																			</div>
+																		</div>
+																		<div class="au-message__item-time">
+																			<span>${m.msgDate }</span>
+																		</div>
+																	</div>
+																</div>
+															</c:if>
+														</c:forEach>
+													</div>
+												</div>
+												<div class="au-chat">
+													<div class="au-chat__title">
+														<div class="au-chat-info">
+															<div class="avatar-wrap online">
+																<div class="avatar avatar--small">
+																	<img src="images/icon/avatar-02.jpg" alt="John Smith">
+																</div>
+															</div>
+															<span class="nick"> <a href="#">John Smith</a>
+															</span>
+														</div>
+													</div>
+													<div class="au-chat__content">
+														<div class="recei-mess-wrap">
+															<span class="mess-time">12 Min ago</span>
+															<div class="recei-mess__inner">
+																<div class="avatar avatar--tiny">
+																	<img src="images/icon/avatar-02.jpg" alt="John Smith">
+																</div>
+																<div class="recei-mess-list">
+																	<div class="recei-mess">Lorem ipsum dolor sit
+																		amet, consectetur adipiscing elit non iaculis</div>
+																	<div class="recei-mess">Donec tempor, sapien ac
+																		viverra</div>
+																</div>
+															</div>
+														</div>
+														<div class="send-mess-wrap">
+															<span class="mess-time">30 Sec ago</span>
+															<div class="send-mess__inner">
+																<div class="send-mess-list">
+																	<div class="send-mess">Lorem ipsum dolor sit
+																		amet, consectetur adipiscing elit non iaculis</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="au-chat-textfield">
+														<form class="au-form-icon">
+															<input class="au-input au-input--full au-input--h65"
+																type="text" placeholder="Type a message">
+															<button class="au-input-icon">
+																<i class="zmdi zmdi-camera"></i>
+															</button>
+														</form>
+													</div>
+												</div>
 											</div>
 										</div>
-
 									</div>
-									<div class="msg-send">
-										<div class="msg-box-title">보낸쪽지함</div>
-										<div class="msg-box-tab">
-											<div>받은사람</div>
-											<div>제목</div>
-											<div></div>
-										</div>
-										<div class="msg-box-content">
-											<div class="msgs">
-												<c:forEach items="${list }" var='m'>
-													<c:if test="${m.msgSendId eq 'admin' }">
-														${m.msgNo }
-														${m.msgSendId }
-														${m.msgReceiveId }
-													</c:if>
-												</c:forEach>
+									<div class="col-lg-6">
+										<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+											<div class="au-card-title"
+												style="background-image: url('images/bg-title-02.jpg');">
+												<div style="background-color: #ffac05;" class="bg-overlay bg-overlay--blue"></div>
+												<h3 style="color:#4a2100;">
+													<i style="color:#4a2100;" class="zmdi zmdi-comment-text"></i>보낸 쪽지함
+												</h3>
+
+											</div>
+											<div class="au-inbox-wrap js-inbox-wrap">
+												<div class="au-message js-list-load">
+													<div class="au-message__noti"></div>
+													<div class="au-message-list">
+
+														<c:forEach items="${list }" var="m">
+															<c:if test="${m.msgSendId eq 'admin' }">
+																<div class="au-message__item">
+																	<div class="au-message__item-inner">
+																		<div class="au-message__item-text">
+																			<div class="avatar-wrap">
+																				<div class="avatar">
+																					<img src="images/icon/avatar-05.jpg"
+																						alt="Michelle Sims">
+																				</div>
+																			</div>
+																			<div class="text">
+																				<h5 class="name">${m.msgReceiveId }</h5>
+																				<p>Purus feugiat finibus</p>
+																			</div>
+																		</div>
+																		<div class="au-message__item-time">
+																			<span>${m.msgDate }</span>
+																		</div>
+																	</div>
+																</div>
+															</c:if>
+														</c:forEach>
+													</div>
+												</div>
+												<div class="au-chat">
+													<div class="au-chat__title">
+														<div class="au-chat-info">
+															<div class="avatar-wrap online">
+																<div class="avatar avatar--small">
+																	<img src="images/icon/avatar-02.jpg" alt="John Smith">
+																</div>
+															</div>
+															<span class="nick"> <a href="#">John Smith</a>
+															</span>
+														</div>
+													</div>
+													<div class="au-chat__content">
+														<div class="recei-mess-wrap">
+															<span class="mess-time">12 Min ago</span>
+															<div class="recei-mess__inner">
+																<div class="avatar avatar--tiny">
+																	<img src="images/icon/avatar-02.jpg" alt="John Smith">
+																</div>
+																<div class="recei-mess-list">
+																	<div class="recei-mess">Lorem ipsum dolor sit
+																		amet, consectetur adipiscing elit non iaculis</div>
+																	<div class="recei-mess">Donec tempor, sapien ac
+																		viverra</div>
+																</div>
+															</div>
+														</div>
+														<div class="send-mess-wrap">
+															<span class="mess-time">30 Sec ago</span>
+															<div class="send-mess__inner">
+																<div class="send-mess-list">
+																	<div class="send-mess">Lorem ipsum dolor sit
+																		amet, consectetur adipiscing elit non iaculis</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="au-chat-textfield">
+														<form class="au-form-icon">
+															<input class="au-input au-input--full au-input--h65"
+																type="text" placeholder="Type a message">
+															<button class="au-input-icon">
+																<i class="zmdi zmdi-camera"></i>
+															</button>
+														</form>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="msg-main">
-									<div class="more-btn-box">
-										<button id="more-btn" totalCount="${totalCount}"
-											currentCount="0" value="">
-											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
-										</button>
-									</div>
-									<div class="more-btn-box">
-										<button id="more-btn" totalCount="${totalCount}"
-											currentCount="0" value="">
-											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
-										</button>
-									</div>
-
-								</div>
-
-
 							</div>
 						</div>
 						<!-- END DATA TABLE-->
