@@ -1,6 +1,4 @@
-
 package member.controller;
-
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NoticeWriteServlet
+ * Servlet implementation class LoginServlet
  */
-
 @WebServlet(name = "/LoginFrm", urlPatterns = { "/loginFrm" })
 public class LoginFrmServlet extends HttpServlet {
-
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -30,9 +26,11 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/login/login.jsp").forward(request, response);;
-		
-		
+		// TODO Auto-generated method stub
+	//1.인코딩
+		//2.변수값 저장
+		//3.비지니스로직 저장
+		request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
 	}
 
 	/**

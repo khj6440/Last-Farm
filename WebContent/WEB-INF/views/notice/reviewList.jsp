@@ -137,7 +137,8 @@
 
 .question_d1 {
 	height: 100%;
-	width: 810px;
+	width: 620px;
+margin-left: 200px;
 }
 
 .d3 {
@@ -178,11 +179,10 @@
 	color: black;
 }
 
-.question_select2 {
+.question_select {
 	position: static;
 	margin-left: 407px;
 	width: 100px;
-	height:30px;
 	margin-top: 0px;
 }
 
@@ -307,7 +307,7 @@ border-radius: 5px;
 			
 				<div class="search_tap">
 				<input type="hidden" name="reqPage" value="1">
-					<select name="type" class="question_select2">
+					<select name="type" class="question_select">
 						<option value="id">아이디</option>
 						<option value="title">제목</option>
 						

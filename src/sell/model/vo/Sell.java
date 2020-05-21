@@ -27,7 +27,6 @@ public class Sell {
 	private String thumbnail;
 	private int sellDeleteState;
 	private String sellRegionalAddr;
-
 	private int timegap;
 
 	public Sell() {
@@ -39,9 +38,7 @@ public class Sell {
 			int sellMax, int sellMin, int sellCount, int sellPrice, Date sellDate, int sellType, String sellCategory1,
 			String sellCategory2, int sellWarning, int sellDeliveryFee, String sellItemOrigin,
 			String sellItemExpireDate, String sellItemQuantity, String sellItemMaterial, String sellItemRule,
-
 			String thumbnail, int sellDeleteState, String sellRegionalAddr, int timegap) {
-
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -71,7 +68,6 @@ public class Sell {
 	}
 	public String getContentBr() {
 		return sellContent.replaceAll("\r\n", "<br>");
-
 	}
 	public int getSellNo() {
 		return sellNo;
@@ -267,8 +263,6 @@ public class Sell {
 		this.sellDeleteState = sellDeleteState;
 	}
 
-
-
 	public String getSellRegionalAddr() {
 		return sellRegionalAddr;
 	}
@@ -278,4 +272,3 @@ public class Sell {
 	}
 
 }
-	

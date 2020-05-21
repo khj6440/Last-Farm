@@ -60,6 +60,7 @@
         <span class="d1" name="reviewScore"></span>
         
         <input type="hidden" class="reviewScore" name="reviewScore">
+<<<<<<< HEAD
    					</td>
 				</tr>
 				<tr>

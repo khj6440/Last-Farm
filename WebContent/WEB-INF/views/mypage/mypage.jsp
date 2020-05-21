@@ -808,87 +808,89 @@ form.form1 {
 </style>
 
 <script type="text/javascript">
-	function deleteMember(memberId) {
-		if (confirm("탈퇴하시겠습니까?"))
 
-			location.href = "/deleteMember?memberId=" + memberId;
-	}
+function deleteMember(memberId) {
+	if (confirm("탈퇴하시겠습니까?"))
 
-	function addrSearch1() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				$("#postCode").val(data.zonecode);
-				$("#roadAddr").val(data.roadAddress);
+		location.href = "/deleteMember?memberId=" + memberId;
+}
 
-			}
-		}).open();
-	}
+function addrSearch1() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			$("#postCode").val(data.zonecode);
+			$("#roadAddr").val(data.roadAddress);
+		
+		}
+	}).open();
+}
 
-	function addrSearch2() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				$("#postCode2").val(data.zonecode);
-				$("#roadAddr2").val(data.roadAddress);
+function addrSearch2() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			$("#postCode2").val(data.zonecode);
+			$("#roadAddr2").val(data.roadAddress);
+			
+		}
+	}).open();
+}
 
-			}
-		}).open();
-	}
 
-	$(function() {
-		$(".tab>ul>li").click(function() {
-			$(".tab>ul>li").removeClass("tab-selected")
-			$(this).addClass("tab-selected");
-			var index = $(".tab>ul>li").index($(this));
-			$(".content").removeClass("show-content");
-			$(".content").eq(index).addClass("show-content")
-		});
+   $(function() {
+      $(".tab>ul>li").click(function() {
+         $(".tab>ul>li").removeClass("tab-selected")
+         $(this).addClass("tab-selected");
+         var index = $(".tab>ul>li").index($(this));
+         $(".content").removeClass("show-content");
+         $(".content").eq(index).addClass("show-content")
+      });
 
-		$(".order>div").click(function() {
-			$(".order>div").css("color", "");
-			$(this).css("color", "#F6b70d");
+      $(".order>div").click(function() {
+         $(".order>div").css("color", "");
+         $(this).css("color", "#F6b70d");
 
-		})
-		$("#inputArea").keyup(function() {
-			var inputLength = $(this).val().length;
-			if (inputLength > 2000) {
-				alert("입력가능 글자를 초과했습니다")
-				return;
-			}
-			$(".textNum>span").html(inputLength + " / 2000");
+      })
+      $("#inputArea").keyup(function() {
+         var inputLength = $(this).val().length;
+         if (inputLength > 2000) {
+            alert("입력가능 글자를 초과했습니다")
+            return;
+         }
+         $(".textNum>span").html(inputLength + " / 2000");
 
-		})
+      })
 
-		$(".p-title>input").click(function(event) {
-			event.stopPropagation();
-		})
+      $(".p-title>input").click(function(event) {
+         event.stopPropagation();
+      })
 
-		$(".product").children().not(".p-info>.p-title>input").click(
-				function() {
-					console.log("test");
-				})
+      $(".product").children().not(".p-info>.p-title>input").click(
+            function() {
+               console.log("test");
+            })
 
-		$("#imgInp").on('change', function() {
-			changeImg(this);
-		});
+      $("#imgInp").on('change', function() {
+         changeImg(this);
+      });
 
-	})
+   })
 
-	function reviewInsert(sellEndNo, sellEndWriter) {
-		console.log("시작");
-		var memberId = "${sessionScope.member.memberId}";
-		/* var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}"; */
-		var url = "/reviewInsertFrm";
-		var title = "reviewInsertFrm";
-		var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
-		var popup = window.open("", title, status);
-		$("input[name=sellEndNo]").val(sellEndNo);
-		$("input[name=memberId]").val(memberId);
-		$("input[name=sellEndWriter]").val(sellEndWriter);
-		$(".reviewInsertFrm").attr("action", url);
-		$(".reviewInsertFrm").attr("method", "post");
-		$(".reviewInsertFrm").attr("target", title);//새로 열린 popup창과 form태그를 연결
-		$(".reviewInsertFrm").submit();
-	}
+   function reviewInsert(sellEndNo) {
+      console.log("시작");
+      var memberId = "${sessionScope.member.memberId}";
+      var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}";
+      var url = "/reviewInsertFrm";
+      var title = "reviewInsertFrm";
+      var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
+      var popup = window.open("", title, status);
+      $("input[name=sellEndNo]").val(sellEndNo);
+      $("input[name=memberId]").val(memberId);
+      $("input[name=sellEndWriter]").val(sellEndWriter);
+      $(".reviewInsertFrm").attr("action", url);
+      $(".reviewInsertFrm").attr("method", "post");
+      $(".reviewInsertFrm").attr("target", title);//새로 열린 popup창과 form태그를 연결
+      $(".reviewInsertFrm").submit();
+   }
 </script>
 </head>
 <body>
@@ -923,8 +925,7 @@ form.form1 {
 							<li class="tab-li">판매 내역</li>
 						</c:if>
 
-						<li class="tab-li"
-							onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">쪽지함</li>
+						<li class="tab-li">쪽지함</li>
 					</ul>
 				</div>
 				<div class="contents">
@@ -1213,56 +1214,45 @@ form.form1 {
 						<div class="content-menu"></div>
 						<div class="list">
 							<c:forEach items="${endList }" var="e">
-					<form class="reviewInsertFrm">
-							<input name="sellEndNo" type="hidden"> <input name="memberId"
-							type="hidden"> <input name="sellEndWriter" type="hidden"
-							value="${e.sellEndWriter}">
-					</form>
-
+								<form class="reviewInsertFrm">
+									<input name="sellEndNo" type="hidden"> <input
+										name="memberId" type="hidden"> <input
+										name="sellEndWriter" type="hidden" value="${e.sellEndWriter}">
+								</form>
 								<div class="product">
 									<div class="p-image">
-										<img src="/imgs/${e.thumbnail }" width="100%" height="100%"
-											alt="" srcset="">
+										<img src="" width="100%" height="100%" alt="" srcset="">
 									</div>
 									<div class="p-info">
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
 											<c:if test="${sessionScope.member.memberType eq 1}">
-												<button onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
+												<button onclick="reviewInsert('${e.sellEndNo}')"
 													type="button">리뷰작성</button>
 											</c:if>
 										</div>
-										<div class="p-price">판매완료</div>
-										<div class="p-day">${e.sellEndDate }</div>
+										<div class="p-price">55,000원</div>
+										<div class="p-day">4시간전</div>
 										<div class="p-location">
-											<i class="fas fa-map-marker-alt"></i> ${e.sellItemOrigin }
+											<i class="fas fa-map-marker-alt"></i> 대전광역시 대덕구 송촌동
 										</div>
 									</div>
 								</div>
-
-
 							</c:forEach>
 						</div>
 					</div>
 
 					<div class="content">
-						<div class="content-title" id="letter">쪽지함</div>
+						<div class="content-title">쪽지함</div>
+
+
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
-	
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
-
-<script>
-	$("#letter").click(function() {
-		$.ajax({
-			url : "/letterList",
-			type : "get",
-
-		});
-	});
-</script>
 </html>

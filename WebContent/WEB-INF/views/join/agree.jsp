@@ -151,10 +151,8 @@
         top: 50%;
         right: 30px;
         margin-top: -12px;
-        font-size:20px;
-        font-weight:570;
     }
-	
+
     .checkBox textarea {
         width: 96%;
         height: 90px;

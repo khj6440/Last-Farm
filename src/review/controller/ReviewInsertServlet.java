@@ -59,7 +59,7 @@ public class ReviewInsertServlet extends HttpServlet {
 		
 		int sellEndNo = Integer.parseInt(mRequest.getParameter("sellEndNo"));
 		String sellEndWriter = mRequest.getParameter("sellEndWriter");
-		System.out.println("sell "+sellEndWriter);
+		
 		
 		Review r = new Review();	
 		r.setReviewTitle(mRequest.getParameter("reviewTitle"));

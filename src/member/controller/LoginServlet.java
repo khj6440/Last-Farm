@@ -1,10 +1,7 @@
-
 package member.controller;
 
 
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,11 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
 
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class LoginServlet
  */
 @WebServlet(name = "Login", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -38,8 +33,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.변수 값 저장
@@ -69,9 +62,6 @@ public class LoginServlet extends HttpServlet {
 		}
 		//경로로 보내줌
 		rd.forward(request, response);
-		
-				
-		
 		
 	}
 

@@ -524,7 +524,7 @@
 															</button>
 
 															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="More" onclick="location.href='/sellView?sell_no=${s.sellNo}&sell_writer=${s.sellWriter }'">
+																data-placement="top" title="More">
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>
