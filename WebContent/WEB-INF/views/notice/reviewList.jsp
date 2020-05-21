@@ -137,8 +137,7 @@
 
 .question_d1 {
 	height: 100%;
-	width: 620px;
-margin-left: 200px;
+	width: 810px;
 }
 
 .d3 {

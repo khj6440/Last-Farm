@@ -141,5 +141,20 @@ public class MessageService {
 
 		return mpd;
 	}
+
+	public int addMsg(Message m) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MessageDao().addMessage(conn,m);
+		
+		if(result != 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 }
 

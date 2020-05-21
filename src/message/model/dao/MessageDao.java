@@ -164,5 +164,28 @@ public class MessageDao {
 		
 		return list;
 	}
+	public int addMessage(Connection conn, Message m) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String query="insert into message values(seq_message.nextval,?,?,?,?,sysdate,0)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMsgTitle());
+			pstmt.setString(2, m.getMsgSendId());
+			pstmt.setString(3, m.getMsgContent());
+			pstmt.setString(4, m.getMsgReceiveId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			
+		}
+		
+		return result;
+	}
 
 }

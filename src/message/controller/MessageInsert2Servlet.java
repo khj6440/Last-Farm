@@ -1,7 +1,6 @@
-package review.controller;
+package message.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import review.model.service.ReviewService;
-import review.model.vo.Review;
-import sellEnd.model.vo.SellEnd;
+import message.model.service.MessageService;
+import message.model.vo.Message;
 
 /**
- * Servlet implementation class ReviewInsertFrmServlet
+ * Servlet implementation class MessageInsert2Servlet
  */
-@WebServlet(name = "ReviewInsertFrm", urlPatterns = { "/reviewInsertFrm" })
-public class ReviewInsertFrmServlet extends HttpServlet {
+@WebServlet(name = "MessageInsert2", urlPatterns = { "/messageInsert2" })
+public class MessageInsert2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewInsertFrmServlet() {
+    public MessageInsert2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +31,31 @@ public class ReviewInsertFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int sellEndNo = Integer.parseInt(request.getParameter("sellEndNo"));
-		String sellEndWriter = request.getParameter("sellEndWriter");
-		System.out.println("12123213"+sellEndWriter);
-		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/notice/reviewInsert.jsp");
-		HttpSession session = request.getSession();
-		session.setAttribute("sellEndNo", sellEndNo);
-		session.setAttribute("sellEndWriter", sellEndWriter);
-		request.setAttribute("loc", "/");
+		
+		String msgSendId = request.getParameter("msgSendId");
+		String msgReceiveId = request.getParameter("msgReceiveId");
+		String msgTitle = request.getParameter("msgTitle");
+		String msgContent = request.getParameter("msgContent");
+		
+		Message m = new Message();
+		m.setMsgContent(msgContent);
+		m.setMsgReceiveId(msgReceiveId);
+		m.setMsgSendId(msgSendId);
+		m.setMsgTitle(msgTitle);
+		
+		int result = new MessageService().addMsg(m);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/close.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "쪽지 보내기 성공");
+		}else {
+			request.setAttribute("msg", "쪽지 보내기 실패");
+		}
+		
 		rd.forward(request, response);
+		
+		
 	}
 
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
