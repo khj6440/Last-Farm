@@ -112,7 +112,7 @@ public class MypageDao {
       PreparedStatement pstmt = null;
       ResultSet rset = null;
       ArrayList<SellEnd> list = new ArrayList<SellEnd>();
-      String query = "select * from sell_end join buy_end on(sell_end_no=buy_end_no) where buy_end_writer=?";
+      String query = "select * from sell_end join buy_end using(sell_end_no) where buy_end_writer=?";
       try {
          pstmt = conn.prepareStatement(query);
          pstmt.setString(1, memberId);

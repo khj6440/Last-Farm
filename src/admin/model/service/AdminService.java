@@ -524,4 +524,19 @@ public class AdminService {
 		return result;
 	}
 
+	
+	public int readMsg(int msgNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new AdminDao().readMsg(conn,msgNo);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+
 }

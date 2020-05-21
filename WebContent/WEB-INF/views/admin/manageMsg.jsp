@@ -271,6 +271,43 @@
 			}
 		});
 	}
+	
+	
+	$(function() {
+		$(".msgs").click(
+						function() {
+							var msgNo = $(this).find("h5").prev().html();
+							var value = $(this).find("h5").html();
+							$("#sender").html(value);
+							$("#title1").html($(this).find("h5").next().html());
+							$("#msgContent1").html($(this).find("h5").next().next().html());
+							
+							var readChk = $(this).find("h5").next().next().next().html();
+							if($(this).find(".readChk").html()!=="읽음"){
+							$.ajax({
+								url : "/adminReadMsg",
+								data:{msgNo:msgNo},
+								type : "get",
+								success : function(data) {
+
+									var newValue=$("#nonReadMsg").html();
+									
+								
+									$(".mess__title").find("span").html(newValue-1);
+									$("#nonReadMsg").html(newValue-1);
+								},
+								error : function() {
+									console.log("서버 전송 실패")
+								}
+							});
+							}
+							$(this).find(".readChk").html("읽음");
+							$(this).find(".readChk").parent().css("color","grey");
+						})
+	})
+	function backBox(){
+		$("#Cbox").removeClass("show-chat-box")
+	}
 </script>
 </head>
 
@@ -323,8 +360,8 @@
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<form class="form-header" action="/adminSearchMember" method="get">
-							<input disabled style="margin-right: 10px;" class="au-input au-input--xl"
-								type="text" name="search"
+							<input disabled style="margin-right: 10px;"
+								class="au-input au-input--xl" type="text" name="search"
 								placeholder="Search for user ID &amp; name..."
 								value="${search }"> <input type="hidden" name="reqPage"
 								value="1"> <input type="hidden" name="reqCount"
@@ -377,7 +414,7 @@
 										</div>
 
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
 									</div>
@@ -400,72 +437,156 @@
 									<h3 class="title-5 m-b-35"
 										style="font-size: 30px; font-weight: bold;">
 										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함<span
-											style="color: gray; font-size: 15px"> ( 받은,보낸쪽지
-											:${totalCount }개)</span>
+											style="color: gray; font-size: 15px"></span>
 									</h3>
 								</div>
-
-								<div class="msg-main">
-									<div class="msg-receive">
-										<div class="msg-box-title">받은쪽지함</div>
-										<div class="msg-box-tab">
-											<div>보낸사람</div>
-											<div>제목</div>
-											<div>읽음여부</div>
-
-										</div>
-
-										<div class="msg-box-content">
-											<div class="msgs">
-												<c:forEach items="${list }" var='m'>
-													<c:if test="${m.msgReceiveId eq 'admin' }">
-														${m.msgNo }
-														${m.msgSendId }
-														${m.msgReceiveId }
-													</c:if>
-												</c:forEach>
-
+								<div style="display: flex">
+									<div class="col-lg-6">
+										<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+											<div class="au-card-title"
+												style="background-image: url('images/bg-title-02.jpg');">
+												<div style="background-color: #ffac05;"
+													class="bg-overlay bg-overlay--blue"></div>
+												<h3 style="color: #4a2100;">
+													<i style="color: #4a2100;" class="zmdi zmdi-comment-text"></i>받은
+													쪽지함
+												</h3>
+											</div>
+											
+											
+											
+											<div  id="Cbox" class="au-inbox-wrap js-inbox-wrap">
+												<div class="au-message js-list-load">
+													<div class="au-message__noti"></div>
+													<div class="au-message-list">
+														<c:forEach items="${list }" var="m">
+															<c:if test="${m.msgReceiveId eq 'admin' }">
+																<div class="au-message__item">
+																	<div class="au-message__item-inner msgs">
+																		<div class="au-message__item-text">
+																			<c:if test="${m.msgRead eq 0 }">
+																			<div  style="padding-top: 10px;color:yellowgreen" class="avatar-wrap">
+																				<i class="far fa-check-circle"></i> <span class="readChk">new</span>
+																			</div>
+																			</c:if>
+																			<c:if test="${m.msgRead eq 1 }">
+																			<div style="padding-top: 10px;color:grey" class="avatar-wrap">
+																				<i class="far fa-check-circle"></i> <span class="readChk">읽음</span>
+																			</div>
+																			</c:if>
+																			<div class="text">
+																				<div style="display:none">${m.msgNo }</div>
+																				<h5 class="name">${m.msgSendId }</h5>
+																				<p>${m.msgTitle }</p>
+																				<div style="display: none">${m.msgContent }</div>
+																				<div style="display: none">${m.msgRead }</div>
+																			</div>
+																		</div>
+																		<div class="au-message__item-time">
+																			<span>${m.msgDate }</span>
+																		</div>
+																	</div>
+																</div>
+															</c:if>
+														</c:forEach>
+													</div>
+												</div>
+												<div class="au-chat ans">
+													<div class="au-chat__title">
+														<div class="au-chat-info">
+															<span class="nick">보낸사람 : <span id="sender"></span>
+															</span>
+														</div>
+													</div>
+													<div  class="au-chat__content">
+														제목 :<span id="title1"></span>
+														
+													<div id="msgContent1" style="word-break: break-all;padding:10px;;height :100% ;background-color: #ededed">
+														
+													</div>
+													</div>
+													<div class="au-chat-textfield"  style="text-align: center;">
+														<button style="border-radius:5px;;width: 30px;height: 30px; background-color: #ffac05;" onclick="backBox()">&lt;</button>
+													</div>
+												</div>
 											</div>
 										</div>
-
 									</div>
-									<div class="msg-send">
-										<div class="msg-box-title">보낸쪽지함</div>
-										<div class="msg-box-tab">
-											<div>받은사람</div>
-											<div>제목</div>
-											<div></div>
-										</div>
-										<div class="msg-box-content">
-											<div class="msgs">
-												<c:forEach items="${list }" var='m'>
-													<c:if test="${m.msgSendId eq 'admin' }">
-														${m.msgNo }
-														${m.msgSendId }
-														${m.msgReceiveId }
-													</c:if>
-												</c:forEach>
+									
+									<div class="col-lg-6">
+										<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+											<div class="au-card-title"
+												style="background-image: url('images/bg-title-02.jpg');">
+												<div style="background-color: #ffac05;"
+													class="bg-overlay bg-overlay--blue"></div>
+												<h3 style="color: #4a2100;">
+													<i style="color: #4a2100;" class="zmdi zmdi-comment-text"></i>보낸
+													쪽지함
+												</h3>
+											</div>
+											<script>
+												$(function() {
+													$(".msgs2").click(
+																	function() {
+																		var value = $(this).find("h5").html();
+																		$("#sender2").html(value);
+																		$("#title2").html($(this).find("h5").next().html());
+																		$("#msgContent2").html($(this).find("h5").next().next().html());
+																	})
+												})
+												function backBox2(){
+													$("#Cbox2").removeClass("show-chat-box")
+												}
+											</script>
+											<div  id="Cbox2" class="au-inbox-wrap js-inbox-wrap">
+												<div class="au-message js-list-load">
+													<div class="au-message__noti"></div>
+													<div class="au-message-list">
+														<c:forEach items="${list }" var="m">
+															<c:if test="${m.msgSendId eq 'admin' }">
+																<div class="au-message__item">
+																	<div class="au-message__item-inner msgs2">
+																		<div class="au-message__item-text">
+																			<div style="padding-top: 10px;" class="avatar-wrap">
+																				 <span>받는이</span>
+																			</div>
+																			<div class="text">
+																				<h5 class="name">${m.msgReceiveId }</h5>
+																				<p>${m.msgTitle }</p>
+																				<div style="display: none">${m.msgContent }</div>
+																			</div>
+																		</div>
+																		<div class="au-message__item-time">
+																			<span>${m.msgDate }</span>
+																		</div>
+																	</div>
+																</div>
+															</c:if>
+														</c:forEach>
+													</div>
+												</div>
+												<div class="au-chat ans">
+													<div class="au-chat__title">
+														<div class="au-chat-info">
+															<span class="nick">받는사람 : <span id="sender2"></span>
+															</span>
+														</div>
+													</div>
+													<div  class="au-chat__content">
+														제목 :<span id="title2"></span>
+														
+													<div id="msgContent2" style="word-break: break-all;padding:10px;;height :100% ;background-color: #ededed">
+														
+													</div>
+													</div>
+													<div class="au-chat-textfield"  style="text-align: center;">
+														<button style="border-radius:5px;;width: 30px;height: 30px; background-color: #ffac05;" onclick="backBox2()">&lt;</button>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="msg-main">
-									<div class="more-btn-box">
-										<button id="more-btn" totalCount="${totalCount}"
-											currentCount="0" value="">
-											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
-										</button>
-									</div>
-									<div class="more-btn-box">
-										<button id="more-btn" totalCount="${totalCount}"
-											currentCount="0" value="">
-											<span>더보기</span> <i class="fas fa-arrow-circle-down"></i>
-										</button>
-									</div>
-
-								</div>
-
-
 							</div>
 						</div>
 						<!-- END DATA TABLE-->
@@ -708,56 +829,6 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-}
-
-.msg-main {
-	display: flex;
-}
-
-.msg-main>div {
-	width: 50%;
-}
-
-.msg-box-title {
-	width: 50%;
-	height: 60px;
-	line-height: 60px;
-	padding-left: 10px;
-	border-radius: 5px;
-	font-weight: bold;
-	font-size: 30px;
-	color: #4a2100;
-	background-color: #ffac05;
-}
-
-.msg-box-content {
-	width: 98%;
-	padding: 20px 0px;
-	border: 1px solid grey;
-	border-radius: 3px;
-	background-color: #f5f5f5;
-}
-
-.msgs, .msg-box-tab {
-	padding: 20px 10px;
-	width: 98%;
-	display: flex;
-}
-
-.msg-box-tab>div:first-child, .msg-box-tab>div:last-child {
-	width: 25%;
-}
-
-.msg-box-tab>div:nth-child(2) {
-	width: 50%;
-}
-
-.msgs>div:nth-child(2) {
-	width: 50%;
-}
-
-.msgs>div:first-child, .msgs>div:last-child {
-	width: 25%;
 }
 </style>
 </html>
