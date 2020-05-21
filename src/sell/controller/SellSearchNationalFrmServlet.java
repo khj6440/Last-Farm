@@ -36,7 +36,11 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 		
 		
 		request.setCharacterEncoding("utf-8");		
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqPage = 1;
+		if(request.getParameter("reqPage") !=null) {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+
+		}
 		String sortingTab = request.getParameter("sortingTab");
 		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");

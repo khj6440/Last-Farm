@@ -7,9 +7,6 @@ import common.JDBCTemplate;
 import sell.model.dao.SellSearchDao;
 import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
-import sellComment.model.dao.SellCommentDao;
-import sellComment.model.vo.SellComment;
-import sellComment.model.vo.SellViewData;
 
 public class SellSearchService {
 
@@ -133,65 +130,66 @@ public class SellSearchService {
 	}
 
 	public SellCategoryPage sellEnd(int reqPage, String type1, String type2, String searchWord, String sortingTab) {
-		Connection conn = JDBCTemplate.getConnection();
-		int numPerPage = 9;
-		
-		int totalCount = new SellSearchDao().typeCount(conn, type1, type2, searchWord);
-		
-		int totalPage = 0;
-		if (totalCount % numPerPage == 0) {
-			totalPage = totalCount / numPerPage;
-		} else {
-			totalPage = totalCount / numPerPage + 1;
-		}
-		int start = (reqPage - 1) * numPerPage + 1;
-		int end = reqPage * numPerPage;
+	      Connection conn = JDBCTemplate.getConnection();
+	      int numPerPage = 9;
+	      
+	      int totalCount = new SellSearchDao().typeCount(conn, type1, type2, searchWord);
+	      
+	      int totalPage = 0;
+	      if (totalCount % numPerPage == 0) {
+	         totalPage = totalCount / numPerPage;
+	      } else {
+	         totalPage = totalCount / numPerPage + 1;
+	      }
+	      int start = (reqPage - 1) * numPerPage + 1;
+	      int end = reqPage * numPerPage;
 
-		// 탭 종류에 따라 sorting
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		if (sortingTab.equals("마감시간 순")) {
-			sellList = new SellSearchDao().selectTimeLeft(conn, start, end, type1, type2, searchWord);
-		} else if (sortingTab.equals("구매 인기순")) {
-			sellList = new SellSearchDao().selectSellCount(conn, start, end, type1, type2, searchWord);
-		} else {
-			sellList = new SellSearchDao().selectRecent(conn, start, end ,type1, type2, searchWord);
-		}
-		
+	      // 탭 종류에 따라 sorting
+	      ArrayList<Sell> sellList = new ArrayList<Sell>();
+	      if (sortingTab.equals("마감시간 순")) {
+	         sellList = new SellSearchDao().selectTimeLeft(conn, start, end, type1, type2, searchWord);
+	      } else if (sortingTab.equals("구매 인기순")) {
+	         sellList = new SellSearchDao().selectSellCount(conn, start, end, type1, type2, searchWord);
+	      } else {
+	         sellList = new SellSearchDao().selectRecent(conn, start, end ,type1, type2, searchWord);
+	      }
+	      
 
-		// 페이징
-		String pageNavi = "";
-		int pageNaviSize = 5;
-		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
-		if (pageNo != 1) {
-			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchNationalFrm?reqPage="
-					+ (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "'>Before</a>";
-		}
-		for (int i = 0; i < pageNaviSize; i++) {
-			if (reqPage == pageNo) {
-				pageNavi += "<span class='btn btn-outline-secondary'>" + pageNo + "</span>";
-			} else {
-				pageNavi += "<a class='btn btn-outline-secondary' href='sellSearchNationalFrm?reqPage=" + pageNo
-						+ "&sortingTab=" + sortingTab + "'>" + pageNo + "</a>";
+	      // 페이징
+	      String pageNavi = "";
+	      int pageNaviSize = 5;
+	      int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+	      if (pageNo != 1) {
+	         pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchNationalFrm?reqPage="
+	               + (pageNo - pageNaviSize) + "&sortingTab=" + sortingTab + "'>Before</a>";
+	      }
+	      for (int i = 0; i < pageNaviSize; i++) {
+	         if (reqPage == pageNo) {
+	            pageNavi += "<span class='btn btn-outline-secondary'>" + pageNo + "</span>";
+	         } else {
+	            pageNavi += "<a class='btn btn-outline-secondary' href='sellSearchNationalFrm?reqPage=" + pageNo
+	                  + "&sortingTab=" + sortingTab + "'>" + pageNo + "</a>";
 
-			}
-			pageNo++;
-			if (pageNo > totalPage) {
-				break;
-			}
-		}
-		if (pageNo < totalPage) {
-			pageNavi += "<a class='btn btn-outline-secondary'" // 다음 버튼 만들기
-					+ "href='/sellSearchNationalFrm?reqPage=" + pageNo + "&sortingTab=" + sortingTab + "'>After</a>";
-		}
-		SellCategoryPage scp = new SellCategoryPage(sellList, pageNavi);
-		JDBCTemplate.close(conn);
-		return scp;
+	         }
+	         pageNo++;
+	         if (pageNo > totalPage) {
+	            break;
+	         }
+	      }
+	      if (pageNo < totalPage) {
+	         pageNavi += "<a class='btn btn-outline-secondary'" // 다음 버튼 만들기
+	               + "href='/sellSearchNationalFrm?reqPage=" + pageNo + "&sortingTab=" + sortingTab + "'>After</a>";
+	      }
+	      SellCategoryPage scp = new SellCategoryPage(sellList, pageNavi);
+	      JDBCTemplate.close(conn);
+	      return scp;
+	   }
+
 	}
-
 	
 
 	
 	
 	
 
-}
+

@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.jasper.tagplugins.jstl.core.Set;
-
 import common.JDBCTemplate;
 import sell.model.vo.Sell;
 
@@ -132,9 +130,6 @@ public class SellSearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		System.out.println(type1);
-		System.out.println(type2);
-		System.out.println(searchWord);
 		String query = "";
 		
 		
@@ -361,6 +356,7 @@ public class SellSearchDao {
 				sell.setSellCount(rset.getInt("sell_count"));
 				sell.setSellDate(rset.getDate("sell_date"));
 				sell.setSellEndDate(rset.getDate("sell_end_date"));
+				sell.setTimegap(rset.getInt("gap"));
 				sellList.add(sell);
 			}
 		} catch (SQLException e) {
@@ -479,6 +475,7 @@ public class SellSearchDao {
 				sell.setSellCount(rset.getInt("sell_count"));
 				sell.setSellDate(rset.getDate("sell_date"));
 				sell.setSellEndDate(rset.getDate("sell_end_date"));
+				sell.setTimegap(rset.getInt("gap"));
 				sellList.add(sell);
 			}
 		} catch (SQLException e) {
@@ -709,90 +706,95 @@ public class SellSearchDao {
 		return result;
 }
 
-	public int typeCount(Connection conn, String type1, String type2, String searchWord) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		int result = 0;
-		String query ="";
-		//셋다 null일때
-		if (type1.equals("null") && type2.equals("null") && searchWord.equals("")) {
-			query = "select count(*) as cnt from sell";
-			
-		}
-		// type1만 값이 있을때
-		if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
-			query = "select count(*) as cnt from sell where sell_category1 = ?";
-		}
-		// type2만 값이 있을때
-		if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
-			query = "select count(*) as cnt from sell where sell_category2 = ?";
-		}
-		// searchWord만 값이 있을때
-		if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
-			query = "select count(*) as cnt from sell where sell_title like ?";
-		}
-		// type1, type2 값이 있을때
-		if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
-			query = "select count(*) as cnt from sell where sell_category1 = ? and sell_category2 = ?";
-		}
-		// type2, search값이 있을때
-		if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
-			query = "select count(*) as cnt from sell where sell_category2 = ? and sell_title like ?";
-		}
-		// type1,search값이 있을때
-		if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
-			query = "select count(*) as cnt from sell where sell_category1 = ? and sell_title like ?";
-		}
-		// 셋다 있을때
-		if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
-			query = "select count(*) as cnt from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ?";
-		
-		}
+	 public int typeCount(Connection conn, String type1, String type2, String searchWord) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      int result = 0;
+	      String query ="";
+	      System.out.println("type1:"+type1);
+	      System.out.println("type2:"+type2);
+	      System.out.println("searchWord:"+searchWord);
 
-		try {
-			pstmt = conn.prepareStatement(query);
-			// type1만 값이 있을때
-			if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
-				pstmt.setString(1, type1);
-			}
-			// type2만 값이 있을때
-			if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
-				pstmt.setString(1, type2);
-			}
-			// searchWord만 값이 있을때
-			if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
-				pstmt.setString(1, '%'+searchWord+'%');
-			}
-			// type1, type2 값이 있을때
-			if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
-				pstmt.setString(1, type1);
-				pstmt.setString(2, type2);
-			}
-			// type2, search값이 있을때
-			if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
-				pstmt.setString(1, type2);
-				pstmt.setString(2, '%'+searchWord+'%');
-			}
-			// type1,search값이 있을때
-			if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
-				pstmt.setString(1, type1);
-				pstmt.setString(2, '%'+searchWord+'%');
-			}
-			// 셋다 있을때
-			if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
-				pstmt.setString(1, type1);
-				pstmt.setString(2, type2);
-				pstmt.setString(3, '%'+searchWord+'%');
-			}
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				result = rset.getInt("cnt");
-			}
-		} catch (SQLException e) {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}
+	      //셋다 null일때
+	      if (type1.equals("null") && type2.equals("null") && searchWord.equals("")) {
+	         query = "select count(*) as cnt from sell";
+	         System.out.println("1");
+	      }
+	      // type1만 값이 있을때
+	      if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
+	         query = "select count(*) as cnt from sell where sell_category1 = ?";
+	      }
+	      // type2만 값이 있을때
+	      if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
+	         query = "select count(*) as cnt from sell where sell_category2 = ?";
+	      }
+	      // searchWord만 값이 있을때
+	      if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
+	         query = "select count(*) as cnt from sell where sell_title like ?";
+	      }
+	      // type1, type2 값이 있을때
+	      if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
+	         query = "select count(*) as cnt from sell where sell_category1 = ? and sell_category2 = ?";
+	      }
+	      // type2, search값이 있을때
+	      if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
+	         query = "select count(*) as cnt from sell where sell_category2 = ? and sell_title like ?";
+	      }
+	      // type1,search값이 있을때
+	      if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
+	         query = "select count(*) as cnt from sell where sell_category1 = ? and sell_title like ?";
+	      }
+	      // 셋다 있을때
+	      if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
+	         query = "select count(*) as cnt from sell where sell_category1 = ? and sell_category2 = ? and sell_title like ?";
+	      
+	      }
+
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         // type1만 값이 있을때
+	         if (!type1.equals("null") && type2.equals("null") && searchWord.equals("")){
+	            pstmt.setString(1, type1);
+	         }
+	         // type2만 값이 있을때
+	         if (type1.equals("null") && !type2.equals("null") && searchWord.equals("")) {
+	            pstmt.setString(1, type2);
+	         }
+	         // searchWord만 값이 있을때
+	         if (type1.equals("null") && type2.equals("null") && !searchWord.equals("")) {
+	            pstmt.setString(1, '%'+searchWord+'%');
+	         }
+	         // type1, type2 값이 있을때
+	         if (!type1.equals("null") && !type2.equals("null") && searchWord.equals("")){
+	            pstmt.setString(1, type1);
+	            pstmt.setString(2, type2);
+	         }
+	         // type2, search값이 있을때
+	         if (type1.equals("null") && !type2.equals("null") && !searchWord.equals("")){
+	            pstmt.setString(1, type2);
+	            pstmt.setString(2, '%'+searchWord+'%');
+	         }
+	         // type1,search값이 있을때
+	         if (!type1.equals("null") && type2.equals("null") && !searchWord.equals("")){
+	            pstmt.setString(1, type1);
+	            pstmt.setString(2, '%'+searchWord+'%');
+	         }
+	         // 셋다 있을때
+	         if (!type1.equals("null") && !type2.equals("null") && !searchWord.equals("")) {
+	            pstmt.setString(1, type1);
+	            pstmt.setString(2, type2);
+	            pstmt.setString(3, '%'+searchWord+'%');
+	         }
+	         
+	         rset = pstmt.executeQuery();
+	         if(rset.next()) {
+	            result = rset.getInt("cnt");
+	         }
+	      } catch (SQLException e) {
+	         JDBCTemplate.close(rset);
+	         JDBCTemplate.close(pstmt);
+	      }
+	      return result;
+	   }
+
 }

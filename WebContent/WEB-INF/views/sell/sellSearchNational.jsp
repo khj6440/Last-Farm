@@ -10,7 +10,8 @@
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="/css/header/header.css?after">
+<link rel="stylesheet" href="/css/header/footer.css?after">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -20,8 +21,8 @@
 .sell-list-body {
 	font-family: 'Jua', sans-serif;
 	width: 1280px;
-	height: 2000px;
 	margin: 0 auto;
+	margin-top: 30px;
 }
 
 .searchbox-wrapper {
@@ -319,7 +320,8 @@
 			m = Math.floor(SetHour % 60) + ":" + Math.floor(SetMin % 60) + ":"
 					+ Math.floor(SetTime % 60); // 남은 시간 계산
 			var msg = m;
-			document.all.ViewTimer.innerHTML = msg;
+			$(".viewTimer").html(msg);
+			//document.all.ViewTimer.innerHTML = msg;
 			SetTime--;
 			if (SetTime < 0) {
 				clearInterval(tid);
@@ -328,14 +330,7 @@
 		window.onload = function TimerStart() {
 			tid = setInterval('msg_time()', 1000)
 		};
-		
-	$(function(){
-		$(".imgToSellPage").click(function(){
-			console.log('${n.sellNo }');
-			console.log('${n.sellWriter }');
-			//location.href="/sellView?sell_no="+"${n.sellNo }"+"&sell_writer="+"${n.sellWriter }";
-		})
-	});
+
 		//DB에서 상품 데이터 불러오기
 		/*function sell_listAll(){
 			var searchTypingBox = $("#searchTypingBox").val();
@@ -369,33 +364,38 @@
 					console.log("데이터 불러오기 실패.")
 				}
 			});
-		}*/
-		/*$(function(){
+		}
+		$(function(){
 			$("form").submit(function(){
 				sell_listAll();
 				return false;
 			});
-		});
+		});*/
 		//카테고리 분류하여 검색
 		$(function(){
-			$("select[name=농산물]").hide();
-			$("select[name=수산물]").hide();
-			$("select[name=전체]").attr("disabled","true");
+			$(".category2").eq(0).hide();
+			$(".category2").eq(1).hide();
+			$(".category2").eq(2).show();
 			//카테고리1- 농산물 선택
 			$(".category1").change(function(){
-				if($(this).children("option:selected").val()=="농산물"){
-					$("select[name=전체]").hide();
-					$("select[name=농산물]").show();
-					$("select[name=수산물]").hide();
-				}else if($(this).children("option:selected").val()=="수산물"){
-					$("select[name=전체]").hide();
-					$("select[name=농산물]").hide();
-					$("select[name=수산물]").show();
-				}else{
-					sell_listAll();
-					$("select[name=전체]").show();
-					$("select[name=농산물]").hide();
-					$("select[name=수산물]").hide();
+				if ($(this).children("option:selected").val() == "농산물") {
+					$(".category2").eq(0).show();
+					$(".category2").eq(0).attr("name", "type2");
+					$(".category2").eq(1).hide();
+					$(".category2").eq(1).removeAttr("name");
+					$(".category2").eq(2).hide();
+				} else if ($(this).children("option:selected").val() == "수산물") {
+					$(".category2").eq(0).hide();
+					$(".category2").eq(0).removeAttr("name");
+					$(".category2").eq(1).show();
+					$(".category2").eq(1).attr("name", "type2");
+					$(".category2").eq(2).hide();
+				} else {
+					$(".category2").eq(0).hide();
+					$(".category2").eq(1).hide();
+					$(".category2").eq(2).show();
+					$(".category2").eq(1).removeAttr("name");
+					$(".category2").eq(0).removeAttr("name");
 				}
 			});
 			
@@ -404,8 +404,8 @@
 				console.log("ㅇㅇ");
 			});
 		});
-		//paging */
 	</script>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="sell-list-body">
 		<form action="/sellSearchBox" method="post" id="searchSell">
 			<div class="searchbox-wrapper">
@@ -419,12 +419,15 @@
 					<option value="과일">과일</option>
 					<option value="가공식품">가공식품</option>
 				</select>
-				<!--     <select class="category category2" name="수산물">
-<option value=null>상품타입(전체)</option>
-        <option value="생물">생물</option>
-        <option value="냉동">냉동</option>
-        <option value="가공식품">가공식품</option>
-    </select> -->
+				<select class="category category2">
+					<option value=null>상품타입(전체)</option>
+        			<option value="생물">생물</option>
+        			<option value="냉동">냉동</option>
+       				 <option value="가공식품">가공식품</option>
+   				 </select>
+   				 <select class="category category2" disabled>
+						<option value="" selected>상품 소분류</option>
+				</select>
 				<div class="searchInput-wrapper">
 					<div class="searchInputBox">
 						<img src="../imgs/search@3x.png"> <input type="text"
@@ -444,7 +447,7 @@
 			<div class="ordertabCategory">
 				<ul>
 					<input type="hidden" value="마감시간 순" name="sortingTab1">
-					<li class="clicktab" name="sortingTab" value="마감시간 순">마감시간 순 </li>
+					<li class="clicktab" name="sortingTab" value="마감시간 순">마감시간 순</li>
 					<li class="unclicktab" name="sortingTab" value="구매 인기순">구매 인기순</li>
 					<li class="unclicktab" name="sortingTab" value="최근 등록순">최근 등록순</li>
 				</ul>
@@ -465,10 +468,12 @@
 							${n.timegap } 일 남음
 							</c:if>
 									<c:if test="${n.timegap ==0 }">
-										<div id="ViewTimer"></div>
+										<div class="viewTimer"></div>
 									</c:if>
 								</div>
+
 								<a href='/sellView?sell_no=${n.sellNo }&sell_writer=${n.sellWriter }'><img src='/imgs/${n.thumbnail }'></a>
+
 							</div>
 							<p>${n.sellTitle }</p>
 							<div class='detailInfoBox'>
@@ -484,6 +489,11 @@
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+=======
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+>>>>>>> e6f5e543c2ebdb914922b897ef2adf2c05f1370e
 </body>
+
 </html>

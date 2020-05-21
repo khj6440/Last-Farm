@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/header/header.css">
+
 </head>
 <body>
    <div class="main_body">
@@ -46,7 +47,9 @@
                      지역 상품</a>
                      </li>
                   <li class="header_top_li1  header_top_li3"><a
+
                      class="header_top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">내 지역 상품</a>
+
                      </li>
                </ul>
                <ul class="header_top_ul1">

@@ -20,7 +20,6 @@
 
 .buy {
 	width: 1280px;
-	height: 1800px;
 	margin: 0 auto;
 	overflow: hidden;
 }
