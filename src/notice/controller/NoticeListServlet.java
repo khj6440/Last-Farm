@@ -33,6 +33,7 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//2. 변수에 값 저장
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		//3. 비지니스 로직
@@ -40,7 +41,7 @@ public class NoticeListServlet extends HttpServlet {
 		//4.결과 값 처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
 		request.setAttribute("list", npd.getList());
-		request.setAttribute("Pagenavi", npd.getPageNavi());
+		request.setAttribute("pageNavi", npd.getPageNavi());
 		rd.forward(request, response);
 		
 	}

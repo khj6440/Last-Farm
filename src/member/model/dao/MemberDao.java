@@ -28,8 +28,8 @@ public class MemberDao {
 				m.setMemberName(rset.getString("member_name"));
 				m.setMemberCode(rset.getString("member_code"));
 				m.setMemberRoadAddr(rset.getString("member_road_addr"));
-				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberPostCode(rset.getString("member_post_code"));
+				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));
 				m.setMemberDetailAddr2(rset.getString("member_detail_addr2"));
 				m.setMemberPostCode2(rset.getString("member_post_code2"));

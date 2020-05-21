@@ -3,85 +3,86 @@ package message.model.vo;
 import java.sql.Date;
 
 public class Message {
-	private int msgNo;
-	private String msgTitle;
-	private String msgSendId;
-	private String msgContent;
-	private String msgReceiveId;
-	private Date msgDate;
-	private int msgRead;
-	
-	public Message(int msgNo, String msgTitle, String msgSendId, String msgContent, String msgReceiveId, Date msgDate) {
-		super();
-		this.msgNo = msgNo;
-		this.msgTitle = msgTitle;
-		this.msgSendId = msgSendId;
-		this.msgContent = msgContent;
-		this.msgReceiveId = msgReceiveId;
-		this.msgDate = msgDate;
-	}
 
-	public Message() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+   private int msgNo;
+   private String msgTitle;
+   private String msgSendId;
+   private String msgContent;
+   private String msgReceiveId;
+   private Date msgDate;
+   private int msgRead;
+   
+   
+   public Message(int msgNo, String msgTitle, String msgSendId, String msgContent, String msgReceiveId, Date msgDate) {
+      super();
+      this.msgNo = msgNo;
+      this.msgTitle = msgTitle;
+      this.msgSendId = msgSendId;
+      this.msgContent = msgContent;
+      this.msgReceiveId = msgReceiveId;
+      this.msgDate = msgDate;
+   }
 
-	public int getMsgNo() {
-		return msgNo;
-	}
+   public Message() {
+      super();
+      // TODO Auto-generated constructor stub
+   }
 
-	public void setMsgNo(int msgNo) {
-		this.msgNo = msgNo;
-	}
+   public int getMsgNo() {
+      return msgNo;
+   }
 
-	public String getMsgTitle() {
-		return msgTitle;
-	}
+   public void setMsgNo(int msgNo) {
+      this.msgNo = msgNo;
+   }
 
-	public void setMsgTitle(String msgTitle) {
-		this.msgTitle = msgTitle;
-	}
+   public String getMsgTitle() {
+      return msgTitle;
+   }
 
-	public String getMsgSendId() {
-		return msgSendId;
-	}
+   public void setMsgTitle(String msgTitle) {
+      this.msgTitle = msgTitle;
+   }
 
-	public void setMsgSendId(String msgSendId) {
-		this.msgSendId = msgSendId;
-	}
+   public String getMsgSendId() {
+      return msgSendId;
+   }
 
-	public String getMsgContent() {
-		return msgContent;
-	}
+   public void setMsgSendId(String msgSendId) {
+      this.msgSendId = msgSendId;
+   }
 
-	public void setMsgContent(String msgContent) {
-		this.msgContent = msgContent;
-	}
+   public String getMsgContent() {
+      return msgContent;
+   }
 
-	public String getMsgReceiveId() {
-		return msgReceiveId;
-	}
+   public void setMsgContent(String msgContent) {
+      this.msgContent = msgContent;
+   }
 
-	public void setMsgReceiveId(String msgReceiveId) {
-		this.msgReceiveId = msgReceiveId;
-	}
+   public String getMsgReceiveId() {
+      return msgReceiveId;
+   }
 
-	public Date getMsgDate() {
-		return msgDate;
-	}
+   public void setMsgReceiveId(String msgReceiveId) {
+      this.msgReceiveId = msgReceiveId;
+   }
 
-	public void setMsgDate(Date msgDate) {
-		this.msgDate = msgDate;
-	}
+   public Date getMsgDate() {
+      return msgDate;
+   }
 
-	public int getMsgRead() {
-		return msgRead;
-	}
+   public void setMsgDate(Date msgDate) {
+      this.msgDate = msgDate;
+   }
 
-	public void setMsgRead(int msgRead) {
-		this.msgRead = msgRead;
-	}
-	
-	
-		
+   public int getMsgRead() {
+      return msgRead;
+   }
+
+   public void setMsgRead(int msgRead) {
+      this.msgRead = msgRead;
+   }
+   
+    
 }

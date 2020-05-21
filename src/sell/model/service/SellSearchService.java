@@ -8,7 +8,21 @@ import sell.model.dao.SellSearchDao;
 import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
 
+
 public class SellSearchService {
+	
+	
+	public ArrayList<Sell> selectList(int test) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      System.out.println(test);
+	      ArrayList<Sell> list = new ArrayList<Sell>();
+	      list = new SellSearchDao().selectList(conn,test);
+	      JDBCTemplate.close(conn);
+	      
+	      return list;
+	   }
+
+
 
 	public ArrayList<Sell> selectSellNationalList() {
 		Connection conn = JDBCTemplate.getConnection();
@@ -184,5 +198,6 @@ public class SellSearchService {
 		JDBCTemplate.close(conn);
 		return scp;
 	}
+
 
 }

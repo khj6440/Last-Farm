@@ -26,6 +26,42 @@ public class Sell {
 	private String sellItemRule;
 	private String thumbnail;
 	private int sellDeleteState;
+	private String sellRegionalAddr;
+	public Sell() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Sell(int sellNo, String sellTitle, String sellName, String sellWriter, String sellContent, Date sellEndDate,
+			int sellMax, int sellMin, int sellCount, int sellPrice, Date sellDate, int sellType, String sellCategory1,
+			String sellCategory2, int sellWarning, int sellDeliveryFee, String sellItemOrigin,
+			String sellItemExpireDate, String sellItemQuantity, String sellItemMaterial, String sellItemRule,
+			String thumbnail, int sellDeleteState, String sellRegionalAddr) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellName = sellName;
+		this.sellWriter = sellWriter;
+		this.sellContent = sellContent;
+		this.sellEndDate = sellEndDate;
+		this.sellMax = sellMax;
+		this.sellMin = sellMin;
+		this.sellCount = sellCount;
+		this.sellPrice = sellPrice;
+		this.sellDate = sellDate;
+		this.sellType = sellType;
+		this.sellCategory1 = sellCategory1;
+		this.sellCategory2 = sellCategory2;
+		this.sellWarning = sellWarning;
+		this.sellDeliveryFee = sellDeliveryFee;
+		this.sellItemOrigin = sellItemOrigin;
+		this.sellItemExpireDate = sellItemExpireDate;
+		this.sellItemQuantity = sellItemQuantity;
+		this.sellItemMaterial = sellItemMaterial;
+		this.sellItemRule = sellItemRule;
+		this.thumbnail = thumbnail;
+		this.sellDeleteState = sellDeleteState;
+		this.sellRegionalAddr = sellRegionalAddr;
+	}
 	public int getSellNo() {
 		return sellNo;
 	}
@@ -164,38 +200,12 @@ public class Sell {
 	public void setSellDeleteState(int sellDeleteState) {
 		this.sellDeleteState = sellDeleteState;
 	}
-	public Sell(int sellNo, String sellTitle, String sellName, String sellWriter, String sellContent, Date sellEndDate,
-			int sellMax, int sellMin, int sellCount, int sellPrice, Date sellDate, int sellType, String sellCategory1,
-			String sellCategory2, int sellWarning, int sellDeliveryFee, String sellItemOrigin,
-			String sellItemExpireDate, String sellItemQuantity, String sellItemMaterial, String sellItemRule,
-			String thumbnail, int sellDeleteState) {
-		super();
-		this.sellNo = sellNo;
-		this.sellTitle = sellTitle;
-		this.sellName = sellName;
-		this.sellWriter = sellWriter;
-		this.sellContent = sellContent;
-		this.sellEndDate = sellEndDate;
-		this.sellMax = sellMax;
-		this.sellMin = sellMin;
-		this.sellCount = sellCount;
-		this.sellPrice = sellPrice;
-		this.sellDate = sellDate;
-		this.sellType = sellType;
-		this.sellCategory1 = sellCategory1;
-		this.sellCategory2 = sellCategory2;
-		this.sellWarning = sellWarning;
-		this.sellDeliveryFee = sellDeliveryFee;
-		this.sellItemOrigin = sellItemOrigin;
-		this.sellItemExpireDate = sellItemExpireDate;
-		this.sellItemQuantity = sellItemQuantity;
-		this.sellItemMaterial = sellItemMaterial;
-		this.sellItemRule = sellItemRule;
-		this.thumbnail = thumbnail;
-		this.sellDeleteState = sellDeleteState;
+	public String getSellRegionalAddr() {
+		return sellRegionalAddr;
 	}
-	public Sell() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setSellRegionalAddr(String sellRegionalAddr) {
+		this.sellRegionalAddr = sellRegionalAddr;
 	}
+	
 }
+	

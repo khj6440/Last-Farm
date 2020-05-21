@@ -11,6 +11,7 @@ public class Notice {
 	private Date noticeDate;
 	private String noticeFilename;
 	private String noticeFilepath;
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
