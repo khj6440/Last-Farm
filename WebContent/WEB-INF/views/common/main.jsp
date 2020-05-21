@@ -160,6 +160,7 @@
 			<h2 class="fff fontCt">전체 판매</h2>
 			<button onclick="testMsg();">쪽지 보내기</button>
 			<button onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">쪽지창</button>
+			 
 		</div>
 	</div>
 	<div id="demo" class="carousel slide" data-ride="carousel">

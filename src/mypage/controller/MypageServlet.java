@@ -66,11 +66,9 @@ public class MypageServlet extends HttpServlet {
 		request.setAttribute("m", m);
 		request.setAttribute("list", list);
 		request.setAttribute("endList", endList);
-		
 		request.setAttribute("msgList", msgList);
-		
 		rd.forward(request, response);
-	}
+	}	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
