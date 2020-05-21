@@ -468,7 +468,7 @@
 										<div id="ViewTimer"></div>
 									</c:if>
 								</div>
-								<a href='/sellView?sellNo=${n.sellNo }&sellWriter=${n.sellWriter }'><img src='/imgs/${n.thumbnail }'></a>
+								<a href='/sellView?sell_no=${n.sellNo }&sell_writer=${n.sellWriter }'><img src='/imgs/${n.thumbnail }'></a>
 							</div>
 							<p>${n.sellTitle }</p>
 							<div class='detailInfoBox'>

@@ -46,7 +46,7 @@
                      지역 상품</a>
                      </li>
                   <li class="header_top_li1  header_top_li3"><a
-                     class="header_top_a1" href="/sellView?sell_no=24&sell_writer=id01">지역 상품</a>
+                     class="header_top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">내 지역 상품</a>
                      </li>
                </ul>
                <ul class="header_top_ul1">
