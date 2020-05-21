@@ -21,13 +21,13 @@ public class BuyService {
 		// 구매중인 갯수update
 		int result1 = new SellCommentDao().updateSellCount(conn, sellNo, type, sellCount);
 		// 구매완료했을때 max개수
-		int result2 = new SellCommentDao().updateSellCount2(conn, sellNo, type, sellMax, sellCount);
+//		int result2 = new SellCommentDao().updateSellCount2(conn, sellNo, type, sellMax, sellCount);
 
 		// 판매글 정보 불러옴
 		Sell s = new SellCommentDao().selectOneSell(conn, sellNo);
 		ArrayList<SellComment> list = new SellCommentDao().selectCommentList(conn, sellNo);
 		SellViewData svd = new SellViewData(s, list);
-
+		
 		// buy를 불러옴
 		Buy b = new Buy();
 		b.setBuyAmount(Integer.parseInt(r2));
@@ -36,16 +36,20 @@ public class BuyService {
 		b.setBuySellNo(sellNo);
 		// buy에 구매완료 insert
 		int result3 = new BuyDao().insertBuy(conn, b);
-
+		System.out.println(result3);
+		int result4 = 0;
+		int result5 = 0;
+		int result6 = 0;
+		int result7 = 0;
 		if (svd.getS().getSellCount() == svd.getS().getSellMax()) {
 			// 판매글 정보를 판매글 마감테이블로 insert
-			int result4 = new BuyDao().insertSellEnd(conn, svd);
+			 result4 = new BuyDao().insertSellEnd(conn, svd);
 			
 			// buy테이블 정보를 List에 가져옴
 			ArrayList<Buy> list2 = new BuyDao().selectBuy(conn, b);
 			// 구매신청테이블에 있던 정보들을 구매완료 테이블로 옮겨주는 로직
 			Buy b1 = new Buy();
-			int result5 = 0;
+			
 			for (int i = 0; i < list2.size(); i++) {
 				b1.setBuyAmount(list2.get(i).getBuyAmount());
 				b1.setBuyId(list2.get(i).getBuyId());
@@ -56,17 +60,26 @@ public class BuyService {
 			
 			System.out.println("정보들을 구매완료 테이블로 옮겨주는 로직 : "+result5);
 			// 넘겨주고 난 후 해당하는 sellNo의 구매이력을 buyList에서 지워줌
-			int result6 = new BuyDao().deleteBuyList(conn, sellNo);
+			 result6 = new BuyDao().deleteBuyList(conn, sellNo);
 			
 			System.out.println("넘겨주고 난 후 해당하는 sellNo의 구매이력을 buyList에서 지워줌 : "+result6);
-			int result7 = new BuyDao().deleteSellPage(conn,sellNo);
-		}
-		if(result1>0 && result2>0 && result3>0) {
-			JDBCTemplate.commit(conn);
-			result =1;
+			result7 = new BuyDao().deleteSellPage(conn,sellNo);
+			if(result1>0 && result3>0&&  result4>0 &&  result5>0 &&  result6>0 &&  result7>0 ) {
+				JDBCTemplate.commit(conn);
+				result =1;
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
 		}else {
-			JDBCTemplate.rollback(conn);
+			if(result1>0 && result3>0) {
+				JDBCTemplate.commit(conn);
+				result =1;
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
 		}
+		
+		
 		JDBCTemplate.close(conn);
 		
 		return result;

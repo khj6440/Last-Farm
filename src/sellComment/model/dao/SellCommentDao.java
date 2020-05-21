@@ -211,7 +211,7 @@ public class SellCommentDao {
 	public int updateSellCount2(Connection conn, int sellNo, int type, int sellMax, int sellCount) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		sellMax = type+sellCount;
+		
 		String query="update sell set sell_max=? where sell_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);

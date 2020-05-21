@@ -403,8 +403,8 @@
     	};
     	
     	$(".buy_btn").click(function(){
-    		var price = 100;
-    			/*  ${sellPrice + deliveryFee}; */
+    		var price = ${sellPrice + deliveryFee};
+    			
     		var d = new Date();
     		var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
     		IMP.init("imp79336132");

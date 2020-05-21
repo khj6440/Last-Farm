@@ -73,8 +73,6 @@
 	margin: 0 auto;
 	width: 65%;
 	height: 1100px;
-	border-left: 1px solid gray;
-	border-right: 1px solid gray;
 }
 
 .sell_content_table {
@@ -89,7 +87,7 @@
 	color : ;
 }
 .sell_table_td {
-	border-right: 1px solid gray;
+	
 }
 
 .sell_img11 {
@@ -109,17 +107,18 @@
 	height: 1;
 }
 
-.sell_timer {
+#sell_timer {
 	box-sizing: border-box;
 	position: absolute;
-	margin-left: 372px;
+	margin-left: 250px;
 	margin-top : -20px;
-	border: 2px solid black;
+	border-radius : 5px;
+	border: 2px solid red;
 	width: 300px;
 	height: 80px;
 	text-align: center;
 	color: red;
-	line-height: 1.7;
+	line-height: 2;
 	font-size: 2em;
 	position: absolute;
 }
@@ -149,7 +148,7 @@
 	margin : 0 auto;
 	width : 80%;
 	border-radius: 5px;
-	height: 60%;
+	height: 70%;
 	border: 1px solid darkseagreen;
 	background-color: darkseagreen;
 }
@@ -201,7 +200,6 @@
 }
 
 .sell_content_text {
-	border-top: 1px solid gray;
 	padding: 10px;
 	width: 100%;
 	height: 500px;
@@ -244,6 +242,11 @@
 }
 
 .sell_content2_sub32 {
+border-top : 1px solid gray;
+	padding-top : 10px;
+	padding-left : 25px;
+	margin: 0 auto;
+	text-align : center;
 	box-sizing: border-box;
 	width: 100%;
 	height: 50%;
@@ -407,14 +410,15 @@
 				<tr>
 					<td rowspan="5" class="sell_table_td"><img
 						src="/imgs/${s.thumbnail }" class="sell_img11">
-						<div class="sell_timer">
+						
 							<c:if test="${s.timegap >0}">
                     		 ${s.timegap } 일 남음
                      			</c:if>
 							<c:if test="${s.timegap ==0 }">
-
-							</c:if>
+						<div id="sell_timer">
 						</div>
+							</c:if>
+						
 					<th class="sell_table_th">${s.sellName }</th>
 					<th class="sell_table_th2"><a
 						href="/sellWarning?sell_no=${s.sellNo }&sell_warning=${s.sellWarning }"><img
@@ -484,7 +488,7 @@
 					<!-- <div class="sell_content_img2_btn">왼</div>
 						<div class="sell_content_img2"></div>
 						<div class="sell_content_img2_btn2">오</div> -->
-					<div class="sell_content_text">${s.contentBr }</div>
+					<div class="sell_content_text"><br>${s.contentBr }</div>
 				</div>
 				<div class="sell_content2_sub2">
 					<div class="sell_content2_sub2_div">
@@ -498,7 +502,7 @@
 						</div>
 						<div class="sell_content2_sub32">
 						<br>
-							  당일 배송 가능한 지역 <br>
+							 <img class="sell_warning"src="/imgs/time_car2.png"> 당일 배송 가능한 지역 <br>
 							  : ${s.sellRegionalAddr }
 						</div>
 					</div>
@@ -578,6 +582,7 @@
 											onclick="insertComment(this, '${sc.sellCommentNo }','${s.sellNo }','${sessionScope.member.memberId }')">댓글달기</a>
 										<a href="javascript:void(0)" class="sell_commentBtn"
 											onclick="warningComment('${sc.sellCommentNo}','${sc.sellCommentWarning }')">신고</a>
+											</c:if>
 										<c:if
 											test="${sessionScope.member.memberId == sc.sellCommentWriter }">
 											<a href="javascript:void(0)" class="sell_commentBtn"
@@ -585,7 +590,7 @@
 											<a href="javascript:void(0)" class="sell_commentBtn"
 												onclick="deleteComment('${sc.sellCommentNo}','${sc.sellRef }')">삭제</a>
 										</c:if>
-									</c:if></li>
+									</li>
 							</ul>
 						</c:if>
 						<c:forEach items="${list }" var="scc">
@@ -647,7 +652,7 @@
 				$(obj).parents('form').remove();
 			}
 		 function warningComment(sellCommentNo,sellCommentWarning){
-		      location.href="/sellCommentWarning?sellCommentNo="+sellCommentNo+"&sellCommentWarning="+sellCommentWarning;
+		      location.href="/sellCommentWarning?sellCommentNo="+sellCommentNo+"&sellCommentWarning="+sellCommentWarning+"&sellRef="+sellRef;
 		 }
 		 
 			function deleteComment(sellCommentNo, sellRef){
@@ -708,6 +713,26 @@
 			});
 		  });
 		
+		//타이머
+		 var now = new Date();
+		 var standD = now.getDate()+1;
+		 var endTime = new Date('2020-05-22');
+		         console.log(now.getDate());
+		 var gapTime = endTime-now-32400000;
+		 var SetTime =gapTime/1000;
+		 var SetMin = SetTime/60;
+		 var SetHour = SetMin/60;
+		 function msg_time() {   // 1초씩 카운트
+		    m = Math.floor(SetHour% 60) + ":"+Math.floor(SetMin % 60) + ":" + Math.floor(SetTime % 60);   // 남은 시간 계산
+		    var msg = m;
+		    document.all.sell_timer.innerHTML = msg;
+		    SetTime--;      
+		    if (SetTime < 0) {   
+		       clearInterval(tid);
+		    }
+		 }
+		 window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+
 	
 		
 	</script>

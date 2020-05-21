@@ -30,6 +30,7 @@ public class SellCommentWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int ref = Integer.parseInt(request.getParameter("sellRef"));
 		int sellCommentNo = Integer.parseInt(request.getParameter("sellCommentNo"));
 	      int sellCommentWarning = Integer.parseInt(request.getParameter("sellCommentWarning"));
 	      int result = new SellCommentService().commentWarning(sellCommentNo, sellCommentWarning);
@@ -39,7 +40,7 @@ public class SellCommentWarningServlet extends HttpServlet {
 	      }else {
 	         request.setAttribute("msg", "신고 실패");
 	      }
-	      request.setAttribute("loc", "/sellView?sell_no=4");
+	      request.setAttribute("loc", "/sellView?sell_no="+ref);
 	      rd.forward(request, response);
 	   }
 

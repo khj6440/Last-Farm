@@ -44,7 +44,7 @@ public class SellWarningServlet extends HttpServlet {
 			request.setAttribute("msg", "신고 실패 !");
 		}
 		
-		request.setAttribute("loc", "/sellView?sell_no=4");
+		request.setAttribute("loc", "/sellView?sell_no="+sellNo);
 		rd.forward(request, response);
 	}
 
