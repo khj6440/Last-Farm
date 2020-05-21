@@ -296,38 +296,34 @@
 					function() {
 						$(this).removeClass("unclicktab");
 						$(this).addClass("clicktab");
-						$(this).attr("name", "sortingTab");
-
+						$(this).children("input").prop('checked', true);
 						$(this).next().addClass("unclicktab");
 						$(this).next().removeClass("clicktab");
-						$(this).next().removeAttr("name", "sortingTab");
 						$(this).next().next().addClass("unclicktab");
 						$(this).next().next().removeClass("clicktab");
-						$(this).next().next().removeAttr("name", "sortingTab");
+						
 					});
 			$(".ordertabCategory").children("ul").children("li").eq(1).click(
 					function() {
 						$(this).addClass("clicktab");
-						$(this).attr("name", "sortingTab");
+						$(this).children("input").prop('checked', true);
 						$(this).removeClass("unclicktab");
 						$(this).next().addClass("unclicktab");
 						$(this).next().removeClass("clicktab");
-						$(this).next().removeAttr("name", "sortingTab");
 						$(this).prev().addClass("unclicktab");
 						$(this).prev().removeClass("clicktab");
-						$(this).prev().removeAttr("name", "sortingTab");
+
 					});
 			$(".ordertabCategory").children("ul").children("li").eq(2).click(
 					function() {
 						$(this).addClass("clicktab");
-						$(this).attr("name", "sortingTab");
+						$(this).children("input").prop('checked', true);
 						$(this).removeClass("unclicktab");
 						$(this).prev().addClass("unclicktab");
 						$(this).prev().removeClass("clicktab");
-						$(this).prev().removeAttr("name", "sortingTab");
 						$(this).prev().prev().addClass("unclicktab");
 						$(this).prev().prev().removeClass("clicktab");
-						$(this).prev().prev().removeAttr("name", "sortingTab");
+					
 					});
 		});
 		//지역 선택시 판매 지역 선택
@@ -477,9 +473,9 @@
 			<br> <br>
 			<div class="ordertabCategory">
 				<ul>
-					<li class="unclicktab" value="마감시간 순">마감시간 순</li>
-					<li class="unclicktab" value="구매 인기순">구매 인기순</li>
-					<li class="unclicktab" value="최근 등록순">최근 등록순</li>
+					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="마감시간 순" hidden>마감시간 순</li>
+					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="구매 인기순" hidden>구매 인기순</li>
+					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="최근 등록순" hidden>최근 등록순</li>
 				</ul>
 			</div>
 		</form>

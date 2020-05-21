@@ -47,7 +47,7 @@
                      지역 상품</a>
                      </li>
                   <li class="header_top_li1  header_top_li3"><a
-                     class="header_top_a1"  href="/sellSearchRegionalFrm">지역 상품</a>
+                     class="header_top_a1"  href="/sellSearchRegional">지역 상품</a>
                      </li>
                </ul>
                <ul class="header_top_ul1">

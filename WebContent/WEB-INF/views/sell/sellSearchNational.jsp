@@ -412,7 +412,7 @@
 					<option value=null>농/수산물(전체)</option>
 					<option value="농산물">농산물</option>
 					<option value="수산물">수산물</option>
-				</select> <select class="category category2">
+				</select> <select class="category category2" name="type2">
 					<option value=null>상품타입(전체)</option>
 					<option value="채소">채소</option>
 					<option value="과일">과일</option>
