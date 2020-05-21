@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <link rel="stylesheet" href="/css/footer/footer.css">
+
 <body>
     <div class="body">
         <div class="main_footer">

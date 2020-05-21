@@ -60,6 +60,7 @@
 	margin: 0 auto;
 	width: 1280px;
 	magin-right: -100px;
+	font-family: 'Jua', sans-serif;
 }
 
 .community_sideTap {
@@ -101,8 +102,12 @@
 .question_table {
 	width: 895px;
 }
-.community_sideTap>a:hover{
-	text-decoration: none;
+.question_tap{
+background-color: #ffac05 ;
+border-radius: 5px;
+}
+.question_tap1:hover{
+	color:#4a2100;
 }
 </style>
 </head>
@@ -112,14 +117,15 @@
 	<div class="community_body">
 		<div class="community_sideTap">
 			<div class="sideTap_a1">
-            <a href="/noticeList?reqPage=1" class="question_tap1">공지사항</a>
-         </div>
-         <div class="sideTap_a1">
-            <a href="/questionList?reqPage=1" class="question_tap question_tap1">자주 묻는 질문</a>
-         </div>
-         <div class="sideTap_a1">
-            <a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
-         </div>
+				<a href="/noticeList?reqPage=1" class="question_tap1">공지사항</a>
+			</div>
+			<div class="sideTap_a1">
+				<a href="/questionList?reqPage=1" class="question_tap question_tap1">자주 묻는 질문</a>
+			</div>
+			<div class="sideTap_a1">
+				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
+			</div>
+
 		</div>
 		<div class="community_content">
 			<br>
@@ -137,6 +143,7 @@
 					</tr>
 
 					<th>내용</th>
+
 					<td><textarea class="textarea1" name="questionContent"
 							rows="5" style="width: 100%;">${question.questionContent }</textarea></td>
 					</tr>

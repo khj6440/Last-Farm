@@ -378,7 +378,7 @@
 										</div>
 
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
 									</div>
@@ -552,7 +552,6 @@
 														<td><span class="more"> <i
 																class="zmdi zmdi-delete"
 																onclick="showModal('${m.memberNo}','회원 삭제','해당 회원 [${m.memberId}]을 삭제 하시겠습니까?<div>회원 삭제시 14일뒤에 삭제 됩니다.</div')"></i>
-														</span> <span class="more"> <i class="zmdi zmdi-more"></i>
 														</span></td>
 													</tr>
 													</c:if>

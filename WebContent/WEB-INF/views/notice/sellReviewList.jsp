@@ -249,8 +249,8 @@ border-radius: 5px;
 					<td>평점 : ${sessionScope.memberScore}점</td>
 				</tr>
 				<tr>
-					<button onclick="reviewInsert('${sessionScope.sellEnd.sellEndNo}')"
-						type="button">리뷰작성</button>
+				<%-- 	<button onclick="reviewInsert('${sessionScope.sellEnd.sellEndNo}')"
+						type="button">리뷰작성</button> --%>
 					<th colspan="4" style="text-align: center;"><h1
 							style="font-weight: bold;">리뷰</h1></th>
 				</tr>

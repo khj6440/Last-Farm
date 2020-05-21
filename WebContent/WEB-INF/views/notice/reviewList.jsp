@@ -135,7 +135,7 @@
 	float: left;
 }
 
-.d1 {
+.question_d1 {
 	height: 100%;
 	width: 810px;
 }
@@ -178,10 +178,11 @@
 	color: black;
 }
 
-.question_select {
+.question_select2 {
 	position: static;
 	margin-left: 407px;
 	width: 100px;
+	height:30px;
 	margin-top: 0px;
 }
 
@@ -306,7 +307,7 @@ border-radius: 5px;
 			
 				<div class="search_tap">
 				<input type="hidden" name="reqPage" value="1">
-					<select name="type" class="question_select">
+					<select name="type" class="question_select2">
 						<option value="id">아이디</option>
 						<option value="title">제목</option>
 						
@@ -330,7 +331,7 @@ border-radius: 5px;
 										</c:if>
 										<c:if test="${empty n.reviewFilepath }"><a class="">사진이 없습니다.</a></c:if>
 								</div>
-								<div class="d1">
+								<div class="question_d1">
 									<table class="table table-striped d1_table">
 										<tr>
 											<th><a class="review_a11" style="font-weight: bold">${n.reviewTitle }</a></th>

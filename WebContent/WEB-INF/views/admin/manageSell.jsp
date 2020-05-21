@@ -403,7 +403,7 @@
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
 										
@@ -524,7 +524,7 @@
 															</button>
 
 															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="More">
+																data-placement="top" title="More" onclick="location.href='/sellView?sell_no=${s.sellNo}&sell_writer=${s.sellWriter }'">
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>

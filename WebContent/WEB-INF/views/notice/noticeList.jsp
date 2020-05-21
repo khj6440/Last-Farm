@@ -8,8 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 부트스트림4 지원 메타 포트 -->
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- 부트스트림4 지원 메타 포트 종료-->
 <title>Insert title here</title>
 <!--    부트스트랩(다운)과 jQuery 불러오기-->
@@ -21,6 +20,7 @@
 <!-- 구글 폰트 링크-->
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Jua&display=swap" rel="stylesheet">
 <!--구글 폰트 링크 종료-->
+
 <!-- header,footer,noticeList 링크-->
 <link rel="stylesheet" href="/css/notice/noticeList.css">
 <link rel="stylesheet" href="/css/header/header.css">
@@ -30,7 +30,16 @@
 
 </head>
 <style>
-	
+* {
+	font-family: 'Jua', sans-serif;
+}
+	.question_tap{
+background-color: #ffac05 ;
+border-radius: 5px;
+}
+.question_tap1:hover{
+	color:#4a2100;
+}
 </style>
 <script>
 	function function1() {
@@ -73,10 +82,10 @@
 
 	<div class="wrapped">
 		<div class="title_notice">
-			<h2 class="fnt2">공지사항</h2>
-
+			<h2 class="">공지사항</h2>
 			<div class="form_div" >
-				<c:if test="${ sessionScope.m.memberId eq 'admin' }">
+
+				<c:if test="${sessionScope.member.memberId=='admin' }">
 				<button class="btn btn-dark write " onclick="link();">글쓰기</button>
 				</c:if>
 				<form class="button_side f-right" action="/searchNotice"
@@ -94,13 +103,13 @@
 		</div>
 		<div class="community_sideTap" id="sideTap">
 			<div class="sideTap_a1">
-				<a href="#">공지사항</a>
+				<a href="/noticeList?reqPage=1" class="question_tap question_tap1">공지사항</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="/questionList?reqPage=1">자주 묻는 질문</a>
+				<a href="/questionList?reqPage=1" class="question_tap1">자주 묻는 질문</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="#">리뷰게시판</a>
+				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
 			</div>
 		</div>
 
@@ -127,7 +136,7 @@
 				</tbody>
 			</table>
 			<div class="pageNavi">
-				<span>${pageNavi }</span>
+				<span>${pageNavi }</span><br><br>
 			</div>
 
 		</div>

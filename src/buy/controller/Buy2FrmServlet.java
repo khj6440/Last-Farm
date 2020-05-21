@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import sell.model.vo.Sell;
 
 /**
  * Servlet implementation class Buy2FrmServlet
@@ -31,9 +32,23 @@ public class Buy2FrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int sellNo = Integer.parseInt(request.getParameter("sell_no"));
+		String sellName = request.getParameter("sell_name");
+		int type = Integer.parseInt(request.getParameter("type"));
+		int sellPrice = Integer.parseInt((request.getParameter("sell_price")));
+		int deliveryFee = Integer.parseInt(request.getParameter("sell_delivery_fee"));
+		int sellCount = Integer.parseInt(request.getParameter("sell_count"));
+		int sellMax = Integer.parseInt(request.getParameter("sell_max"));
 		
-		
-		request.getRequestDispatcher("/WEB-INF/views/buy/buy2.jsp").forward(request, response);;
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/buy/buy2.jsp");
+		request.setAttribute("sellNo", sellNo);
+		request.setAttribute("sellName", sellName);
+		request.setAttribute("type", type);
+		request.setAttribute("sellPrice", sellPrice);
+		request.setAttribute("deliveryFee", deliveryFee);
+		request.setAttribute("sellCount", sellCount);
+		request.setAttribute("sellMax", sellMax);
+		rd.forward(request, response);
 		
 	}
 

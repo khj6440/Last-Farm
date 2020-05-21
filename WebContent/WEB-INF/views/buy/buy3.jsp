@@ -7,8 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문완료</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
 <style>
-	  <style>
+* {
+   font-family: 'Jua', sans-serif;
+}
+
         .buy {
             width: 1280px;
             height: 1800px;
@@ -148,6 +153,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="buy_container">
         <form action="/buy2Frm" method="post" class="buy">
             <div class="buy_head">
@@ -171,26 +177,26 @@
                             <div class="buy_content2_sub2_1">
                                 <div class="buy_content11">
                                     <h3 class="buy_h3">
-                                        고객님이 주문하신 주문 번호는 123456789 입니다.
+                                        고객님이 주문하신 주문 번호는 ${r1 } 입니다.
                                     </h3>
                                 </div>
                                 <table class="buy_content_table">
                                     <tr class="buy_content_table_tr">
-                                        <th>상품명</th>
-                                        <td>대홍단 왕감자</td>
+                                        <th>구매자명</th>
+                                        <td>${sessionScope.member.memberName }</td>
+                                    </tr>
+                                    <tr class="buy_content_table_tr">
+                                        <th>총 결제 수량</th>
+                                        <td>${type } 개</td>
                                     </tr>
                                     <tr class="buy_content_table_tr">
                                         <th>총 결제 금액</th>
-                                        <td>10000 원</td>
-                                    </tr>
-                                    <tr class="buy_content_table_tr">
-                                        <th>거래 일시</th>
-                                        <td>2020-02-02</td>
+                                        <td>${r2 } 원</td>
                                     </tr>
                                 </table>
                                 <div class="buy_content12">
-                                <button class="buy_table_btn">주문확인</button>
-                                <button class="buy_table_btn2" onclick="location.href='/index.jsp'">메인으로</button>
+                                <button type="submit" class="buy_table_btn" onclick="location.href='/mypage?memberId=${sessionScope.member.memberId}'">주문확인</button>
+                                <button type="button" class="buy_table_btn2" onclick="location.href='/sellView?sell_no=${n.sellNo }'">메인으로</button>
                                     </div>
                             </div>
                         </div>
@@ -200,5 +206,6 @@
             </div>
         </form>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

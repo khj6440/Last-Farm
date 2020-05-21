@@ -8,7 +8,12 @@
 <title>약관동의</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
 <style>
+* {
+   font-family: 'Jua', sans-serif;
+}
 .buy {
 	width: 1280px;
 	height: 1800px;
@@ -29,6 +34,7 @@
 	font-size: 2.5em;
 	margin-left: 20px;
 	font-weight: bold;
+	color : #4a2100;
 }
 
 .buy_head1 {
@@ -135,12 +141,15 @@
 .buy_btn {
 	width: 120px;
 	height: 50px;
+	background-color : #ffac05;
+	color : #4a2100;
 }
 
 .buy_btn:hover {
 	font-weight: bold;
 	cursor: pointer;
-	background-color: darkgray;
+	background-color : #4a2100;
+	color : #ffac05;
 }
 
 .return {
@@ -150,9 +159,16 @@
 </style>
 </head>
 <body>
-	
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="buy_container">
 	<form action="/buy2Frm" method="post" class="buy">
+	<input type="hidden" name="sell_no" value="${sellNo }">
+	<input type="hidden" name="sell_name" value="${sellName }">
+	<input type="hidden" name="type" value="${type }">
+	<input type="hidden" name="sell_price" value="${sellPrice }">
+	<input type="hidden" name="sell_delivery_fee" value="${deliveryFee }">
+	<input type="hidden" name="sell_count" value="${sellCount }">
+	<input type="hidden" name="sell_max" value="${sellMax }">
 		<div class="buy_head">
 			<div class="buy_head1">
 				<p class="buy_p">약관동의</p>
@@ -804,7 +820,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 				<div class="buy_btn_div">
 					<br>
 					<button class="buy_btn" type="submit">다음으로(동의)</button>
-					<button class="buy_btn" onclick="location.href='#'">취소</button>
+					<button class="buy_btn" onclick="location.href='sellView?sell_no=${sellNo}'">취소</button>
 				</div>
 
 
@@ -812,7 +828,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 		</div>
 	</form>
 	</section>
-	<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
 	<script>
 		$(".allchk").click(function() {
 			

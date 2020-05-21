@@ -29,7 +29,11 @@
 	
 	<div class="wrapped">
 		<c:if test="${not empty check }">
+<<<<<<< HEAD
 			<button class="btn btn-dark" onclick="location.href='/messageList?reqPage=1'">받은쪽지함</button>
+=======
+			<button class="btn btn-dark" onclick="location.href='/messageList?reqPage=1&memberId=${sessionScope.member.memberId }'">받은쪽지함</button>
+>>>>>>> origin/HyeokJin
 			<div class="title_notice">
 				<h2 class="fnt2">보낸쪽지함</h2>
 			</div>
@@ -60,7 +64,11 @@
 				</div>
 		</c:if>
 		<c:if test="${ empty check }">
+<<<<<<< HEAD
 			<button class="btn btn-dark" onclick="location.href='/messageList?check=1&reqPage=1'">보낸쪽지함</button>
+=======
+			<button class="btn btn-dark" onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">보낸쪽지함</button>
+>>>>>>> origin/HyeokJin
 			<div class="title_notice">
 				<h2 class="fnt2">받은쪽지함</h2>
 			</div>

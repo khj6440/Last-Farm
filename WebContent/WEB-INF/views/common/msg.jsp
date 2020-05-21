@@ -11,6 +11,7 @@
 <body>
 
 
+
 	<script>
 		alert("${msg}");
 
@@ -18,6 +19,12 @@
 
 	</script>
 
+
+
+   <script>
+      alert("${msg}");
+      location.href="${loc}";
+   </script>
 
 </body>
 </html>

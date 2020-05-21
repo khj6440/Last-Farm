@@ -250,10 +250,7 @@
 
 						for (var i = 0; i < data.length; i++) {
 							html += "<tr><td>";
-							html += "<label class='au-checkbox'>";
-							html += '<input type="checkbox" name="pick" value='+data[i].typeNo+'>';
-							html += '<span class="au-checkmark"></span>';
-							html += '</label></td>';
+							html += '</td>';
 							switch (data[i].type) {
 							case "review":
 								value = "리뷰";
@@ -292,7 +289,6 @@
 									+ "'"
 									+ ')">';
 							html += '<i class="zmdi zmdi-delete"></i></button>';
-							html += '<button class="item" data-toggle="tooltip" data-placement="top" title="More"><i class="zmdi zmdi-more"></i></button>';
 							html += '</div>';
 							html += '</td></tr>';
 
@@ -427,7 +423,7 @@
 										</div>
 
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
 									</div>
@@ -457,17 +453,11 @@
 									<div>
 										(신고누적 <span style="color: #dc3545">5</span>개 이상)
 									</div>
-									<button style="margin-bottom: 30px; float: right"
-										class="btn au-btn-icon btn-danger au-btn--small" id=selectDel>
-										<i class="zmdi zmdi-minus"></i>선택항목 삭제
-									</button>
+									
 									<table class="table table-borderless table-data3">
 										<thead>
 											<tr>
-												<th style="display: flex;"><label class="au-checkbox">
-														<input type="checkbox" name="allCheck"> <span
-														class="au-checkmark"></span>
-												</label></th>
+												<th style="display: flex;"></th>
 												<th>type</th>
 												<th>description</th>
 												<th>writer</th>

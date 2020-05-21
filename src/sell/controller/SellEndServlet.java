@@ -1,30 +1,23 @@
 package sell.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
-
 /**
- * Servlet implementation class SearchSellServlet
+ * Servlet implementation class SellEndServlet
  */
-@WebServlet(name = "SearchSellCategory", urlPatterns = { "/searchSellCategory" })
-public class SearchSellCategoryServlet extends HttpServlet {
+@WebServlet(name = "SellEnd", urlPatterns = { "/sellEnd" })
+public class SellEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchSellCategoryServlet() {
+    public SellEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,6 +31,8 @@ public class SearchSellCategoryServlet extends HttpServlet {
 		
 		//ArrayList<Sell> sellList = new SellSearchService().searchBoxSorting(searchWord);
 		//new Gson().toJson(sellList,response.getWriter());
+
+
 	}
 
 	/**

@@ -700,7 +700,7 @@ public class AdminDao {
 	public ArrayList<Message> getMsgList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ArrayList<Message> list = new ArrayList<Message>();
-		String query = "select * from message where msg_receive_id='admin' or msg_send_id='admin'";
+		String query = "select * from message where msg_receive_id='admin' or msg_send_id='admin' order by msg_date desc";
 		ResultSet rset = null;
 
 		try {
@@ -850,6 +850,25 @@ public class AdminDao {
 				pstmt.setInt(i + 1, Integer.parseInt(checkList.get(i)));
 			}
 			System.out.println(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int readMsg(Connection conn, int msgNo) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update message set msg_read=1 where msg_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, msgNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

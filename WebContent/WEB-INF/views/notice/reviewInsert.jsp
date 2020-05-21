@@ -7,8 +7,9 @@
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
-   rel="stylesheet">
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/header/style.css">
@@ -59,32 +60,36 @@
         <span class="d1" name="reviewScore"></span>
         
         <input type="hidden" class="reviewScore" name="reviewScore">
-                  </td>
-            </tr>
-            <tr>
-               <th>첨부파일</th>
-               <td><input type="file" name="reviewFilepath" onchange="loadImg(this)"></td>
-            </tr>
-            <tr>
-               <th>이미지 보기</th>
-               <td>
-                  <div id="img-viewer">
-                     <img id="img-view" width="350">
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <th>내용</th>
-               <td><textarea id="reviewContent_textarea" name="reviewContent" rows="5" style="width:100%;"></textarea></td>
-            </tr>
-            <tr style="text-align:center;">
-               <th colspan="2">
-                  <button type="submit" class="btn btn-outline-primary">등록</button>               
-               </th>
-            </tr>
-         </table>
-      </form>
+   					</td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td><input type="file" name="reviewFilepath" onchange="loadImg(this)"></td>
+				</tr>
+				<tr>
+					<th>이미지 보기</th>
+					<td>
+						<div id="img-viewer">
+							<img id="img-view" width="350">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea id="reviewContent_textarea" name="reviewContent" rows="5" style="width:100%;"></textarea></td>
+				</tr>
+				<tr style="text-align:center;">
+					<th colspan="2">
+						<button type="submit" OnClick="FnClose()" class="btn btn-outline-primary">등록</button>	 
+										
+					</th>
+				</tr>
+			</table>
+		</form>
+
 <script>
+
+
 function setMemberId(){
    alert("등록 성공");
    self.close();//현재창 닫기

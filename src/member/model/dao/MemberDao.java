@@ -100,6 +100,7 @@ public class MemberDao {
 		return m;
 	}
 
+
 	public int insertMemberCus(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -278,4 +279,32 @@ public class MemberDao {
 
 
 	
+
+	public Member selectOneWriter(Connection conn, String sellWriter) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		
+		String query="select * from member where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sellWriter);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("member_id"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setMemberScore(rset.getInt("member_score"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return m;
+	}
+
 }
