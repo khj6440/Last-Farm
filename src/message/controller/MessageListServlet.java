@@ -31,6 +31,7 @@ public class MessageListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String check = request.getParameter("check");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		String memberId = request.getParameter("memberId");

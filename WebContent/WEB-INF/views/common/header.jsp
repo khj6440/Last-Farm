@@ -50,9 +50,9 @@
                      </li>
                </ul>
                <ul class="header_top_ul1">
-                  <li class="header_top_li1"><a class="header_top_a1" href="/questionList?reqPage=1">커뮤니티</a>
+                  <li class="header_top_li1"><a class="header_top_a1" href="/noticeList?reqPage=1">커뮤니티</a>
                      </li>
-                  <li class="header_top_li1"><a class="header_top_a1" href="#">마이페이지</a>
+                  <li class="header_top_li1"><a class="header_top_a1" href="">마이페이지</a>
                      </li>
                </ul>
             </div>

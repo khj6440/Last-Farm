@@ -127,6 +127,7 @@
 .ntcWrapeed {
 	width: 70%;
 	margin: 0 auto;
+	overflow:hidden;
 }
 </style>
 </head>

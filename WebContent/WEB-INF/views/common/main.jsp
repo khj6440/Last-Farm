@@ -158,9 +158,9 @@
 	<div class="container">
 		<div class="d1">
 			<h2 class="fff fontCt">전체 판매</h2>
-			<button onclick="testMsg();">쪽지 보내기</button>
+		 <button onclick="testMsg();">쪽지 보내기</button>
 			<button onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">쪽지창</button>
-			 
+			  
 		</div>
 	</div>
 	<div id="demo" class="carousel slide" data-ride="carousel">
@@ -172,10 +172,10 @@
 					src="/imgs/${listNation[0].thumbnail }"
 					alt="First slide" onclick="location.href='/sellView?sellno=${listNation[0].sellNo }'" value="${listNation[0].sellNo }"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="/imgs/${listNation[1].thumbnail }" onclick="location.href='/sellView?sellno=${listNation[1].sellNo }'"
+					src="/imgs/${listNation[1].thumbnail }" onclick="location.href='/sellView?sellNo=${listNation[1].sellNo }'"  value="${listNation[1].sellNo }"
 					alt="First slide"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="/imgs/${listNation[2].thumbnail }"
+					src="/imgs/${listNation[2].thumbnail }"  onclick="location.href='/sellView?sellNo=${listNation[2].sellNo }'"  value="${listNation[1].sellNo }"
 					alt="First slide"></span> 
 				<div class="carousel-caption d-none d-md-block">
 					제목
@@ -183,23 +183,23 @@
 			</div>
 			<div class="carousel-item">
 				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="imgs/${listNation[3].thumbnail }"
+					src="imgs/${listNation[3].thumbnail }"  onclick="location.href='/sellView?sellNo=${listNation[3].sellNo }'"  value="${listNation[3].sellNo }"
 					alt="Second slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listNation[4].sellNo }'"  value="${listNation[4].sellNo }"
 					src="imgs/${listNation[4].thumbnail }"
 					alt="Second slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listNation[5].sellNo }'"  value="${listNation[5].sellNo }"
 					src="imgs/${listNation[5].thumbnail }"
 					alt="Second slide"></span>
 			</div>
 			<div class="carousel-item">
-				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"   onclick="location.href='/sellView?sellNo=${listNation[6].sellNo }'"  value="${listNation[6].sellNo }"
 					src="imgs/${listNation[6].thumbnail }"
 					alt="Third slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"   onclick="location.href='/sellView?sellNo=${listNation[7].sellNo }'"  value="${listNation[7].sellNo }"
 					src="imgs/${listNation[7].thumbnail }"
 					alt="Third slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"   onclick="location.href='/sellView?sellNo=${listNation[8].sellNo }'"  value="${listNation[8].sellNo }"
 					src="imgs/${listNation[8].thumbnail }"
 					alt="Third slide"></span>
 			</div>
@@ -239,11 +239,11 @@
 				<!--가로-->
 				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
 					src="/imgs/${listRegion[0].thumbnail }"
-					alt="First slide" onclick="location.href='/sellView?sellno=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
+					alt="First slide" onclick="location.href='/sellView?sellNo=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="/imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellno=${listRegion[1].sellNo }'"
+					src="/imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellNo=${listRegion[1].sellNo }'"  value="${listRegion[1].sellNo }"
 					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[2].sellNo }'" value="${listRegion[2].sellNo }"
 					src="/imgs/${listRegion[2].thumbnail }"
 					alt="First slide"></span> 
 				<div class="carousel-caption d-none d-md-block">
@@ -251,24 +251,24 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[3].sellNo }'"
 					src="imgs/${listRegion[3].thumbnail }"
 					alt="Second slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[4].sellNo }'"
 					src="imgs/${listRegion[4].thumbnail }"
 					alt="Second slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[5].sellNo }'"
 					src="imgs/${listRegion[5].thumbnail }"
 					alt="Second slide"></span>
 			</div>
 			<div class="carousel-item">
-				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[6].sellNo }'"
 					src="imgs/${listRegion[6].thumbnail }"
 					alt="Third slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[7].sellNo }'"
 					src="imgs/${listRegion[7].thumbnail }"
 					alt="Third slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"  onclick="location.href='/sellView?sellNo=${listRegion[8].sellNo }'"
 					src="imgs/${listRegion[8].thumbnail }"
 					alt="Third slide"></span>
 			</div>

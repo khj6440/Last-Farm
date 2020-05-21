@@ -7,30 +7,20 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 부트스트림4 지원 메타 포트 -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- 부트스트림4 지원 메타 포트 종료-->
 <title>Insert title here</title>
-<!--  부트스트랩-->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link
-	href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Noto+Serif+KR:wght@900&display=swap"
-	rel="stylesheet">
+<!--    부트스트랩(다운)과 jQuery 불러오기-->
+<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+<!--    부트스트랩(다운)과 jQuery 불러오기 종료-->
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-
-<!--부트스트랩 종료  -->
-
+<!-- 구글 폰트 링크-->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Jua&display=swap" rel="stylesheet">
+<!--구글 폰트 링크 종료-->
 <!-- header,footer,noticeList 링크-->
 <link rel="stylesheet" href="/css/notice/noticeList.css">
 <link rel="stylesheet" href="/css/header/header.css">
@@ -86,8 +76,8 @@
 			<h2 class="fnt2">공지사항</h2>
 
 			<div class="form_div" >
-				<button class="btn btn-dark write " onclick="link();">글쓰기</button>
 				<c:if test="${ sessionScope.m.memberId eq 'admin' }">
+				<button class="btn btn-dark write " onclick="link();">글쓰기</button>
 				</c:if>
 				<form class="button_side f-right" action="/searchNotice"
 					method="get">

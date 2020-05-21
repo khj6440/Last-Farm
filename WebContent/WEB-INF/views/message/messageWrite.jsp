@@ -121,7 +121,7 @@ body {
 
 <body>
 	<div class="msg_wrap">
-		<form action="/messageInsert" method="post" id="msgSend">
+		<form action="/messageInsertSend" method="post" id="msgSend">
 			<h2 class="h2Center">쪽지 보내기</h2>
            
 			<div class="mb-3">
