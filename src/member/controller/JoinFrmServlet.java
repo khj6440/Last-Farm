@@ -1,6 +1,4 @@
-
 package member.controller;
-
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,18 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NoticeWriteServlet
+ * Servlet implementation class JoinFrmServlet
  */
-
-@WebServlet(name = "/LoginFrm", urlPatterns = { "/loginFrm" })
-public class LoginFrmServlet extends HttpServlet {
-
+@WebServlet(name = "JoinFrm", urlPatterns = { "/joinFrm" })
+public class JoinFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginFrmServlet() {
+    public JoinFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +26,7 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/login/login.jsp").forward(request, response);;
-		
+		request.getRequestDispatcher("/WEB-INF/views/join/agree.jsp").forward(request, response);;
 		
 	}
 
@@ -42,4 +37,5 @@ public class LoginFrmServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

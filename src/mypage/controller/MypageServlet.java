@@ -39,8 +39,6 @@ public class MypageServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		System.out.println(memberId);
 		
-		
-		
 		Member m = new MypageService().selectOneMember(memberId);
 		ArrayList<Sell> list =null;
 		ArrayList<SellEnd> endList = null;

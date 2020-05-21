@@ -28,6 +28,11 @@
 body {
 	padding-top: 70px;
 	padding-bottom: 30px;
+	/* 크롬에서 스크롤바를 없애기 위한 방법 코드.. */
+	overflow-x:hidden; 
+	overflow-y:hidden;"
+
+
 }
 
 .noticeIn {
@@ -70,6 +75,13 @@ body {
 .contt{
 	width:
 }
+#msgPut{
+	margin-left: 150px;
+	width:70px;
+	height:30px;
+	background-color:#ffac05;
+	color:#4a2100;
+}
 
 </style>
 
@@ -88,7 +100,7 @@ body {
 				success : function(data) {
 					if (data != 'true') {
 						alert("입력하신 회원이 없습니다.");
-						$("#msgReceiveId").val("아이디가 없습니다.");
+						$("#msgReceiveId").val("");
 						$("#msgReceiveId").css("border", "1.2px solid red");
 
 					} else {

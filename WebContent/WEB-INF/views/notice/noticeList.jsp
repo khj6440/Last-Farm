@@ -33,13 +33,14 @@
 
 <!-- header,footer,noticeList 링크-->
 <link rel="stylesheet" href="/css/notice/noticeList.css">
-<link rel="stylesheet" href="/css/header/header.css?after">
-<link rel="stylesheet" href="/css/footer/footer.css?after">
+<link rel="stylesheet" href="/css/header/header.css">
+<link rel="stylesheet" href="/css/footer/footer.css">
 
 <!--  header,footer 종료  -->
 
 </head>
 <style>
+	
 </style>
 <script>
 	function function1() {
@@ -84,7 +85,7 @@
 		<div class="title_notice">
 			<h2 class="fnt2">공지사항</h2>
 
-			<div class="form_div">
+			<div class="form_div" >
 				<button class="btn btn-dark write " onclick="link();">글쓰기</button>
 				<c:if test="${ sessionScope.m.memberId eq 'admin' }">
 				</c:if>
@@ -141,8 +142,8 @@
 
 		</div>
 	</div>
-
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
 
 </body>
 

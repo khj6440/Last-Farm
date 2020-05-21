@@ -54,7 +54,8 @@ public class NoticeInsertServlet extends HttpServlet {
 		// request -> MultipartRequest 파일 업로드 진행
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize, "UTF-8",
 				new DefaultFileRenamePolicy());
-		String writer = mRequest.getParameter("Writer");
+		String writer = mRequest.getParameter("writer");
+		System.out.println("writer"+writer);
 		String content = mRequest.getParameter("content");
 		String title = mRequest.getParameter("title");
 		String filename = mRequest.getOriginalFileName("filename");
@@ -63,7 +64,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		n.setNoticeContent(content);
 		n.setNoticeTitle(title);
 		//임시로 넣을 작성자
-		n.setNoticeWriter("테스트");
+		n.setNoticeWriter(writer);
 		n.setNoticeFilename(filename);
 		n.setNoticeFilepath(filepath);
 		// 비지니스로직 처리

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -50,187 +49,6 @@
 }
 
 
-.font {
-	font-family: 'Do Hyeon', sans-serif;
-}
-/*
-
-.d1 {
-	margin-left: 100px;
-}
-*/
-
-.f-black {
-	font-size: 20px;
-	color: black;
-}
-
-.main_body {
-	margin: 0 auto;
-	text-shadow: 0.5px 0.5px gray;
-	width: 1280px;
-}
-
-.jj {
-	margin-top: 17px;
-}
-
-a:hover {
-	color: black;
-	text-decoration: none;
-}
-
-.header_top {
-	border-bottom: 0.1px solid gray;
-	width: 100%;
-	height: 235px;
-	font-family: 'Nanum Gothic', sans-serif;
-	position: relative;
-}
-
-.main_content {
-	width: 100%;
-	height: 62%;
-	border-left: 0.1px solid gray;
-	border-right: 0.1px solid gray;
-}
-
-.main_footer {
-	position: relative;
-	background-color: #D9D4CF;
-	width: 100%;
-	height: 15%;
-}
-
-.header_top_logo {
-	width: 16%;
-	height: 90%;
-	float: left;
-	margin-top: -2.5%;
-	position: absolute;
-	margin-left: 42%;
-}
-
-.header_top_logo1 {
-	width: 100%;
-	height: 100%;
-}
-
-.header_top_tap {
-	width: 100%;
-	float: left;
-	margin-top: 4.4%;
-}
-
-.header_top_tap2 {
-	width: 42%;
-	float: left;
-	margin-top: 4.4%;
-}
-
-.header_top_ul1 {
-	list-style: none;
-}
-
-.header_top_li1 {
-	display: block;
-	float: left;
-	width: 170px;
-	height: 85px;
-	margin-left: 40px;
-	line-height: 85px;
-	text-align: center;
-	font-weight: bold;
-}
-
-.header_top_a1 {
-	display: inline-block;
-	text-decoration: none;
-	font-size: 22px;
-	color: black;
-	text-shadow: 10px 10px 10px 10px gray;
-}
-
-.header_top_ul2 {
-	list-style: none;
-	padding: 0;
-	position: absolute;
-	visibility: hidden;
-	text-align: center;
-	box-sizing: border-box;
-	line-height: 50px;
-	left: 3%;
-}
-
-.header_top_ul3 {
-	list-style: none;
-	padding: 0;
-	position: absolute;
-	visibility: hidden;
-	text-align: center;
-	box-sizing: border-box;
-	line-height: 50px;
-	right: 5%;
-}
-
-.header_top_li2 {
-	width: 210px;
-	float: left;
-}
-
-.header_top_li4 {
-	margin-left: 25px;
-}
-
-.header_top_li2>a {
-	text-decoration: none;
-	display: block;
-	color: white;
-	font-size: 22px;
-}
-
-.header_top_li1:hover>.header_top_ul2>li {
-	visibility: visible;
-}
-
-.header_top_li1:hover>.header_top_ul3>li {
-	visibility: visible;
-}
-
-.header_top_bottom {
-	margin-top: -50px;
-	width: 100%;
-	height: 50px;
-	background-color: #D9D4CF;
-	border-bottom: 0.1px solid gray;
-}
-
-.header_top_a2 {
-	font-size: 27px;
-}
-
-.header_top_login {
-	margin-left: 88%;
-	width: 140px;
-}
-
-.header_top_login>a {
-	font-size: 20px;
-	color: #7C7877;
-	margin-right: 10px;
-}
-
-.header_top_tap {
-	position: relative;
-}
-
-.header_top_tap2 {
-	position: relative;
-}
-
-.header_top_li3 {
-	margin-right: 25%;
-}
 #demo2,#demo{
 	width:1280px;
 	margin:0 auto;
@@ -277,15 +95,52 @@ a:hover {
 		height:300px;
 		display:inline-block;
 	}
+	#sellImg{
+		width:100%;
+		height:230px;
+	}
 </style>
 <script>
 	function testMsg() {
-		var win = window
+		var options = {
+		        height: 600, // sets the height in pixels of the window.
+		        width: 500, // sets the width in pixels of the window.
+		        toolbar: 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
+		        scrollbars: 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
+		        status: 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
+		        resizable: 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
+		        left: 500, // left position when the window appears.
+		        top: 200, // top position when the window appears.
+		        center: 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
+		        createnew: 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
+		        location: 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
+		        menubar: 0 // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
+		    };
+
+		    var parameters = "location=" + options.location +
+		                     ",menubar=" + options.menubar +
+		                     ",height=" + options.height +
+		                     ",width=" + options.width +
+		                     ",toolbar=" + options.toolbar +
+		                     ",scrollbars=" + options.scrollbars +
+		                     ",status=" + options.status +
+		                     ",resizable=" + options.resizable +
+		                     ",left=" + options.left +
+		                     ",screenX=" + options.left +
+		                     ",top=" + options.top +
+		                     ",screenY=" + options.top;
+
+		    // target url
+		    var target = "/messageWrite"; 
+
+		    popup = window.open(target, 'popup', parameters);
+		
+		/* var win = window
 				.open(
 						"/messageWrite",
 						"_blank",
-						"toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=500,height=600");
-
+						"menubar=no,toolbar=yes,scrollbars=0,resizable=yes,status=no,top=200,left=500,width=500,height=600"); */
+		
 	}
 	
 </script>
@@ -304,7 +159,7 @@ a:hover {
 		<div class="d1">
 			<h2 class="fff fontCt">전체 판매</h2>
 			<button onclick="testMsg();">쪽지 보내기</button>
-			
+			<button onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">쪽지창</button>
 		</div>
 	</div>
 	<div id="demo" class="carousel slide" data-ride="carousel">
@@ -313,39 +168,39 @@ a:hover {
 			<div class="carousel-item active">
 				<!--가로-->
 				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="imgs/${listRegion[0].thumbnail }"
-					alt="First slide" onclick="location.href='/sellView?sellno=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellno=${listRegion[1].sellNo }'"
+					src="/imgs/${listNation[0].thumbnail }"
+					alt="First slide" onclick="location.href='/sellView?sellno=${listNation[0].sellNo }'" value="${listNation[0].sellNo }"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="/imgs/${listNation[1].thumbnail }" onclick="location.href='/sellView?sellno=${listNation[1].sellNo }'"
 					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[2].thumbnail }"
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="/imgs/${listNation[2].thumbnail }"
 					alt="First slide"></span> 
 				<div class="carousel-caption d-none d-md-block">
 					제목
 				</div>
 			</div>
 			<div class="carousel-item">
-				<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[3].thumbnail }"
-					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[4].thumbnail }"
-					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[5].thumbnail }"
-					alt="First slide"></span>
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[3].thumbnail }"
+					alt="Second slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[4].thumbnail }"
+					alt="Second slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[5].thumbnail }"
+					alt="Second slide"></span>
 			</div>
 			<div class="carousel-item">
-				<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[6].thumbnail }"
-					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[7].thumbnail }"
-					alt="First slide"></span>
-					<span class="carsel_wrap"><img class="d-inline-block"
-					src="imgs/${listRegion[8].thumbnail }"
-					alt="First slide"></span>
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[6].thumbnail }"
+					alt="Third slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[7].thumbnail }"
+					alt="Third slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listNation[8].thumbnail }"
+					alt="Third slide"></span>
 			</div>
 
 			<!-- / 슬라이드 쇼 끝 -->
@@ -381,36 +236,41 @@ a:hover {
 			<!-- 슬라이드 쇼 -->
 			<div class="carousel-item active">
 				<!--가로-->
-				<img class="d-inline-block"
-					src="imgs/%EA%B5%B0%EA%B3%A0%EA%B5%AC%EB%A7%88.jpg"
-					alt="First slide"> <img class="d-inline-block"
-					src="imgs/%EA%B5%B0%EA%B3%A0%EA%B5%AC%EB%A7%88.jpg"
-					alt="First slide"> <img class="d-inline-block"
-					src="imgs/%EA%B5%B0%EA%B3%A0%EA%B5%AC%EB%A7%88.jpg"
-					alt="First slide">
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="/imgs/${listRegion[0].thumbnail }"
+					alt="First slide" onclick="location.href='/sellView?sellno=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="/imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellno=${listRegion[1].sellNo }'"
+					alt="First slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="/imgs/${listRegion[2].thumbnail }"
+					alt="First slide"></span> 
 				<div class="carousel-caption d-none d-md-block">
-					
+					제목
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-inline-block"
-					src="imgs/%EC%A2%85%EA%B0%93%EC%A7%91%20%EA%B9%80%EC%B9%98.jpg"
-					alt="Second slide"> <img class="d-inline-block"
-					src="imgs/%EC%A2%85%EA%B0%93%EC%A7%91%20%EA%B9%80%EC%B9%98.jpg"
-					alt="Second slide"> <img class="d-inline-block"
-					src="imgs/%EC%A2%85%EA%B0%93%EC%A7%91%20%EA%B9%80%EC%B9%98.jpg"
-					alt="Second slide">
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[3].thumbnail }"
+					alt="Second slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[4].thumbnail }"
+					alt="Second slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[5].thumbnail }"
+					alt="Second slide"></span>
 			</div>
 			<div class="carousel-item">
-				<img class="d-inline-block"
-					src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-					alt="Third slide"> <img class="d-inline-block"
-					src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-					alt="Third slide"> <img class="d-inline-block"
-					src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-					alt="Third slide">
+				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[6].thumbnail }"
+					alt="Third slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[7].thumbnail }"
+					alt="Third slide"></span>
+					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
+					src="imgs/${listRegion[8].thumbnail }"
+					alt="Third slide"></span>
 			</div>
-
 			<!-- / 슬라이드 쇼 끝 -->
 
 			<!-- 인디케이터 -->
