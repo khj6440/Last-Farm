@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="sell.model.vo.Sell" project="lastFarm" 
+    file="/lastFarm/src/sell/model/vo/Sell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1296" width="815" x="248" y="106"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="sellComment.model.vo.SellViewData" project="lastFarm" 
+    file="/lastFarm/src/sellComment/model/vo/SellViewData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1475" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="sellComment.model.vo.SellComment" project="lastFarm" 
+    file="/lastFarm/src/sellComment/model/vo/SellComment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2907" y="404"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="sellComment.model.service.SellCommentService" project="lastFarm" 
+    file="/lastFarm/src/sellComment/model/service/SellCommentService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="367" x="3219" y="129"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="sellComment.model.dao.SellCommentDao" project="lastFarm" 
+    file="/lastFarm/src/sellComment/model/dao/SellCommentDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3433" y="561"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="sellComment.controller.SellCommentDeleteServlet" project="lastFarm" 
+    file="/lastFarm/src/sellComment/controller/SellCommentDeleteServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3418" y="1044"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="sellComment.controller.SellCommentInsertServlet" project="lastFarm" 
+    file="/lastFarm/src/sellComment/controller/SellCommentInsertServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3421" y="1227"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="sellComment.controller.SellCommentUpdateServlet" project="lastFarm" 
+    file="/lastFarm/src/sellComment/controller/SellCommentUpdateServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1489" y="695"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="sellComment.controller.SellCommentWarningServlet" project="lastFarm" 
+    file="/lastFarm/src/sellComment/controller/SellCommentWarningServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3412" y="867"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="sell.controller.SellPageDelRequestServlet" project="lastFarm" 
+    file="/lastFarm/src/sell/controller/SellPageDelRequestServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1482" y="504"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="sell.controller.SellViewServlet" project="lastFarm" 
+    file="/lastFarm/src/sell/controller/SellViewServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1487" y="881"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="sell.controller.SellWarningServlet" project="lastFarm" 
+    file="/lastFarm/src/sell/controller/SellWarningServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1493" y="1073"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="buyEnd.model.vo.BuyEnd" project="lastFarm" 
+    file="/lastFarm/src/buyEnd/model/vo/BuyEnd.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2535" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="buy.model.vo.Buy" project="lastFarm" file="/lastFarm/src/buy/model/vo/Buy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="433" width="239" x="1853" y="310"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="buy.model.service.BuyService" project="lastFarm" 
+    file="/lastFarm/src/buy/model/service/BuyService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2444" y="1000"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="buy.model.dao.BuyDao" project="lastFarm" 
+    file="/lastFarm/src/buy/model/dao/BuyDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2451" y="1214"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="buy.controller.BuyFrmServlet" project="lastFarm" 
+    file="/lastFarm/src/buy/controller/BuyFrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1966" y="872"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="buy.controller.Buy2FrmServlet" project="lastFarm" 
+    file="/lastFarm/src/buy/controller/Buy2FrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1969" y="1084"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="buy.controller.Buy3FrmServlet" project="lastFarm" 
+    file="/lastFarm/src/buy/controller/Buy3FrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1974" y="1283"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="20">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="21" name="list"/>      
+      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="24" name="s"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
