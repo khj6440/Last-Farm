@@ -78,7 +78,6 @@ public class ReviewInsertServlet extends HttpServlet {
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/close.jsp");
-		
 		if(result>0) {
 			request.setAttribute("msg", "리뷰 등록 성공");
 		}else {

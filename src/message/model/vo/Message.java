@@ -9,6 +9,7 @@ public class Message {
 	private String msgContent;
 	private String msgReceiveId;
 	private Date msgDate;
+	private int msgRead;
 	
 	public Message(int msgNo, String msgTitle, String msgSendId, String msgContent, String msgReceiveId, Date msgDate) {
 		super();
@@ -19,45 +20,68 @@ public class Message {
 		this.msgReceiveId = msgReceiveId;
 		this.msgDate = msgDate;
 	}
+
 	public Message() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getMsgNo() {
 		return msgNo;
 	}
+
 	public void setMsgNo(int msgNo) {
 		this.msgNo = msgNo;
 	}
+
 	public String getMsgTitle() {
 		return msgTitle;
 	}
+
 	public void setMsgTitle(String msgTitle) {
 		this.msgTitle = msgTitle;
 	}
+
 	public String getMsgSendId() {
 		return msgSendId;
 	}
+
 	public void setMsgSendId(String msgSendId) {
 		this.msgSendId = msgSendId;
 	}
+
 	public String getMsgContent() {
 		return msgContent;
 	}
+
 	public void setMsgContent(String msgContent) {
 		this.msgContent = msgContent;
 	}
+
 	public String getMsgReceiveId() {
 		return msgReceiveId;
 	}
+
 	public void setMsgReceiveId(String msgReceiveId) {
 		this.msgReceiveId = msgReceiveId;
 	}
+
 	public Date getMsgDate() {
 		return msgDate;
 	}
+
 	public void setMsgDate(Date msgDate) {
 		this.msgDate = msgDate;
 	}
+
+	public int getMsgRead() {
+		return msgRead;
+	}
+
+	public void setMsgRead(int msgRead) {
+		this.msgRead = msgRead;
+	}
 	
+	
+		
 }

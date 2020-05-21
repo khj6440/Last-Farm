@@ -76,7 +76,7 @@
 
 <body>
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 	<div class="container">
 		<div class="d1">

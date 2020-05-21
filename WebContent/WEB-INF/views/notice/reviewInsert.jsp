@@ -2,55 +2,56 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/header/style.css">
 <link rel="stylesheet" href="/css/header/responsive.css">
-<script type="text/javascript" src="/js/bootstrap.js">
-	
-</script>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
-		#insertFrm{
-			width:500px;
-			margin:0 auto;
-		}
-		.review_h1{
-		text-align: center;
-		margin: 0 auto;
-		}
-		#reviewContent_textarea{
-		 resize: none;
-		}
-	</style>
+      #insertFrm{
+         width:500px;
+         margin:0 auto;
+      }
+      .review_h1{
+      text-align: center;
+      margin: 0 auto;
+      }
+      #reviewContent_textarea{
+       resize: none;
+      }
+   </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body><br>
-	<h1 class="review_h1">리뷰 작성</h1><br>
-		<form action="/reviewInsert" method="post" enctype="multipart/form-data" id="insertFrm">
-		<input type="hidden" name="sellEndWriter" value="${sessionScope.sellEndWriter }">
-		<input type="hidden" name="sellEndNo" value="${sessionScope.sellEndNo}">
+   <h1 class="review_h1">리뷰 작성</h1><br>
+      <form action="/reviewInsert" method="post" enctype="multipart/form-data" id="insertFrm">
+      <input type="hidden" name="sellEndWriter" value="${sessionScope.sellEndWriter }">
+      <input type="hidden" name="sellEndNo" value="${sessionScope.sellEndNo}">
 
-			<table class="table table-bordered">
-				<tr>
-					<th>제목</th>
-					
-					<td><input type="text" class="form-control" name="reviewTitle"></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td>${sessionScope.member.memberId }
-					<input type="hidden" name="reviewWriter" value="${sessionScope.member.memberId }"></td>
-				</tr>
-				<tr>
-					<th>별점</th>
-					<td>
+         <table class="table table-bordered">
+            <tr>
+               <th>제목</th>
+               
+               <td><input type="text" class="form-control" name="reviewTitle"></td>
+            </tr>
+            <tr>
+               <th>작성자</th>
+               <td>${sessionScope.member.memberId }
+               <input type="hidden" name="reviewWriter" value="${sessionScope.member.memberId }"></td>
+            </tr>
+            <tr>
+               <th>별점</th>
+               <td>
         <img class="star" src="../imgs/star-off.png">
         <img class="star" src="../imgs/star-off.png">
         <img class="star" src="../imgs/star-off.png">
@@ -59,6 +60,7 @@
         <span class="d1" name="reviewScore"></span>
         
         <input type="hidden" class="reviewScore" name="reviewScore">
+<<<<<<< HEAD
    					</td>
 				</tr>
 				<tr>
@@ -86,28 +88,25 @@
 			</table>
 		</form>
 
-
-
-
 <script>
 
 
 function setMemberId(){
-	alert("등록 성공");
-	
+   alert("등록 성공");
+   self.close();//현재창 닫기
 }
 
 function loadImg(f){
-	console.log(f.files);
-	if(f.files.length!=0 && f.files[0]!=0){
-		var reader = new FileReader();
-		reader.readAsDataURL(f.files[0]);
-		reader.onload = function(e){
-			$("#img-view").attr("src",e.target.result);
-		}
-	}else{
-		$("#img-view").attr("src","");
-	}
+   console.log(f.files);
+   if(f.files.length!=0 && f.files[0]!=0){
+      var reader = new FileReader();
+      reader.readAsDataURL(f.files[0]);
+      reader.onload = function(e){
+         $("#img-view").attr("src",e.target.result);
+      }
+   }else{
+      $("#img-view").attr("src","");
+   }
 }
 
 $(function() {

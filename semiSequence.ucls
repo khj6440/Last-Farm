@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="member.controller.SellerSignInFrmServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SellerSignInFrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="286" y="184"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="member.controller.SearchFrmServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SearchFrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="773" y="183"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="member.controller.SendPw" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SendPw.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1153" y="122"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="member.controller.CheckIdServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/CheckIdServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1500" y="181"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="member.controller.LoginFrmServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/LoginFrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="1763" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="member.controller.JoinClassifyServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/JoinClassifyServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="2207" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="member.controller.SellerSignInServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SellerSignInServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="2651" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="member.controller.MailSend" project="LastFarm" 
+    file="/LastFarm/src/member/controller/MailSend.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="188" x="3095" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="member.controller.SearchPwServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SearchPwServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="3323" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="member.controller.CustomerSignInServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/CustomerSignInServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="3767" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="member.controller.SendPwServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SendPwServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="4211" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="member.controller.CustomerSignInFrmServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/CustomerSignInFrmServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="4655" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="member.controller.SearchIdServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SearchIdServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="5099" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="member.controller.AgreeServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/AgreeServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="5543" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="member.controller.LoginServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/LoginServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="5987" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="member.controller.SendMailServlet" project="LastFarm" 
+    file="/LastFarm/src/member/controller/SendMailServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="404" x="6431" y="248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

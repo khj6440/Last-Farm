@@ -188,6 +188,7 @@ border-radius: 5px;
 			<input type="hidden" name="reqPage" value="1">
 			<c:if test="${sessionScope.member.memberId=='admin' }">
 			<a class="question_add btn btn-dark" href="/questionWriteFrm">글쓰기</a>
+
 			</c:if>
 			<input type="text" class="question_search" name="keyword" value="${keyword }" placeholder="제목을 입력해주세요">
 			<button type="submit" class="btn btn-outline-primary">검색</button>
