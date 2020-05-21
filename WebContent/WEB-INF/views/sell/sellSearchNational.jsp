@@ -219,7 +219,6 @@
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<script>
 		//로그인한 아이디가 판매자이면 검색 대신 새글 쓰기 버튼
 		$(function() {

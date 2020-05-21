@@ -195,8 +195,8 @@
                                     </tr>
                                 </table>
                                 <div class="buy_content12">
-                                <button class="buy_table_btn">주문확인</button>
-                                <button class="buy_table_btn2" onclick="location.href='index.jsp'">메인으로</button>
+                                <button type="submit" class="buy_table_btn" onclick="location.href='#'">주문확인</button>
+                                <button type="button" class="buy_table_btn2" onclick="location.href='/sellView?sell_no=${n.sellNo }'">메인으로</button>
                                     </div>
                             </div>
                         </div>

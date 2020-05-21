@@ -472,13 +472,11 @@ form {
 	});
 </script>
 <body>
-<<<<<<< HEAD
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-=======
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
->>>>>>> e6f5e543c2ebdb914922b897ef2adf2c05f1370e
+
 	<form action="/sellFormInsert" method="post"
-		enctype="multipart/form-data"">
+		enctype="multipart/form-data">
 		<input type="hidden" name="sellWriter"
 			value="${sessionScope.member.memberId }">
 		<table>
@@ -643,11 +641,9 @@ form {
 			</tr>
 		</table>
 	</form>
-<<<<<<< HEAD
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-=======
-		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
->>>>>>> e6f5e543c2ebdb914922b897ef2adf2c05f1370e
+
 </body>
 
 </html>
