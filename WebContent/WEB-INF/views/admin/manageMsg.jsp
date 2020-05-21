@@ -814,6 +814,8 @@
 	justify-content: center;
 }
 
+
+
 #more-btn:hover {
 	background-color: #4a2100;
 	color: #ffac05;
