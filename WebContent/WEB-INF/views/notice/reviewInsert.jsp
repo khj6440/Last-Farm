@@ -5,9 +5,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/js/jquery-3.3.1.js">
-	
-</script>
+ <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/header/style.css">
 <link rel="stylesheet" href="/css/header/responsive.css">
@@ -81,15 +79,22 @@
 				</tr>
 				<tr style="text-align:center;">
 					<th colspan="2">
-						<button type="submit" class="btn btn-outline-primary">등록</button>					
+						<button type="submit" OnClick="FnClose()" class="btn btn-outline-primary">등록</button>	 
+										
 					</th>
 				</tr>
 			</table>
 		</form>
+
+
+
+
 <script>
+
+
 function setMemberId(){
 	alert("등록 성공");
-	self.close();//현재창 닫기
+	
 }
 
 function loadImg(f){

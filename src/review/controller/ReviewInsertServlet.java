@@ -77,13 +77,14 @@ public class ReviewInsertServlet extends HttpServlet {
 		int result = new ReviewService().insertReview(r, sellEndNo, sellEndWriter);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/close.jsp");
+		
 		if(result>0) {
 			request.setAttribute("msg", "리뷰 등록 성공");
 		}else {
 			request.setAttribute("msg", "리뷰 등록 실패");
 		}
-		request.setAttribute("loc", "/");
+		
 		rd.forward(request, response);
 	}
 

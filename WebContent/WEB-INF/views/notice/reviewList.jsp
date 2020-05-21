@@ -178,7 +178,7 @@
 	color: black;
 }
 
-.question_select {
+.question_select1 {
 	position: static;
 	margin-left: 407px;
 	width: 100px;
@@ -306,7 +306,7 @@ border-radius: 5px;
 			
 				<div class="search_tap">
 				<input type="hidden" name="reqPage" value="1">
-					<select name="type" class="question_select">
+					<select name="type" class="question_select1 ">
 						<option value="id">아이디</option>
 						<option value="title">제목</option>
 						

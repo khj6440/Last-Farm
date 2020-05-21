@@ -19,7 +19,7 @@
                         COPYRIGHT 2016 ALL RIGHTS RESERVED | 개인정보보호방침 |</a>
                 </div>
                 <div>
-                    <select>
+                    <select class="footer_select">
                         <option>관련사이트</option>
                         <option>main 페이지</option>
                         <option>회사 소개</option>

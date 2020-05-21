@@ -16,7 +16,8 @@
 					<ul>
 						<c:if test="${empty sessionScope.member}">
 							<li class="nav-item header_top_login_li">
-								<!-- 2. 로그인 클릭시 온클릭으로 인해  loginFrm서블릿으로 이동-->
+								<!-- 2. 로그인 클릭시 온클릭으로 인해  login
+								Frm서블릿으로 이동-->
 								<button class="btn btn-outline-primary"
 									onclick="location.href='/loginFrm'">로그인</button>
 								<button class="btn btn-outline-primary"
@@ -42,10 +43,10 @@
 
 					<ul class="header_top_ul1 jj">
 						<li class="header_top_li1"><a class="header_top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전
-								지역 상품</a>
+                     지역 상품</a>
 							</li>
 						<li class="header_top_li1  header_top_li3"><a
-							class="header_top_a1" href="#">지역 상품</a>
+							class="header_top_a1" href="/sellView?sell_no=25&sell_writer=id01">지역 상품</a>
 							</li>
 					</ul>
 					<ul class="header_top_ul1">

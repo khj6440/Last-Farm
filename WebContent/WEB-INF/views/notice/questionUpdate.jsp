@@ -32,6 +32,7 @@
 	margin: 0 auto;
 	width: 1280px;
 	magin-right: -100px;
+	font-family: 'Jua', sans-serif;
 }
 
 .community_sideTap {
@@ -73,7 +74,13 @@
 	width: 895px;
 	
 }
-
+.question_tap{
+background-color: #ffac05 ;
+border-radius: 5px;
+}
+.question_tap1:hover{
+	color:#4a2100;
+}
 	</style>
 </head>
 <body>
@@ -82,13 +89,13 @@
 	<div class="community_body">
 		<div class="community_sideTap">
 			<div class="sideTap_a1">
-				<a href="#">공지사항</a>
+				<a href="/noticeList?reqPage=1" class="question_tap1">공지사항</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="/questionList?reqPage=1">자주 묻는 질문</a>
+				<a href="/questionList?reqPage=1" class="question_tap question_tap1">자주 묻는 질문</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="#" >리뷰게시판</a>
+				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
 			</div>
 		</div>
 		<div class="community_content">
@@ -108,7 +115,7 @@
 				<tr style="text-align:center;">
 					<th colspan="2">
 						<button type="submit" class="btn btn-outline-primary">등록</button>
-						<button type="reset" class="btn btn-outline-primary">취소</button>					
+						<button type="reset" href="/questionList" class="btn btn-outline-primary">취소</button>					
 					</th>
 				</tr>
 			</table>
