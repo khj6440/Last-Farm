@@ -109,6 +109,7 @@ public class AdminDao {
 				m.setMemberPw(rset.getString("member_pw"));
 				m.setMemberName(rset.getString("member_name"));
 				m.setMemberCode(rset.getString("member_code"));
+				m.setMemberRoadAddr(rset.getString("member_road_addr"));
 				m.setMemberDetailAddr(rset.getString("member_detail_addr"));
 				m.setMemberPostCode(rset.getString("member_post_code"));
 				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));

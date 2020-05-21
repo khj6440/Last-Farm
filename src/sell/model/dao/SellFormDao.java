@@ -12,10 +12,11 @@ public class SellFormDao {
 	public int sellFormInsert(Connection conn, Sell s) {
 		PreparedStatement pstmt = null;
 		int result=0;
-		String query = "insert into sell values(seq_sell.nextval,?,?,?,?,?,?,?,0,?,sysdate,?,?,?,0,?,?,?,?,?,?,?,0,?)";
+		String query = "insert into sell values(seq_sell.nextval,?,?,?,?,?,?,?,?,0,?,sysdate,?,?,?,0,?,?,?,?,?,?,?,0)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			int index=1;
+			pstmt.setString(index++, s.getSellRegionalAddr());
 			pstmt.setString(index++, s.getSellTitle());
 			pstmt.setString(index++, s.getSellName());
 			pstmt.setString(index++, s.getSellWriter());
@@ -34,7 +35,7 @@ public class SellFormDao {
 			pstmt.setString(index++, s.getSellItemMaterial());
 			pstmt.setString(index++, s.getSellItemRule());
 			pstmt.setString(index++, s.getThumbnail());
-			pstmt.setString(index++, s.getSellRegionalAddr());
+		
 			result = pstmt.executeUpdate();			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

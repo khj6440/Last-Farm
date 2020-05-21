@@ -596,7 +596,7 @@ font-family: 'Jua', sans-serif;
 <body>
 
 	<div class="main">
-		<div style="text-align: center; padding-top: 30px; font-size: 40px;">판매자
+		<div style="text-align: center; padding-top: 30px; font-size: 40px;">소비자
 			회원가입</div>
 		<form class="form1" method="post" action="/customerSignIn">
 

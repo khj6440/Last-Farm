@@ -26,7 +26,6 @@ public class SellSearchBoxServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -48,8 +47,31 @@ public class SellSearchBoxServlet extends HttpServlet {
 			request.setAttribute("sellList", scp.getSellList());
 			request.setAttribute("pageNavi", scp.getPageNavi());
 			rd.forward(request, response);
+		
+		
+//		System.out.println(reqPage);
+//		System.out.println(searchWord);
+//		System.out.println(sortingTab);
+		
+		/*ArrayList<Sell> sellList = new ArrayList<Sell>();
+		SellCategoryPage scp = new SellCategoryPage();
+		
+		if(searchWord=="") {
+			sellList = new SellSearchService().selectSellNationalList();
+		}else {
+			scp = new SellSearchService().searchBoxSorting(reqPage, sortingTab, searchWord);
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
+		request.setAttribute("sellList", scp.getSellList());
+		request.setAttribute("sortingTab", sortingTab);
+//		System.out.println(scp.getSellList().get(0).getSellNo());
+		request.setAttribute("pageNavi", scp.getPageNavi());
+		request.setAttribute("searchWord", searchWord);
+		rd.forward(request, response);*/
 	}
 
+   
 
    /**
     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

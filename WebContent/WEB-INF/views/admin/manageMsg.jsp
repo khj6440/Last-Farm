@@ -308,6 +308,48 @@
 	function backBox(){
 		$("#Cbox").removeClass("show-chat-box")
 	}
+	
+	function testMsg() {
+		var options = {
+		        height: 600, // sets the height in pixels of the window.
+		        width: 500, // sets the width in pixels of the window.
+		        toolbar: 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
+		        scrollbars: 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
+		        status: 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
+		        resizable: 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
+		        left: 500, // left position when the window appears.
+		        top: 200, // top position when the window appears.
+		        center: 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
+		        createnew: 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
+		        location: 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
+		        menubar: 0 // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
+		    };
+
+		    var parameters = "location=" + options.location +
+		                     ",menubar=" + options.menubar +
+		                     ",height=" + options.height +
+		                     ",width=" + options.width +
+		                     ",toolbar=" + options.toolbar +
+		                     ",scrollbars=" + options.scrollbars +
+		                     ",status=" + options.status +
+		                     ",resizable=" + options.resizable +
+		                     ",left=" + options.left +
+		                     ",screenX=" + options.left +
+		                     ",top=" + options.top +
+		                     ",screenY=" + options.top;
+
+		    // target url
+		    var target = "/messageWrite"; 
+
+		    popup = window.open(target, 'popup', parameters);
+		
+		/* var win = window
+				.open(
+						"/messageWrite",
+						"_blank",
+						"menubar=no,toolbar=yes,scrollbars=0,resizable=yes,status=no,top=200,left=500,width=500,height=600"); */
+		
+	}
 </script>
 </head>
 
@@ -436,8 +478,8 @@
 								<div class="table-responsive m-b-40">
 									<h3 class="title-5 m-b-35"
 										style="font-size: 30px; font-weight: bold;">
-										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함<span
-											style="color: gray; font-size: 15px"></span>
+										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함
+										<button onclick="testMsg();" style="font-size:20px; background-color: #ffac05; border-radius: 5px; padding:5px;color:#4a2100;">쪽지 보내기</button>
 									</h3>
 								</div>
 								<div style="display: flex">

@@ -37,6 +37,7 @@ public class ReviewInsertFrmServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int sellEndNo = Integer.parseInt(request.getParameter("sellEndNo"));
 		String sellEndWriter = request.getParameter("sellEndWriter");
+		System.out.println("12123213"+sellEndWriter);
 		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/notice/reviewInsert.jsp");
 		HttpSession session = request.getSession();
 		session.setAttribute("sellEndNo", sellEndNo);

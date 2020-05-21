@@ -214,7 +214,7 @@ public class ReviewService {
 		
 		int result2 = new ReviewDao().insertScore(conn, AllScore, sellEndWriter);
 		
-		if(result > 0 && result2 >0) {
+		if(result > 0 && result2>0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
