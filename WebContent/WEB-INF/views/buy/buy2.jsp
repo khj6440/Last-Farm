@@ -6,10 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문결제</title>
-
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
-	<style>
+	<script src = "http://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
+<style>
+* {
+   font-family: 'Jua', sans-serif;
+}
 		.buy {
             width: 1280px;
             height: 1800px;
@@ -99,6 +105,7 @@
             line-height: 4.5;
         }
         .buy_content_sub2_1_2{
+        	line-height : 4;
             box-sizing: border-box;
             width: 100%;
             height: 75px;
@@ -182,6 +189,8 @@
         .buy_btn2 {
             width: 120px;
             height: 50px;
+            background-color : #ffac05;
+			color : #4a2100;
         }
 
         .buy_btn {
@@ -193,11 +202,15 @@
             background-color: darkgray;
             font-weight: bold;
             cursor: pointer;
+            background-color : #4a2100;
+	color : #ffac05;
         }
         .buy_btn2:hover {
             background-color: darkgray;
             font-weight: bold;
             cursor: pointer;
+            background-color : #4a2100;
+	color : #ffac05;
         }
         input{
             height: 30px;
@@ -228,9 +241,14 @@
 	</style>
 </head>
 <body>
-	<%-- <jsp:include page="/WEB-INF/views/common/header.jsp"/> --%>
+	 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<section class="buy_container">
         <form action="/buy3Frm" method="post" class="buy">
+        	<input type="hidden" name="sellNo" value="${sellNo }">
+			<input type="hidden" name="type" value="${type }">
+			<input type="hidden" name="memberId" value="${sessionScope.member.memberId }">
+			<input type="hidden" name="sellCount" value="${sellCount }">
+			<input type="hidden" name="sell_max" value="${sellMax }">
             <div class="buy_head">
                 <div class="buy_head1">
                     <p class="buy_p">주문결제</p>
@@ -251,7 +269,7 @@
                             </div>
                             <div
                             class="buy_content_sub2_1_2">
-                            
+                            ${sellName}
                             </div>
                         </div>
                         <div class="buy_content_sub2_2">
@@ -260,7 +278,7 @@
                             </div>
                             <div
                             class="buy_content_sub2_1_2">
-                            
+                            ${type }
                             </div>
                         </div>
                         <div class="buy_content_sub2_3">
@@ -269,7 +287,7 @@
                             </div>
                             <div
                             class="buy_content_sub2_1_2">
-                            
+                            ${sellPrice }
                             </div>
                         </div>
                         <div class="buy_content_sub2_4">
@@ -278,7 +296,7 @@
                             </div>
                             <div
                             class="buy_content_sub2_1_2">
-                            
+                            ${deliveryFee }
                             </div></div>
                     </div>
                     <div class="buy_content2_sub">
@@ -315,7 +333,7 @@
                     </div>
                     <div class="buy_content3_sub">
                         <h3 class="buy_h3"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            배송지 정보 입력</h3>
+                            	배송지 정보 입력</h3>
                         <div class="buy_inf_div">
                             <table class="buy_inf">
                                 <tr>
@@ -325,45 +343,56 @@
                                 </tr>
                                 <tr>
                                     <th>주문자 이름</th>
-                                    <td><input type="text" name="name" class="name2" value=""></td>
+                                    <td><input type="text" name="name2" class="name2" ></td>
                                 </tr>
                                 <tr>
                                     <th rowspan="3">주소</th>
-                                    <td><input type="text" name="addr" id="postCode" class="addr2" value="" placeholder="우편번호" readonly>
+                                    <td><input type="text" name="addr2" id="postCode2" class="addr2" placeholder="우편번호" readonly>
                                         <button type="button" id="addrSearchBtn" onclick="addrSearch();" class="addrBtn">주소검색</button>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="roadAddr" class="addr3" value="" placeholder="도로명주소" readonly></td>
+                                    <td><input type="text" name="addr2" id="roadAddr2" class="addr3" placeholder="도로명주소"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr" id="detailAddr" class="addr4" value="" placeholder="상세주소"></td>
+                                    <td><input type="text" name="addr2" id="detailAddr" class="addr4" value="" placeholder="상세주소"></td>
                                 </tr>
                                 <tr>
                                     <th>휴대전화</th>
-                                    <td><input type="text" name="tel" class="tel2" value="" placeholder="ex) 010-0000-0000">
+                                    <td><input type="text" name="tel2" class="tel2" value="" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>이메일</th>
-                                    <td><input type="text" name="email" class="email2" value="" placeholder="ex) test123@naver.com"></td>
+                                    <td><input type="text" name="email2" class="email2" value="" placeholder="ex) test123@naver.com"></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="buy_content4_sub">
-                        <h2>총 결제 금액 : </h2>
-                        <button type="submit" class="buy_btn">결제하기</button>
+                        <h2>총 결제 금액 : ${sellPrice + deliveryFee} 원</h2>
+                        <button type="button" class="buy_btn">결제하기</button>
                         <button type="button" class="buy_btn2">취소하기</button>
                     </div>
                 </div>
             </div>
         </form>
     </section>
-    <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
-    
+    	
+    	function addrSearch(){
+    		new daum.Postcode({
+    			oncomplete:function(data){
+    				document.getElementById("postCode").value=data.zonecode;
+    				$("#postCode2").val(data.zonecode);
+    				$("#roadAddr2").val(data.roadAddress);
+    				console.log($("#postCode").val());
+    				console.log($("#roadAddr").val());
+    			}
+    		}).open();
+    	}
     	function SameBtn(){
     		$('.name2').val('${sessionScope.member.memberName}');
     		$('.tel2').val('${sessionScope.member.memberPhone}');
@@ -372,6 +401,63 @@
     		$('.addr3').val('${sessionScope.member.memberRoadAddr }');
     		$('.addr4').val('${sessionScope.member.memberDetailAddr }');
     	};
+    	
+    	$(".buy_btn").click(function(){
+    		var price = ${sellPrice + deliveryFee};
+    			
+    		var d = new Date();
+    		var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+    		IMP.init("imp79336132");
+    		IMP.request_pay({
+    			merchant_uid : '상품명_' +date,
+    			name : '결제',
+    			amount : price,
+    			buyer_email : $('.email2').val(),
+    			buyer_name : $('.name2').val(),
+    			buyer_tel : $('.tel2').val(),
+    			buyer_addr : $('.addr3').val(),
+    			buyer_postcode :$('.addr2').val()
+    			
+    	},function(rsp){
+    		if(rsp.success){
+    			var r1 = rsp.imp_uid; //고유 Id
+    			var r2 = rsp.merchant_uid; //상점 거래 아이디
+    			var r3 = rsp.paid_amount; // 결제 금액
+    			var r4 = rsp.apply_num;// 카드 승인번호 
+    			var $div = $("<div></div>");
+    			$div.append($("<input type='hidden' name='imp_uid' value='"+r1+"'>"));
+    			$div.append($("<input type='hidden' name='merchant_uid' value='"+r2+"'>"));
+    			$div.append($("<input type='hidden' name='paid_amount' value='"+r3+"'>"));
+    			$div.append($("<input type='hidden' name='apply_num' value='"+r4+"'>"));
+    			$(".buy").append($div);
+    			$(".buy").submit();
+    		}else{
+    			//결제 실패했을때
+    			alert("결제에 실패했습니다.");
+    			location.href="/WEB-INF/views/sell/sellView?sell_no=4";
+    		}
+    	});
+    	});
+    	
+    	  var now = new Date();
+    	  var standD = now.getDate()+1;
+    	  var endTime = new Date('2020-05-22');
+    	          console.log(now.getDate());
+    	  var gapTime = endTime-now-32400000;
+    	  var SetTime =gapTime/1000;
+    	  var SetMin = SetTime/60;
+    	  var SetHour = SetMin/60;
+    	  function msg_time() {   // 1초씩 카운트
+    	     m = Math.floor(SetHour% 60) + ":"+Math.floor(SetMin % 60) + ":" + Math.floor(SetTime % 60);   // 남은 시간 계산
+    	     var msg = m;
+    	     document.all.ViewTimer.innerHTML = msg;
+    	     SetTime--;      
+    	     if (SetTime < 0) {   
+    	        clearInterval(tid);
+    	     }
+    	  }
+    	  window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+
     </script>
 </body>
 </html>

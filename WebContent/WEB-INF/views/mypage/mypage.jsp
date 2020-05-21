@@ -873,10 +873,10 @@ form.form1 {
 
 	})
 
-	function reviewInsert(sellEndNo) {
+	function reviewInsert(sellEndNo, sellEndWriter) {
 		console.log("시작");
 		var memberId = "${sessionScope.member.memberId}";
-		var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}";
+		/* var sellEndWriter = "${sessionScope.sellEnd.sellEndWriter}"; */
 		var url = "/reviewInsertFrm";
 		var title = "reviewInsertFrm";
 		var status = "left=500px, top=100px, width=600px, height=550px, menubar=no, status=no, scrollbars=yes";
@@ -1228,7 +1228,7 @@ form.form1 {
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
 											<c:if test="${sessionScope.member.memberType eq 1}">
-												<button onclick="reviewInsert('${e.sellEndNo}')"
+												<button onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
 													type="button">리뷰작성</button>
 											</c:if>
 										</div>

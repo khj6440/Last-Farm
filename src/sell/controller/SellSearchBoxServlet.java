@@ -1,7 +1,6 @@
 package sell.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,11 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-
 import sell.model.service.SellSearchService;
-import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
 
 /**
@@ -21,7 +16,7 @@ import sell.model.vo.SellCategoryPage;
  */
 @WebServlet(name = "SellSearchBox", urlPatterns = { "/sellSearchBox" })
 public class SellSearchBoxServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,6 +48,7 @@ public class SellSearchBoxServlet extends HttpServlet {
 			request.setAttribute("pageNavi", scp.getPageNavi());
 			rd.forward(request, response);
 		
+		
 //		System.out.println(reqPage);
 //		System.out.println(searchWord);
 //		System.out.println(sortingTab);
@@ -75,12 +71,14 @@ public class SellSearchBoxServlet extends HttpServlet {
 		rd.forward(request, response);*/
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

@@ -33,13 +33,18 @@ public class SellSearchNationalFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		request.setCharacterEncoding("utf-8");		
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqPage = 1;
+		if(request.getParameter("reqPage") !=null) {
+			reqPage = Integer.parseInt(request.getParameter("reqPage"));
+
+		}
 		String sortingTab = request.getParameter("sortingTab");
 		SellCategoryPage scp = new SellSearchService().selectList(reqPage, sortingTab);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchNational.jsp");
 		request.setAttribute("sellList", scp.getSellList());
-		System.out.println(scp.getSellList().get(0).getSellNo());
 		request.setAttribute("pageNavi", scp.getPageNavi());
 		rd.forward(request, response);
 	}
