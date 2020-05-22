@@ -1181,13 +1181,13 @@ form.form1 {
 							<c:forEach items="${list }" var="l">
 								<div class="product">
 									<div class="p-image">
-										<img src="/imgs/logo1.png" width="100%" height="100%" alt=""
+										<img src="/imgs/${l.thumbnail }" width="100%" height="100%" alt=""
 											srcset="">
 									</div>
 									<div class="p-info">
 										<div class="p-title">
 											<span>${l.sellTitle}</span>
-											<button onclick="" type="button">상세보기</button>
+											<button onclick="location.href='/sellView?sell_no=${l.sellNo}&sell_writer=${l.sellWriter }'" type="button">상세보기</button>
 										</div>
 										<div class="p-price">
 											<fmt:formatNumber value="${l.sellPrice}"

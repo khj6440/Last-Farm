@@ -715,7 +715,7 @@ border-top : 1px solid gray;
 		//타이머
 		 var now = new Date();
 		 var standD = now.getDate()+1;
-		 var endTime = new Date('2020-05-22');
+		 var endTime = new Date('2020-05-23');
 		         console.log(now.getDate());
 		 var gapTime = endTime-now-32400000;
 		 var SetTime =gapTime/1000;

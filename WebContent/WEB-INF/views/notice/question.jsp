@@ -35,7 +35,7 @@
 
 .community_content {
 	width: 70%;
-	height:900px;
+	
 	margin-left: 20%;
 }
 
@@ -159,7 +159,7 @@ border-radius: 5px;
 		$(".question_li1").click(function() {
 			$(this).find(".question_sub2").toggle();
 			$("#pageNavi").css("margin-top","0px");
-			$(".community_content").css("height","1000px");
+			
 		});
 	});
 </script>

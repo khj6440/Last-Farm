@@ -17,7 +17,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>관리자페이지</title>
+<title>관리자 | 회원관리</title>
 
 <!-- Fontfaces CSS-->
 <link href="/admin_css/css/font-face.css" rel="stylesheet" media="all">

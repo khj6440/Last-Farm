@@ -29,7 +29,7 @@
 <title>Insert title here</title>
 <!-- header,footer 링크-->
 
-<link rel="stylesheet" href="/css/header/header.css?after">
+
 <link rel="stylesheet" href="/css/footer/footer.css">
 <link rel="stylesheet" href="/css/notice/noticeList.css">
 <!--  header,footer 종료  -->
@@ -67,13 +67,14 @@
 </style>
 <body>
 	<div class="button_wrap">
+		<c:if test="${ sessionScope.member.memberId eq 'admin' }">
 		<button class="btn btn-dark">
 			<a href="/noticeModify?noticeNo=${n.noticeNo }">수정하기</a>
 		</button>
 		<button class="btn btn-dark">
 			<a href="/noticeDelete?noticeNo=${n.noticeNo }">삭제하기</a>
 		</button>
-		<c:if test="${ sessionScope.m.memberId eq 'admin' }">
+		
 		</c:if>
 	</div>
 	<div class="ntcWrite_Wrap">
