@@ -40,6 +40,7 @@ public class BuyFrmServlet extends HttpServlet {
 		int sellPrice = Integer.parseInt(request.getParameter("sell_price"));
 		int sellCount = Integer.parseInt(request.getParameter("sell_count"));
 		int sellMax = Integer.parseInt(request.getParameter("sell_max"));
+		String sellRegionalAddr = request.getParameter("sell_regional_addr");
 		int result = type*sellPrice;
 		
 		int deliveryFee = Integer.parseInt(request.getParameter("sell_delivery_fee"));
@@ -51,6 +52,7 @@ public class BuyFrmServlet extends HttpServlet {
 		request.setAttribute("deliveryFee", deliveryFee);
 		request.setAttribute("sellCount", sellCount);
 		request.setAttribute("sellMax", sellMax);
+		request.setAttribute("sellRegionalAddr", sellRegionalAddr);
 		rd.forward(request, response);
 		
 	}

@@ -307,4 +307,26 @@ public class MemberDao {
 		return m;
 	}
 
+	public int updateOneMember(Connection conn, Member m ) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_post_code2 =?, member_road_addr2=?, member_detail_addr2 =? where member_id =?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPostCode2());
+			pstmt.setString(2, m.getMemberRoadAddr2());
+			pstmt.setString(3, m.getMemberDetailAddr2());
+			pstmt.setString(4, m.getMemberId());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
 }

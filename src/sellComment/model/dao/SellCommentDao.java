@@ -104,7 +104,6 @@ public class SellCommentDao {
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
 				sell.setSellRegionalAddr(rset.getString("sell_regional_addr"));
-				sell.setTimegap(rset.getInt("timegap"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

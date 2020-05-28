@@ -169,6 +169,8 @@
 	<input type="hidden" name="sell_delivery_fee" value="${deliveryFee }">
 	<input type="hidden" name="sell_count" value="${sellCount }">
 	<input type="hidden" name="sell_max" value="${sellMax }">
+	<input type="hidden" name="sell_regional_addr" value="${sellRegionalAddr }">
+	
 		<div class="buy_head">
 			<div class="buy_head1">
 				<p class="buy_p">약관동의</p>
@@ -819,8 +821,8 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 				</div>
 				<div class="buy_btn_div">
 					<br>
-					<button class="buy_btn" type="submit" >다음으로(동의)</button>
-					<button class="buy_btn" onclick="location.href='sellView?sell_no=${sellNo}'">취소</button>
+					<button class="buy_btn" type="submit">다음으로(동의)</button>
+					<button type="button" class="buy_btn" onclick="location.href='sellView?sell_no=${sellNo}'">취소</button>
 				</div>
 
 
@@ -845,15 +847,14 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 		
 			$('form').submit(function() {
 				var arr = document.getElementsByName("buy_chk");
-				for(var i=0;i<arr.length;i++){
-					if(arr[i].checked==false){
+				
+					if(arr[0].checked==true && arr[1].checked==true && arr[2].checked==true ){
+						location.href="/buy2Frm";
+					}else{
 						alert("전체 약관에 동의해주세요");
 						return false;
-					}else{
-						location.href="/buy2Frm";
 					}	
 					
-				}
 				});
 				
 			});  

@@ -278,7 +278,6 @@ border-top : 1px solid gray;
 	margin: 0 auto;
 	box-sizing: content-box;
 	width: 70%;
-	height: 300px;
 }
 
 .sell_menu {
@@ -378,6 +377,7 @@ border-top : 1px solid gray;
 			type="hidden" name="sell_delivery_fee" value="${s.sellDeliveryFee }">
 		<input type="hidden" name="sell_count" value="${s.sellCount }">
 		<input type="hidden" name="sell_max" value="${s.sellMax }">
+		<input type="hidden" name="sell_regional_addr" value="${s.sellRegionalAddr }">
 		<div class="sell_head">
 			<div class="sell_head_sub">
 				<a href="index.jsp"><img src="imgs/두더지.jpg" class="sell_home"></a>
@@ -392,7 +392,7 @@ border-top : 1px solid gray;
 			<div class="sell_head_sub2">
 				작성일 : ${s.sellDate }
 				<c:if
-					test="${sessionScope.member.memberId eq s.sellWriter && s.sellDeleteState eq 0 && sessionScope.member.memberType eq 2}">
+					test="${sessionScope.member.memberId ne 'admin' && sessionScope.member.memberId eq s.sellWriter && s.sellDeleteState eq 0 && sessionScope.member.memberType eq 2}">
 
 					<button type="button" class="sell_delete_btn"
 						onclick="location.href='/sellPageDelRequest?sell_no=${s.sellNo}&sell_delete_state=${s.sellDeleteState }'">글
@@ -419,9 +419,11 @@ border-top : 1px solid gray;
 							</c:if>
 						
 					<th class="sell_table_th">${s.sellName }</th>
+					<c:if test="${not empty sessionScope.member && sessionScope.member.memberId ne 'admin' && sessionScope.member.memberId ne s.sellWriter }">
 					<th class="sell_table_th2"><a
 						href="/sellWarning?sell_no=${s.sellNo }&sell_warning=${s.sellWarning }"><img
 							src="/img/신고버튼.png" class="sell_warning"></a><br></th>
+							</c:if>
 				</tr>
 				<tr>
 					<th colspan="2">${s.sellPrice }원|개당(g)</th>
@@ -470,7 +472,7 @@ border-top : 1px solid gray;
 					</select> <c:if test="${s.sellDeleteState eq 1 ||s.sellCount eq s.sellMax}">
 							<span>딜이 중지된 글입니다.</span>
 						</c:if> <c:if
-							test="${s.sellDeleteState eq 0 && not empty sessionScope.member || s.sellCount ne s.sellMax}">
+							test="${s.sellDeleteState eq 0 && not empty sessionScope.member && s.sellCount ne s.sellMax}">
 							<input type="submit" onclick="location.href='/buyFrm'"
 								class="sell_btn" value="딜 참여하기"> 총 <span class="sell_allprice">${s.sellPrice }</span>원
 								</c:if>
@@ -709,8 +711,8 @@ border-top : 1px solid gray;
 		$(function(){
 			$(".sell_count_select").change(function(){
 				$(".sell_allprice").html($(this).val() * ${s.sellPrice});
-			});
-		  });
+			 });
+		   });
 		
 		//타이머
 		 var now = new Date();
