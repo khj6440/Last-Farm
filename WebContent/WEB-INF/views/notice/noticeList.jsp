@@ -54,7 +54,7 @@ border-radius: 5px;
 		}
 		var searchKeyword = document.getElementById("searchKeyword");
 		var regal;
-		regal = /^[0-9]$/;
+		regal = /^\d{1,}$/;
 
 		if (type.value == "noticeNo" && (!regal.test(searchKeyword.value))) {
 

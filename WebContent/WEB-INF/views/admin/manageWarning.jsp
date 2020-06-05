@@ -108,6 +108,10 @@
 	font-size: 30px;
 	color: #ffac05;
 }
+
+.header-mobile .navbar-mobile .navbar-mobile__list li a:hover {
+	color: #ffac05;
+}
 </style>
 
 <script type="text/javascript">
@@ -327,7 +331,45 @@
 <body class="animsition">
 	<div class="page-wrapper">
 		<!-- HEADER MOBILE-->
+		<header class="header-mobile d-block d-lg-none">
+		<div class="header-mobile__bar">
+			<div class="container-fluid">
+				<div class="header-mobile-inner">
 
+					<a href="index.jsp"> <img src="/imgs/mole.jpg"
+						style="width: 55px; margin-right: 10px;" /><span
+						class="logoTitle">LAST FARM</span>
+					</a>
+					<button class="hamburger hamburger--slider" type="button">
+						<span class="hamburger-box"> <span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar-mobile">
+		<div class="container-fluid">
+			<ul class="navbar-mobile__list list-unstyled">
+				<li><a href="/manageMember?reqPage=1"> <i
+						class="fas fa-users"></i>회원 관리
+				</a></li>
+				<li><a href="/manageSell?reqPage=1"> <i
+						class="far fa-list-alt"></i>거래글 관리
+				</a></li>
+
+				<li><a href="/manageReview?reqPage=1"> <i
+						class="far fa-star"></i>리뷰 관리
+				</a></li>
+
+				<li style="border-radius: 0px;" class="active"><a
+					href="/manageWarning"><i class="fas fa-exclamation-circle"
+						style="color: #4a2100"></i>신고글 관리 </a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
+				</a></li>
+			</ul>
+		</div>
+		</nav> </header>
 		<!-- END HEADER MOBILE-->
 
 		<!-- MENU SIDEBAR-->
@@ -453,7 +495,7 @@
 									<div>
 										(신고누적 <span style="color: #dc3545">5</span>개 이상)
 									</div>
-									
+
 									<table class="table table-borderless table-data3">
 										<thead>
 											<tr>

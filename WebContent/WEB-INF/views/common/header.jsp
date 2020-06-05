@@ -81,9 +81,11 @@
 				</ul>
 			</div>
 			<div class="header_top_logo">
+
 				<a class="header_top_logo_a1" href="index.jsp">
 					<img class="header_top_logo2" src="../imgs/Logo1.png" >
 				</a>
+
 			</div>
 			<div class="header_top_tap">
 

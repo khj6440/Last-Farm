@@ -17,7 +17,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>관리자페이지</title>
+<title>관리자 | 회원관리</title>
 
 <!-- Fontfaces CSS-->
 <link href="/admin_css/css/font-face.css" rel="stylesheet" media="all">
@@ -278,7 +278,45 @@
 <body class="animsition">
 	<div class="page-wrapper">
 		<!-- HEADER MOBILE-->
+		<header class="header-mobile d-block d-lg-none">
+		<div class="header-mobile__bar">
+			<div class="container-fluid">
+				<div class="header-mobile-inner">
 
+					<a href="index.jsp"> <img src="/imgs/mole.jpg"
+						style="width: 55px; margin-right: 10px;" /><span
+						class="logoTitle">LAST FARM</span>
+					</a>
+					<button class="hamburger hamburger--slider" type="button">
+						<span class="hamburger-box"> <span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar-mobile">
+		<div class="container-fluid">
+			<ul class="navbar-mobile__list list-unstyled">
+				<li style="border-radius: 0px;" class="active"><a style="color: #4a2100"
+					href="/manageMember?reqPage=1"> <i class="fas fa-users"></i>회원
+						관리
+				</a></li>
+				<li><a href="/manageSell?reqPage=1"> <i
+						class="far fa-list-alt"></i>거래글 관리
+				</a></li>
+
+				<li><a href="/manageReview?reqPage=1"> <i
+						class="far fa-star"></i>리뷰 관리
+				</a></li>
+
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
+				</a></li>
+			</ul>
+		</div>
+		</nav> </header>
 		<!-- END HEADER MOBILE-->
 
 		<!-- MENU SIDEBAR-->
@@ -491,69 +529,72 @@
 											<tbody>
 												<c:forEach items="${list}" var="m">
 													<c:if test="${m.memberId ne 'admin'}">
-													<tr class="results">
-														<td><label class="au-checkbox"> <input
-																type="checkbox" name="pick" value="${m.memberNo }">
-																<span class="au-checkmark"></span>
-														</label> <c:if test="${m.memberStatus eq 2 }">
-																<div class="setDelete">
-																	<span class="delTitle">삭제 예정일 : </span> <span
-																		class="delDate"> ${m.memberDelDate} 00시 </span>
-																	<button class="delCancel"
-																		onclick="deleteCancelModal('${m.memberNo }','회원삭제 취소','취소하시겠습니까?')">삭제
-																		취소</button>
+														<tr class="results">
+															<td><label class="au-checkbox"> <input
+																	type="checkbox" name="pick" value="${m.memberNo }">
+																	<span class="au-checkmark"></span>
+															</label> <c:if test="${m.memberStatus eq 2 }">
+																	<div class="setDelete">
+																		<span class="delTitle">삭제 예정일 : </span> <span
+																			class="delDate"> ${m.memberDelDate} 00시 </span>
+																		<button class="delCancel"
+																			onclick="deleteCancelModal('${m.memberNo }','회원삭제 취소','취소하시겠습니까?')">삭제
+																			취소</button>
+																	</div>
+																</c:if></td>
+															<td>
+																<div class="table-data__info">
+																	<h6>${m.memberName }</h6>
+																	<span> <a href="#">${m.memberEmail}</a>
+																	</span>
 																</div>
-															</c:if></td>
-														<td>
-															<div class="table-data__info">
-																<h6>${m.memberName }</h6>
-																<span> <a href="#">${m.memberEmail}</a>
-																</span>
-															</div>
-														</td>
-														<td><span>${m.memberId }</span></td>
+															</td>
+															<td><span>${m.memberId }</span></td>
 
-														<c:if test="${m.memberType eq 1}">
-															<td><span class="role member"
-																style="background-color: #d9be8d;">구매자</span></td>
-														</c:if>
-														<c:if test="${m.memberType eq 2}">
-															<td><span class="role user"
-																style="background-color: #8f7951;">판매자</span></td>
-														</c:if>
-														<td>
-															<div class="rs-select2--trans rs-select2--sm">
+															<c:if test="${m.memberType eq 1}">
+																<td><span class="role member"
+																	style="background-color: #d9be8d;">구매자</span></td>
+															</c:if>
+															<c:if test="${m.memberType eq 2}">
+																<td><span class="role user"
+																	style="background-color: #8f7951;">판매자</span></td>
+															</c:if>
+															<td>
+																<div class="rs-select2--trans rs-select2--sm">
 
-																<c:if test="${m.memberStatus eq 1 }">
-																	<select class="js-select2 memberStatus" name="property">
-																		<option memberNo="${m.memberNo}" value="1" selected>활성화</option>
-																		<option memberNo="${m.memberNo}" value="3">비활성화</option>
-																		<option value="2" disabled>삭제중</option>
-																	</select>
-																</c:if>
-																<c:if test="${m.memberStatus eq 3 }">
-																	<select class="js-select2 memberStatus" name="property">
-																		<option memberNo="${m.memberNo}" value="1">활성화</option>
-																		<option memberNo="${m.memberNo}" value="3" selected>비활성화</option>
-																		<option value="2" disabled>삭제중</option>
-																	</select>
-																</c:if>
-																<c:if test="${m.memberStatus eq 2 }">
-																	<select class="js-select2 memberStatus" name="property">
-																		<option value="1">활성화</option>
-																		<option value="3">비활성화</option>
-																		<option value="2" selected disabled>삭제중</option>
-																	</select>
-																</c:if>
-																<div class="dropDownSelect2"></div>
-															</div>
-														</td>
-														<td>${m.memberDate }</td>
-														<td><span class="more"> <i
-																class="zmdi zmdi-delete"
-																onclick="showModal('${m.memberNo}','회원 삭제','해당 회원 [${m.memberId}]을 삭제 하시겠습니까?<div>회원 삭제시 14일뒤에 삭제 됩니다.</div')"></i>
-														</span></td>
-													</tr>
+																	<c:if test="${m.memberStatus eq 1 }">
+																		<select class="js-select2 memberStatus"
+																			name="property">
+																			<option memberNo="${m.memberNo}" value="1" selected>활성화</option>
+																			<option memberNo="${m.memberNo}" value="3">비활성화</option>
+																			<option value="2" disabled>삭제중</option>
+																		</select>
+																	</c:if>
+																	<c:if test="${m.memberStatus eq 3 }">
+																		<select class="js-select2 memberStatus"
+																			name="property">
+																			<option memberNo="${m.memberNo}" value="1">활성화</option>
+																			<option memberNo="${m.memberNo}" value="3" selected>비활성화</option>
+																			<option value="2" disabled>삭제중</option>
+																		</select>
+																	</c:if>
+																	<c:if test="${m.memberStatus eq 2 }">
+																		<select class="js-select2 memberStatus"
+																			name="property">
+																			<option value="1">활성화</option>
+																			<option value="3">비활성화</option>
+																			<option value="2" selected disabled>삭제중</option>
+																		</select>
+																	</c:if>
+																	<div class="dropDownSelect2"></div>
+																</div>
+															</td>
+															<td>${m.memberDate }</td>
+															<td><span class="more"> <i
+																	class="zmdi zmdi-delete"
+																	onclick="showModal('${m.memberNo}','회원 삭제','해당 회원 [${m.memberId}]을 삭제 하시겠습니까?<div>회원 삭제시 14일뒤에 삭제 됩니다.</div')"></i>
+															</span></td>
+														</tr>
 													</c:if>
 												</c:forEach>
 											</tbody>
@@ -789,6 +830,9 @@
 .search-btn:hover {
 	background-color: #ffac05;
 	color: white;
+}
+.header-mobile .navbar-mobile .navbar-mobile__list li a:hover {
+    color: #ffac05;
 }
 </style>
 </html>

@@ -17,7 +17,7 @@
 <meta name="keywords" content="au theme template">
 
 <!-- Title Page-->
-<title>관리자페이지</title>
+<title>관리자 | 쪽지함</title>
 
 <!-- Fontfaces CSS-->
 <link href="/admin_css/css/font-face.css" rel="stylesheet" media="all">
@@ -271,84 +271,79 @@
 			}
 		});
 	}
-	
-	
-	$(function() {
-		$(".msgs").click(
-						function() {
-							var msgNo = $(this).find("h5").prev().html();
-							var value = $(this).find("h5").html();
-							$("#sender").html(value);
-							$("#title1").html($(this).find("h5").next().html());
-							$("#msgContent1").html($(this).find("h5").next().next().html());
-							
-							var readChk = $(this).find("h5").next().next().next().html();
-							if($(this).find(".readChk").html()!=="읽음"){
-							$.ajax({
-								url : "/adminReadMsg",
-								data:{msgNo:msgNo},
-								type : "get",
-								success : function(data) {
 
-									var newValue=$("#nonReadMsg").html();
-									
-								
-									$(".mess__title").find("span").html(newValue-1);
-									$("#nonReadMsg").html(newValue-1);
-								},
-								error : function() {
-									console.log("서버 전송 실패")
-								}
-							});
-							}
-							$(this).find(".readChk").html("읽음");
-							$(this).find(".readChk").parent().css("color","grey");
-						})
+	$(function() {
+		$(".msgs").click(function() {
+			var msgNo = $(this).find("h5").prev().html();
+			var value = $(this).find("h5").html();
+			$("#sender").html(value);
+			$("#title1").html($(this).find("h5").next().html());
+			$("#msgContent1").html($(this).find("h5").next().next().html());
+
+			var readChk = $(this).find("h5").next().next().next().html();
+			if ($(this).find(".readChk").html() !== "읽음") {
+				$.ajax({
+					url : "/adminReadMsg",
+					data : {
+						msgNo : msgNo
+					},
+					type : "get",
+					success : function(data) {
+
+						var newValue = $("#nonReadMsg").html();
+
+						$(".mess__title").find("span").html(newValue - 1);
+						$("#nonReadMsg").html(newValue - 1);
+					},
+					error : function() {
+						console.log("서버 전송 실패")
+					}
+				});
+			}
+			$(this).find(".readChk").html("읽음");
+			$(this).find(".readChk").parent().css("color", "grey");
+		})
 	})
-	function backBox(){
+	function backBox() {
 		$("#Cbox").removeClass("show-chat-box")
 	}
-	
+
 	function testMsg() {
 		var options = {
-		        height: 600, // sets the height in pixels of the window.
-		        width: 500, // sets the width in pixels of the window.
-		        toolbar: 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
-		        scrollbars: 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
-		        status: 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
-		        resizable: 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
-		        left: 500, // left position when the window appears.
-		        top: 200, // top position when the window appears.
-		        center: 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
-		        createnew: 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
-		        location: 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
-		        menubar: 0 // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
-		    };
+			height : 600, // sets the height in pixels of the window.
+			width : 500, // sets the width in pixels of the window.
+			toolbar : 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
+			scrollbars : 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
+			status : 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
+			resizable : 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
+			left : 500, // left position when the window appears.
+			top : 200, // top position when the window appears.
+			center : 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
+			createnew : 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
+			location : 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
+			menubar : 0
+		// determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
+		};
 
-		    var parameters = "location=" + options.location +
-		                     ",menubar=" + options.menubar +
-		                     ",height=" + options.height +
-		                     ",width=" + options.width +
-		                     ",toolbar=" + options.toolbar +
-		                     ",scrollbars=" + options.scrollbars +
-		                     ",status=" + options.status +
-		                     ",resizable=" + options.resizable +
-		                     ",left=" + options.left +
-		                     ",screenX=" + options.left +
-		                     ",top=" + options.top +
-		                     ",screenY=" + options.top;
+		var parameters = "location=" + options.location + ",menubar="
+				+ options.menubar + ",height=" + options.height + ",width="
+				+ options.width + ",toolbar=" + options.toolbar
+				+ ",scrollbars=" + options.scrollbars + ",status="
+				+ options.status + ",resizable=" + options.resizable + ",left="
+				+ options.left + ",screenX=" + options.left + ",top="
+				+ options.top + ",screenY=" + options.top;
 
-		    // target url
-		    var target = "/messageWrite"; 
+		// target url
+		var target = "/messageWrite";
 
-		    popup = window.open(target, 'popup', parameters);
-		
+		popup = window.open(target, 'popup', parameters);
+
 		/* var win = window
 				.open(
 						"/messageWrite",
 						"_blank",
 						"menubar=no,toolbar=yes,scrollbars=0,resizable=yes,status=no,top=200,left=500,width=500,height=600"); */
-		
+
 	}
 </script>
 </head>
@@ -358,7 +353,45 @@
 <body class="animsition">
 	<div class="page-wrapper">
 		<!-- HEADER MOBILE-->
+		<header class="header-mobile d-block d-lg-none">
+		<div class="header-mobile__bar">
+			<div class="container-fluid">
+				<div class="header-mobile-inner">
 
+					<a href="index.jsp"> <img src="/imgs/mole.jpg"
+						style="width: 55px; margin-right: 10px;" /><span
+						class="logoTitle">LAST FARM</span>
+					</a>
+					<button class="hamburger hamburger--slider" type="button">
+						<span class="hamburger-box"> <span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar-mobile">
+		<div class="container-fluid">
+			<ul class="navbar-mobile__list list-unstyled">
+				<li><a href="/manageMember?reqPage=1"> <i
+						class="fas fa-users"></i>회원 관리
+				</a></li>
+				<li><a href="/manageSell?reqPage=1"> <i
+						class="far fa-list-alt"></i>거래글 관리
+				</a></li>
+
+				<li><a href="/manageReview?reqPage=1"> <i
+						class="far fa-star"></i>리뷰 관리
+				</a></li>
+
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
+				<li style="border-radius: 0px;" class="active"><a
+					href="/adminGetMsgList"> <i class="far fa-envelope-open"
+						style="color: #4a2100"></i>쪽지함
+				</a></li>
+			</ul>
+		</div>
+		</nav> </header>
 		<!-- END HEADER MOBILE-->
 
 		<!-- MENU SIDEBAR-->
@@ -479,7 +512,9 @@
 									<h3 class="title-5 m-b-35"
 										style="font-size: 30px; font-weight: bold;">
 										<i style="color: gray" class="far fa-envelope-open"></i> 쪽지함
-										<button onclick="testMsg();" style="font-size:20px; background-color: #ffac05; border-radius: 5px; padding:5px;color:#4a2100;">쪽지 보내기</button>
+										<button onclick="testMsg();"
+											style="font-size: 20px; background-color: #ffac05; border-radius: 5px; padding: 5px; color: #4a2100;">쪽지
+											보내기</button>
 									</h3>
 								</div>
 								<div style="display: flex">
@@ -494,10 +529,10 @@
 													쪽지함
 												</h3>
 											</div>
-											
-											
-											
-											<div  id="Cbox" class="au-inbox-wrap js-inbox-wrap">
+
+
+
+											<div id="Cbox" class="au-inbox-wrap js-inbox-wrap">
 												<div class="au-message js-list-load">
 													<div class="au-message__noti"></div>
 													<div class="au-message-list">
@@ -507,17 +542,21 @@
 																	<div class="au-message__item-inner msgs">
 																		<div class="au-message__item-text">
 																			<c:if test="${m.msgRead eq 0 }">
-																			<div  style="padding-top: 10px;color:yellowgreen" class="avatar-wrap">
-																				<i class="far fa-check-circle"></i> <span class="readChk">new</span>
-																			</div>
+																				<div style="padding-top: 10px; color: yellowgreen"
+																					class="avatar-wrap">
+																					<i class="far fa-check-circle"></i> <span
+																						class="readChk">new</span>
+																				</div>
 																			</c:if>
 																			<c:if test="${m.msgRead eq 1 }">
-																			<div style="padding-top: 10px;color:grey" class="avatar-wrap">
-																				<i class="far fa-check-circle"></i> <span class="readChk">읽음</span>
-																			</div>
+																				<div style="padding-top: 10px; color: grey"
+																					class="avatar-wrap">
+																					<i class="far fa-check-circle"></i> <span
+																						class="readChk">읽음</span>
+																				</div>
 																			</c:if>
 																			<div class="text">
-																				<div style="display:none">${m.msgNo }</div>
+																				<div style="display: none">${m.msgNo }</div>
 																				<h5 class="name">${m.msgSendId }</h5>
 																				<p>${m.msgTitle }</p>
 																				<div style="display: none">${m.msgContent }</div>
@@ -540,21 +579,24 @@
 															</span>
 														</div>
 													</div>
-													<div  class="au-chat__content">
+													<div class="au-chat__content">
 														제목 :<span id="title1"></span>
-														
-													<div id="msgContent1" style="word-break: break-all;padding:10px;;height :100% ;background-color: #ededed">
-														
+
+														<div id="msgContent1"
+															style="word-break: break-all; padding: 10px;; height: 100%; background-color: #ededed">
+
+														</div>
 													</div>
-													</div>
-													<div class="au-chat-textfield"  style="text-align: center;">
-														<button style="border-radius:5px;;width: 30px;height: 30px; background-color: #ffac05;" onclick="backBox()">&lt;</button>
+													<div class="au-chat-textfield" style="text-align: center;">
+														<button
+															style="border-radius: 5px;; width: 30px; height: 30px; background-color: #ffac05;"
+															onclick="backBox()">&lt;</button>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="col-lg-6">
 										<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
 											<div class="au-card-title"
@@ -568,19 +610,45 @@
 											</div>
 											<script>
 												$(function() {
-													$(".msgs2").click(
+													$(".msgs2")
+															.click(
 																	function() {
-																		var value = $(this).find("h5").html();
-																		$("#sender2").html(value);
-																		$("#title2").html($(this).find("h5").next().html());
-																		$("#msgContent2").html($(this).find("h5").next().next().html());
+																		var value = $(
+																				this)
+																				.find(
+																						"h5")
+																				.html();
+																		$(
+																				"#sender2")
+																				.html(
+																						value);
+																		$(
+																				"#title2")
+																				.html(
+																						$(
+																								this)
+																								.find(
+																										"h5")
+																								.next()
+																								.html());
+																		$(
+																				"#msgContent2")
+																				.html(
+																						$(
+																								this)
+																								.find(
+																										"h5")
+																								.next()
+																								.next()
+																								.html());
 																	})
 												})
-												function backBox2(){
-													$("#Cbox2").removeClass("show-chat-box")
+												function backBox2() {
+													$("#Cbox2").removeClass(
+															"show-chat-box")
 												}
 											</script>
-											<div  id="Cbox2" class="au-inbox-wrap js-inbox-wrap">
+											<div id="Cbox2" class="au-inbox-wrap js-inbox-wrap">
 												<div class="au-message js-list-load">
 													<div class="au-message__noti"></div>
 													<div class="au-message-list">
@@ -590,7 +658,7 @@
 																	<div class="au-message__item-inner msgs2">
 																		<div class="au-message__item-text">
 																			<div style="padding-top: 10px;" class="avatar-wrap">
-																				 <span>받는이</span>
+																				<span>받는이</span>
 																			</div>
 																			<div class="text">
 																				<h5 class="name">${m.msgReceiveId }</h5>
@@ -614,15 +682,18 @@
 															</span>
 														</div>
 													</div>
-													<div  class="au-chat__content">
+													<div class="au-chat__content">
 														제목 :<span id="title2"></span>
-														
-													<div id="msgContent2" style="word-break: break-all;padding:10px;;height :100% ;background-color: #ededed">
-														
+
+														<div id="msgContent2"
+															style="word-break: break-all; padding: 10px;; height: 100%; background-color: #ededed">
+
+														</div>
 													</div>
-													</div>
-													<div class="au-chat-textfield"  style="text-align: center;">
-														<button style="border-radius:5px;;width: 30px;height: 30px; background-color: #ffac05;" onclick="backBox2()">&lt;</button>
+													<div class="au-chat-textfield" style="text-align: center;">
+														<button
+															style="border-radius: 5px;; width: 30px; height: 30px; background-color: #ffac05;"
+															onclick="backBox2()">&lt;</button>
 													</div>
 												</div>
 											</div>
@@ -856,8 +927,6 @@
 	justify-content: center;
 }
 
-
-
 #more-btn:hover {
 	background-color: #4a2100;
 	color: #ffac05;
@@ -873,6 +942,10 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.header-mobile .navbar-mobile .navbar-mobile__list li a:hover {
+	color: #ffac05;
 }
 </style>
 </html>

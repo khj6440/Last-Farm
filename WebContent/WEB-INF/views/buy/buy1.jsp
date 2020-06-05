@@ -850,7 +850,7 @@ NICE신용평가정보㈜	비회원구매 나이인증	휴대폰/아이핀 인�
 						alert("전체 약관에 동의해주세요");
 						return false;
 					}else{
-						location.href="'/buy2Frm'";
+						location.href="/buy2Frm";
 					}	
 					
 				}

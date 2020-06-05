@@ -36,6 +36,7 @@
 
 .community_content {
 	width: 70%;
+
 	margin-left: 15%;
 	
 }

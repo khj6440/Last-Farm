@@ -168,9 +168,9 @@
 				<!--가로-->
 				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
 					src="/imgs/${listNation[0].thumbnail }"
-					alt="First slide" onclick="location.href='/sellView?sellno=${listNation[0].sellNo }'" value="${listNation[0].sellNo }"></span>
+					alt="First slide" onclick="location.href='/sellView?sell_no=${listNation[0].sellNo }'" value="${listNation[0].sellNo }"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="/imgs/${listNation[1].thumbnail }" onclick="location.href='/sellView?sellno=${listNation[1].sellNo }'"
+					src="/imgs/${listNation[1].thumbnail }" onclick="location.href='/sellView?sell_no=${listNation[1].sellNo }'"
 					alt="First slide"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
 					src="/imgs/${listNation[2].thumbnail }"
@@ -237,9 +237,9 @@
 				<!--가로-->
 				<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
 					src="/imgs/${listRegion[0].thumbnail }"
-					alt="First slide" onclick="location.href='/sellView?sellno=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
+					alt="First slide" onclick="location.href='/sellView?sellNo=${listRegion[0].sellNo }'" value="${listRegion[0].sellNo }"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
-					src="/imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellno=${listRegion[1].sellNo }'"
+					src="/imgs/${listRegion[1].thumbnail }" onclick="location.href='/sellView?sellNo=${listRegion[1].sellNo }'"
 					alt="First slide"></span>
 					<span class="carsel_wrap"><img class="d-inline-block" id="sellImg"
 					src="/imgs/${listRegion[2].thumbnail }"
