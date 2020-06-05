@@ -2,72 +2,97 @@ package sell.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import common.JDBCTemplate;
 import sell.model.dao.SellCategoryDao;
+import sell.model.vo.SearchTab;
 import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
 
 public class SellCategoryService {
 
-	public SellCategoryPage sellSearchList(int reqPage, String addr, String type1, String type2, String searchWord,
-			String sortingTab) {
+	public SellCategoryPage search(int reqPage, SearchTab st) {
 		Connection conn = JDBCTemplate.getConnection();
+		//페이지 당 게시물 수
 		int numPerPage = 9;
-
-		int totalCount = new SellCategoryDao().typeCount(conn, addr, type1, type2, searchWord);
-
-		int totalPage = 0;
-		if (totalCount % numPerPage == 0) {
-			totalPage = totalCount / numPerPage;
-		} else {
-			totalPage = totalCount / numPerPage + 1;
+		//전체 게시물 조회
+		int totalCount = new SellCategoryDao().totalCount(conn, st);
+		//전체 페이지 수 조회
+		int totalPage;
+		if(totalCount%numPerPage==0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
 		}
-		int start = (reqPage - 1) * numPerPage + 1;
-		int end = reqPage * numPerPage;
-
-		// 탭 종류에 따라 sorting
-		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		System.out.println(sortingTab);
-		if (sortingTab.equals("마감시간 순")) {
-			sortingTab = "sell_end_date";
-		} else if (sortingTab.equals("구매 인기순")) {
-			sortingTab = "sell_count desc";
-		} else if (sortingTab.equals("최근 등록순")){
-			sortingTab = "sell_date desc";
-		}
-		sellList = new SellCategoryDao().selectSearchAll(conn, addr, start, end, type1, type2, searchWord,sortingTab);
-		
-		// 페이징
+		int start = (reqPage-1)*numPerPage+1;
+		int end = reqPage*numPerPage;
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("start",String.valueOf(start)); //정수를 문자열로
+		map.put("end", String.valueOf(end));
+		ArrayList<Sell> list = new SellCategoryDao().selectList(conn,map, st);
+		//pageNavi 작성
 		String pageNavi = "";
 		int pageNaviSize = 5;
-		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
-		if (pageNo != 1) {
-			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchRegional?reqPage=" + (pageNo - pageNaviSize)
-				 + "&type1=" + type1 + "&type2=" + type2 + "&searchWord=" + searchWord+ "&sortingTab=" + sortingTab
-					+ "'>Before</a>";
+		//pageNo 연산 -> 페이지 시작번호 -> 요청페이지 기준으로 -1 요청페이지 +1
+		int pageNo = 1;
+		if(reqPage!=1) {
+			pageNo = reqPage-1;
 		}
-		for (int i = 0; i < pageNaviSize; i++) {
-			if (reqPage == pageNo) {
-				pageNavi += "<span class='btn btn-outline-secondary'>" + pageNo + "</span>";
-			} else {
-				pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchRegional?reqPage="
-						+ (pageNo - pageNaviSize) + "&type1=" + type1 + "&type2=" + type2
-						+ "&searchWord=" + searchWord+"&sortingTab=" + sortingTab  + "'>" + pageNo + "</a>";
-
+		//int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		//이전 버튼 생성
+		if(pageNo !=1) {
+			pageNavi += "<a href='/sellSearchRegional?reqPage="+(pageNo-1)+"&sido="+st.getSido()+"&gugun="+st.getGugun();
+			if(st.getType1()!=null) {
+				pageNavi += "&type1="+st.getType1();
+			}
+			if(st.getType2()!=null) {
+				pageNavi += "&type2="+st.getType2();
+			}
+			if(st.getKeyword()!=null) {
+				pageNavi += "&keyword="+st.getKeyword();
+			}
+			pageNavi += "&sortingTab="+st.getSortingTab()+"'>이전</a>";
+		}
+		//페이지 버튼 생성
+		for(int i=0;i<pageNaviSize;i++) {
+			if(reqPage==pageNo) {
+				pageNavi+="<span>"+pageNo+"</span>";
+			}else {
+				pageNavi += "<a href='/sellSearchRegional?reqPage="+pageNo+"&sido="+st.getSido()+"&gugun="+st.getGugun();
+				if(st.getType1()!=null) {
+					pageNavi += "&type1="+st.getType1();
+				}
+				if(st.getType2()!=null) {
+					pageNavi += "&type2="+st.getType2();
+				}
+				if(st.getKeyword()!=null) {
+					pageNavi += "&keyword="+st.getKeyword();
+				}
+				pageNavi += "&sortingTab="+st.getSortingTab()+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
-			if (pageNo > totalPage) {
+			if(pageNo>totalPage) {
 				break;
 			}
 		}
-		if (pageNo < totalPage) {
-			pageNavi += "<a class='btn btn-outline-secondary' href='/sellSearchRegional?reqPage=" + (pageNo - pageNaviSize)
-					+ "&type1=" + type1 + "&type2=" + type2 + "&searchWord=" + searchWord+"&sortingTab=" + sortingTab 
-					+ "'>After</a>";
+		//다음버튼
+		if(pageNo<=totalPage) {
+			pageNavi += "<a href='/sellSearchRegional?reqPage="+pageNo+"&sido="+st.getSido()+"&gugun="+st.getGugun();
+			if(st.getType1()!=null) {
+				pageNavi += "&type1="+st.getType1();
+			}
+			if(st.getType2()!=null) {
+				pageNavi += "&type2="+st.getType2();
+			}
+			if(st.getKeyword()!=null) {
+				pageNavi += "&keyword="+st.getKeyword();
+			}
+			pageNavi += "&sortingTab="+st.getSortingTab()+"'>다음</a>";
 		}
-		SellCategoryPage scp = new SellCategoryPage(sellList, pageNavi);
-		JDBCTemplate.close(conn);
+		SellCategoryPage scp = new SellCategoryPage(list, pageNavi);
 		return scp;
 	}
 

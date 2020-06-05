@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sell.model.service.SellCategoryService;
+import sell.model.service.SellSearchService;
+import sell.model.vo.SearchTab;
+import sell.model.vo.Sell;
 import sell.model.vo.SellCategoryPage;
 
 /**
  * Servlet implementation class SellSearchRegionalServlet
  */
-@WebServlet(name = "sellSearchRegional", urlPatterns = { "/sellSearchRegional" })
+@WebServlet(name = "SellSearchRegional", urlPatterns = { "/sellSearchRegional" })
 public class SellSearchRegionalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,49 +37,53 @@ public class SellSearchRegionalServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchRegional.jsp");
-//		rd.forward(request, response);
-		
-
 		int reqPage = 1;
-		if (request.getParameter("reqPage") != null) {
+		if( request.getParameter("reqPage")!=null) {
 			reqPage = Integer.parseInt(request.getParameter("reqPage"));
-
 		}
-		String addr = "서울 강남구";
-		if (request.getParameter("sido") != null && request.getParameter("gugun")!=null) {
-			addr = request.getParameter("sido") + " " + request.getParameter("gugun");
-		}
-		String type1 = null;
-		if (request.getParameter("type1") != null) {
-			type1 = request.getParameter("type1");
-		}
-		String type2 = null;
-		if (request.getParameter("type2") != null) {
-			type2 = request.getParameter("type2");
-		}
-		String searchWord = null;
-		if (request.getParameter("searchTypingBox") != null) {
-			searchWord = request.getParameter("searchTypingBox");
-		}
-		String sortingTab = "마감시간 순";
-		if(request.getParameter("sortingTab")!="마감시간 순") {
-			sortingTab = request.getParameter("sortingTab");
-		}
-		SellCategoryPage scp = new SellCategoryService().sellSearchList(reqPage, addr, type1, type2, searchWord,
-				sortingTab);
-		if (scp.getSellList().isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "검색어와 일치하는 글이 없습니다.");
-			request.setAttribute("loc", "/sellSearchRegional");
-			rd.forward(request, response);
+		SearchTab st = new SearchTab();
+		if (request.getParameter("sido").equals("시/도 선택")) {
+			st.setSido("서울");
+			st.setGugun("강남구");
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchRegional.jsp");
-			request.setAttribute("sellList", scp.getSellList());
-			request.setAttribute("searchWord", searchWord);
-			request.setAttribute("pageNavi", scp.getPageNavi());
-			rd.forward(request, response);
+			st.setSido(request.getParameter("sido"));
+			st.setGugun(request.getParameter("gugun"));
 		}
+		st.setType1(request.getParameter("type1"));
+		if (!request.getParameter("type1").equals("null")) {
+			st.setType2(request.getParameter("type2"));
+		}else {
+			st.setType2(null);
+		}
+		if (request.getParameter("keyword").isEmpty()) {
+			st.setKeyword(null);
+		} else {
+			st.setKeyword(request.getParameter("keyword"));
+		}
+		st.setSortingTab("마감시간순");
+		if(request.getParameter("sortingTab")!=null) {
+			if(!request.getParameter("sortingTab").equals("마감시간순")) {
+				st.setSortingTab(request.getParameter("sortingTab"));
+			}else {
+				st.setSortingTab("마감시간순");
+			}
+		}
+		System.out.println(reqPage);
+		System.out.println("구군:"+st.getGugun());
+		System.out.println("시도:"+st.getSido());
+		System.out.println("타입1:"+st.getType1());
+		System.out.println("타입2:"+st.getType2());
+		System.out.println("키워드: "+st.getKeyword());
+		System.out.println("탭:"+st.getSortingTab());
+
+		SellCategoryPage scp = new SellCategoryService().search(reqPage,st);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellSearchRegional.jsp");
+		request.setAttribute("list", scp.getSellList());
+		System.out.println(scp.getSellList().size());
+		request.setAttribute("pageNavi", scp.getPageNavi());
+		request.setAttribute("st", st);
+		request.setAttribute("reqPage", reqPage);
+		rd.forward(request, response);
 	}
 
 	/**
