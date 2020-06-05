@@ -111,7 +111,7 @@ border-radius: 5px;
 				<a href="/questionList?reqPage=1" class="question_tap1">자주 묻는 질문</a>
 			</div>
 			<div class="sideTap_a1">
-				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
+				<a href="reviewList?reqPage=1&memberId=${sessionScope.member.memberId }" class="question_tap1" >리뷰게시판</a>
 			</div>
 		</div>
 

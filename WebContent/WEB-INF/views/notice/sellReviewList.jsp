@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>리뷰 게시판</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -42,16 +42,16 @@
 	width: 20%;
 	float: left;
 	margin-top: 12%;
+	margin-left: -100px;
 }
 
 .community_content {
 	width: 70%;
-	margin-left: 20%;
+	margin-left: 15%;
 }
 
 .question {
-	width: 90%;
-	margin-left: 5%;
+	width: 100%;
 }
 
 .question_h1 {
@@ -59,6 +59,7 @@
 }
 
 .question_List {
+	width:100%;
 	height: 200px;
 	line-height: 58px;
 }
@@ -66,7 +67,7 @@
 .question_sub1 {
 	list-style: none;
 	position: relative;
-	margin-left: -5%;
+	margin-left: -10%;
 }
 
 .question_sub2 {
@@ -79,7 +80,7 @@
 	list-style: none;
 	border: 1px solid gray;
 	border-radius: 10px;
-	width: 102.2%;
+	width: 100%;
 	margin-left: -2%;
 }
 
@@ -127,9 +128,33 @@
 }
 
 .d2 {
-	height: 100%;
+	height: 200px;
 	width: 200px;
-	float: left;
+	
+}
+
+
+.question_d1 {
+	margin-left: 200px;
+	margin-top: -200px;
+}
+
+.d3 {
+	height: 90%;
+	width: 500px;
+}
+
+.table {
+	height: 100px;
+}
+
+.table-wrapper {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.table-wrapper th {
+	width: 300px;
 }
 
 .d4 {
@@ -141,16 +166,9 @@
 .d1 {
 	height: 100%;
 	width: 810px;
+	
 }
 
-.d3 {
-	height: 90%;
-	width: 500px;
-}
-
-.table {
-	height: 100px;
-}
 
 .table-wrapper {
 	width: 1000px;
@@ -186,23 +204,24 @@
 	margin-top: 0px;
 }
 
-.a11 {
-	margin-left: 40%;
+.question_tap {
+	background-color: #ffac05;
+	border-radius: 5px;
 }
-.question_tap{
-background-color: #ffac05 ;
-border-radius: 5px;
+
+.question_tap1:hover {
+	color: #4a2100;
 }
-.question_tap1:hover{
-	color:#4a2100;
-}
-.table td {
-	width: 20%;
-}
+
 
 .review_a11 {
 	margin-left: 30px;
 }
+
+.d1_table{
+	height: 14%;
+}
+
 </style>
 <script>
 	function sellContent(reviewBuyEndNo) {
@@ -213,7 +232,7 @@ border-radius: 5px;
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="container1">
 	<div class="community_body">
-		<div class="community_sideTap">
+		 <div class="community_sideTap">
 			<div class="sideTap_a1">
 				<a href="#" class="question_tap1">공지사항</a>
 			</div>
@@ -223,7 +242,7 @@ border-radius: 5px;
 			<div class="sideTap_a1">
 				<a href="/reviewList?reqPage=1" class="question_tap question_tap1">리뷰게시판</a>
 			</div>
-		</div>
+		</div> 
 		<div class="community_content">
 			<br> <br>
 			<h1 class="question_h1" style="font-weight: bold">판매 글</h1>
@@ -249,36 +268,44 @@ border-radius: 5px;
 					<td>평점 : ${sessionScope.memberScore}점</td>
 				</tr>
 				<tr>
-				<%-- 	<button onclick="reviewInsert('${sessionScope.sellEnd.sellEndNo}')"
-						type="button">리뷰작성</button> --%>
 					<th colspan="4" style="text-align: center;"><h1
 							style="font-weight: bold;">리뷰</h1></th>
 				</tr>
 			</table>
 			<div class="question">
-				<ul class="question_sub1">
-
+				
 					<c:forEach items="${list }" var="n">
-						<li class="question_li1 question_li2">
-							<div class="question_List">
-								<div class="d2">
-									<a class=""><img class="header_top_logo1"
-										src="/imgs/${n.reviewFilepath }"></a>
-								</div>
-								<div class="d1">
-									<a class="review_a11" style="font-weight: bold">${n.reviewTitle }</a><br> <a class="review_a11">${n.reviewContent }</a><br>
-									<a class="review_a11">${n.reviewWriter } | ${n.reviewDate } | <span
-										class="d1" name="reviewScore">${n.reviewScore }점</span>
-									</a>
-								</div>
-							</div>
+					<div class="d2">
 
-						</li>
-				</ul>
-				</li>
-
-				</c:forEach>
-				<br><br><br>
+									<c:if test="${not empty n.reviewFilepath }">
+										<a class=""><img class="header_top_logo1"
+											src="/imgs/${n.reviewFilepath }"></a>
+									</c:if>
+									<c:if test="${empty n.reviewFilepath }">
+										<a class="">사진이 없습니다.</a>
+									</c:if>
+								</div>
+							<div class="question_d1">
+									<table class="table table-striped d1_table">
+										<tr>
+											<th><a class="review_a11" style="font-weight: bold">${n.reviewTitle }</a></th>
+										</tr>
+										<tr>
+											<td colspan="3"><a class="review_a11">${n.reviewContent }</a></td>
+										</tr>
+										<tr class="ddddd">
+											<td><a class="review_a11">작성자 : ${n.reviewWriter } |
+													작성일 : ${n.reviewDate } | 평점 : ${n.reviewScore }점</a></td>
+											</div>
+										</tr>
+									</table>
+								</div>
+	
+					</c:forEach>
+				
+				 <br>
+				<br>
+				<br>
 			</div>
 		</div>
 

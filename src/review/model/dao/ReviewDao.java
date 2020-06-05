@@ -259,14 +259,14 @@ public class ReviewDao {
 		return list;
 	}
 
-	public int reviewWarning(Connection conn, int reviewNo, int reviewWarning) {
+	public int reviewWarning(Connection conn, int PageNo, int result2) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "update review set review_warning=? where review_no=?";
 		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, (reviewWarning+1));
-			pstmt.setInt(2, reviewNo);
+			pstmt.setInt(1, result2);
+			pstmt.setInt(2, PageNo);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -391,7 +391,6 @@ public class ReviewDao {
 				m.setMemberRoadAddr2(rset.getString("member_road_addr2"));
 				m.setMemberDetailAddr2(rset.getString("member_detail_addr2"));
 				m.setMemberPostCode2(rset.getString("member_post_code2"));
-				
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberEmail(rset.getString("member_email"));
 				m.setMemberDate(rset.getDate("member_date"));
@@ -416,6 +415,33 @@ public class ReviewDao {
 	public int searchWriter(int reviewRef) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public ArrayList<Review> ReviewWarning(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query ="select review_no,review_title,(select warning_writer from warning where review_no = warning_page_no and warning_writer=?) as writer from review";
+		ArrayList<Review> list = new ArrayList<Review>();
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset= pstmt.executeQuery();
+			System.out.println("rset :"+rset);
+			while(rset.next()) {
+				Review n = new Review();
+				n.setReviewNo(rset.getInt("review_no"));
+				n.setReviewTitle(rset.getString("review_title"));
+				n.setWriter(rset.getString("writer"));
+				list.add(n);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 
 }

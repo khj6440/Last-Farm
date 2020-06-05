@@ -30,7 +30,7 @@
       }
    </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>리뷰 게시판</title>
 </head>
 <body><br>
    <h1 class="review_h1">리뷰 작성</h1><br>

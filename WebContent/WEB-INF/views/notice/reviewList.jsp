@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>리뷰 게시판</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -33,7 +33,6 @@
 .community_body {
 	margin: 0 auto;
 	width: 1280px;
-	magin-right: -100px;
 	list-style: none;
 	font-family: 'Jua', sans-serif;
 }
@@ -42,18 +41,18 @@
 	width: 20%;
 	float: left;
 	margin-top: 12%;
+	margin-left: -100px;
 }
 
 .community_content {
 	width: 70%;
-	height: 950px;
-	margin-left: 20%;
+	margin-left: 15%;
+	height: 960px;
 }
 
 .question {
-	width: 90%;
+	width: 100%;
 	height: 75%;
-	margin-left: 5%;
 }
 
 .question_h1 {
@@ -81,7 +80,7 @@
 	list-style: none;
 	border: 1px solid gray;
 	border-radius: 10px;
-	width: 102.2%;
+	width: 100%;
 	margin-left: -2%;
 	background-color: #dee2e6;
 }
@@ -126,6 +125,7 @@
 	text-align: center;
 	width: 1000px;
 	margin: 0 auto;
+	height: 100px;
 	margin-top: -80px;
 }
 
@@ -137,7 +137,7 @@
 
 .question_d1 {
 	height: 100%;
-	width: 810px;
+	width: 930px;
 }
 
 .d3 {
@@ -180,9 +180,9 @@
 
 .question_select2 {
 	position: static;
-	margin-left: 407px;
+	margin-left: 450px;
 	width: 100px;
-	height:30px;
+	height: 30px;
 	margin-top: 0px;
 }
 
@@ -207,19 +207,22 @@
 .ddddd {
 	line-height: 50%;
 }
-.sell_Content{
-	margin-left: -100px;
+
+.sell_Content {
+	margin-left: -130px;
 }
-.question_tap{
-background-color: #ffac05 ;
-border-radius: 5px;
+
+.question_tap {
+	background-color: #ffac05;
+	border-radius: 5px;
 }
-.question_tap1:hover{
-	color:#4a2100;
+
+.question_tap1:hover {
+	color: #4a2100;
 }
-.review_a11{
-	margin-left:10px;
-	
+
+.review_a11 {
+	margin-left: 10px;
 }
 </style>
 <script>
@@ -232,61 +235,69 @@ border-radius: 5px;
 			$(".question_sub2").hide();
 			$(this).find(".question_sub2").show();
 			$("#pageNavi").css("margin-top", "0px");
-			$(".community_content").css("height", "1000px");
+			$(".community_content").css("height", "1400px");
 		});
 	});
 
-	function updateComment(obj,reviewCommentNo,reviewRef){
+	function updateComment(obj, reviewCommentNo, reviewRef) {
 		$(obj).prev().hide();
 		$(obj).html("수정완료");
-		$(obj).attr('onclick','modifyComplete(this,"'+reviewCommentNo+'","'+reviewRef+'")');
+		$(obj).attr(
+				'onclick',
+				'modifyComplete(this,"' + reviewCommentNo + '","' + reviewRef
+						+ '")');
 		$(obj).next().html("취소");
-		$(obj).next().attr('onclick','modifyCancel(this,"'+reviewCommentNo+'","'+reviewRef+'")');
+		$(obj).next().attr(
+				'onclick',
+				'modifyCancel(this,"' + reviewCommentNo + '","' + reviewRef
+						+ '")');
 		$(obj).parent().parent().find('input').show();
 		$(obj).parent().parent().find('input').prev().hide();
 	}
-	
-	function modifyComplete(obj,reviewCommentNo,reviewRef){
-	      var $form=$("<form action='/reviewCommentUpdate' method='post'></form>"); 
-	         $form.append($("<input type='text' name='reviewCommentNo' value='"+reviewCommentNo+"'>"));
-	        
-	         $form.append($("<input type='text' name='reviewRef' value='"+reviewRef+"'>"));
-	         $form.append($(obj).parent().parent().find('input'));
-	         $('body').append($form);
-	         $form.submit();
-	         
-		
+
+	function modifyComplete(obj, reviewCommentNo, reviewRef) {
+		var $form = $("<form action='/reviewCommentUpdate' method='post'></form>");
+		$form
+				.append($("<input type='text' name='reviewCommentNo' value='"+reviewCommentNo+"'>"));
+
+		$form
+				.append($("<input type='text' name='reviewRef' value='"+reviewRef+"'>"));
+		$form.append($(obj).parent().parent().find('input'));
+		$('body').append($form);
+		$form.submit();
+
 	}
-	
-	function deleteComment(reviewCommentNo){
-	
-		location.href="/reviewCommentDelete?reviewCommentNo="+reviewCommentNo;
+
+	function deleteComment(reviewCommentNo) {
+
+		location.href = "/reviewCommentDelete?reviewCommentNo="
+				+ reviewCommentNo;
 	}
-	
-	function warningComment(reviewCommentNo,reviewCommentWarning){
-	
-		location.href="/reviewCommentWarning?reviewCommentNo="+reviewCommentNo+"&reviewCommentWarning="+reviewCommentWarning;
-		
+
+	function warningComment(reviewCommentNo, memberId) {
+
+		location.href = "/warning?PageNo=" + reviewCommentNo + "&memberId="
+				+ memberId + "&warningType=2";
+
 	}
-	
-	function reviewWarning(reviewNo,reviewWarning){
-		
-		location.href="/reviewWarning?reviewNo="+reviewNo+"&reviewWarning="+reviewWarning;
-		
+
+	function reviewWarning(reviewNo, memberId) {
+
+		location.href = "/warning?PageNo=" + reviewNo + "&memberId=" + memberId
+				+ "&warningType=1";
+
 	}
-	
-	function reviewDelete(reviewNo){
-		
-		location.href="/reviewDelete?reviewNo="+reviewNo;
-		
+
+	function reviewDelete(reviewNo) {
+
+		location.href = "/reviewDelete?reviewNo=" + reviewNo;
+
 	}
-	
-	
-	
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section class="container1">
+
 	<div class="community_body">
 		<div class="community_sideTap">
 			<div class="sideTap_a1">
@@ -304,18 +315,17 @@ border-radius: 5px;
 			<h1 class="question_h1" style="font-weight: bold">리뷰 게시판</h1>
 			<br>
 			<form action="/reviewSearch" method="post">
-			
+
 				<div class="search_tap">
-				<input type="hidden" name="reqPage" value="1">
-					<select name="type" class="question_select2">
+					<input type="hidden" name="reqPage" value="1"> <select
+						name="type" class="question_select2">
 						<option value="id">아이디</option>
 						<option value="title">제목</option>
-						
 					</select> <input type="text" class="question_search" name="keyword"
 						value="${keyword }" placeholder="제목을 입력해주세요">
-					<button type="submit" class="btn btn-outline-primary">검색</button>
-					<a href="/reviewList?reqPage=1" class="btn btn-outline-primary">전체 목록보기</a>
-
+					<button type="submit" class="btn btn-outline-dark">검색</button>
+					<a href="/reviewList?reqPage=1" class="btn btn-outline-dark">전체
+						목록보기</a>
 				</div>
 			</form>
 			<div class="question">
@@ -324,12 +334,14 @@ border-radius: 5px;
 						<li class="question_li1 question_li2">
 							<div class="question_List">
 								<div class="d2">
-								
-								<c:if test="${not empty n.reviewFilepath }">
-									<a class=""><img class="header_top_logo1"
-										src="/imgs/${n.reviewFilepath }"></a>
-										</c:if>
-										<c:if test="${empty n.reviewFilepath }"><a class="">사진이 없습니다.</a></c:if>
+
+									<c:if test="${not empty n.reviewFilepath }">
+										<a class=""><img class="header_top_logo1"
+											src="/imgs/${n.reviewFilepath }"></a>
+									</c:if>
+									<c:if test="${empty n.reviewFilepath }">
+										<a class="">사진이 없습니다.</a>
+									</c:if>
 								</div>
 								<div class="question_d1">
 									<table class="table table-striped d1_table">
@@ -340,21 +352,41 @@ border-radius: 5px;
 											<td colspan="3"><a class="review_a11">${n.reviewContent }</a></td>
 										</tr>
 										<tr class="ddddd">
-											<td><a class="review_a11">작성자 : ${n.reviewWriter } | 작성일 :
-													${n.reviewDate } | 평점 : ${n.reviewScore }점</a>
+											<td><a class="review_a11">작성자 : ${n.reviewWriter } |
+													작성일 : ${n.reviewDate } | 평점 : ${n.reviewScore }점</a>
 												<div class="ddd1">
 													<a class="sell_Content btn btn-outline-dark"
 														href="javascript:void(0)"
 														onclick="sellContent('${n.reviewBuyEndNo}')">판매글</a>
-														<c:if test="${sessionScope.member.memberId=='admin' }">
-														<a class=" btn btn-outline-dark"
-														href="javascript:void(0)"
-														onclick="reviewDelete('${n.reviewNo}')">삭제</a></c:if>
-														<c:if test="${not empty sessionScope.member.memberId }">
-														<a class=" btn btn-danger"
-														href="javascript:void(0)"
-														onclick="reviewWarning('${n.reviewNo}','${n.reviewWarning }')">신고</a></c:if>
-														</td>
+													<c:if test="${sessionScope.member.memberId=='admin' }">
+														<a class=" btn btn-outline-dark" href="javascript:void(0)"
+															onclick="reviewDelete('${n.reviewNo}')">삭제</a>
+													</c:if>
+
+													<c:if test="${not empty sessionScope.member}">
+														<c:if test="${empty w}">
+															<a class=" btn btn-danger" href="javascript:void(0)"
+																onclick="reviewWarning('${n.reviewNo}','${sessionScope.member.memberId }')">신고</a>
+														</c:if>
+														<c:if test="${not empty w}">
+															<c:forEach items="${w }" var="w">
+																
+																<c:if
+																	test="${w.writer eq sessionScope.member.memberId && w.reviewNo eq n.reviewNo}">
+																	<a class=" btn btn-danger" href="javascript:void(0)">신고완료</a>
+																</c:if>
+																
+																<c:if
+																	test="${w.writer ne sessionScope.member.memberId && w.reviewNo eq n.reviewNo}">
+																	<a class=" btn btn-danger" href="javascript:void(0)"
+																		onclick="reviewWarning('${n.reviewNo}','${sessionScope.member.memberId }')">신고</a>
+																</c:if>
+																
+
+															</c:forEach>
+														</c:if>
+													</c:if>
+												</div></td>
 											</div>
 										</tr>
 									</table>
@@ -363,37 +395,62 @@ border-radius: 5px;
 							<ul class="question_sub2">
 								<li class="question_li3">
 									<div class="dd1">
-									<c:if test="${not empty sessionScope.member}">
-										<form action="/reviewComment" method="post">
-											<input type="hidden" name="commentWriter"
-												value="${sessionScope.member.memberId }"> <input
-												type="hidden" name="reviewNo" value="${n.reviewNo}">
-											<input type="text" name="reviewCommentContent"
-												class="reviewCommentContent">
-											<button class="btn btn-outline-primary" type="submit">등록</button>
-										</form>
+										<c:if test="${not empty sessionScope.member}">
+											<form action="/reviewComment" method="post">
+												<input type="hidden" name="commentWriter"
+													value="${sessionScope.member.memberId }"> <input
+													type="hidden" name="reviewNo" value="${n.reviewNo}">
+												<input type="text" name="reviewCommentContent"
+													class="reviewCommentContent">
+												<button class="btn btn-outline-primary" type="submit">등록</button>
+											</form>
 										</c:if>
-									</div>
-									<c:forEach items="${list2 }" var="nc">
-									<c:if test="${nc.reviewRef == n.reviewNo }">
-										<ul class="commentList">
-											<li style="width: 15%; text-align: center;"><span>작성자 : ${nc.reviewCommentWriter }</span></li>
-											<li style="width: 40%"><span>내용 : ${nc.reviewCommentContent }</span>
-												<input type="text" class="form-control"
-												name="reviewCommentContent"
-												value="${nc.reviewCommentContent }" style="display: none;">
-											</li>
-											<li style="width: 20%; text-align: center;"><span>작성일 : ${nc.reviewCommentDate }</span></li>
-											<li style="width: 25%; text-align: center;">
-												<c:if test="${sessionScope.member.memberId eq nc.reviewCommentWriter }">
-													<a href="javascript:void(0)" class="btn btn-outline-dark"
-														onclick="updateComment(this,'${nc.reviewCommentNo }','${nc.reviewRef }')">수정</a>
-													<a href="javascript:void(0)" class="btn btn-outline-dark"
-														onclick="deleteComment('${nc.reviewCommentNo}')">삭제</a>
-														<a href="javascript:void(0)"  class="Comment_warning btn btn-danger"
-														onclick="warningComment('${nc.reviewCommentNo}','${nc.reviewCommentWarning }')">신고</a>
-												</c:if></li>
-										</ul>
+									</div> <c:forEach items="${list2 }" var="nc">
+										<c:if test="${nc.reviewRef == n.reviewNo }">
+											<ul class="commentList">
+												<li style="width: 15%; text-align: center;"><span>작성자
+														: ${nc.reviewCommentWriter }</span></li>
+												<li style="width: 40%"><span>내용 :
+														${nc.reviewCommentContent }</span> <input type="text"
+													class="form-control" name="reviewCommentContent"
+													value="${nc.reviewCommentContent }" style="display: none;">
+												</li>
+												<li style="width: 20%; text-align: center;"><span>작성일
+														: ${nc.reviewCommentDate }</span></li>
+												<li style="width: 25%; text-align: center;"><c:if
+														test="${sessionScope.member.memberId eq nc.reviewCommentWriter }">
+														<a href="javascript:void(0)" class="btn btn-outline-dark"
+															onclick="updateComment(this,'${nc.reviewCommentNo }','${nc.reviewRef }')">수정</a>
+														<a href="javascript:void(0)" class="btn btn-outline-dark"
+															onclick="deleteComment('${nc.reviewCommentNo}')">삭제</a>
+															
+															
+														<c:if test="${not empty sessionScope.member}">
+														<c:if test="${empty w2}">
+															<a href="javascript:void(0)"
+																		class="Comment_warning btn btn-danger"
+																		onclick="warningComment('${nc.reviewCommentNo}','${sessionScope.member.memberId }')">신고</a>
+														</c:if>
+														<c:if test="${not empty w2}">
+															<c:forEach items="${w2 }" var="w2">
+																<c:if
+																	test="${w2.writer eq sessionScope.member.memberId && w2.reviewCommentNo eq nc.reviewCommentNo}">
+																	<a class=" btn btn-danger" href="javascript:void(0)">신고완료</a>
+																</c:if>
+																
+																<c:if
+																	test="${w2.writer ne sessionScope.member.memberId && w2.reviewCommentNo eq nc.reviewCommentNo}">
+																	<a href="javascript:void(0)"
+																		class="Comment_warning btn btn-danger"
+																		onclick="warningComment('${nc.reviewCommentNo}','${sessionScope.member.memberId }')">신고</a>
+																</c:if>
+																
+
+															</c:forEach>
+														</c:if>
+													</c:if>
+													</c:if></li>
+											</ul>
 										</c:if>
 									</c:forEach>
 								</li>
@@ -405,10 +462,8 @@ border-radius: 5px;
 				</ul>
 			</div>
 		</div>
+
 		<div id="pageNavi">${pageNavi }</div>
-		
-		
-		<br> <br>
 	</div>
 
 	</section>

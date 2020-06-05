@@ -1,6 +1,7 @@
-package review.controller;
+package warning.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,21 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import review.model.service.ReviewService;
-
+import warning.model.service.WarningService;
+import warning.model.vo.Warning;
 
 /**
- * Servlet implementation class ReviewWarningServlet
+ * Servlet implementation class WarningServlet
  */
-@WebServlet(name = "ReviewWarning", urlPatterns = { "/reviewWarning" })
-public class ReviewWarningServlet extends HttpServlet {
+@WebServlet(name = "Warning", urlPatterns = { "/warning" })
+public class WarningServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewWarningServlet() {
+    public WarningServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +34,33 @@ public class ReviewWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		int reviewWarning = Integer.parseInt(request.getParameter("reviewWarning"));
-		int result = new ReviewService().reviewWarning(reviewNo, reviewWarning);
+		int PageNo = Integer.parseInt(request.getParameter("PageNo"));
+		int warningType = Integer.parseInt(request.getParameter("warningType"));
+		String warningWriter = request.getParameter("memberId");
+		
+		System.out.println("리뷰넘버 :"+PageNo);
+		System.out.println("리뷰타입 :"+warningType);
+		System.out.println("신고자 :"+warningWriter);
+		
+		int result = new WarningService().WarningInsert(PageNo, warningType, warningWriter);
+		
+		
+		
+		
+		
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
 			request.setAttribute("msg", "신고 성공");
 		}else {
 			request.setAttribute("msg", "신고 실패");
 		}
+		if(warningType==1) {
 		request.setAttribute("loc", "/reviewList?reqPage=1");
+		}else if(warningType ==2) {
+		request.setAttribute("loc", "/reviewList?reqPage=1");
+		}
 		rd.forward(request, response);
 	}
 

@@ -35,12 +35,12 @@ public class MainServlet extends HttpServlet {
 		//메인에 보여질 전체 9개 지역 9개의 판매 list 가져오기
 		
 		
-		ArrayList<Sell> listNation = new SellSearchService().selectList(1);
-		ArrayList<Sell> listRegion = new SellSearchService().selectList(2);
+		/*ArrayList<Sell> listNation = new SellSearchService().selectList(1);
+		ArrayList<Sell> listRegion = new SellSearchService().selectList(2);*/
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/main.jsp");
-		request.setAttribute("listNation", listNation);
-		request.setAttribute("listRegion", listRegion);
+		/*request.setAttribute("listNation", listNation);
+		request.setAttribute("listRegion", listRegion);*/
 		rd.forward(request, response);
 				
 		
