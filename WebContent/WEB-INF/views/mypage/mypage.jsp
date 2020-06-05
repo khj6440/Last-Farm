@@ -9,14 +9,16 @@
 <title>Insert title here</title>
 
 
-
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
- 
-  
+<!-- <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous"> -->
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <style>
@@ -809,7 +811,6 @@ form.form1 {
 	border: 0.5px solid gray;
 	border-radius: 3px 3px 3px 3px;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -1184,7 +1185,7 @@ form.form1 {
 						</div>
 					</div>
 					<div class="content">
-						 <c:if test="${sessionScope.member.memberType eq 1 }">
+						<c:if test="${sessionScope.member.memberType eq 1 }">
 							<div class="content-title">구매 내역</div>
 						</c:if>
 
@@ -1193,9 +1194,9 @@ form.form1 {
 						</c:if>
 						<div class="content-menu"></div>
 						<div class="list">
-						<button class="" id="more-btn2" totalCount="${totalEndCount}"
+							<button class="" id="more-btn2" totalCount="${totalEndCount}"
 								currentCount="0" value="">결과더보기 (총 ${totalEndCount} 건 )</button>
-						<!-- 	<c:forEach items="${endList }" var="e">
+							<!-- 	<c:forEach items="${endList }" var="e">
 								<form class="reviewInsertFrm">
 									<input name="sellEndNo" type="hidden"> <input
 										name="memberId" type="hidden"> <input
@@ -1383,11 +1384,10 @@ form.form1 {
 	})
 </script>
 <style>
-	#more-btn,#more-btn2{
-		width: 100%;
-		height: 70px;
-		font-size: 20px;
-		
-	}
+#more-btn, #more-btn2 {
+	width: 100%;
+	height: 70px;
+	font-size: 20px;
+}
 </style>
 </html>

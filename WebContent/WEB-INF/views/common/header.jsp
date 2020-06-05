@@ -10,11 +10,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/header/header.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- 
+<!--  <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script> -->
+
   <style>
         
         
@@ -40,7 +51,7 @@
         }
         
        
-       
+    
     </style>
 </head>
 <body>
@@ -55,10 +66,10 @@
 					<c:if test="${empty sessionScope.member}">
 						<li class="nav-item header_top_login_li">
 							<!-- 2. 로그인 클릭시 온클릭으로 인해  loginFrm서블릿으로 이동-->
-							<button class="btn"
+							<button class="btn123"
 								onclick="location.href='/loginFrm'">로그인</button>
 								<a> | </a>
-							<button class="btn"
+							<button class="btn123"
 								onclick="location.href='/joinFrm'">회원가입</button>
 						</li>
 						
@@ -67,14 +78,14 @@
 						<li class="nav-item header_top_login_li">
 							<!-- 4.세션 안에있는 member안에 이름만 가저온다. --> <c:if
 								test="${not empty sessionScope.member.memberId && sessionScope.member.memberId ne 'admin'  }">
-								<button class="btn"
+								<button class="btn123"
 									onclick="location.href='/mypage?memberId=${sessionScope.member.memberId}'">${sessionScope.member.memberName }</button>
 							</c:if> <c:if test="${sessionScope.member.memberId eq 'admin' }">
-								<button class="btn"
+								<button class="btn123"
 									onclick="location.href='/manageMember?reqPage=1'">${sessionScope.member.memberName }</button>
 							</c:if>
 							<a> | </a>
-							<button class="btn"
+							<button class="btn123"
 								onclick="location.href='/logoutFrm'">로그아웃</button>
 						</li>
 					</c:if>
