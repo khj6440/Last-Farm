@@ -413,9 +413,6 @@ public class ReviewDao {
 		return m;
 	}
 
-	public int searchWriter(int reviewRef) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

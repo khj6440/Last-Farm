@@ -71,6 +71,10 @@
 	height : 30px;
 	background-color : #DC3545 ;
 }
+.sell_delete_btn:hover{
+	color : #DC3545 ;
+	background-color:  #ffac05;
+}
 .sell_content {
 	margin: 0 auto;
 	width: 65%;
@@ -100,8 +104,9 @@
 	box-sizing: content-box;
 }
 .sell_img11 {
-	width : 400px;
-	height : 400px;
+	width : 405px;
+	height : 430px;
+	position: relative;
 }
 
 .sell_content_table tr {
@@ -116,16 +121,18 @@
 }
 
 #sell_timer {
-position : absolute;
+	position : absolute;
 	box-sizing: content-box;
 	border-radius : 3px;
 	border: 2px solid red;
 	width: 300px;
 	height: 80px;
 	text-align: center;
-	color: red;
+	color : red;
 	line-height: 2;
 	font-size: 2em;
+	bottom: 0px;
+    right: 0px;
 }
 
 .sell_table_th {
@@ -425,7 +432,6 @@ legend{
 					<td rowspan="5" class="sell_table_td">
 					<div class="sell_img_div"><img
 						src="/imgs/${s.thumbnail }" class="sell_img11">
-						</div>
 							<c:if test="${s.timegap >0}">
                     		 ${s.timegap } 일 남음
                      			</c:if>
@@ -433,13 +439,15 @@ legend{
 						<div id="sell_timer">
 						</div>
 							</c:if>
+						</div>
 						</td>
 					<th class="sell_table_th">${s.sellName }</th>
 					<c:if test="${not empty sessionScope.member && sessionScope.member.memberType ne 3 && sessionScope.member.memberId ne s.sellWriter }">
-					<th class="sell_table_th2"><a
-						href="/sellWarning?sell_no=${s.sellNo }&sell_warning=${s.sellWarning }"><img
-							src="/img/신고버튼.png" class="sell_warning"></a><br></th>
-							</c:if>
+					<th class="sell_table_th2">
+					
+					<a href="javascript:void(0)" onclick="sellWarning('${s.sellNo }','${sessionScope.member.memberId }')">
+					<img src="/img/신고버튼.png" class="sell_warning"></a><br></th>
+					</c:if>
 				</tr>
 				<tr>
 					<th colspan="2">${s.sellPrice }원|개당(g)</th>
@@ -567,7 +575,7 @@ legend{
 					<form action="/sellCommentInsert" method="post">
 						<input type="hidden" name="sellCommentWriter"
 							value="${sessionScope.member.memberId }"> <input
-							type="hidden" name="sellRef" value="${s.sellNo }"> <input
+							type="hidden" name="sellNo" value="${s.sellNo }"> <input
 							type="hidden" name="sellCommentLevel" value="1"> <input
 							type="hidden" name="sellCommentRef" value="0">
 						<c:if test="${not empty sessionScope.member}">
@@ -595,13 +603,28 @@ legend{
 									style="display: none;"></li>
 								<li style="width: 20%; text-align: center"><span>${sc.sellCommentDate }</span></li>
 								<li style="width:90%; text-align: right">
-								<c:if test="${sessionScope.member.memberId eq s.sellWriter || sessionScope.member.memberType ne 3}">
+								<c:if test="${sessionScope.member.memberId eq s.sellWriter}">
+								<c:if test="${sessionScope.member.memberType ne 3 }">
 										<a href="javascript:void(0)" class="sell_commentBtn"
 											onclick="insertComment(this, '${sc.sellCommentNo }','${s.sellNo }','${sessionScope.member.memberId }')">댓글달기</a>
 											</c:if>
+											</c:if>
 											<c:if test="${not empty sessionScope.member && sessionScope.member.memberId ne sc.sellCommentWriter && sessionScope.member.memberType ne 3}">
+											<c:if test="${ empty w4}">
 										<a href="javascript:void(0)" class="sell_commentBtn"
-											onclick="warning('${sc.sellCommentNo}','${sessionScope.member.memberId }')">신고</a>
+											onclick="sellCommentWarning('${s.sellNo }','${sc.sellRef }','${sc.sellCommentNo}','${sessionScope.member.memberId }')">신고</a>
+											</c:if>
+											<c:if test="${not empty w4 }">
+											<c:forEach items="${w4 }" var="w4">
+											<c:if test="${w4.writer eq sessionScope.member.memberId && w4.sellCommentNo eq sc.sellCommentNo}">
+											<a class="sell_commentBtn" href="javascript:void(0)">신고완료</a>
+											</c:if>
+											<c:if test="${w4.writer ne sessionScope.member.memberId && w4.sellCommentNo eq sc.sellCommentNo }">
+												<a href="javascript:void(0)" class="sell_commentBtn"
+											onclick="sellCommentWarning('${s.sellNo }','${sc.sellRef }','${sc.sellCommentNo}','${sessionScope.member.memberId }')">신고</a>
+											</c:if>
+											</c:forEach>
+											</c:if>
 											</c:if>
 										<c:if
 											test="${not empty sessionScope.member && sessionScope.member.memberId == sc.sellCommentWriter }">
@@ -671,8 +694,12 @@ legend{
 				$(obj).parents('form').prev().children().show();
 				$(obj).parents('form').remove();
 			}
-		 function warning(sellCommentNo,memberId){
-		      location.href="/warning?PageNo="+sellCommentNo+"&sellRef="+sellRef+"&memberId="+memberId+"&warningType=4";
+		 
+		 function sellWarning(sellNo,memberId,sellRef){
+			 location.href="/warning?PageNo="+sellNo+"&sellNo="+sellNo+"&sellRef="+sellRef+"&memberId="+memberId+"&warningType=3";
+		 }
+		 function sellCommentWarning(sellNo,sellRef,sellCommentNo,memberId){
+		      location.href="/warning?PageNo="+sellCommentNo+"&sellNo="+sellNo+"&memberId="+memberId+"&sellRef="+sellRef+"&warningType=4";
 		 }
 		 
 			function deleteComment(sellCommentNo, sellRef){

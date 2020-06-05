@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import review.model.vo.Review;
+import sell.model.vo.Sell;
+import sellComment.model.vo.SellComment;
 import warning.model.vo.Warning;
 
 public class WarningDao {
@@ -115,32 +117,77 @@ public class WarningDao {
 		return list;
 	}
 
-	public ArrayList<Warning> Search4Warning(Connection conn, int sellComment) {
+	public ArrayList<SellComment> Search4Warning(Connection conn, String memberId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query ="select * from warning where warning_type=?";
-		ArrayList<Warning> list = new ArrayList<Warning>();
+		String query ="select sell_comment_no,(select warning_writer from warning where sell_comment_no = warning_page_no and warning_writer=?) as writer from sell_comment";
+		ArrayList<SellComment> list = new ArrayList<SellComment>();
 		try {
-			pstmt=conn.prepareStatement(query);
-			
-			pstmt.setInt(1,sellComment);
-			rset= pstmt.executeQuery();
-			while(rset.next()) {
-				Warning w = new Warning();
-				w.setWarningNo(rset.getInt("warning_no"));
-				w.setWarningPageNo(rset.getInt("warning_page_no"));
-				w.setWarningWriter(rset.getString("warning_writer"));
-				w.setWarningType(rset.getInt("warning_type"));
-				
-				list.add(w);
-			}
+		   pstmt=conn.prepareStatement(query);
+		      pstmt.setString(1, memberId);
+		      rset= pstmt.executeQuery();
+		      while(rset.next()) {
+		         SellComment sc = new SellComment();
+
+		         //쿼리문에서 가져오는 값만 가져오기!!!
+
+		         sc.setSellCommentNo(rset.getInt("sell_comment_no"));
+		         sc.setWriter(rset.getString("writer"));
+		         System.out.println("sc :"+sc.getWriter());
+		         list.add(sc);
+		      }
+		   } catch (SQLException e) {
+		      // TODO Auto-generated catch block
+		      e.printStackTrace();
+		   }finally {
+		      JDBCTemplate.close(rset);
+		      JDBCTemplate.close(pstmt);
+		   }
+		return list;
+	}
+	
+	public int sellWarning(Connection conn, int sellNo, int sellWarning) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = "update sell set sell_warning=? where sell_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (sellWarning + 1));
+			pstmt.setInt(2, sellNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rset);
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+		return result;
+	}
+
+	public ArrayList<Sell> Search3Warning(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query ="select sell_no,(select warning_writer from warning where sell_no = warning_page_no and warning_writer=?) as writer from sell";
+		ArrayList<Sell> list = new ArrayList<Sell>();
+		try {
+		   pstmt=conn.prepareStatement(query);
+		      pstmt.setString(1, memberId);
+		      rset= pstmt.executeQuery();
+		      while(rset.next()) {
+		         Sell s = new Sell();
+
+		         s.setSellNo(rset.getInt("sell_no"));
+		         s.setWriter(rset.getString("writer"));
+		         System.out.println("n :"+s.getWriter());
+		         list.add(s);
+		      }
+		   } catch (SQLException e) {
+		      // TODO Auto-generated catch block
+		      e.printStackTrace();
+		   }finally {
+		      JDBCTemplate.close(rset);
+		      JDBCTemplate.close(pstmt);
+		   }
 		return list;
 	}
 

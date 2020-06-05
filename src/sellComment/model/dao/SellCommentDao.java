@@ -114,23 +114,7 @@ public class SellCommentDao {
 		return sell;
 	}
 
-	public int sellWarning(Connection conn, int sellNo, int sellWarning) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-
-		String query = "update sell set sell_warning=? where sell_no=?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, (sellWarning + 1));
-			pstmt.setInt(2, sellNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}
+	
 
 	public int sellCommentDelete(Connection conn, int sc) {
 		PreparedStatement pstmt = null;
@@ -264,5 +248,24 @@ public class SellCommentDao {
 		}
 		return result;
 
+	}
+
+	public int sellWarning(Connection conn, int pageNo, int sellWarning) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update sell set sell_warning=? where sell_no=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, (sellWarning+1));
+			pstmt.setInt(2, pageNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+	}
+	return result;
 	}
 }

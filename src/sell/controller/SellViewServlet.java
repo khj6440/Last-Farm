@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
+import sell.model.vo.Sell;
 import sellComment.model.service.SellCommentService;
+import sellComment.model.vo.SellComment;
 import sellComment.model.vo.SellViewData;
 import warning.model.service.WarningService;
 import warning.model.vo.Warning;
@@ -43,16 +46,24 @@ public class SellViewServlet extends HttpServlet {
 				//3. 비즈니스 로직
 				SellViewData svd = new SellCommentService().selectOneSell(sellNo); //기존에 n만 넘기던 것을 댓글이 추가되면서 list도 넘기게 된다
 				Member m = new SellCommentService().selectOneWriter(sellWriter);
-//				int sell = 3;
-				int sellComment = 4;
-//				ArrayList<Warning> w = new WarningService().searchWarning(sell);
-				ArrayList<Warning> w4 = new WarningService().search4Warning(sellComment);
+				
+				HttpSession session = request.getSession();
+				Member m2 = (Member) session.getAttribute("member");
+				if(m2!=null) {
+				String memberId = m2.getMemberId();
+				System.out.println(memberId);
+				
+				ArrayList<Sell> w3 = new WarningService().search3Warning(memberId);
+				ArrayList<SellComment> w4 = new WarningService().search4Warning(memberId);
+				System.out.println("신고자 이름 : "+ w4.get(0).getWriter());
+				request.setAttribute("w3", w3);
+				request.setAttribute("w4", w4);
+				}
 				//4. 결과처리
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/sell/sellPage.jsp");
 				request.setAttribute("s", svd.getS());
 				request.setAttribute("list", svd.getList());
 				request.setAttribute("m", m);
-				request.setAttribute("w4", w4);
 				//svd 자체를 넘겨주어도 된다.
 				rd.forward(request, response);
 	}
