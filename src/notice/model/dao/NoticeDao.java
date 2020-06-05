@@ -203,11 +203,8 @@ public class NoticeDao {
 
 	public int insertNotice(Connection conn,Notice n) {
 		PreparedStatement pstmt = null;
-		String query = "insert into Notice values(seq_notice.nextval,?,?,?,sysdate,?,?)";
+		String query = "insert into notice values(seq_notice.nextval,?,?,?,sysdate,?,?)";
 		int result = 0;
-		if( n !=null) {
-			System.out.println(10);
-		}
 		try {
 			
 			pstmt = conn.prepareStatement(query);
@@ -227,6 +224,7 @@ public class NoticeDao {
 		}
 		
 		System.out.println(result);
+		
 		return result;
 		
 		

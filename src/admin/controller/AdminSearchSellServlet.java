@@ -44,13 +44,22 @@ public class AdminSearchSellServlet extends HttpServlet {
 		
 		SellPageData pd = new AdminService().searchSell(reqPage,reqCount,searched);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageSell.jsp");
-
+		
+		
+		RequestDispatcher rd = null;
+		if(pd.getList().isEmpty() && pd.getTotalCount()!=0) {
+			System.out.println("전페이지 요청");
+			rd =request.getRequestDispatcher("/adminSearchSell?reqCount="+reqCount+"&reqPage="+(reqPage-1)+"&search="+searched);
+		}else {
+			rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageSell.jsp");
+		}
+		
 		request.setAttribute("list", pd.getList());
 		request.setAttribute("pageNavi", pd.getPageNavi());
 		request.setAttribute("totalPage", pd.getTotalPage());
 		request.setAttribute("totalCount", pd.getTotalCount());
 		
+		request.setAttribute("search",searched);
 		rd.forward(request, response);
 	}
 

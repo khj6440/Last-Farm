@@ -20,6 +20,7 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 <!--    부트스트랩(다운)과 jQuery 불러오기 종료-->
 
+
 <!-- 구글 폰트 링크-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Jua&display=swap"
@@ -29,23 +30,18 @@
 <title>Insert title here</title>
 <!-- header,footer 링크-->
 
-<link rel="stylesheet" href="/css/header/header.css?after">
-<link rel="stylesheet" href="/css/footer/footer.css">
 <link rel="stylesheet" href="/css/notice/noticeList.css">
+<link rel="stylesheet" href="/css/header/header.css">
+<link rel="stylesheet" href="/css/footer/footer.css">
 <!--  header,footer 종료  -->
 </head>
 <style>
 .noticeIn {
 	width: 80%;
-	float: left;
-}
-
-#sideTap {
-	padding-top: 50px;
 }
 
 .ntcWrite_Wrap {
-	padding-top: 50px;
+	overflow: hidden;
 }
 
 .ntcWrite_Wrap>* {
@@ -53,7 +49,7 @@
 }
 
 .h2Center {
-	padding-left: 250px;
+	text-align: center;
 }
 
 .divCenter {
@@ -61,56 +57,104 @@
 }
 
 .ntcWrapeed {
-	width: 70%;
-	margin: 0 auto;
+	width: 80%;
+	/* margin: 0 auto; */
+	margin-left: 250px;
+}
+
+.content-wrap {
+	width: 1190px;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+.modify_a {
+	color: white;
+}
+
+.modify_a:hover {
+	color: white;
+	text-decoration: none;
+	
+}
+
+.mb-3>label {
+	font-size: 20px;
+}
+
+.mb-3>.contentHtml {
+	font-size: 15px;
+	border: 1.2px solid black;
+	border-radius: 5px;
+	padding: 15px;
+}
+.button_wrap{
+	float: right;
+	
+}
+#notiveBack{
+	margin-left:300px;
+	width:150px;
 }
 </style>
 <body>
-	<div class="button_wrap">
-		<button class="btn btn-dark">
-			<a href="/noticeModify?noticeNo=${n.noticeNo }">수정하기</a>
-		</button>
-		<button class="btn btn-dark">
-			<a href="/noticeDelete?noticeNo=${n.noticeNo }">삭제하기</a>
-		</button>
-		<c:if test="${ sessionScope.m.memberId eq 'admin' }">
-		</c:if>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<div class="community_sideTap" id="sideTap">
+		<div class="sideTap_a1">
+			<a href="#">공지사항</a>
+		</div>
+		<div class="sideTap_a1">
+			<a href="/questionList?reqPage=1">자주 묻는 질문</a>
+		</div>
+		<div class="sideTap_a1">
+			<a href="#">리뷰게시판</a>
+		</div>
 	</div>
-	<div class="ntcWrite_Wrap">
-		<div class="ntcWrapeed">
-			<div class="community_sideTap" id="sideTap">
-				<div class="sideTap_a1">
-					<a href="#">공지사항</a>
-				</div>
-				<div class="sideTap_a1">
-					<a href="/questionList?reqPage=1">자주 묻는 질문</a>
-				</div>
-				<div class="sideTap_a1">
-					<a href="#">리뷰게시판</a>
-				</div>
-			</div>
-			<div class="noticeIn">
-				<h2 class="h2Center">공지사항</h2>
-				<div class="mb-3">
-					<label for="writer">작성자 : &nbsp; ${n.noticeWriter }</label>
-				</div>
+	<div class="content-wrap">
 
-				<div class="mb-3">
-					<label for="title">제목 : ${n.noticeTitle }</label>
-				</div>
-				<div class="mb-3">
-					<label for="img">참조 이미지 :</label>
-					<div class="img-viewer">
-						<img id="img-view" width="350px" src="/imgs/${n.noticeFilename }">
+		<div class="ntcWrite_Wrap">
+			<div class="ntcWrapeed">
+
+				<div class="noticeIn">
+					<br><br><br><br>
+					<h2 class="h2Center">공지사항</h2>
+					<div class="button_wrap">
+						<c:if test="${ sessionScope.member.memberId eq 'admin' }">
+						<button class="btn btn-dark">
+							<a class="modify_a" href="/noticeModify?noticeNo=${n.noticeNo }">수정하기</a>
+						</button>
+						<button class="btn btn-dark">
+							<a class="modify_a" href="/noticeDelete?noticeNo=${n.noticeNo }">삭제하기</a>
+						</button>
+						</c:if>
 					</div>
-				</div>
-				<div class="mb-3">
-					<label for="content">내용 : </label>
-					<div>${n.noticeContent }</div>
+
+					<div class="mb-3">
+						<label for="writer">작성자 : &nbsp; ${n.noticeWriter }</label>
+					</div>
+
+					<div class="mb-3">
+						<label for="title">제목 : ${n.noticeTitle }</label>
+					</div>
+					<div class="mb-3">
+						<label for="img">참조 이미지 :</label>
+						<div class="img-viewer">
+							<c:if test="${not empty n.noticeFilename }">
+							<img id="img-view" width="350px" height="300px" src="/imgs/${n.noticeFilename }">
+							</c:if>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="content">내용 : </label>
+						<div class="contentHtml">${n.noticeContent }</div>
+					</div>
+					<input type="button" class="btn btn-dark" id="notiveBack"value="돌아가기" onclick="location.href='noticeList?reqPage=1'">
+					<br><br><br><br>
 				</div>
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 
 </html>

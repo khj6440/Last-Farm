@@ -29,10 +29,10 @@
 
 <title>Insert title here</title>
 <!-- header,footer 링크-->
-
-<link rel="stylesheet" href="/css/header/header.css?after">
-<link rel="stylesheet" href="/css/footer/footer.css">
 <link rel="stylesheet" href="/css/notice/noticeList.css">
+<link rel="stylesheet" href="/css/header/header.css">
+<link rel="stylesheet" href="/css/footer/footer.css">
+
 <!--  header,footer 종료  -->
 
 <Script>
@@ -96,87 +96,97 @@
 </Script>
 <style>
 
-.noticeIn{
-	width:80%;
-	float:left;
-	
-}
-#sideTap{
+.ntcWrite_Wrap {
+	width:1280px;
+	margin: 0 auto;
 	padding-top: 50px;
+	overflow:hidden;
 }
-.ntcWrite_Wrap{
-	padding-top: 50px;
-}
-.ntcWrite_Wrap>*{
+
+.ntcWrite_Wrap>* {
 	font-family: 'Jua', sans-serif;
 }
-.h2Center{
-	padding-left:250px;
+.noticeIn {
+	width: 80%;
+	margin-left:170px;
 }
-.divCenter{
-	padding-left:280px;
+
+.h2Center {
+	padding-left: 220px;
 }
-.ntcWrapeed{
-	width:70%;
-	margin:0 auto;
+
+.divCenter {
+	
+	margin-left: 250px;
+	margin-bottom:40px;
+}
+.divCenter>*{
+	width:60px;
+}
+.ntcWrapeed {
+	width: 80%;
+	margin: 0 auto;
+}
+.mb-3>label{
+	font-size:20px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	
+	<div class="community_sideTap" id="sideTap">
+				<div class="sideTap_a1">
+					<a href="#">공지사항</a>
+				</div>
+				<div class="sideTap_a1">
+					<a href="/questionList?reqPage=1">자주 묻는 질문</a>
+				</div>
+				<div class="sideTap_a1">
+					<a href="#">리뷰게시판</a>
+				</div>
+			</div>
 	<div class="ntcWrite_Wrap">
 		<div class="ntcWrapeed">
-		<div class="community_sideTap" id="sideTap">
-			<div class="sideTap_a1">
-				<a href="#">공지사항</a>
-			</div>
-			<div class="sideTap_a1">
-				<a href="/questionList?reqPage=1">자주 묻는 질문</a>
-			</div>
-			<div class="sideTap_a1">
-				<a href="#">리뷰게시판</a>
-			</div>
-		</div>
-		<div class="noticeIn">
-			<h2 class="h2Center">공지사항 작성하기</h2>
-			<form action="/noticeInsert" method="post" id="frm"
-				enctype="multipart/form-data">
-				<div class="mb-3">
-					<label for="writer">작성자 : &nbsp;
-						${sessionScope.member.memberId }</label> <input type="hidden"
-						name="writer" value="${sessionScope.member.memberId }">
-				</div>
-				<div class="mb-3">
-					<label for="title">제목 :</label> <input type="text" id="title" class="form-control alng"
-						name="title" style="width: 650px" />
-	
-				</div>
-				<div class="mb-3">
-					<label for="filename">첨부 이미지 :</label> <input type="file"
-						name="filename" onchange="loadImg(this);">
-				</div>
-				<div class="mb-3">
-					<label for="img-viewer">이미지보기</label>
-					<div img="img-viewer">
-						<img id="img-view" width="350px">
+			
+			<div class="noticeIn">
+				<h2 class="h2Center">공지사항 작성하기</h2>
+				<br><br>
+				<form action="/noticeInsert" method="post" id="frm"
+					enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="writer">작성자 : 
+							${sessionScope.member.memberId }</label> <input type="hidden"
+							name="writer" value="${sessionScope.member.memberId }">
 					</div>
-				</div>
-				<div class="mb-3">
-					<label for="content">내용</label>
-					<textarea name="content" id="content" rows="10" cols="100"
-					style="width: 652px; height: 412px;"></textarea>
-				</div>
-				<div class="divCenter">
-					<input type="button"
-				id="savebutton" value="완료" /> <input type="button" value="취소"
-				onclick="func1();" />
-				</div>
-			</form>	
-		</div>
+					<div class="mb-3">
+						<label for="title">제목 : </label> &nbsp;&nbsp;<input type="text" id="title"
+							class="form-control alng" name="title" />
+
+					</div>
+					<div class="mb-3">
+						<label for="filename">첨부 이미지 :</label> <input type="file"
+							name="filename" onchange="loadImg(this);">
+					</div>
+					<div class="mb-3">
+						<label for="img-viewer">이미지보기</label>
+						<div img="img-viewer">
+							<img id="img-view" width="350px">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="content">내용 :</label>
+						<textarea name="content" id="content" rows="10" cols="100"
+							style="width: 652px; height: 412px;"></textarea>
+					</div>
+					<div class="divCenter">
+						<input type="button" id="savebutton" value="완료" class="btn btn-dark"/> <input
+							type="button" value="취소" onclick="func1();"  class="btn btn-dark"/>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

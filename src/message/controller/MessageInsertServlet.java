@@ -30,6 +30,7 @@ public class MessageInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String msgReceiveId = request.getParameter("msgReceiveId");
 		boolean check = new MessageService().checkId(msgReceiveId);
 		PrintWriter out = response.getWriter();

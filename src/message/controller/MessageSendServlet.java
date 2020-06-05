@@ -31,6 +31,7 @@ public class MessageSendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Message msg = new Message();
 		msg.setMsgContent(request.getParameter("msgContent"));
 		msg.setMsgReceiveId(request.getParameter("msgReceiveId"));

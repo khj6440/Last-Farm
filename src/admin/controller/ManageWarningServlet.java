@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminService;
+import admin.model.vo.SellPageData;
+
 /**
  * Servlet implementation class ManageWarningServlet
  */
@@ -28,7 +31,11 @@ public class ManageWarningServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageWarning.html");
+		int totalCount = new AdminService().totalWarningCount();
+		System.out.println(totalCount);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/admin/manageWarning.jsp");
+		request.setAttribute("totalCount", totalCount);
 		rd.forward(request, response);
 	}
 

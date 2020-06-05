@@ -3,6 +3,7 @@ package message.model.vo;
 import java.sql.Date;
 
 public class Message {
+
    private int msgNo;
    private String msgTitle;
    private String msgSendId;
@@ -10,6 +11,7 @@ public class Message {
    private String msgReceiveId;
    private Date msgDate;
    private int msgRead;
+   
    
    public Message(int msgNo, String msgTitle, String msgSendId, String msgContent, String msgReceiveId, Date msgDate) {
       super();
@@ -82,6 +84,5 @@ public class Message {
       this.msgRead = msgRead;
    }
    
-   
-      
+    
 }

@@ -28,6 +28,11 @@
 body {
 	padding-top: 70px;
 	padding-bottom: 30px;
+	/* 크롬에서 스크롤바를 없애기 위한 방법 코드.. */
+	overflow-x:hidden; 
+	overflow-y:hidden;"
+
+
 }
 
 .noticeIn {
@@ -70,6 +75,12 @@ body {
 .contt{
 	width:
 }
+.btn{
+	margin-left: 160px;
+	width:60px;
+	
+	
+}
 
 </style>
 
@@ -88,7 +99,7 @@ body {
 				success : function(data) {
 					if (data != 'true') {
 						alert("입력하신 회원이 없습니다.");
-						$("#msgReceiveId").val("아이디가 없습니다.");
+						$("#msgReceiveId").val("");
 						$("#msgReceiveId").css("border", "1.2px solid red");
 
 					} else {
@@ -109,13 +120,21 @@ body {
 
 <body>
 	<div class="msg_wrap">
-		<form action="/messageInsert" method="post" id="msgSend">
+		<form action="/messageInsert2" method="post" id="msgSend">
 			<h2 class="h2Center">쪽지 보내기</h2>
-           
+           	<c:if test="${not empty sessionScope.member.memberId }">
 			<div class="mb-3">
-				<label>작성자 : ${sessionScope.m.memberId }</label> <input
-					type="hidden" value=${sessionScope.m.memberId } name="msgSendId">
+				<label>작성자 : ${sessionScope.member.memberId }</label> <input
+					type="hidden" value=${sessionScope.member.memberId } name="msgSendId">
 			</div>
+			</c:if>
+			<c:if test="${empty sessionScope.member.memberId }">
+			<div class="mb-3">
+				<label>작성자 : 관리자</label> <input
+					type="hidden" value="admin" name="msgSendId">
+			</div>
+			</c:if>
+			
 			<div class="mb-3">
 				<label>받는사람</label> <input type="text" id="msgReceiveId"
 					class="form-control msgReceiveId" name="msgReceiveId"
@@ -129,7 +148,7 @@ body {
 				<label>내용</label> <input type="text" class="form-control contt"
 					name="msgContent" placeholder="내용을 입력하세요.">
 			</div>
-			<button type="submit" Id="msgPut" onclick="returnmsgfunc();">완료</button>
+			<button type="submit" class="btn btn-outline-warning" onclick="returnmsgfunc();">완료</button>
 		</form>
 	</div>
 </body>

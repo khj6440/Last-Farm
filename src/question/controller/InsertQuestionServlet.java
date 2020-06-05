@@ -34,12 +34,7 @@ public class InsertQuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-//		if(!ServletFileUpload.isMultipartContent(request)) {
-//			request.setAttribute("msg", "자주묻는 질문 타입오류[enctype]");
-//			request.setAttribute("loc", "/");
-//			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-//			return;
-//		}
+
 		Question q = new Question();
 		q.setQuestionTitle(request.getParameter("questionTitle"));
 		q.setQuestionContent(request.getParameter("questionContent"));
