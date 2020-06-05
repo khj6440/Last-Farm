@@ -138,19 +138,23 @@
 .sell_table_th {
 	width: 500px;
 	height: 50px;
+	text-align: center;
 }
 
 .sell_table_th2 {
 	line-height: 0.5;
 	width: 80px;
 	height: 50px;
+	text-align: center;
 }
 
 .sell_warning {
 	width: 20px;
 	height: 20px;
 }
-
+#sell_th{
+text-align: center;
+}
 #sell_content_warning {
 	font-size: 10px;
 }
@@ -315,8 +319,13 @@
 	border-top: none;
 	display: none;
 }
+fieldset{
+	border : 1px solid gray;
+	border-radius: 5px;
+}
 legend{
 	text-align : center;
+	margin-bottom : 0;
 }
 .sell_content_wrapper {
 	margin : 0 auto;
@@ -341,7 +350,7 @@ legend{
 }
 
 .sell_comment_h4 {
-	width: 350px;
+	width: 420px;
 	height: 30px;
 	text-align : center;
 	background-color: lightgray;
@@ -349,6 +358,7 @@ legend{
 	margin-bottom: 10px;
 	margin-top: 10px;
 	line-height: 2;
+	font-size:20px;
 }
 
 .sell_goods_inf {
@@ -373,6 +383,7 @@ legend{
 	border-top: 1px solid gray;
 }
 .sellCommentTable{
+	padding : 10px;
 	margin : 0 auto;
 }
 .sellCommentInput {
@@ -450,10 +461,10 @@ legend{
 					</c:if>
 				</tr>
 				<tr>
-					<th colspan="2">${s.sellPrice }원|개당(g)</th>
+					<th colspan="2" id="sell_th">${s.sellPrice }원|개당(g)</th>
 				</tr>
 				<tr>
-					<th colspan="2">
+					<th colspan="2" id="sell_th">
 
 						<div class="sell_table_div">
 							<c:if test="${s.sellType eq 1 }">
@@ -467,7 +478,7 @@ legend{
 					</th>
 				</tr>
 				<tr>
-					<th colspan="2"><c:if
+					<th colspan="2" id="sell_th"><c:if
 							test="${s.sellDeliveryFee eq 0 && s.sellType eq 1}">
 							무료배송<br> 3일 내 도착 보장<br>(오후 2시 전 주문 시 / 전 지역 상품 기준)<br>
 							*지역에 따라 상이*							
@@ -584,7 +595,7 @@ legend{
 										class="sellCommentInput" name="sellCommentContent"
 										placeholder="이곳에 문의 댓글을 남겨주세요.">
 									
-									<button type="submit" class="btn btn-outline-primary">등록</button>
+									<button type="submit" >등록</button>
 								
 								
 							</div>
@@ -762,7 +773,7 @@ legend{
 		//타이머
 		 var now = new Date();
 		 var standD = now.getDate()+1;
-		 var endTime = new Date('2020-05-22');
+		 var endTime = new Date('2020-05-23');
 		         console.log(now.getDate());
 		 var gapTime = endTime-now-32400000;
 		 var SetTime =gapTime/1000;

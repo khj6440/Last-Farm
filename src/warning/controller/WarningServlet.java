@@ -37,15 +37,16 @@ public class WarningServlet extends HttpServlet {
 		int PageNo = Integer.parseInt(request.getParameter("PageNo"));
 		int warningType = Integer.parseInt(request.getParameter("warningType"));
 		String warningWriter = request.getParameter("memberId");
+
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		System.out.println("sellNo : "+sellNo);
-		
-		System.out.println("리뷰넘버 :"+PageNo);
-		System.out.println("리뷰타입 :"+warningType);
-		System.out.println("신고자 :"+warningWriter);
+
 		System.out.println("글번호(신고된 글 번호) : "+sellNo);
 		
 		int result = new WarningService().WarningInsert(PageNo, warningType, warningWriter, sellNo);
+		
+
+		
 		
 	
 		
@@ -59,10 +60,12 @@ public class WarningServlet extends HttpServlet {
 		request.setAttribute("loc", "/reviewList?reqPage=1");
 		}else if(warningType ==2) {
 		request.setAttribute("loc", "/reviewList?reqPage=1");
+
 		}else if(warningType==3) {
 			request.setAttribute("loc", "/sellView?sell_no="+sellNo+"&sell_writer="+warningWriter);
 		}else if(warningType ==4) {
 			request.setAttribute("loc", "/sellView?sell_no="+sellNo+"&sell_writer="+warningWriter);
+
 		}
 		rd.forward(request, response);
 	}

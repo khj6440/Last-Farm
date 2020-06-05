@@ -7,12 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
+ 
+  
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <style>
@@ -805,6 +809,7 @@ form.form1 {
 	border: 0.5px solid gray;
 	border-radius: 3px 3px 3px 3px;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -1101,12 +1106,8 @@ form.form1 {
 												value="${m.memberRoadAddr2 }"> <input
 												id="detailAddr2" name="detailAddr2"
 												style="width: 125px; margin-left: 15px;" type="text"
-												;
-														class="form-control"
-												value="${m.memberDetailAddr2 }">
-
+												class="form-control" value="${m.memberDetailAddr2 }">
 										</div>
-
 									</div>
 									<br>
 									<br>
@@ -1178,32 +1179,12 @@ form.form1 {
 						</c:if>
 						<div class="content-menu"></div>
 						<div class="list">
-							<c:forEach items="${list }" var="l">
-								<div class="product">
-									<div class="p-image">
-										<img src="/imgs/logo1.png" width="100%" height="100%" alt=""
-											srcset="">
-									</div>
-									<div class="p-info">
-										<div class="p-title">
-											<span>${l.sellTitle}</span>
-											<button onclick="" type="button">상세보기</button>
-										</div>
-										<div class="p-price">
-											<fmt:formatNumber value="${l.sellPrice}"
-												pattern="###,###,###,###" />
-											원
-										</div>
-										<div class="p-day">${l.sellWriter }</div>
-										<div class="p-location">구매중 수량 : ${l.sellCount }/${l.sellMax }
-										</div>
-									</div>
-								</div>
-							</c:forEach>
+							<button class="" id="more-btn" totalCount="${totalCount}"
+								currentCount="0" value="">결과더보기 (총 ${totalCount} 건 )</button>
 						</div>
 					</div>
 					<div class="content">
-						<c:if test="${sessionScope.member.memberType eq 1 }">
+						 <c:if test="${sessionScope.member.memberType eq 1 }">
 							<div class="content-title">구매 내역</div>
 						</c:if>
 
@@ -1212,12 +1193,14 @@ form.form1 {
 						</c:if>
 						<div class="content-menu"></div>
 						<div class="list">
-							<c:forEach items="${endList }" var="e">
-					<form class="reviewInsertFrm">
-							<input name="sellEndNo" type="hidden"> <input name="memberId"
-							type="hidden"> <input name="sellEndWriter" type="hidden"
-							value="${e.sellEndWriter}">
-					</form>
+						<button class="" id="more-btn2" totalCount="${totalEndCount}"
+								currentCount="0" value="">결과더보기 (총 ${totalEndCount} 건 )</button>
+						<!-- 	<c:forEach items="${endList }" var="e">
+								<form class="reviewInsertFrm">
+									<input name="sellEndNo" type="hidden"> <input
+										name="memberId" type="hidden"> <input
+										name="sellEndWriter" type="hidden" value="${e.sellEndWriter}">
+								</form>
 
 								<div class="product">
 									<div class="p-image">
@@ -1228,7 +1211,8 @@ form.form1 {
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
 											<c:if test="${sessionScope.member.memberType eq 1}">
-												<button onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
+												<button
+													onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
 													type="button">리뷰작성</button>
 											</c:if>
 										</div>
@@ -1242,6 +1226,7 @@ form.form1 {
 
 
 							</c:forEach>
+							 -->
 						</div>
 					</div>
 
@@ -1252,7 +1237,7 @@ form.form1 {
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 
@@ -1264,5 +1249,145 @@ form.form1 {
 
 		});
 	});
+
+	function viewDetail(num,id){
+		location.href="/sellView?sell_no="+num+"&sell_writer="+id;
+	}
+	function fn_more(start) {
+		var param = {
+			start : start,
+			writer : "${sessionScope.member.memberId}"
+		};
+		$.ajax({
+					url : "/presentMore",
+					data : param,
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						
+						var html = "";
+						for (var i = 0; i < data.length; i++) {
+							html+='<div class="product">';
+							html+='<div class="p-image">';
+							html+='<img src="/imgs/'+data[i].thumbnail+'" width="100%" height="100%">';
+							html+='</div>';
+							html+='<div class="p-info">';
+							html+='<div class="p-title">';
+							html+='<span>'+data[i].sellTitle+'</span>';
+							html+="<button onclick='viewDetail("+data[i].sellNo+","+'"'+data[i].sellWriter+'"'+")'";
+							html+=' type="button">상세보기</button>';
+							html+='</div>';
+							html+='<div class="p-price">';
+							html+= data[i].sellPrice+"원";
+							html+='<div class="p-day">~'+data[i].sellEndDate+'까지</div>';
+							html+='<div class="p-location">구매중 수량 : '+data[i].sellCount+"/"+data[i].sellMax;
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+						}
+						$(".content:nth-child(2)>.list>button").before(html);
+						$("#more-btn").val(Number(start) + 5);
+						$("#more-btn").attr(
+								"currentCount",
+								Number($("#more-btn").attr("currentCount"))
+										+ data.length);
+						var totalCount = Number($("#more-btn").attr("totalCount"));
+						var currentCount = Number($("#more-btn").attr("currentCount"));
+						
+						if (totalCount <= currentCount) {
+							console.log("test");
+							$("#more-btn").attr("disabled", true);
+							$("#more-btn").css("cursor", "not-allowed");
+						}
+
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+	}
+	function fn_more2(start) {
+		var param = {
+			start : start,
+			writer : "${sessionScope.member.memberId}"
+		};
+		$.ajax({
+					url : "/pastMore",
+					data : param,
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						
+						
+						
+						var html = "";
+						for (var i = 0; i < data.length; i++) {
+							html+='<form class="reviewInsertFrm">';
+							html+='<input name="sellEndNo" type="hidden">';
+							html+='<input name="memberId" type="hidden">';
+							html+='<input name="sellEndWriter" type="hidden" value="${e.sellEndWriter}">';
+							html+='</form>';
+							html+='<div class="product">';
+							html+='<div class="p-image">';
+							html+='<img src="/imgs/'+data[i].thumbnail+'" width="100%" height="100%">';
+							html+='</div>';
+							html+='<div class="p-info">';
+							html+='<div class="p-title">';
+							html+='<span>'+data[i].sellEndTitle+'</span>';
+							if(${sessionScope.member.memberType eq 1}){
+								html+="<button onclick='reviewInsert("+data[i].sellEndNo+","+'"'+data[i].sellEndWriter+'"'+")'";
+								html+=' type="button">리뷰작성</button>';
+							}
+							html+='</div>';
+							html+='<div class="p-price">';
+							html+= "판매완료";
+							html+='<div class="p-day">~'+data[i].sellEndDate+'까지</div>';
+							html+='<div class="p-location">';
+							html+="<i class='fas fa-map-marker-alt'></i>"+data[i].sellItemOrigin
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+							html+='</div>';
+						}
+						$(".content:nth-child(3)>.list>button").before(html);
+						$("#more-btn2").val(Number(start) + 5);
+						$("#more-btn2").attr("currentCount",Number($("#more-btn2").attr("currentCount"))+ data.length);
+						var totalCount = Number($("#more-btn2").attr("totalCount"));
+						var currentCount = Number($("#more-btn2").attr("currentCount"));
+						if (totalCount <= currentCount) {
+							console.log("test2");
+							$("#more-btn2").attr("disabled", true);
+							$("#more-btn2").css("cursor", "not-allowed");
+						}
+
+					},
+					error : function() {
+						console.log("실패")
+					}
+				})
+	}
+	
+	$(function() {
+		fn_more(1);
+		fn_more2(1);
+		$("#more-btn").click(function() {
+			fn_more($(this).val());
+		});
+		
+		$("#more-btn2").click(function() {
+			fn_more2($(this).val());
+		});
+	})
 </script>
+<style>
+	#more-btn,#more-btn2{
+		width: 100%;
+		height: 70px;
+		font-size: 20px;
+		
+	}
+</style>
 </html>

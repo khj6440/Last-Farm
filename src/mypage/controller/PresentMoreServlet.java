@@ -1,9 +1,8 @@
-package review.controller;
+package mypage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import review.model.service.ReviewService;
-import review.model.vo.Review;
-import sellEnd.model.vo.SellEnd;
+import com.google.gson.Gson;
+
+import member.model.vo.Member;
+import mypage.model.service.MypageService;
+import sell.model.vo.Sell;
 
 /**
- * Servlet implementation class ReviewInsertFrmServlet
+ * Servlet implementation class PresentMoreServlet
  */
-@WebServlet(name = "ReviewInsertFrm", urlPatterns = { "/reviewInsertFrm" })
-public class ReviewInsertFrmServlet extends HttpServlet {
+@WebServlet(name = "PresentMore", urlPatterns = { "/presentMore" })
+public class PresentMoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewInsertFrmServlet() {
+    public PresentMoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +35,23 @@ public class ReviewInsertFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int sellEndNo = Integer.parseInt(request.getParameter("sellEndNo"));
-		String sellEndWriter = request.getParameter("sellEndWriter");
-	
-		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/notice/reviewInsert.jsp");
-		HttpSession session = request.getSession();
-		session.setAttribute("sellEndNo", sellEndNo);
-		session.setAttribute("sellEndWriter", sellEndWriter);
-		request.setAttribute("loc", "/");
-		rd.forward(request, response);
+		// TODO Auto-generated method stub
+		int start = Integer.parseInt(request.getParameter("start"));
+		String memberId = request.getParameter("writer");
+		Member m = new MypageService().selectOneMember(memberId);
+		ArrayList<Sell> list=null;	
+		if(m.getMemberType()==2) {
+			list = new MypageService().presentMore(start,memberId);
+		}else if(m.getMemberType()==1){
+			list = new MypageService().presentMore2(start, memberId);
+			System.out.println("소비자 중리스트사이즈 : "+list.size());
+		}else {
+			System.out.println("둘다아님");
+		}
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(list,response.getWriter());
 	}
 
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

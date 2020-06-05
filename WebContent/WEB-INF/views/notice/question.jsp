@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>자주 묻는 질문</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -31,17 +31,19 @@
 	width: 20%;
 	float: left;
 	margin-top: 12%;
+	margin-left: -100px;
 }
 
 .community_content {
 	width: 70%;
-	height:900px;
-	margin-left: 20%;
+
+	margin-left: 15%;
+	
 }
 
 .question {
 	width: 90%;
-	height: 75%;
+	
 	margin-left: 5%;
 }
 
@@ -87,11 +89,6 @@
 	margin-left: 55%;
 }
 
-.btn3 {
-	margin-left: 87%;
-	margin-top: 2%;
-}
-
 .question_li1 {
 	border-bottom: 0.1px solid #D9D4CF;
 }
@@ -126,14 +123,14 @@
 	text-align: center;
 	width: 1000px;
 	margin: 0 auto;
-	margin-top: -80px;
+	
 }
-.d1{
+.question_List_d1{
 	text-align:right;
 	margin-top:-7%;
 	
 }
-.dd1{
+.question_List_d2{
 	margin:20px;
 }
 .question_tap{
@@ -159,7 +156,7 @@ border-radius: 5px;
 		$(".question_li1").click(function() {
 			$(this).find(".question_sub2").toggle();
 			$("#pageNavi").css("margin-top","0px");
-			$(".community_content").css("height","1000px");
+			
 		});
 	});
 </script>
@@ -178,7 +175,7 @@ border-radius: 5px;
 			<div class="sideTap_a1">
 				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
 			</div>
-		</div>
+		</div> 
 		<div class="community_content">
 			<br><br>
 			<h1 class="question_h1" style="font-weight: bold">자주 묻는 질문</h1><br>
@@ -191,20 +188,19 @@ border-radius: 5px;
 
 			</c:if>
 			<input type="text" class="question_search" name="keyword" value="${keyword }" placeholder="제목을 입력해주세요">
-			<button type="submit" class="btn btn-outline-primary">검색</button>
-			<a href="/questionList?reqPage=1" class="btn btn-outline-primary">전체 목록보기</a>
+			<button type="submit" class="btn btn-dark">검색</button>
+			<a href="/questionList?reqPage=1" class="btn btn-dark">전체 목록보기</a>
 			</form>
 			<!--<c:if test="${sessionScope.member.memberId=='admin' }">
 				<a class="question_add" href="insertQuestion">글쓰기</a>
 			</c:if>-->
-			
 			<div class="question">
 				<ul class="question_sub1">
 					<c:forEach items="${list }" var="n">
 						<li class="question_li1 question_li2">
 							<div class="question_List">
 								<a style="font-weight: bold">Q${n.questionNo}. ${n.questionTitle }</a>
-								<div class="d1">
+								<div class="question_List_d1">
 									<c:if test="${sessionScope.member.memberId=='admin' }">
 									<a class="question_update btn btn-outline-dark" href="javascript:void(0)" onclick="updateQuestion('${n.questionNo}')">수정</a>	
 									<a class="question_del btn btn-outline-dark" href="javascript:void(0)" onclick="deleteQuestion('${n.questionNo}')">삭제</a>	
@@ -212,7 +208,7 @@ border-radius: 5px;
 								</div>
 							</div>
 							<ul class="question_sub2">
-								<li class="question_li3"><div class="dd1"><a>${n.contentBr }</a></div></li>
+								<li class="question_li3"><div class="question_List_d2"><a>${n.contentBr }</a></div></li>
 							</ul>
 						</li>
 					</c:forEach>
@@ -220,9 +216,9 @@ border-radius: 5px;
 				</ul>
 			
 			</div>
-		
+	
 		</div>
-	<div id="pageNavi">${pageNavi }</div><br><br>	
+	<div id="pageNavi">${pageNavi }</div><br><br>		
 	</div>
 	
 	</section>

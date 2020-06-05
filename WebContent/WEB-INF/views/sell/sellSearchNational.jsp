@@ -310,7 +310,7 @@
       });
       //countdown
       var now = new Date();
-      var endTime = new Date('2020-05-22');
+      var endTime = new Date('2020-05-23');
       var gapTime = endTime - now - 32400000;
       var SetTime = gapTime / 1000;
       var SetMin = SetTime / 60;
