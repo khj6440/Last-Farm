@@ -95,16 +95,10 @@
 	}
 </Script>
 <style>
-.noticeIn {
-	width: 80%;
-	float: left;
-}
-
-#sideTap {
-	padding-top: 50px;
-}
 
 .ntcWrite_Wrap {
+	width:1280px;
+	margin: 0 auto;
 	padding-top: 50px;
 	overflow:hidden;
 }
@@ -112,18 +106,25 @@
 .ntcWrite_Wrap>* {
 	font-family: 'Jua', sans-serif;
 }
+.noticeIn {
+	width: 80%;
+	margin-left:170px;
+}
 
 .h2Center {
-	padding-left: 250px;
+	padding-left: 220px;
 }
 
 .divCenter {
-	padding-left: 280px;
-	margin-bottom:15px;
+	
+	margin-left: 250px;
+	margin-bottom:40px;
 }
-
+.divCenter>*{
+	width:60px;
+}
 .ntcWrapeed {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 }
 .mb-3>label{
@@ -133,10 +134,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
-	<div class="ntcWrite_Wrap">
-		<div class="ntcWrapeed">
-			<div class="community_sideTap" id="sideTap">
+	<div class="community_sideTap" id="sideTap">
 				<div class="sideTap_a1">
 					<a href="#">공지사항</a>
 				</div>
@@ -147,8 +145,12 @@
 					<a href="#">리뷰게시판</a>
 				</div>
 			</div>
+	<div class="ntcWrite_Wrap">
+		<div class="ntcWrapeed">
+			
 			<div class="noticeIn">
 				<h2 class="h2Center">공지사항 작성하기</h2>
+				<br><br>
 				<form action="/noticeInsert" method="post" id="frm"
 					enctype="multipart/form-data">
 					<div class="mb-3">
@@ -177,8 +179,8 @@
 							style="width: 652px; height: 412px;"></textarea>
 					</div>
 					<div class="divCenter">
-						<input type="button" id="savebutton" value="완료" /> <input
-							type="button" value="취소" onclick="func1();" />
+						<input type="button" id="savebutton" value="완료" class="btn btn-dark"/> <input
+							type="button" value="취소" onclick="func1();"  class="btn btn-dark"/>
 					</div>
 				</form>
 			</div>

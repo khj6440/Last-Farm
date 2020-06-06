@@ -48,10 +48,10 @@ public class NoticeDeleteServlet extends HttpServlet {
 						File delFile = new File(saveDirectory+n.getNoticeFilepath());
 						boolean bool = delFile.delete();
 					}
-					request.setAttribute("msg", "게시물 삭제");
+					request.setAttribute("msg", "해당 게시물이 삭제되었습니다.");
 					request.setAttribute("loc", "/noticeList?reqPage=1");
 				} else {
-					request.setAttribute("msg", "삭제 실패");
+					request.setAttribute("msg", "게시물 삭제 실패!");
 					request.setAttribute("loc", "/noticeView?noticeNo="+noticeNo);
 				}
 				rd.forward(request, response);

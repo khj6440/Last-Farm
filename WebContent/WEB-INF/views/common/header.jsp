@@ -17,7 +17,6 @@
 	<div class="main_body">
 		<div class="header_top">
 			<div class="header_top_login">
-
 				<ul>
 					<c:if test="${empty sessionScope.member}">
 						<li class="nav-item header_top_login_li">
@@ -46,7 +45,7 @@
 				</ul>
 			</div>
 			<div class="header_top_logo">
-				<a class="header_top_logo_a1" href="index.jsp"><img
+				<a class="header_top_logo_a1 index" href="/"><img
 					class="header_top_logo1 header_top_logo2" src="../imgs/Logo1.png"></a>
 			</div>
 			<div class="header_top_tap">
@@ -82,29 +81,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="header_top_bottom"></div>
-
-<<<<<<< HEAD
-               <ul class="header_top_ul1 jj">
-                  <li class="header_top_li1"><a class="header_top_a1" href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전
-                     지역 상품</a>
-                     </li>
-                  <li class="header_top_li1  header_top_li3"><a
-                     class="header_top_a1" href="/sellView?sell_no=25&sell_writer=id01">지역 상품</a>
-                     </li>
-               </ul>
-               <ul class="header_top_ul1">
-                  <li class="header_top_li1"><a class="header_top_a1" href="/noticeList?reqPage=1">커뮤니티</a>
-                     </li>
-                  <li class="header_top_li1"><a class="header_top_a1" href="">마이페이지</a>
-                     </li>
-               </ul>
-            </div>
-         </div>
-      
+	
       </div>
       <div class="header_top_bottom"></div>
-=======
->>>>>>> origin/HyeokJin
 </body>
 </html>

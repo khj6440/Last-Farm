@@ -69,6 +69,7 @@ public class MypageService {
 		ArrayList<Message> list = new MypageDao().getMsgList(conn, memberId);
 		
 		JDBCTemplate.close(conn);
+		
 		return list;
 	}
 

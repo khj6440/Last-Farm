@@ -75,12 +75,11 @@ body {
 .contt{
 	width:
 }
-#msgPut{
-	margin-left: 150px;
-	width:70px;
-	height:30px;
-	background-color:#ffac05;
-	color:#4a2100;
+.btn{
+	margin-left: 160px;
+	width:60px;
+	
+	
 }
 
 </style>
@@ -121,11 +120,7 @@ body {
 
 <body>
 	<div class="msg_wrap">
-<<<<<<< HEAD
-		<form action="/messageInsertSend" method="post" id="msgSend">
-=======
 		<form action="/messageInsert2" method="post" id="msgSend">
->>>>>>> origin/HyeokJin
 			<h2 class="h2Center">쪽지 보내기</h2>
            	<c:if test="${not empty sessionScope.member.memberId }">
 			<div class="mb-3">
@@ -153,7 +148,7 @@ body {
 				<label>내용</label> <input type="text" class="form-control contt"
 					name="msgContent" placeholder="내용을 입력하세요.">
 			</div>
-			<button type="submit" Id="msgPut" onclick="returnmsgfunc();">완료</button>
+			<button type="submit" class="btn btn-outline-warning" onclick="returnmsgfunc();">완료</button>
 		</form>
 	</div>
 </body>

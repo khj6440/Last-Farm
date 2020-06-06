@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
@@ -14,7 +15,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 * {
 	font-family: 'Jua', sans-serif;
@@ -923,8 +924,7 @@ form.form1 {
 							<li class="tab-li">판매 내역</li>
 						</c:if>
 
-						<li class="tab-li"
-							onclick="location.href='/messageList?check=1&reqPage=1&memberId=${sessionScope.member.memberId }'">쪽지함</li>
+						<li class="tab-li">쪽지함</li>
 					</ul>
 				</div>
 				<div class="contents">
@@ -1213,11 +1213,11 @@ form.form1 {
 						<div class="content-menu"></div>
 						<div class="list">
 							<c:forEach items="${endList }" var="e">
-					<form class="reviewInsertFrm">
-							<input name="sellEndNo" type="hidden"> <input name="memberId"
-							type="hidden"> <input name="sellEndWriter" type="hidden"
-							value="${e.sellEndWriter}">
-					</form>
+								<form class="reviewInsertFrm">
+									<input name="sellEndNo" type="hidden"> <input
+										name="memberId" type="hidden"> <input
+										name="sellEndWriter" type="hidden" value="${e.sellEndWriter}">
+								</form>
 
 								<div class="product">
 									<div class="p-image">
@@ -1228,7 +1228,8 @@ form.form1 {
 										<div class="p-title">
 											<span>${e.sellEndTitle } </span>
 											<c:if test="${sessionScope.member.memberType eq 1}">
-												<button onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
+												<button
+													onclick="reviewInsert('${e.sellEndNo}','${e.sellEndWriter }')"
 													type="button">리뷰작성</button>
 											</c:if>
 										</div>
@@ -1246,23 +1247,199 @@ form.form1 {
 					</div>
 
 					<div class="content">
-						<div class="content-title" id="letter">쪽지함</div>
+						<div class="content-title dis" id="letter">쪽지함</div>
+						<div class="content-menu"></div>
+						<div class="msg-tab">
+							<ul class="msg-ul">
+								<li class="tab-li tab-selected">받은쪽지함</li>
+								<li class="tab-li">보낸쪽지함</li>
+							</ul>
+						</div>
+						<div class="content-menu"></div>
+						
+						<!-- <i class="far fa-envelope"></i> -->
+						<!-- <i class="far fa-envelope-open"></i> -->
+						
+						<!-- 받은 쪽지함  -->
+						<table class="w3-table-all w3-hoverable">
+							<thead>
+								<tr class="th-color">
+									<th>번호</th>
+									<th>제목</th>
+									<th>보낸사람</th>
+									<th>보낸날짜</th>
+									<th>읽음유무</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${msgList }" var="msg">
+									<c:set var="memberId" value="${sessionScope.member.memberId }"/>
+									<c:if test="${msg.msgReceiveId eq memberId}">
+									<tr class="msg-tr">
+										<td>${msg.msgNo }</td>
+										<td><button class="msgView">${msg.msgTitle }</button></td>
+										<td>${msg.msgSendId }</td>
+										<td>${msg.msgDate }</td>
+										<td>
+										<c:if test="${msg.msgRead eq 1 }">
+											<i class="far fa-envelope-open"></i>
+										</c:if>
+										<c:if test="${msg.msgRead eq 0 }">
+											<i class="far fa-envelope"></i>
+										</c:if>
+										</td>
+										
+										<%-- <div class="msg-td-content">${msg.msgContent }</div> --%>
+										
+									</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+						
+						<!-- 보낸 쪽지함 -->
+						<table class="w3-table-all w3-hoverable  show-msgtap">
+							<thead>
+								<tr class="th-color">
+									<th>번호</th>
+									<th>제목</th>
+									<th>보낸사람</th>
+									<th>보낸날짜</th>
+									<th>읽음유무</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${msgList }" var="msg">
+									<c:set var="memberId" value="${sessionScope.member.memberId }"/>
+									<c:if test="${msg.msgSendId eq memberId}">
+									<tr class="msg-tr">
+										<td class="msgNo">${msg.msgNo }</td>
+										<td><button class="msgView">${msg.msgTitle }</button></td>
+										<td>${msg.msgSendId }</td>
+										<td>${msg.msgDate }</td>
+										<td>
+										<c:if test="${msg.msgRead eq 1 }">
+											<i class="far fa-envelope-open"></i>
+										</c:if>
+										<c:if test="${msg.msgRead eq 0 }">
+											<i class="far fa-envelope"></i>
+										</c:if>
+										</td>
+										<%-- <div class="msg-td-content">${msg.msgContent }</div> --%>
+									</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+						
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	
+    
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    
 </body>
+<style>
 
+.msg-ul {
+
+	overflow: hidden;
+	padding-left: 400px;
+	
+}
+.th-color>th{
+	background-color:#ffac05;
+	color:whitesmoke;
+}
+.w3-table-all{
+	width:70%;
+	margin:0 auto;
+	
+}
+
+.show-msgtap{
+	display:none;
+}
+
+.msg-tr a{
+	text-decoration: none;
+	color:black;
+	
+}
+.msg-td-content{
+	
+}
+</style>
 <script>
-	$("#letter").click(function() {
-		$.ajax({
-			url : "/letterList",
-			type : "get",
+	$(function(){
+
+		$(".msg-tab>ul>li").click(function() {
+			$(".msg-tab>ul>li").removeClass("tab-selected");
+			$(this).addClass("tab-selected");
+			var index = $(".msg-tab>ul>li").index($(this));
+			console.log(index);
+			$(".w3-table-all").addClass("show-msgtap");
+			$(".w3-table-all").eq(index).removeClass("show-msgtap");
 
 		});
+
+		
 	});
+
+	 $(".msgView").click(function() {
+		 
+		 var index = $(".msgNo").eq().index(this);
+         
+		$.ajax({
+			url : "/MessageView",
+			data : {
+				memberNo : $(".msgNo").eq(index).val()
+			},
+			type : "post",
+			success:function(data
+                
+				var options = {
+		        height: 600, // sets the height in pixels of the window.
+		        width: 500, // sets the width in pixels of the window.
+		        toolbar: 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
+		        scrollbars: 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
+		        status: 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
+		        resizable: 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
+		        left: 500, // left position when the window appears.
+		        top: 200, // top position when the window appears.
+		        center: 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
+		        createnew: 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
+		        location: 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
+		        menubar: 0 // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
+                
+		    };
+
+		    var parameters = "location=" + options.location +
+		                     ",menubar=" + options.menubar +
+		                     ",height=" + options.height +
+		                     ",width=" + options.width +
+		                     ",toolbar=" + options.toolbar +
+		                     ",scrollbars=" + options.scrollbars +
+		                     ",status=" + options.status +
+		                     ",resizable=" + options.resizable +
+		                     ",left=" + options.left +
+		                     ",screenX=" + options.left +
+		                     ",top=" + options.top +
+		                     ",screenY=" + options.top;
+
+		    // target url
+		    var target = "/messageView?"; 
+		    popup = window.open(target, 'popup', parameters);
+			
+			},
+			error : function() {
+				console.log("서버 전송 실패")
+			}
+		});
+		
+	}); 
 </script>
 </html>

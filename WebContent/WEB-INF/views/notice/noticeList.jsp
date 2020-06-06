@@ -30,16 +30,7 @@
 
 </head>
 <style>
-* {
-	font-family: 'Jua', sans-serif;
-}
-	.question_tap{
-background-color: #ffac05 ;
-border-radius: 5px;
-}
-.question_tap1:hover{
-	color:#4a2100;
-}
+
 </style>
 <script>
 	function function1() {
@@ -53,7 +44,7 @@ border-radius: 5px;
 		}
 		var searchKeyword = document.getElementById("searchKeyword");
 		var regal;
-		regal = /^[0-9]$/;
+		regal = /^\d{1,}$/;
 
 		if (type.value == "noticeNo" && (!regal.test(searchKeyword.value))) {
 
@@ -79,15 +70,36 @@ border-radius: 5px;
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
+	
+	<div class="community_sideTap" id="sideTap">
+			<div class="sideTap_a1">
+				<a href="/noticeList?reqPage=1" class="question_tap question_tap1">공지사항</a>
+			</div>
+			<div class="sideTap_a1">
+				<a href="/questionList?reqPage=1" class="question_tap1">자주 묻는 질문</a>
+			</div>
+			<div class="sideTap_a1">
+				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
+			</div>
+		</div>
+	
+	
 	<div class="wrapped">
+		
 		<div class="title_notice">
-			<h2 class="">공지사항</h2>
+	
+		</div>
+	
+		<div id="table">
+			
+			<h1>공지사항</h1>
+			<br><br>
 			<div class="form_div" >
 
 				<c:if test="${sessionScope.member.memberId=='admin' }">
 				<button class="btn btn-dark write " onclick="link();">글쓰기</button>
 				</c:if>
+				
 				<form class="button_side f-right" action="/searchNotice"
 					method="get">
 					<select class="select_option" name="type" id="type">
@@ -100,20 +112,6 @@ border-radius: 5px;
 						onclick="return function1();">검색</button>
 				</form>
 			</div>
-		</div>
-		<div class="community_sideTap" id="sideTap">
-			<div class="sideTap_a1">
-				<a href="/noticeList?reqPage=1" class="question_tap question_tap1">공지사항</a>
-			</div>
-			<div class="sideTap_a1">
-				<a href="/questionList?reqPage=1" class="question_tap1">자주 묻는 질문</a>
-			</div>
-			<div class="sideTap_a1">
-				<a href="reviewList?reqPage=1" class="question_tap1" >리뷰게시판</a>
-			</div>
-		</div>
-
-		<div id="table">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -136,7 +134,7 @@ border-radius: 5px;
 				</tbody>
 			</table>
 			<div class="pageNavi">
-				<span>${pageNavi }</span><br><br>
+				<span>${pageNavi }</span><br><br><br><br><br><br>
 			</div>
 
 		</div>
@@ -145,5 +143,4 @@ border-radius: 5px;
 	
 
 </body>
-
 </html>

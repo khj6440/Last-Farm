@@ -21,6 +21,10 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 <!--    부트스트랩(다운)과 jQuery 불러오기 종료-->
 
+<!-- w3.css 지원링크 -->
+<link rel="stylesheet" hre="https://www.w3schools.com/w3css/4/w3.css">
+<!--w3.css 지원링크 -->
+
 <!-- 구글 폰트 링크-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Jua&display=swap"
@@ -81,6 +85,9 @@
 			reader.readAsDataURL(f.files[0]);
 			reader.onload = function(e) {
 				$("#img-view").attr("src", e.target.result);
+				$("#img-view").css("width","350px");
+				$("#img-view").css("height","250px");
+				$("#img-view").css("margin-left","200px");
 			}
 
 		} else {
@@ -100,13 +107,11 @@
 </script>
 <style>
 .noticeIn {
-	width: 80%;
-	float: left;
+	width: 70%;
+	margin-left:300px;
+	
 }
 
-#sideTap {
-	padding-top: 50px;
-}
 
 .ntcModify_Wrap {
 	padding-top: 50px;
@@ -121,22 +126,27 @@
 }
 
 .divCenter {
-	padding-left: 280px;
+	padding-left: 290px;
+	
+}
+.divCenter>input{
+	width:80px;
+	height:40px;
 }
 
 .ntcWrapeed {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 	overflow:hidden;
+}
+.font-24{
+	font-size:24px;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
-	<div class="ntcModify_Wrap">
-		<div class="ntcWrapeed">
-			<div class="community_sideTap" id="sideTap">
+	<div class="community_sideTap" id="sideTap">
 				<div class="sideTap_a1">
 					<a href="#">공지사항</a>
 				</div>
@@ -147,32 +157,36 @@
 					<a href="#">리뷰게시판</a>
 				</div>
 			</div>
+	<div class="ntcModify_Wrap">
+		<div class="ntcWrapeed">
+			
 		
 		<div class="noticeIn">
 			<h2 class="h2Center">공지사항 수정하기</h2>
+			<br><br><br>
 			<form action="/noticeModyInsert" method="post" id="frm"
-				enctype="multipart/form-data">
+			 	enctype="multipart/form-data">
 				<input type=hidden name="noticeNo" value="${n.noticeNo }">
 
 				<div class="mb-3">
-					<label for="writer">작성자 : &nbsp; ${n.noticeWriter }</label> <input
+					<label for="writer" class="font-24">작성자 : &nbsp; ${n.noticeWriter }</label> <input
 						type="hidden" name="noticeWriter" value="${n.noticeWriter }">
 				</div>
 				<div class="mb-3">
-					<label for="title">제목 :</label> <input type="text" id="title"
+					<label for="title"  class="font-24">제목 :</label> <input type="text" id="title"
 						class="form-control alng" name="noticeTitle" style="width: 650px"
 						value="${n.noticeTitle }" />
 
 				</div>
 				<div class="mb-3">
-					<label for="img-view">이미지보기</label>
+					<label for="img-view" class="font-24">이미지보기</label>
 					<div class="img-viewer">
-						<img id="img-view" width="350px">
+						<img id="img-view">
 					</div>
 
 				</div>
-				<div class="mb-c">
-					<label for="ffile">첨부파일</label> <input type="hidden" name="status"
+				<div class="mb-3">
+					<label for="ffile"  class="font-24">첨부파일 : </label> <input type="hidden" name="status"
 						value="stay">
 					<c:if test="${not empty n.noticeFilename }">
 						<img src="/imgs/file.png" width="16px" class="delFile">
@@ -180,7 +194,7 @@
 							onchange="loadImg(this);">
 				</div>
 				<div class="mb-c">
-					<label> 첨부된 이미지</label> <span class="delFile">${n.noticeFilename }</span>
+					<label  class="font-24"> 첨부된 이미지 : </label> <span class="delFile">${n.noticeFilename }</span>
 					<button type="button" id="fileDelBtn"
 						class="btn btn-primary btn-sm delFile">파일삭제</button>
 					<!--  삭제하기위한 경로 히든-->
@@ -194,22 +208,23 @@
 				</div>
 
 				<div class="mb-c">
-					<label for="content">내용</label>
+					<label for="content"  class="font-24">내용 : </label>
 					<textarea name="content" id="content" rows="10" cols="100"
-						style="width: 652px; height: 412px;"></textarea>
+						style="width: 720px; height: 412px;"></textarea>
 				</div>
+				<br>
 				<div class="divCenter">
-
-					<input type="button" id="savebutton" value="완료" /> <input
-						type="button" value="취소" onclick="func1();" />
+					<input type="button" id="savebutton" value="완료" class="btn btn-dark"/> 
+					<input
+						type="button" value="취소" onclick="func1();"  class="btn btn-dark"/>
 				</div>
-
+	
 
 			</form>
 		</div>
 	</div>
 </div>
-
+<br><br><br>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 		
 </body>
