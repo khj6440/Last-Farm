@@ -34,7 +34,7 @@ public class WarningService {
 			} else if (warningType == 3) {
 				result3 = new SellCommentDao().sellWarning(conn, PageNo, result2);
 			} else if (warningType == 4) {
-				result3 = new SellCommentDao().sellcommentWarning(conn, PageNo, result2);
+				result3 = new SellCommentDao().sellWarning(conn, PageNo, result2);///수정
 				
 			} else {
 				JDBCTemplate.rollback(conn);
