@@ -5,73 +5,81 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import common.JDBCTemplate;
+import sell.model.vo.SearchTab;
 import sell.model.vo.Sell;
 
 public class SellCategoryDao {
 
-	public int typeCount(Connection conn, String addr, String type1, String type2, String searchWord) {
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			int result = 0;
-			String qAddr = "%"+addr+"%";
-			String query ="select * from sell where sell_type=2 and sell_regional_addr like"+qAddr;
-			if(type1!=null) {
-				String qtype1 = "and sell_category1="+type1;
-				query+=qtype1;
+	public int totalCount(Connection conn, SearchTab st) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String qAddr = "%"+st.getSido()+"%"+st.getGugun()+"%";
+		String q ="where sell_type=2 and sell_regional_addr like '"+qAddr+"'";
+		if(!st.getType1().equals("null")&&st.getType1()!=null) {
+			if(!st.getType2().equals("null")&&st.getType2()!=null) {
+				q += " and sell_category1='"+st.getType1()+"' and sell_category2='"+st.getType2()+"'";
+			}else {
+				q += " and sell_category1='"+st.getType1()+"'";	
 			}
-			if(type2!=null) {
-				String qtype2 = "and sell_category2="+type2;
-				query+=qtype2;
-			}
-			if(searchWord!=null) {
-				String qSearchWord = "and sell_title like %"+searchWord+"%";
-				query+=qSearchWord;
-			}
-			try {
-				pstmt = conn.prepareStatement(query);
-				rset = pstmt.executeQuery();
-				if(rset.next()) {
-					result = rset.getInt("cnt");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				JDBCTemplate.close(rset);
-				JDBCTemplate.close(pstmt);
-			}
-			
-			return result;
 		}
+		if(st.getKeyword()!=null) {
+			q += " and sell_title like '%"+st.getKeyword()+"%'";
+		}
+		String query = "select count(*)cnt from sell "+q;
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
 
 
-	public ArrayList<Sell> selectSearchAll(Connection conn, String addr, int start, int end, String type1, String type2,
-			String searchWord, String sortingTab) {
+	public ArrayList<Sell> selectList(Connection conn, HashMap<String, String> map, SearchTab st) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Sell> sellList = new ArrayList<Sell>();
-		String qAddr = "%"+addr+"%";
-		String query1 = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_type=2 and sell_regional_addr like"+qAddr;
-		String query2 = "order by "+sortingTab+")n)s where rnum between ? and ?";
-		if(type1!=null) {
-			String qtype1 = "and sell_category1="+type1;
-			query1+=qtype1;
+		//쿼리문 조합
+		//select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell order by sell_end_date)n)s 
+		//where rnum between 1 and 10;
+		String query ="select s.*, floor(sell_end_date-sysdate+1)as gap from(select rownum as rnum, n.*from(select * from sell where sell_type=2 and sell_regional_addr like";
+		query += " '%"+st.getSido()+"%"+st.getGugun()+"%"+"'";
+		if(!st.getType1().equals("null")&&st.getType1()!=null) {
+			if(!st.getType2().equals("null")&&st.getType2()!=null) {
+				query += " and sell_category1='"+st.getType1()+"' and sell_category2='"+st.getType2()+"'";
+			}else {
+				query += " and sell_category1='"+st.getType1()+"'";	
+			}
 		}
-		if(type2!=null) {
-			String qtype2 = "and sell_category2="+type2;
-			query1+=qtype2;
+		if(st.getKeyword()!=null) {
+			query += " and sell_title like "+"'%"+st.getKeyword()+"%"+"'";
 		}
-		if(searchWord!=null) {
-			String qSearchWord = "and sell_title like %"+searchWord+"%";
-			query1+=qSearchWord;
+		if(st.getSortingTab().equals("마감시간순")) {
+			query += " order by sell_end_date";
+		}else if(st.getSortingTab().equals("구매인기순")) {
+			query += "order by sell_count desc";
+		}else if(st.getSortingTab().equals("최근등록순")) {
+			query += "order by sell_date desc";
 		}
-		String query = query1+query2;
+		query += ")n)s where rnum between "+map.get("start")+" and "+map.get("end");
+		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Sell sell = new Sell();
@@ -95,6 +103,8 @@ public class SellCategoryDao {
 		}
 		return sellList;
 	}
+
+
 	
 	
 

@@ -37,7 +37,9 @@
 								<button class="btn btn-outline-primary"
 									onclick="location.href='/manageMember?reqPage=1'">${sessionScope.member.memberName }</button>
 							</c:if>
-
+							<c:if test="${sessionScope.member.memberType eq '2'}">
+							<button class="btn btn-outline-primary" onclick="location.href='/sellForm'">새 글쓰기</button>
+							</c:if>
 							<button class="btn btn-outline-primary"
 								onclick="location.href='/logoutFrm'">로그아웃</button>
 						</li>
@@ -55,7 +57,7 @@
 						href="/sellSearchNationalFrm?reqPage=1&sortingTab=마감시간 순">전 지역
 							상품</a></li>
 					<li class="header_top_li1  header_top_li3"><a
-						class="header_top_a1" href="#">지역 상품</a></li>
+						class="header_top_a1" href="/sellSearchRegional?reqPage=1&sido=서울&gugun=강남구&type1=null&type2=null&keyword=null&sortingTab=마감시간순">지역 상품</a></li>
 				</ul>
 				<ul class="header_top_ul1">
 					<li class="header_top_li1"><a class="header_top_a1"

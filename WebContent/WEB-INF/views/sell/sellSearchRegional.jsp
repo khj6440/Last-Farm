@@ -56,7 +56,7 @@
 	margin-left: 43px;
 }
 
-.searchTypingBox {
+.keyword{
 	height: 60px;
 	width: 350px;
 	font-size: 120%;
@@ -94,7 +94,7 @@
 	color: #ffac05;
 }
 
-.searchTypingBox {
+.keyword {
 	height: 90%;
 	width: 400px;
 	font-size: 1.5em;
@@ -151,7 +151,7 @@
 	margin: 0 auto;
 }
 
-.ordertabCategory>ul>li {
+.ordertabCategory>ul li {
 	display: block;
 	height: 60px;
 	width: 33.1%;
@@ -237,13 +237,13 @@
 		});
 		//검색창에 검색어 입력 시, 아웃라인 제거
 		$(function() {
-			$(".searchTypingBox").focusin(function() {
-				$(".searchTypingBox").css("outline", "none");
+			$(".keyword").focusin(function() {
+				$(".keyword").css("outline", "none");
 			});
 		});
 		//countdown
 		var now = new Date();
-		var endTime = new Date('2020-05-22');
+		var endTime = new Date('2020-06-06');
 		var gapTime = endTime - now - 32400000;
 		var SetTime = gapTime / 1000;
 		var SetMin = SetTime / 60;
@@ -291,41 +291,54 @@
 			});
 		});
 		//탭 검사
+		/*
 		$(function() {
-			$(".ordertabCategory").children("ul").children("li").eq(0).click(
-					function() {
-						$(this).removeClass("unclicktab");
-						$(this).addClass("clicktab");
-						$(this).children("input").prop('checked', true);
-						$(this).next().addClass("unclicktab");
-						$(this).next().removeClass("clicktab");
-						$(this).next().next().addClass("unclicktab");
-						$(this).next().next().removeClass("clicktab");
-						
-					});
-			$(".ordertabCategory").children("ul").children("li").eq(1).click(
-					function() {
-						$(this).addClass("clicktab");
-						$(this).children("input").prop('checked', true);
-						$(this).removeClass("unclicktab");
-						$(this).next().addClass("unclicktab");
-						$(this).next().removeClass("clicktab");
-						$(this).prev().addClass("unclicktab");
-						$(this).prev().removeClass("clicktab");
+				var num = 0;
+				for(var i=0;i<3;i++){
+					if($(".ordertabCategory").children("ul").children("label").children("li").children("input[type=radio]").eq(i).val()== $("#returnst").val()){
+						num = i;	
+					}
+				}
+				console.log(num);
+				if(num==0){
+				$(".ordertabCategory").children("ul").children("li").eq(0).click(
+						function() {
+							$(this).removeClass("unclicktab");
+							$(this).addClass("clicktab");
+							$(this).children("input").prop('checked', true);
+							$(this).next().addClass("unclicktab");
+							$(this).next().removeClass("clicktab");
+							$(this).next().next().addClass("unclicktab");
+							$(this).next().next().removeClass("clicktab");
+							
+						});
+				}else if(num==1){
+				$(".ordertabCategory").children("ul").children("li").eq(1).click(
+						function() {
+							$(this).addClass("clicktab");
+							$(this).children("input").prop('checked', true);
+							$(this).removeClass("unclicktab");
+							$(this).next().addClass("unclicktab");
+							$(this).next().removeClass("clicktab");
+							$(this).prev().addClass("unclicktab");
+							$(this).prev().removeClass("clicktab");
 
-					});
-			$(".ordertabCategory").children("ul").children("li").eq(2).click(
-					function() {
-						$(this).addClass("clicktab");
-						$(this).children("input").prop('checked', true);
-						$(this).removeClass("unclicktab");
-						$(this).prev().addClass("unclicktab");
-						$(this).prev().removeClass("clicktab");
-						$(this).prev().prev().addClass("unclicktab");
-						$(this).prev().prev().removeClass("clicktab");
-					
-					});
-		});
+						});
+				}else if(num==2){
+				$(".ordertabCategory").children("ul").children("li").eq(2).click(
+						function() {
+							$(this).addClass("clicktab");
+							$(this).children("input").prop('checked', true);
+							$(this).removeClass("unclicktab");
+							$(this).prev().addClass("unclicktab");
+							$(this).prev().removeClass("clicktab");
+							$(this).prev().prev().addClass("unclicktab");
+							$(this).prev().prev().removeClass("clicktab");
+						
+						});
+				}
+			});
+		*/
 		//지역 선택시 판매 지역 선택
 		$('document')
 				.ready(
@@ -397,7 +410,7 @@
 												$selsido
 														.next()
 														.append(
-																"<option value=''>구/군 선택</option>");
+																"<option value='null'>구/군 선택</option>");
 											});
 							// 시/도 선택시 구/군 설정
 							$("select[name^=sido]")
@@ -413,7 +426,7 @@
 												$("option", $gugun).remove(); // 구군 초기화
 												if (area == "area0")
 													$gugun
-															.append("<option value=''>구/군 선택</option>");
+															.append("<option value='null'>구/군 선택</option>");
 												else {
 													$
 															.each(
@@ -427,14 +440,20 @@
 												}
 											});
 						});
+		//검색창 데이터 남기기
+		$(function(){
+			if($("#keyword").val()=="null"){
+				$("#keyword").val("");
+			}
+		});
 	</script>
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="sell-list-body">
-		<form action="/sellSearchRegionalFrm" method="post" id="searchSell">
+		<form action="/sellSearchRegional" method="get" id="searchSell">
 			<div class="searchbox-wrapper">
-				<select name="sido" id="sido"></select> <select name="gugun"
-					id="gugun"></select> <select class="category category1"
-					name="type1">
+				<select name="sido" id="sido"></select> 
+				<select name="gugun" id="gugun"></select> 
+				<select class="category category1" name="type1">
 					<option value=null>농/수산물(전체)</option>
 					<option value="농산물">농산물</option>
 					<option value="수산물">수산물</option>
@@ -451,38 +470,40 @@
 				</select> <select class="category category2" disabled>
 					<option value="" selected>상품 소분류</option>
 				</select>
-
-				<script>
-					
-				</script>
 				<div class="searchInput-wrapper">
 					<div class="searchInputBox">
-						<img src="../imgs/search@3x.png"> <input type="text"
-							name="searchTypingBox" id="searchTypingBox"
-							class="searchTypingBox" placeholder="검색할 상품을 입력하세요(Enter)">
+						<img src="../imgs/search@3x.png"> 
+						<input type="text" name="keyword" id="keyword" class="keyword" placeholder="검색할 상품을 입력하세요(Enter)" value="${st.keyword }">
 					</div>
-					<c:if test="${sessionScope.member.memberType != '2'}">
 						<input type="submit" value="상품 검색" class="searchBtn">
-					</c:if>
-					<c:if test="${sessionScope.member.memberType == '2'}">
-						<input type="button" id="newSellForm" value="새 글쓰기"
-							class="searchBtn">
-					</c:if>
 				</div>
 			</div>
 			<br> <br>
+			<script>
+				$(function(){
+					$("label").click(function(){
+						$(".searchBtn").click();
+					});
+					if($("#returnst").val()=="구매인기순"){
+						$("#pop").prop("select",true);
+					}
+					console.log($("#returnst").val());
+					console.log($("#input[type=radio]").val($("#returnst").val()));
+				});
+			</script>
 			<div class="ordertabCategory">
+				<input type="hidden" value="${st.sortingTab }" id="returnst">
 				<ul>
-					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="마감시간 순" hidden>마감시간 순</li>
-					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="구매 인기순" hidden>구매 인기순</li>
-					<li class="unclicktab tab"><input type="radio" name="sortingTab" value="최근 등록순" hidden>최근 등록순</li>
+					<label for="time"><li class="unclicktab tab"><input type="radio" name="sortingTab" value="마감시간순" id="time">마감시간 순</li></label>
+					<label for="pop"><li class="unclicktab tab"><input type="radio" name="sortingTab" value="구매인기순" id="pop">구매 인기순</li></label>
+					<label for="rec"><li class="unclicktab tab"><input type="radio" name="sortingTab" value="최근등록순" id="rec">최근 등록순</li></label>
 				</ul>
 			</div>
 		</form>
 		<br> <br> <br>
 		<div class="shoppingList-wrapper">
 			<table class="shoppingList-firstRow">
-				<c:forEach items="${sellList }" var="n" varStatus="i">
+				<c:forEach items="${list }" var="s" varStatus="i">
 					<c:if test="${i.count%3 eq 1 }">
 						<tr>
 					</c:if>
@@ -490,20 +511,20 @@
 						<div class="productBox">
 							<div class='productImg'>
 								<div class='timeBox' id='timeBox'>
-									<c:if test="${n.timegap >0}">
-							${n.timegap } 일 남음
+									<c:if test="${s.timegap >0}">
+							${s.timegap } 일 남음
 							</c:if>
-									<c:if test="${n.timegap ==0 }">
+									<c:if test="${s.timegap ==0 }">
 										<div class="viewTimer"></div>
 									</c:if>
 								</div>
 								<a
-									href='/sellView?sellNo=${n.sellNo }&sellWriter=${n.sellWriter }'><img
-									src='/imgs/${n.thumbnail }'></a>
+									href='/sellView?sellNo=${s.sellNo }&sellWriter=${s.sellWriter }'><img
+									src='/imgs/${s.thumbnail }'></a>
 							</div>
-							<p>${n.sellTitle }</p>
+							<p>${s.sellTitle }</p>
 							<div class='detailInfoBox'>
-								상품가격: ${n.sellPrice }원<br> 현재 참여인원: ${n.sellCount }명
+								상품가격: ${s.sellPrice }원<br> 현재 참여인원: ${s.sellCount }명
 							</div>
 						</div>
 					</th>

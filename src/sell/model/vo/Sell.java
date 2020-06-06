@@ -27,7 +27,6 @@ public class Sell {
 	private String thumbnail;
 	private int sellDeleteState;
 	private String sellRegionalAddr;
-
 	private int timegap;
 
 	public Sell() {
