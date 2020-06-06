@@ -1298,7 +1298,7 @@ form.form1 {
 						</table>
 						
 						<!-- 보낸 쪽지함 -->
-						<table class="w3-table-all w3-hoverable  show-msgtap">
+						<table class="w3-table-all w3-hoverable show-msgtap">
 							<thead>
 								<tr class="th-color">
 									<th>번호</th>
@@ -1361,7 +1361,9 @@ form.form1 {
 }
 
 .show-msgtap{
+
 	display:none;
+	
 }
 
 .msg-tr a{
@@ -1374,21 +1376,22 @@ form.form1 {
 }
 </style>
 <script>
+
 	$(function(){
 
 		$(".msg-tab>ul>li").click(function() {
+			
 			$(".msg-tab>ul>li").removeClass("tab-selected");
 			$(this).addClass("tab-selected");
 			var index = $(".msg-tab>ul>li").index($(this));
-			console.log(index);
 			$(".w3-table-all").addClass("show-msgtap");
 			$(".w3-table-all").eq(index).removeClass("show-msgtap");
-
+			
 		});
-
 		
 	});
-
+	
+/* 
 	 $(".msgView").click(function() {
 		 
 		 var index = $(".msgNo").eq().index(this);
@@ -1396,50 +1399,13 @@ form.form1 {
 		$.ajax({
 			url : "/MessageView",
 			data : {
-				memberNo : $(".msgNo").eq(index).val()
+				memberNo : $(".msgNo").eq(index).val();
 			},
 			type : "post",
-			success:function(data
-                
-				var options = {
-		        height: 600, // sets the height in pixels of the window.
-		        width: 500, // sets the width in pixels of the window.
-		        toolbar: 0, // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
-		        scrollbars: 0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
-		        status: 0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
-		        resizable: 1, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
-		        left: 500, // left position when the window appears.
-		        top: 200, // top position when the window appears.
-		        center: 0, // should we center the window? {1 (YES) or 0 (NO)}. overrides top and left
-		        createnew: 0, // should we create a new window for each occurance {1 (YES) or 0 (NO)}.
-		        location: 0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
-		        menubar: 0 // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
-                
-		    };
-
-		    var parameters = "location=" + options.location +
-		                     ",menubar=" + options.menubar +
-		                     ",height=" + options.height +
-		                     ",width=" + options.width +
-		                     ",toolbar=" + options.toolbar +
-		                     ",scrollbars=" + options.scrollbars +
-		                     ",status=" + options.status +
-		                     ",resizable=" + options.resizable +
-		                     ",left=" + options.left +
-		                     ",screenX=" + options.left +
-		                     ",top=" + options.top +
-		                     ",screenY=" + options.top;
-
-		    // target url
-		    var target = "/messageView?"; 
-		    popup = window.open(target, 'popup', parameters);
 			
-			},
-			error : function() {
-				console.log("서버 전송 실패")
-			}
+                
 		});
 		
-	}); 
+	});  */
 </script>
 </html>
