@@ -36,7 +36,7 @@ public class SellCommentInsertServlet extends HttpServlet {
 		sc.setSellCommentLevel(Integer.parseInt(request.getParameter("sellCommentLevel")));
 		sc.setSellCommentWriter(request.getParameter("sellCommentWriter"));
 		sc.setSellCommentContent(request.getParameter("sellCommentContent"));
-		sc.setSellRef(Integer.parseInt(request.getParameter("sellRef")));
+		sc.setSellRef(Integer.parseInt(request.getParameter("sellNo")));
 		sc.setSellCommentRef(Integer.parseInt(request.getParameter("sellCommentRef")));
 		//JAVA의 INT에는 NULL값이 들어갈 수 없다. 후처리 작업을 해주어야 함.
 		//3. 비즈니스 로직

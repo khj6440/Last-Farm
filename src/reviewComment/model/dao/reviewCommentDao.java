@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import review.model.vo.Review;
 import reviewComment.model.vo.ReviewComment;
 
 public class reviewCommentDao {
@@ -128,14 +129,14 @@ public class reviewCommentDao {
 	return result;
 	}
 
-	public int commentWarning(Connection conn, int reviewCommentNo, int reviewCommentWarning) {
+	public int commentWarning(Connection conn, int PageNo, int result2) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "update review_comment set review_comment_warning=? where review_comment_no=?";
 		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, (reviewCommentWarning+1));
-			pstmt.setInt(2, reviewCommentNo);
+			pstmt.setInt(1, result2);
+			pstmt.setInt(2, PageNo);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -145,6 +146,33 @@ public class reviewCommentDao {
 			JDBCTemplate.close(pstmt);
 	}
 	return result;
+	}
+
+	public ArrayList<ReviewComment> ReviewWarning(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query ="select review_comment_no,review_comment_content,(select warning_writer from warning where review_comment_no = warning_page_no and warning_writer=?) as writer from review_comment";
+		ArrayList<ReviewComment> list = new ArrayList<ReviewComment>();
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset= pstmt.executeQuery();
+			System.out.println("rset :"+rset);
+			while(rset.next()) {
+				ReviewComment n = new ReviewComment();
+				n.setReviewCommentNo(rset.getInt("review_comment_no"));
+				n.setReviewCommentContent(rset.getString("review_comment_content"));
+				n.setWriter(rset.getString("writer"));
+				list.add(n);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 
 	

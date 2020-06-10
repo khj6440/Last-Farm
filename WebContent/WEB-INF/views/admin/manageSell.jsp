@@ -68,11 +68,13 @@
 .next_page:hover>a, .pre_page:hover>a {
 	color: #ffac05;
 }
+
 .logoTitle {
 	font-weight: bold;
 	font-size: 30px;
 	color: #ffac05;
 }
+
 .noResult {
 	height: 500px;
 	display: flex;
@@ -102,54 +104,53 @@
 	background-color: #ffac05;
 	color: white;
 }
+.navbar-mobile .navbar-mobile__list li a:hover {
+    color: #4272d7;
+}
 
 </style>
 <script type="text/javascript">
 	$(function() {
-		
 
 		$.ajax({
 			url : "/adminGetMsgCount",
 			type : "post",
-			
+
 			success : function(data) {
 				console.log(data);
-				if(data<=0){
+				if (data <= 0) {
 					$("#nonReadMsg").remove();
 					return;
 				}
-				
+
 				$(".mess__title").find("span").html(data);
 				$("#nonReadMsg").html(data);
 			},
 			error : function() {
 				console.log("서버 전송 실패")
 			}
-		});		
-		
-		
-		$("#msg-btn").click(function(){
+		});
+
+		$("#msg-btn").click(function() {
 			$.ajax({
 				url : "/adminGetMsgCount",
 				type : "post",
 				success : function(data) {
 					console.log(data);
-					if(data<=0){
+					if (data <= 0) {
 						$("#nonReadMsg").remove();
 						return;
 					}
-					
+
 					$(".mess__title").find("span").html(data);
 					$("#nonReadMsg").html(data);
 				},
 				error : function() {
 					console.log("서버 전송 실패")
 				}
-			});			
+			});
 		});
-		
-		
-		
+
 		$("#sellDel").click(function() {
 			console.log("게시물삭제요청");
 			$.ajax({
@@ -305,7 +306,45 @@
 	<div class="page-wrapper">
 
 		<!-- HEADER MOBILE-->
+		<header class="header-mobile d-block d-lg-none">
+		<div class="header-mobile__bar">
+			<div class="container-fluid">
+				<div class="header-mobile-inner">
 
+					<a href="index.jsp"> <img src="/imgs/mole.jpg"
+						style="width: 55px; margin-right: 10px;" /><span
+						class="logoTitle">LAST FARM</span>
+					</a>
+					<button class="hamburger hamburger--slider" type="button">
+						<span class="hamburger-box"> <span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar-mobile">
+		<div class="container-fluid">
+			<ul class="navbar-mobile__list list-unstyled">
+				<li><a href="/manageMember?reqPage=1"> <i
+						class="fas fa-users"></i>회원 관리
+				</a></li>
+				<li style="border-radius: 0px;" class="active"><a
+					href="/manageSell?reqPage=1"> <i class="far fa-list-alt"
+						style="color: #4a2100"></i>거래글 관리
+				</a></li>
+
+				<li><a href="/manageReview?reqPage=1"> <i
+						class="far fa-star"></i>리뷰 관리
+				</a></li>
+
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
+				<li><a href="/adminGetMsgList"> <i
+						class="far fa-envelope-open"></i>쪽지함
+				</a></li>
+			</ul>
+		</div>
+		</nav> </header>
 		<!-- END HEADER MOBILE-->
 
 		<!-- MENU SIDEBAR-->
@@ -324,16 +363,17 @@
 				<li><a href="/manageMember?reqPage=1"> <i
 						class="fas fa-users"></i>회원 관리
 				</a></li>
-				<li class="active"><a style="color: #4a2100" href="/manageSell?reqPage=1"> <i
-						class="far fa-list-alt"></i>거래글 관리
+				<li class="active"><a style="color: #4a2100"
+					href="/manageSell?reqPage=1"> <i class="far fa-list-alt"></i>거래글
+						관리
 				</a></li>
 
 				<li><a href="/manageReview?reqPage=1"> <i
 						class="far fa-star"></i>리뷰 관리
 				</a></li>
 
-				<li><a href="/manageWarning"><i class="fas fa-exclamation-circle"></i>신고글
-						관리 </a></li>
+				<li><a href="/manageWarning"><i
+						class="fas fa-exclamation-circle"></i>신고글 관리 </a></li>
 				<li><a href="/adminGetMsgList"> <i
 						class="far fa-envelope-open"></i>쪽지함
 				</a></li>
@@ -358,14 +398,16 @@
 								placeholder="Search for title , user ID..." value="${search }" />
 							<input type="hidden" name="reqPage" value="1"> <input
 								type="hidden" name="reqCount" value="10">
-							<button style="height: 43px; width: 43px;" class="search-btn" type="submit">
+							<button style="height: 43px; width: 43px;" class="search-btn"
+								type="submit">
 								<i class="zmdi zmdi-search"></i>
 							</button>
 						</form>
 						<div class="header-button">
-						<div class="noti-wrap">
+							<div class="noti-wrap">
 								<div id="msg-btn" class="noti__item js-item-menu">
-									<i class="far fa-envelope-open"></i> <span id="nonReadMsg" class="quantity">8</span>
+									<i class="far fa-envelope-open"></i> <span id="nonReadMsg"
+										class="quantity">8</span>
 									<div class="mess-dropdown js-dropdown">
 										<div class="mess__title">
 											<p style="font-size: 20px;">
@@ -406,7 +448,7 @@
 											<a href="/logoutFrm"> <i class="zmdi zmdi-power"></i>Logout
 											</a>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -428,15 +470,13 @@
 								<h3 class="title-5 m-b-35">
 									<i style="color: navy;" class="far fa-list-alt"></i> <span
 										style="font-weight: bold">거래글 관리</span><span
-											style="color: gray; font-size: 15px"> (검색결과 거래글
-											:${totalCount }개)</span>
+										style="color: gray; font-size: 15px"> (검색결과 거래글
+										:${totalCount }개)</span>
 								</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
-										<div class="rs-select2--light rs-select2--md">
-											
-										</div>
-								</div>
+										<div class="rs-select2--light rs-select2--md"></div>
+									</div>
 									<div class="table-data__tool-right">
 										<button class="btn btn-danger" id="selectDel">
 											<i class="zmdi zmdi-minus"></i> 선택항목 삭제
@@ -524,7 +564,8 @@
 															</button>
 
 															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="More" onclick="location.href='/sellView?sell_no=${s.sellNo}&sell_writer=${s.sellWriter }'">
+																data-placement="top" title="More"
+																onclick="location.href='/sellView?sell_no=${s.sellNo}&sell_writer=${s.sellWriter }'">
 																<i class="zmdi zmdi-more"></i>
 															</button>
 														</div>
@@ -533,7 +574,7 @@
 
 												<tr class="spacer"></tr>
 											</c:forEach>
-											
+
 										</tbody>
 									</table>
 									<c:if test="${empty list  && totalCount==0 }">
@@ -626,5 +667,10 @@
 	<script src="/admin_css/js/main.js"></script>
 
 </body>
+<style>
+.header-mobile .navbar-mobile .navbar-mobile__list li a:hover {
+    color:#ffac05;
+}
+</style>
 </html>
 <!-- end document-->

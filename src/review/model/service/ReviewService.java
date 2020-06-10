@@ -184,8 +184,12 @@ public class ReviewService {
 		return list;
 	}
 
-	public int reviewWarning(int reviewNo, int reviewWarning) {
+	/*public int reviewWarning(int reviewNo, int reviewWarning,int warningType, String warningWriter) {
 		Connection conn = JDBCTemplate.getConnection();
+		int result = new 
+		
+		
+		
 		int result = new ReviewDao().reviewWarning(conn, reviewNo, reviewWarning);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
@@ -195,7 +199,7 @@ public class ReviewService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
+*/
 	public int insertReview(Review r, int sellEndNo, String sellEndWriter) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new ReviewDao().insertReview(conn, r, sellEndNo);
@@ -247,6 +251,13 @@ public class ReviewService {
 		JDBCTemplate.close(conn);
 		return m;
 		
+	}
+
+	public ArrayList<Review> ReviewWarning(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Review> list = new ReviewDao().ReviewWarning(conn,memberId);
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 }

@@ -193,6 +193,7 @@
 				<span class="carsel_wrap" style="cursor: pointer"><img class="d-inline-block"
 					id="sellImg" src="/imgs/${listNation[1].thumbnail }"
 					onclick="location.href='/sellView?sell_no=${listNation[1].sellNo }'"
+
 					alt="First slide"></span> 
                 <span class="carsel_wrap" style="cursor: pointer"><img
 					class="d-inline-block" id="sellImg"
@@ -271,6 +272,7 @@
 					onclick="location.href='/sellView?sell_no=${listRegion[2].sellNo }'"
 					src="/imgs/${listRegion[2].thumbnail }" alt="First slide"></span>
 				<div class="carousel-caption d-none d-md-block">제목</div>
+
 			</div>
 			<div class="carousel-item">
 				<span class="carsel_wrap"><img class="d-inline-block"

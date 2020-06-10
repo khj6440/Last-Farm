@@ -9,12 +9,13 @@ public class ReviewComment {
 	private int reviewRef;
 	private Date reviewCommentDate;
 	private int reviewCommentWarning;
+	private String writer;
 	public ReviewComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ReviewComment(int reviewCommentNo, String reviewCommentWriter, String reviewCommentContent, int reviewRef,
-			Date reviewCommentDate, int reviewCommentWarning) {
+			Date reviewCommentDate, int reviewCommentWarning, String writer) {
 		super();
 		this.reviewCommentNo = reviewCommentNo;
 		this.reviewCommentWriter = reviewCommentWriter;
@@ -22,6 +23,7 @@ public class ReviewComment {
 		this.reviewRef = reviewRef;
 		this.reviewCommentDate = reviewCommentDate;
 		this.reviewCommentWarning = reviewCommentWarning;
+		this.writer = writer;
 	}
 	public int getReviewCommentNo() {
 		return reviewCommentNo;
@@ -59,5 +61,12 @@ public class ReviewComment {
 	public void setReviewCommentWarning(int reviewCommentWarning) {
 		this.reviewCommentWarning = reviewCommentWarning;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
 	
 }

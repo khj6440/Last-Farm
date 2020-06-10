@@ -15,17 +15,17 @@ public class SellCommentDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "insert into sell_comment values (seq_sell_comment.nextval,?,?,?,?,?,sysdate,?)";
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sc.getSellCommentLevel());
 			pstmt.setString(2, sc.getSellCommentWriter());
 			pstmt.setString(3, sc.getSellCommentContent());
 			pstmt.setInt(4, sc.getSellRef());
-			//일반적으로 0을 넣는 구조
-//			pstmt.setInt(5, nc.getNoticeCommentRef()); 
-			//0을 Null로 넣는 방법. Oracle은 '1'을 입력해도 Number타입으로 자동 형변환을 해준다.
-			pstmt.setString(5, sc.getSellCommentRef()==0?null:String.valueOf(sc.getSellCommentRef()));
+			// 일반적으로 0을 넣는 구조
+			// pstmt.setInt(5, nc.getNoticeCommentRef());
+			// 0을 Null로 넣는 방법. Oracle은 '1'을 입력해도 Number타입으로 자동 형변환을 해준다.
+			pstmt.setString(5, sc.getSellCommentRef() == 0 ? null : String.valueOf(sc.getSellCommentRef()));
 			pstmt.setInt(6, sc.getSellCommentWarning());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -41,12 +41,12 @@ public class SellCommentDao {
 		ResultSet rset = null;
 		ArrayList<SellComment> list2 = new ArrayList<SellComment>();
 		String query = "select * from sell_comment where sell_ref=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sellNo);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				SellComment sc = new SellComment();
 				sc.setSellCommentNo(rset.getInt("sell_comment_no"));
 				sc.setSellCommentLevel(rset.getInt("sell_comment_level"));
@@ -73,12 +73,12 @@ public class SellCommentDao {
 		ResultSet rset = null;
 		Sell sell = null;
 		String query = "select s.*, floor(sell_end_date-sysdate+1)as gap from(select * from sell where sell_no = ?)s";
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sellNo);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			if (rset.next()) {
 				sell = new Sell();
 				sell.setSellNo(rset.getInt("sell_no"));
 				sell.setSellTitle(rset.getString("sell_title"));
@@ -104,7 +104,6 @@ public class SellCommentDao {
 				sell.setThumbnail(rset.getString("thumbnail"));
 				sell.setSellDeleteState(rset.getInt("sell_delete_state"));
 				sell.setSellRegionalAddr(rset.getString("sell_regional_addr"));
-				sell.setTimegap(rset.getInt("timegap"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -115,28 +114,12 @@ public class SellCommentDao {
 		return sell;
 	}
 
-	public int sellWarning(Connection conn, int sellNo, int sellWarning) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = "update sell set sell_warning=? where sell_no=?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, (sellWarning+1));
-			pstmt.setInt(2, sellNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}
+	
 
 	public int sellCommentDelete(Connection conn, int sc) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query="delete from sell_comment where sell_comment_no=?";
+		String query = "delete from sell_comment where sell_comment_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sc);
@@ -144,10 +127,10 @@ public class SellCommentDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-	
+
 		return result;
 	}
 
@@ -155,7 +138,7 @@ public class SellCommentDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "update sell_comment set sell_comment_content=? where sell_comment_no=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, sc.getSellCommentContent());
@@ -192,7 +175,7 @@ public class SellCommentDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		sellCount += type;
-		String query="update sell set sell_count=? where sell_no=?";
+		String query = "update sell set sell_count=? where sell_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sellCount);
@@ -201,18 +184,18 @@ public class SellCommentDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int updateSellCount2(Connection conn, int sellNo, int type, int sellMax, int sellCount) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
-		String query="update sell set sell_max=? where sell_no=?";
+
+		String query = "update sell set sell_max=? where sell_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, sellMax);
@@ -221,37 +204,68 @@ public class SellCommentDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int commentWarning(Connection conn, int sellCommentNo, int sellCommentWarning) {
-	     PreparedStatement pstmt = null;
-	      int result = 0;
-	      String query = "update sell_comment set sell_comment_warning=? where sell_comment_no=?";
-	      try {
-	         pstmt=conn.prepareStatement(query);
-	         pstmt.setInt(1, (sellCommentWarning+1));
-	         pstmt.setInt(2, sellCommentNo);
-	         result = pstmt.executeUpdate();
-	         
-	      } catch (SQLException e) {
-	         // TODO Auto-generated catch block
-	         e.printStackTrace();
-	      }finally {
-	         JDBCTemplate.close(pstmt);
-	   }
-	   return result;
-	   }
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update sell_comment set sell_comment_warning=? where sell_comment_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (sellCommentWarning + 1));
+			pstmt.setInt(2, sellCommentNo);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
+	public int sellcommentWarning(Connection conn, int pageNo, int result2) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update sell_comment set sell_comment_warning=? where sell_comment_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, result2);
+			pstmt.setInt(2, pageNo);
+			result = pstmt.executeUpdate();
 
-	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 
+	}
 
-	
-	
-
+	public int sellWarning(Connection conn, int pageNo, int sellWarning) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update sell set sell_warning=? where sell_no=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, (sellWarning+1));
+			pstmt.setInt(2, pageNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+	}
+	return result;
+	}
+}

@@ -130,9 +130,11 @@ public class WarningDao {
 		         SellComment sc = new SellComment();
 
 		         //쿼리문에서 가져오는 값만 가져오기!!!
-		         sc.setSellCommentNo(rset.getInt("sell_comment_no"));
 		         sc.setSellCommentWriter(rset.getString("writer"));
 		         System.out.println("sc :"+sc.getSellCommentWriter());
+		         sc.setSellCommentNo(rset.getInt("sell_comment_no"));
+		         sc.setWriter(rset.getString("writer"));
+		         System.out.println("sc :"+sc.getWriter());
 		         list.add(sc);
 		      }
 		   } catch (SQLException e) {
@@ -176,8 +178,8 @@ public class WarningDao {
 		         Sell s = new Sell();
 
 		         s.setSellNo(rset.getInt("sell_no"));
-		         s.setSellWriter(rset.getString("writer"));
-		         System.out.println("n :"+s.getSellWriter());
+		         s.setWriter(rset.getString("writer"));
+		         System.out.println("n :"+s.getWriter());
 		         list.add(s);
 		      }
 		   } catch (SQLException e) {

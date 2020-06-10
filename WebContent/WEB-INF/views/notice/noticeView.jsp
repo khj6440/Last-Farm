@@ -30,6 +30,7 @@
 <title>Insert title here</title>
 <!-- header,footer 링크-->
 
+
 <link rel="stylesheet" href="/css/notice/noticeList.css">
 <link rel="stylesheet" href="/css/header/header.css">
 <link rel="stylesheet" href="/css/footer/footer.css">
@@ -109,6 +110,7 @@
 		<div class="sideTap_a1">
 			<a href="#">리뷰게시판</a>
 		</div>
+
 	</div>
 	<div class="content-wrap">
 

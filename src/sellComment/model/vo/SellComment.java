@@ -11,6 +11,24 @@ public class SellComment {
 	private int sellCommentRef;
 	private Date sellCommentDate;
 	private int sellCommentWarning;
+	private String Writer;
+	public SellComment() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public SellComment(int sellCommentNo, int sellCommentLevel, String sellCommentWriter, String sellCommentContent,
+			int sellRef, int sellCommentRef, Date sellCommentDate, int sellCommentWarning, String writer) {
+		super();
+		this.sellCommentNo = sellCommentNo;
+		this.sellCommentLevel = sellCommentLevel;
+		this.sellCommentWriter = sellCommentWriter;
+		this.sellCommentContent = sellCommentContent;
+		this.sellRef = sellRef;
+		this.sellCommentRef = sellCommentRef;
+		this.sellCommentDate = sellCommentDate;
+		this.sellCommentWarning = sellCommentWarning;
+		Writer = writer;
+	}
 	public int getSellCommentNo() {
 		return sellCommentNo;
 	}
@@ -59,21 +77,11 @@ public class SellComment {
 	public void setSellCommentWarning(int sellCommentWarning) {
 		this.sellCommentWarning = sellCommentWarning;
 	}
-	public SellComment() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getWriter() {
+		return Writer;
 	}
-	public SellComment(int sellCommentNo, int sellCommentLevel, String sellCommentWriter, String sellCommentContent,
-			int sellRef, int sellCommentRef, Date sellCommentDate, int sellCommentWarning) {
-		super();
-		this.sellCommentNo = sellCommentNo;
-		this.sellCommentLevel = sellCommentLevel;
-		this.sellCommentWriter = sellCommentWriter;
-		this.sellCommentContent = sellCommentContent;
-		this.sellRef = sellRef;
-		this.sellCommentRef = sellCommentRef;
-		this.sellCommentDate = sellCommentDate;
-		this.sellCommentWarning = sellCommentWarning;
+	public void setWriter(String writer) {
+		Writer = writer;
 	}
 	
 }

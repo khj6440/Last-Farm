@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>자주 묻는 질문</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -67,12 +67,14 @@
 	width: 20%;
 	float: left;
 	margin-top: 12%;
+	margin-left: -100px;
 }
 
 .community_content {
 	width: 70%;
+	margin-left: 15%;
 	height: 900px;
-	margin-left: 20%;
+	
 }
 
 .question {

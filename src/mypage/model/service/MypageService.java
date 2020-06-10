@@ -88,5 +88,85 @@ public class MypageService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	public int totalBuy(String memberId) {
+		// TODO Auto-generated method stub
+		Connection conn= JDBCTemplate.getConnection();
+		int result = new MypageDao().totalBuy(conn,memberId);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int totalBuyEnd(String memberId) {
+		Connection conn= JDBCTemplate.getConnection();
+		int result = new MypageDao().totalBuyEnd(conn,memberId);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int totalSell(String memberId) {
+		Connection conn= JDBCTemplate.getConnection();
+		int result = new MypageDao().totalSell(conn,memberId);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int totalSellEnd(String memberId) {
+		Connection conn= JDBCTemplate.getConnection();
+		int result = new MypageDao().totalSellEnd(conn,memberId);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public ArrayList<Sell> presentMore(int start,String memberId) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+		int length=5;
+		int end=start+length-1;
+		ArrayList<Sell> list = new MypageDao().presentMore(conn,start,end,memberId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<SellEnd> pastMore(int start, String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int length=5;
+		int end=start+length-1;
+		ArrayList<SellEnd> list = new MypageDao().pastMore(conn,start,end,memberId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Sell> presentMore2(int start, String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int length=5;
+		int end=start+length-1;
+		ArrayList<Sell> list = new MypageDao().presentMore2(conn,start,end,memberId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<SellEnd> pastMore2(int start, String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int length=5;
+		int end=start+length-1;
+		ArrayList<SellEnd> list = new MypageDao().pastMore2(conn,start,end,memberId);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+
 
 }

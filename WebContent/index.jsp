@@ -10,12 +10,9 @@
 
 <body>
 	<script>
-	
 		location.href="/main";
-		
 	</script>
-
+	sss
 <body>
-
 </body>
 </html>

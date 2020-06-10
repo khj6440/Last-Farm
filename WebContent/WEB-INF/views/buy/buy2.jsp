@@ -244,7 +244,7 @@
 	 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<section class="buy_container">
         <form action="/buy3Frm" method="post" class="buy">
-        	<input type="hidden" name="sellNo" value="${sellNo }">
+        	<input type="hidden" name="sell_no" value="${sellNo }">
 			<input type="hidden" name="type" value="${type }">
 			<input type="hidden" name="memberId" value="${sessionScope.member.memberId }">
 			<input type="hidden" name="sellCount" value="${sellCount }">
@@ -312,6 +312,7 @@
                                     <th rowspan="3">주소</th>
                                     <td> 
                                     <input type="text" name="addr" id="postCode" class="addr" value="${sessionScope.member.memberPostCode }" placeholder="우편번호" readonly></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td><input type="text" name="addr" id="roadAddr" class="addr" value="${sessionScope.member.memberRoadAddr }" placeholder="도로명주소" readonly></td>
@@ -347,25 +348,28 @@
                                 </tr>
                                 <tr>
                                     <th rowspan="3">주소</th>
-                                    <td><input type="text" name="addr2" id="postCode2" class="addr2" placeholder="우편번호" readonly>
+                                    <td><input type="text" name="postCode2" id="postCode2" class="addr2" placeholder="우편번호" readonly>
                                         <button type="button" id="addrSearchBtn" onclick="addrSearch();" class="addrBtn">주소검색</button>
                                     </td>
-
+									<td></td>
+                                    <td > **당일배달 가능한 지역 : <span class="dAddr" style="color : red;">${sellRegionalAddr }</span></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr2" id="roadAddr2" class="addr3" placeholder="도로명주소"></td>
+                                    <td><input type="text" name="roadAddr2" id="roadAddr2" class="addr3" placeholder="도로명주소">
+                                    	<button type="button" id="checkAddr" class="checkAddr">주소확인</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="addr2" id="detailAddr" class="addr4" value="" placeholder="상세주소"></td>
+                                    <td><input type="text" name="detailAddr2" id="detailAddr2" class="addr4" placeholder="상세주소"></td>
                                 </tr>
                                 <tr>
                                     <th>휴대전화</th>
-                                    <td><input type="text" name="tel2" class="tel2" value="" placeholder="ex) 010-0000-0000">
+                                    <td><input type="text" name="tel2" class="tel2" placeholder="ex) 010-0000-0000">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>이메일</th>
-                                    <td><input type="text" name="email2" class="email2" value="" placeholder="ex) test123@naver.com"></td>
+                                    <td><input type="text" name="email2" class="email2" placeholder="ex) test123@naver.com"></td>
                                 </tr>
                             </table>
                         </div>
@@ -373,7 +377,8 @@
                     <div class="buy_content4_sub">
                         <h2>총 결제 금액 : ${sellPrice + deliveryFee} 원</h2>
                         <button type="button" class="buy_btn">결제하기</button>
-                        <button type="button" class="buy_btn2">취소하기</button>
+                        <button type="button" class="buy_btn2" onclick="location.href='/sellView?sell_no=${sellNo}'">취소하기</button>
+                        
                     </div>
                 </div>
             </div>
@@ -381,6 +386,7 @@
     </section>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
+    	var count = 0;
     	
     	function addrSearch(){
     		new daum.Postcode({
@@ -388,11 +394,10 @@
     				document.getElementById("postCode").value=data.zonecode;
     				$("#postCode2").val(data.zonecode);
     				$("#roadAddr2").val(data.roadAddress);
-    				console.log($("#postCode").val());
-    				console.log($("#roadAddr").val());
     			}
     		}).open();
-    	}
+    	};
+    	
     	function SameBtn(){
     		$('.name2').val('${sessionScope.member.memberName}');
     		$('.tel2').val('${sessionScope.member.memberPhone}');
@@ -400,9 +405,34 @@
     		$('.addr2').val('${sessionScope.member.memberPostCode }');
     		$('.addr3').val('${sessionScope.member.memberRoadAddr }');
     		$('.addr4').val('${sessionScope.member.memberDetailAddr }');
+    		
     	};
+    		$(".checkAddr").click(function(){
+    			
+    		var string = '${sellRegionalAddr}';
+    		console.log(string);
+    		var stArray = string.split(',');
+    		console.log(stArray)
+    		var addr1 = stArray[0];
+    		var addr2 = stArray[1];
+    		var addr3 = stArray[2];
+    		
+    		alert($(".addr3").val());
+    		if($(".addr3").val().indexOf(addr1)!= -1 || $(".addr3").val().indexOf(addr2)!= -1 || $(".addr3").val().indexOf(addr3)!= -1){ 
+    			alert("당일 배달 가능 지역과 일치합니다.");
+    			count = 1;
+    		 }else{
+    			alert("당일 배달 가능 지역과 일치하지 않습니다.");
+    		} 
+    		
+    		});
+    			
+    		
     	
     	$(".buy_btn").click(function(){
+    		if(count==1){
+    			
+    		
     		var price = ${sellPrice + deliveryFee};
     			
     		var d = new Date();
@@ -434,12 +464,16 @@
     		}else{
     			//결제 실패했을때
     			alert("결제에 실패했습니다.");
-    			location.href="/WEB-INF/views/sell/sellView?sell_no=4";
+    			
     		}
     	});
+    	}else{
+    		alert("배달 주소확인 후 결제 가능합니다.");
+    	}
+    			
     	});
     	
-    	  var now = new Date();
+    	/*   var now = new Date();
     	  var standD = now.getDate()+1;
     	  var endTime = new Date('2020-05-22');
     	          console.log(now.getDate());
@@ -457,7 +491,7 @@
     	     }
     	  }
     	  window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
-
+ */
     </script>
 </body>
 </html>

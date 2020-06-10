@@ -112,6 +112,11 @@
 						onclick="return function1();">검색</button>
 				</form>
 			</div>
+
+		</div>
+	
+
+		<div id="table">
 			<table class="table table-striped">
 				<thead>
 					<tr>

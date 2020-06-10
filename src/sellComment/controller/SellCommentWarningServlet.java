@@ -33,6 +33,7 @@ public class SellCommentWarningServlet extends HttpServlet {
 		int ref = Integer.parseInt(request.getParameter("sellRef"));
 		int sellCommentNo = Integer.parseInt(request.getParameter("sellCommentNo"));
 	      int sellCommentWarning = Integer.parseInt(request.getParameter("sellCommentWarning"));
+	      
 	      int result = new SellCommentService().commentWarning(sellCommentNo, sellCommentWarning);
 	      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 	      if(result>0) {

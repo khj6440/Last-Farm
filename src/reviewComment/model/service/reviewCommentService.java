@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import review.model.dao.ReviewDao;
+import review.model.vo.Review;
 import reviewComment.model.dao.reviewCommentDao;
 import reviewComment.model.vo.ReviewComment;
 
@@ -54,7 +56,15 @@ public class reviewCommentService {
 		return result;
 	}
 
-	public int commentWarning(int reviewCommentNo, int reviewCommentWarning) {
+	public ArrayList<ReviewComment> ReviewWarning(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<ReviewComment> list = new reviewCommentDao().ReviewWarning(conn,memberId);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	/*public int commentWarning(int reviewCommentNo, int reviewCommentWarning) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new reviewCommentDao().commentWarning(conn, reviewCommentNo, reviewCommentWarning);
 		if(result > 0) {
@@ -64,7 +74,7 @@ public class reviewCommentService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
-	}
+	}*/
 
 	
 

@@ -36,38 +36,41 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		System.out.println(memberId);
 		
+		
+		String memberId = request.getParameter("memberId");
 		Member m = new MypageService().selectOneMember(memberId);
-		ArrayList<Sell> list =null;
-		ArrayList<SellEnd> endList = null;
+		int totalCount = 0;
+		int totalEndCount= 0;
+				
+				
 		
 		if(m.getMemberType()==1) {
-			list = new MypageService().getBuyList(memberId);
-			endList = new MypageService().getBuyEndList(memberId);
+			totalCount =new MypageService().totalBuy(memberId);
+			totalEndCount = new MypageService().totalBuyEnd(memberId);
 			System.out.println("소비자입니다");
-			
-			
 		}else if(m.getMemberType()==2) {
-			list = new MypageService().getSellList(memberId);
-			endList = new MypageService().getSellEndList(memberId);
+			totalCount =new MypageService().totalSell(memberId);
+			totalEndCount = new MypageService().totalSellEnd(memberId);
 			System.out.println("판매자입니다");
-			
 		}else {
 			System.out.println("관리자");
 		}
 		
-		System.out.println(list.size());
-		System.out.println(endList.size());
-		ArrayList<Message> msgList = new MypageService().getMsgList(memberId);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
-		request.setAttribute("m", m);
-		request.setAttribute("list", list);
-		request.setAttribute("endList", endList);
-		request.setAttribute("msgList", msgList);
+		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("totalEndCount", totalEndCount);
 		rd.forward(request, response);
+		
+		
+//		ArrayList<Message> msgList = new MypageService().getMsgList(memberId);
+//		
+//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
+//		request.setAttribute("m", m);
+//		request.setAttribute("list", list);
+//		request.setAttribute("endList", endList);
+//		request.setAttribute("msgList", msgList);
+//		rd.forward(request, response);
 	}	
 
 	/**

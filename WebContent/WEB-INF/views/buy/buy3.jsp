@@ -177,7 +177,7 @@
                             <div class="buy_content2_sub2_1">
                                 <div class="buy_content11">
                                     <h3 class="buy_h3">
-                                        고객님이 주문하신 주문 번호는 ${r1 } 입니다.
+                                        	고객님이 주문하신 주문 번호는 ${r1 } 입니다.
                                     </h3>
                                 </div>
                                 <table class="buy_content_table">
@@ -196,7 +196,7 @@
                                 </table>
                                 <div class="buy_content12">
                                 <button type="submit" class="buy_table_btn" onclick="location.href='/mypage?memberId=${sessionScope.member.memberId}'">주문확인</button>
-                                <button type="button" class="buy_table_btn2" onclick="location.href='/sellView?sell_no=${n.sellNo }'">메인으로</button>
+                                <button type="button" class="buy_table_btn2" onclick="location.href='/sellView?sell_no=${sellNo }'">메인으로</button>
                                     </div>
                             </div>
                         </div>
