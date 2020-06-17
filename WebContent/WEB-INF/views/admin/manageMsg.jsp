@@ -63,7 +63,7 @@
 
 			success : function(data) {
 				console.log(data);
-				if (data <= 0) {
+				if (data <= 0) {z`
 					$("#nonReadMsg").remove();
 					return;
 				}

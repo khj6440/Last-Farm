@@ -58,6 +58,7 @@ public class MypageServlet extends HttpServlet {
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
+		request.setAttribute("m", m);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("totalEndCount", totalEndCount);
 		rd.forward(request, response);
@@ -66,7 +67,7 @@ public class MypageServlet extends HttpServlet {
 //		ArrayList<Message> msgList = new MypageService().getMsgList(memberId);
 //		
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
-//		request.setAttribute("m", m);
+//		
 //		request.setAttribute("list", list);
 //		request.setAttribute("endList", endList);
 //		request.setAttribute("msgList", msgList);
